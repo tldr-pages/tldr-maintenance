@@ -1,0 +1,47 @@
+name: Calculate Metrics
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sanity-check:
+    runs-on: ubuntu-latest
+
+    name: Calculate Metrics
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm install -g markdownlint-cli tldr-lint
+
+      - name: Run the script and generate artifacts
+        run: |
+          rm -f metrics.log
+          ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
+          exit ${PIPESTATUS[0]}
+
+      - name: Commit the Calculate Metrics log file
+        if: always()
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add metrics.log && git commit -m "metrics: update metrics log" && git push
+  
+      - name: Upload Calculate Metrics artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: metrics
+          path: | 
+            metrics.log
+            *.txt
+            check-pages*/*.txt

@@ -1,0 +1,3 @@
+[submodule "tldr"]
+	path = tldr
+	url = https://github.com/tldr-pages/tldr

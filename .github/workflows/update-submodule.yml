@@ -1,0 +1,44 @@
+name: Update Submodule
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "10,40 * * * *"
+
+jobs:
+  update-submodule:
+    name: Update Submodule
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+
+      - name: Git submodule update
+        run: |
+          git pull --rebase=true --recurse-submodules
+          git submodule update --remote --recursive
+
+      - name: Commit update
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          if git commit -am "ci: update TLDR submodule" && git push; then
+            exit 0
+          else
+            exit 1
+          fi
+
+      - name: Trigger Calculate Metrics Workflow
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'calculate-metrics.yml',
+                ref: 'main',
+              })
