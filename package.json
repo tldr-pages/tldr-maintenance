@@ -1,0 +1,12 @@
+{
+  "name": "tldr-maintenance",
+  "description": "Calculate several metrics about the tldr-pages",
+  "author": "Sebastiaan Speck",
+  "repository": "tldr-pages/tldr-maintenance",
+  "homepage": "https://github.com/tldr-pages/tldr-maintenance",
+  "dependencies": {
+    "markdownlint-cli": "^0.37.0",
+    "tldr-lint": "^0.0.13"
+  },
+  "private": true
+}

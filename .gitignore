@@ -10,3 +10,6 @@
 # npm-specific files
 node_modules
 npm-debug.log
+
+# check-pages.sh generates these files
+check-pages*/
