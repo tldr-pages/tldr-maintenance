@@ -100,8 +100,9 @@ check_missing_tldr_page() {
 
     if ! [[ $command =~ ^-[^[:space:]] ]] && ! [[ $command =~ \{\{.*\}\} ]]; then # Exclude -p / -u / -o (tldr -u) commands and {{commands}}.
       local missing=true
+      local filename="${command,,}"
       for platform in "${PLATFORMS[@]}"; do
-        if [ -f "$folder_path/$platform/$command.md" ]; then
+        if [ -f "$folder_path/$platform/$filename.md" ]; then
           missing=false
           break
         fi
