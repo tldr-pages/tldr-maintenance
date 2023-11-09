@@ -55,7 +55,7 @@
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 101 outdated page(s) in check-pages.es/outdated-es-pages.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
-3786 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
+3785 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
 ----------------------------------------------------------------------------------------------------
 0 missing TLDR page(s) in check-pages.fa/missing-tldr-fa-commands.txt.
@@ -255,8 +255,8 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 235/341 - 68%
-Total misplaced page(s): 0/15078 - 0%
-Total outdated page(s): 1396/10645 - 13%
+Total misplaced page(s): 0/15079 - 0%
+Total outdated page(s): 1396/10646 - 13%
 Total missing English page(s): 0/1906 - 0%
-Total missing translated page(s): 148943/159588 - 93%
+Total missing translated page(s): 148942/159588 - 93%
 Total lint error(s): 2
