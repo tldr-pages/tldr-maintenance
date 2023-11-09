@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  sanity-check:
+  calculate-metrics:
     runs-on: ubuntu-latest
 
     name: Calculate Metrics
