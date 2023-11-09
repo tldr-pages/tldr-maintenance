@@ -32,7 +32,7 @@ jobs:
             exit 1
           fi
 
-      - name: Trigger Calculate Metrics Workflow
+      - name: Trigger Workflows
         uses: actions/github-script@v6
         with:
           script: |
@@ -40,5 +40,12 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 workflow_id: 'calculate-metrics.yml',
+                ref: 'main',
+              })
+
+            github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'run-set-more-info-link.yml',
                 ref: 'main',
               })

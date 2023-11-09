@@ -1,0 +1,31 @@
+name: Run set-more-info-link.py
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-set-more-info-link:
+    runs-on: ubuntu-latest
+
+    name: Run set-more-info-link.py
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+
+      - name: Run the script and generate artifact
+        run: |
+          ./tldr/scripts/set-more-info-link.py -S 2>&1 | tee set-more-info-link.log
+          if [ -s set-more-info-link.log ]; then
+            exit 1
+          fi
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: set-more-info-link
+          path: | 
+            set-more-info-link.log
