@@ -1,4 +1,4 @@
-10 missing TLDR page(s) in check-pages/missing-tldr-commands.txt.
+9 missing TLDR page(s) in check-pages/missing-tldr-commands.txt.
 0 misplaced page(s) in check-pages/misplaced-pages.txt.
 0 linter error(s) in check-pages/lint-errors.txt.
 ----------------------------------------------------------------------------------------------------
@@ -254,7 +254,7 @@
 4153 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total missing TLDR commands: 235/341 - 68%
+Total missing TLDR commands: 234/341 - 68%
 Total misplaced page(s): 0/15080 - 0%
 Total outdated page(s): 1396/10646 - 13%
 Total missing English page(s): 0/1906 - 0%
