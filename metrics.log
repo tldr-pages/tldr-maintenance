@@ -91,7 +91,7 @@
 54 outdated page(s) in check-pages.id/outdated-id-pages.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
 4103 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
-1 linter error(s) in check-pages.id/lint-errors-id.txt.
+0 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
@@ -259,4 +259,4 @@ Total misplaced page(s): 0/15149 - 0%
 Total outdated page(s): 1401/10670 - 13%
 Total missing English page(s): 0/1910 - 0%
 Total missing translated page(s): 150574/161244 - 93%
-Total lint error(s): 3
+Total lint error(s): 2
