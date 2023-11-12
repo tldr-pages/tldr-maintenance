@@ -90,8 +90,8 @@
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
 54 outdated page(s) in check-pages.id/outdated-id-pages.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
-4111 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
-0 linter error(s) in check-pages.id/lint-errors-id.txt.
+4102 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
+1 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
@@ -111,7 +111,7 @@
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
 129 outdated page(s) in check-pages.ko/outdated-ko-pages.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
-3973 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
+3972 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
 ----------------------------------------------------------------------------------------------------
 191 missing TLDR page(s) in check-pages.lo/missing-tldr-lo-commands.txt.
@@ -244,7 +244,7 @@
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
 150 outdated page(s) in check-pages.zh/outdated-zh-pages.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
-3762 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
+3761 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
 ----------------------------------------------------------------------------------------------------
 173 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
@@ -255,8 +255,8 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 234/342 - 68%
-Total misplaced page(s): 0/15137 - 0%
-Total outdated page(s): 1396/10659 - 13%
+Total misplaced page(s): 0/15148 - 0%
+Total outdated page(s): 1396/10670 - 13%
 Total missing English page(s): 0/1910 - 0%
-Total missing translated page(s): 150549/161208 - 93%
-Total lint error(s): 2
+Total missing translated page(s): 150538/161208 - 93%
+Total lint error(s): 3
