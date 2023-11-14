@@ -137,7 +137,7 @@
 ----------------------------------------------------------------------------------------------------
 172 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
-2 outdated page(s) in check-pages.nl/outdated-nl-pages.txt.
+0 outdated page(s) in check-pages.nl/outdated-nl-pages.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 4009 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
@@ -256,7 +256,7 @@
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/346 - 69%
 Total misplaced page(s): 0/15157 - 0%
-Total outdated page(s): 1365/10674 - 12%
+Total outdated page(s): 1363/10674 - 12%
 Total missing English page(s): 0/1910 - 0%
 Total missing translated page(s): 150714/161388 - 93%
 Total lint error(s): 2
