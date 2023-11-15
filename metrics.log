@@ -207,7 +207,7 @@
 ----------------------------------------------------------------------------------------------------
 183 missing TLDR page(s) in check-pages.ta/missing-tldr-ta-commands.txt.
 0 misplaced page(s) in check-pages.ta/misplaced-ta-pages.txt.
-7 outdated page(s) in check-pages.ta/outdated-ta-pages.txt.
+0 outdated page(s) in check-pages.ta/outdated-ta-pages.txt.
 0 missing English page(s) in check-pages.ta/missing-english-ta-pages.txt.
 4105 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
 0 linter error(s) in check-pages.ta/lint-errors-ta.txt.
@@ -256,7 +256,7 @@
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/346 - 69%
 Total misplaced page(s): 0/15161 - 0%
-Total outdated page(s): 1364/10677 - 12%
+Total outdated page(s): 1357/10677 - 12%
 Total missing English page(s): 0/1911 - 0%
 Total missing translated page(s): 150747/161424 - 93%
 Total lint error(s): 2
