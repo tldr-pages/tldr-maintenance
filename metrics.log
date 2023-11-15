@@ -30,12 +30,7 @@
 4196 missing translated page(s) in check-pages.ca/missing-translated-ca-pages.txt.
 0 linter error(s) in check-pages.ca/lint-errors-ca.txt.
 ----------------------------------------------------------------------------------------------------
-0 missing TLDR page(s) in check-pages.cs/missing-tldr-cs-commands.txt.
-0 misplaced page(s) in check-pages.cs/misplaced-cs-pages.txt.
-1 outdated page(s) in check-pages.cs/outdated-cs-pages.txt.
-0 missing English page(s) in check-pages.cs/missing-english-cs-pages.txt.
-4482 missing translated page(s) in check-pages.cs/missing-translated-cs-pages.txt.
-0 linter error(s) in check-pages.cs/lint-errors-cs.txt.
+Skipping pages.cs since it only has 2 supported platform.
 ----------------------------------------------------------------------------------------------------
 190 missing TLDR page(s) in check-pages.da/missing-tldr-da-commands.txt.
 0 misplaced page(s) in check-pages.da/misplaced-da-pages.txt.
@@ -65,12 +60,7 @@
 4425 missing translated page(s) in check-pages.fa/missing-translated-fa-pages.txt.
 0 linter error(s) in check-pages.fa/lint-errors-fa.txt.
 ----------------------------------------------------------------------------------------------------
-0 missing TLDR page(s) in check-pages.fi/missing-tldr-fi-commands.txt.
-0 misplaced page(s) in check-pages.fi/misplaced-fi-pages.txt.
-0 outdated page(s) in check-pages.fi/outdated-fi-pages.txt.
-0 missing English page(s) in check-pages.fi/missing-english-fi-pages.txt.
-4483 missing translated page(s) in check-pages.fi/missing-translated-fi-pages.txt.
-0 linter error(s) in check-pages.fi/lint-errors-fi.txt.
+Skipping pages.fi since it only has 1 supported platform.
 ----------------------------------------------------------------------------------------------------
 152 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
@@ -170,12 +160,7 @@
 4230 missing translated page(s) in check-pages.pt_PT/missing-translated-pt_PT-pages.txt.
 0 linter error(s) in check-pages.pt_PT/lint-errors-pt_PT.txt.
 ----------------------------------------------------------------------------------------------------
-0 missing TLDR page(s) in check-pages.ro/missing-tldr-ro-commands.txt.
-0 misplaced page(s) in check-pages.ro/misplaced-ro-pages.txt.
-0 outdated page(s) in check-pages.ro/outdated-ro-pages.txt.
-0 missing English page(s) in check-pages.ro/missing-english-ro-pages.txt.
-4483 missing translated page(s) in check-pages.ro/missing-translated-ro-pages.txt.
-0 linter error(s) in check-pages.ro/lint-errors-ro.txt.
+Skipping pages.ro since it only has 1 supported platform.
 ----------------------------------------------------------------------------------------------------
 174 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
@@ -184,19 +169,9 @@
 4185 missing translated page(s) in check-pages.ru/missing-translated-ru-pages.txt.
 0 linter error(s) in check-pages.ru/lint-errors-ru.txt.
 ----------------------------------------------------------------------------------------------------
-0 missing TLDR page(s) in check-pages.sh/missing-tldr-sh-commands.txt.
-0 misplaced page(s) in check-pages.sh/misplaced-sh-pages.txt.
-9 outdated page(s) in check-pages.sh/outdated-sh-pages.txt.
-0 missing English page(s) in check-pages.sh/missing-english-sh-pages.txt.
-4474 missing translated page(s) in check-pages.sh/missing-translated-sh-pages.txt.
-0 linter error(s) in check-pages.sh/lint-errors-sh.txt.
+Skipping pages.sh since it only has 1 supported platform.
 ----------------------------------------------------------------------------------------------------
-0 missing TLDR page(s) in check-pages.sr/missing-tldr-sr-commands.txt.
-0 misplaced page(s) in check-pages.sr/misplaced-sr-pages.txt.
-3 outdated page(s) in check-pages.sr/outdated-sr-pages.txt.
-0 missing English page(s) in check-pages.sr/missing-english-sr-pages.txt.
-4479 missing translated page(s) in check-pages.sr/missing-translated-sr-pages.txt.
-0 linter error(s) in check-pages.sr/lint-errors-sr.txt.
+Skipping pages.sr since it only has 1 supported platform.
 ----------------------------------------------------------------------------------------------------
 181 missing TLDR page(s) in check-pages.sv/missing-tldr-sv-commands.txt.
 0 misplaced page(s) in check-pages.sv/misplaced-sv-pages.txt.
@@ -233,12 +208,7 @@
 4230 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
 0 linter error(s) in check-pages.uk/lint-errors-uk.txt.
 ----------------------------------------------------------------------------------------------------
-0 missing TLDR page(s) in check-pages.uz/missing-tldr-uz-commands.txt.
-0 misplaced page(s) in check-pages.uz/misplaced-uz-pages.txt.
-0 outdated page(s) in check-pages.uz/outdated-uz-pages.txt.
-0 missing English page(s) in check-pages.uz/missing-english-uz-pages.txt.
-4478 missing translated page(s) in check-pages.uz/missing-translated-uz-pages.txt.
-2 linter error(s) in check-pages.uz/lint-errors-uz.txt.
+Skipping pages.uz since it only has 1 supported platform.
 ----------------------------------------------------------------------------------------------------
 140 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
@@ -256,7 +226,7 @@
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/346 - 69%
 Total misplaced page(s): 0/15161 - 0%
-Total outdated page(s): 1357/10677 - 12%
+Total outdated page(s): 1344/10677 - 12%
 Total missing English page(s): 0/1911 - 0%
-Total missing translated page(s): 150747/161424 - 93%
-Total lint error(s): 2
+Total missing translated page(s): 123868/161424 - 76%
+Total lint error(s): 0
