@@ -21,7 +21,7 @@
 ROOT_DIR="./tldr"
 PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows")
 
-COMMAND_REGEX='^`.*`$'
+COMMAND_REGEX='^`[^`]\+`$'
 CHECK_NAMES="missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
 
 while getopts ":l:c:" opt; do
