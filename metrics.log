@@ -99,7 +99,7 @@ Skipping pages.fi since it only has 1 supported platform.
 ----------------------------------------------------------------------------------------------------
 148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
-131 outdated page(s) in check-pages.ko/outdated-ko-pages.txt.
+78 outdated page(s) in check-pages.ko/outdated-ko-pages.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
 3976 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
@@ -226,7 +226,7 @@ Skipping pages.uz since it only has 1 supported platform.
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/346 - 69%
 Total misplaced page(s): 0/15167 - 0%
-Total outdated page(s): 1345/10681 - 12%
+Total outdated page(s): 1292/10681 - 12%
 Total missing English page(s): 0/1911 - 0%
 Total missing translated page(s): 123924/161496 - 76%
 Total lint error(s): 0
