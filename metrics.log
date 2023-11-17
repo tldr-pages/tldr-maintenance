@@ -66,7 +66,7 @@ Skipping pages.fi since it only has 1 supported platform.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
 99 outdated page(s) in check-pages.fr/outdated-fr-pages.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
-3860 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
+3857 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
 0 linter error(s) in check-pages.fr/lint-errors-fr.txt.
 ----------------------------------------------------------------------------------------------------
 175 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
@@ -125,11 +125,11 @@ Skipping pages.fi since it only has 1 supported platform.
 4270 missing translated page(s) in check-pages.ne/missing-translated-ne-pages.txt.
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
-172 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+164 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) in check-pages.nl/outdated-nl-pages.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4012 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+4003 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
@@ -225,8 +225,8 @@ Skipping pages.uz since it only has 1 supported platform.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/346 - 69%
-Total misplaced page(s): 0/15170 - 0%
-Total outdated page(s): 1292/10684 - 12%
-Total missing English page(s): 0/1911 - 0%
-Total missing translated page(s): 123921/161496 - 76%
+Total misplaced page(s): 0/15182 - 0%
+Total outdated page(s): 1292/10696 - 12%
+Total missing English page(s): 0/1915 - 0%
+Total missing translated page(s): 123909/161496 - 76%
 Total lint error(s): 0
