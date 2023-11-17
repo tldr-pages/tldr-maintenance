@@ -41,7 +41,7 @@ folders=$(find ./tldr -type d -name "pages.*" | sort -u)
 for folder in $folders; do
   number_of_platforms="$(find $folder -mindepth 1 -type d | wc -l)"
   if [[ "$number_of_platforms" -le 2 ]]; then
-    echo "Skipping ${folder##*/} since it only has $number_of_platforms supported platform."
+    echo "Skipping ${folder##*/} since it only has $number_of_platforms supported platform(s)."
     printf -- '-%.0s' {1..100}; echo
     continue
   fi
@@ -113,7 +113,7 @@ calculate_and_display() {
 calculate_and_display '*/check-pages*/missing-tldr*commands.txt' "./missing-tldr-commands.txt" "$total_tldr_commands" "missing TLDR commands"
 calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-count.txt' "./outdated-pages-based-on-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
-calculate_and_display '*/check-pages*/outdated*pages-based-on-content.txt' "./outdated-pages-based-on-content.txt" "$total_non_english_pages" "outdated page(s) based on the commands itself"
+calculate_and_display '*/check-pages*/outdated*pages-based-on-contents.txt' "./outdated-pages-based-on-content.txt" "$total_non_english_pages" "outdated page(s) based on the commands itself"
 calculate_and_display '*/check-pages*/missing-english*pages.txt' "./missing-english-pages.txt" "$total_unique_non_english_pages" "missing English page(s)"
 calculate_and_display '*/check-pages*/missing-translated*pages.txt' "./missing-translated-pages.txt" "$total_pages_need_translation" "missing translated page(s)"
 calculate_and_display '*/check-pages*/lint-errors*.txt' "./lint-errors.txt" "" "lint error(s)"
