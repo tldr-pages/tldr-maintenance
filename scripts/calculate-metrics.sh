@@ -60,7 +60,7 @@ for folder in $folders; do
   grep "based on the commands itself" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt  | sed 's/\(based on the commands itself\).*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-contents.txt
 
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-count.txt" "outdated page(s) based on number of commands"
-  count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-comman-contents.txt" "outdated page(s) based on the commands itself"
+  count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-contents.txt" "outdated page(s) based on the commands itself"
   count_and_display "./check-pages.$folder_suffix/missing-english-$folder_suffix-pages.txt" "missing English page(s)"
   count_and_display "./check-pages.$folder_suffix/missing-translated-$folder_suffix-pages.txt" "missing translated page(s)"
   count_and_display "./check-pages.$folder_suffix/lint-errors-$folder_suffix.txt" "linter error(s)"
