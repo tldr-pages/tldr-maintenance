@@ -75,7 +75,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 52 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-count.txt.
 47 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-contents.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
-3860 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
+3857 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
 0 linter error(s) in check-pages.fr/lint-errors-fr.txt.
 ----------------------------------------------------------------------------------------------------
 175 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
@@ -115,7 +115,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 51 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-count.txt.
 27 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
-3976 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
+3973 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
 ----------------------------------------------------------------------------------------------------
 191 missing TLDR page(s) in check-pages.lo/missing-tldr-lo-commands.txt.
@@ -142,12 +142,12 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4270 missing translated page(s) in check-pages.ne/missing-translated-ne-pages.txt.
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
-172 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+164 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4012 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+4003 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
