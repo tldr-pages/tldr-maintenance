@@ -56,8 +56,8 @@ for folder in $folders; do
   count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt" "missing TLDR page(s)"
   count_and_display "./check-pages.$folder_suffix/misplaced-$folder_suffix-pages.txt" "misplaced page(s)"
 
-  grep "based on number of commands" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt | sed 's/\(based on number of commands.*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-count.txt
-  grep "based on the commands itself" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt  | sed 's/\(based on the commands itself.*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-contents.txt
+  grep "based on number of commands" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt | sed 's/\(based on number of commands\).*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-count.txt
+  grep "based on the commands itself" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt  | sed 's/\(based on the commands itself\).*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-contents.txt
 
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-count.txt" "outdated page(s) based on number of commands"
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-contents.txt" "outdated page(s) based on the commands itself"
