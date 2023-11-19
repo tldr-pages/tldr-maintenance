@@ -46,7 +46,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-43 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+42 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 64 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
 3862 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
@@ -160,7 +160,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 199 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
-29 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
+27 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
 15 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4062 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
@@ -254,9 +254,9 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4206 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total missing TLDR commands: 239/349 - 68%
+Total missing TLDR commands: 239/345 - 69%
 Total misplaced page(s): 0/15185 - 0%
-Total outdated page(s) based on number of commands: 793/10698 - 7%
+Total outdated page(s) based on number of commands: 790/10698 - 7%
 Total outdated page(s) based on the commands itself: 501/10698 - 4%
 Total missing English page(s): 0/1915 - 0%
 Total missing translated page(s): 123937/161532 - 76%
