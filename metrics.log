@@ -160,7 +160,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 199 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
-27 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
+26 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
 15 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4064 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
@@ -254,9 +254,9 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4208 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total missing TLDR commands: 239/345 - 69%
+Total missing TLDR commands: 239/348 - 68%
 Total misplaced page(s): 0/15189 - 0%
-Total outdated page(s) based on number of commands: 790/10700 - 7%
+Total outdated page(s) based on number of commands: 789/10700 - 7%
 Total outdated page(s) based on the commands itself: 501/10700 - 4%
 Total missing English page(s): 0/1916 - 0%
 Total missing translated page(s): 123995/161604 - 76%
