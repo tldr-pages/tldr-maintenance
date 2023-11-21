@@ -57,7 +57,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 51 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 50 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
-3837 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
+3836 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
 ----------------------------------------------------------------------------------------------------
 0 missing TLDR page(s) in check-pages.fa/missing-tldr-fa-commands.txt.
@@ -255,9 +255,9 @@ Skipping pages.uz since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/348 - 68%
-Total misplaced page(s): 0/15189 - 0%
-Total outdated page(s) based on number of commands: 789/10700 - 7%
-Total outdated page(s) based on the commands itself: 501/10700 - 4%
-Total missing English page(s): 0/1916 - 0%
-Total missing translated page(s): 123995/161604 - 76%
+Total misplaced page(s): 0/15190 - 0%
+Total outdated page(s) based on number of commands: 789/10701 - 7%
+Total outdated page(s) based on the commands itself: 501/10701 - 4%
+Total missing English page(s): 0/1917 - 0%
+Total missing translated page(s): 123994/161604 - 76%
 Total lint error(s): 0
