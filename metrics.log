@@ -80,7 +80,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 175 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
 0 misplaced page(s) in check-pages.hi/misplaced-hi-pages.txt.
-18 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
+19 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.hi/outdated-hi-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.hi/missing-english-hi-pages.txt.
 4175 missing translated page(s) in check-pages.hi/missing-translated-hi-pages.txt.
@@ -112,7 +112,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
-51 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
+52 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
 27 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
 3974 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
@@ -256,7 +256,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/352 - 67%
 Total misplaced page(s): 0/15214 - 0%
-Total outdated page(s) based on number of commands: 789/10722 - 7%
+Total outdated page(s) based on number of commands: 791/10722 - 7%
 Total outdated page(s) based on the commands itself: 501/10722 - 4%
 Total missing English page(s): 0/1927 - 0%
 Total missing translated page(s): 124063/161712 - 76%
