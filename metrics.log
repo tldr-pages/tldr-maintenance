@@ -142,12 +142,12 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4277 missing translated page(s) in check-pages.ne/missing-translated-ne-pages.txt.
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
-157 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+154 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4000 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+3994 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
@@ -255,9 +255,9 @@ Skipping pages.uz since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/352 - 67%
-Total misplaced page(s): 0/15218 - 0%
-Total outdated page(s) based on number of commands: 791/10725 - 7%
-Total outdated page(s) based on the commands itself: 501/10725 - 4%
-Total missing English page(s): 0/1927 - 0%
-Total missing translated page(s): 124090/161748 - 76%
+Total misplaced page(s): 0/15224 - 0%
+Total outdated page(s) based on number of commands: 791/10731 - 7%
+Total outdated page(s) based on the commands itself: 501/10731 - 4%
+Total missing English page(s): 0/1928 - 0%
+Total missing translated page(s): 124084/161748 - 76%
 Total lint error(s): 0
