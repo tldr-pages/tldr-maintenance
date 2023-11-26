@@ -243,7 +243,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 82 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 68 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
-3775 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
+3774 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
 ----------------------------------------------------------------------------------------------------
 173 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
@@ -255,9 +255,9 @@ Skipping pages.uz since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total missing TLDR commands: 239/352 - 67%
-Total misplaced page(s): 0/15217 - 0%
-Total outdated page(s) based on number of commands: 791/10724 - 7%
-Total outdated page(s) based on the commands itself: 501/10724 - 4%
+Total misplaced page(s): 0/15218 - 0%
+Total outdated page(s) based on number of commands: 791/10725 - 7%
+Total outdated page(s) based on the commands itself: 501/10725 - 4%
 Total missing English page(s): 0/1927 - 0%
-Total missing translated page(s): 124091/161748 - 76%
+Total missing translated page(s): 124090/161748 - 76%
 Total lint error(s): 0
