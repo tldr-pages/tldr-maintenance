@@ -92,7 +92,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 22 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
 4135 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
-1 linter error(s) in check-pages.id/lint-errors-id.txt.
+0 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
@@ -260,4 +260,4 @@ Total outdated page(s) based on number of commands: 840/10838 - 7%
 Total outdated page(s) based on the commands itself: 478/10838 - 4%
 Total missing English page(s): 0/1965 - 0%
 Total missing translated page(s): 125567/163656 - 76%
-Total lint error(s): 1
+Total lint error(s): 0
