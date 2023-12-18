@@ -142,12 +142,12 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4339 missing translated page(s) in check-pages.ne/missing-translated-ne-pages.txt.
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
-138 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+130 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4003 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+3995 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
@@ -254,10 +254,10 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4274 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total missing TLDR commands: 249/356 - 69%
-Total misplaced page(s): 0/15407 - 0%
-Total outdated page(s) based on number of commands: 834/10852 - 7%
-Total outdated page(s) based on the commands itself: 478/10852 - 4%
-Total missing English page(s): 0/1977 - 0%
-Total missing translated page(s): 125823/163980 - 76%
+Total missing TLDR commands: 243/356 - 68%
+Total misplaced page(s): 0/15415 - 0%
+Total outdated page(s) based on number of commands: 834/10860 - 7%
+Total outdated page(s) based on the commands itself: 478/10860 - 4%
+Total missing English page(s): 0/1984 - 0%
+Total missing translated page(s): 125815/163980 - 76%
 Total lint error(s): 0
