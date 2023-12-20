@@ -49,3 +49,10 @@ jobs:
                 workflow_id: 'run-set-more-info-link.yml',
                 ref: 'main',
               })
+
+            github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'run-set-alias-page.yml',
+                ref: 'main',
+              })
