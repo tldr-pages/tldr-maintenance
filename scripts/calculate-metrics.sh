@@ -14,6 +14,18 @@ total_unique_non_english_pages=$(find ./tldr/pages.* -type f | awk -F/ '{print $
 
 EXIT_CODE=0
 
+run_python_script() {
+  local script_name="$1"
+
+  ./tldr/scripts/${script_name}.py -S > $script_name.log
+  sed 's/\x1b\[[0-9;]*m//g' $script_name.log > $script_name.log.tmp
+  mv $script_name.log.tmp $script_name.log
+  sort -o $script_name.log $script_name.log
+}
+
+run_python_script "set-more-info-link"
+run_python_script "set-alias-page"
+
 ./scripts/check-pages.sh
 
 count_and_display() {
@@ -27,6 +39,9 @@ count_and_display() {
 uniqify_file() {
   sort -u "$1" -o "$1"
 }
+
+grep "pages.en/" ./set-more-info-link.log > ./check-pages/malformed-more-info-link-pages.txt
+count_and_display "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
 
 grep "does not exist yet!" ./check-pages/missing-tldr-pages.txt | sed 's/Command referenced in.*$//' > ./check-pages/missing-tldr-commands.txt
 uniqify_file ./check-pages/missing-tldr-commands.txt
@@ -49,6 +64,12 @@ for folder in $folders; do
   folder_suffix="${folder##*/pages.}"
 
   ./scripts/check-pages.sh -l "$folder_suffix"
+
+  grep "pages.$folder_suffix/" ./set-more-info-link.log > ./check-pages.$folder_suffix/malformed-more-info-link-$folder_suffix-pages.txt
+  count_and_display "./check-pages.$folder_suffix/malformed-more-info-link-$folder_suffix-pages.txt" "malformed more info link page(s)"
+
+  grep "pages.$folder_suffix/" ./set-alias-page.log > ./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt
+  count_and_display "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
 
   grep "does not exist yet!" ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt | sed 's/Command referenced in.*$//' > ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt
   uniqify_file ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt
@@ -110,6 +131,8 @@ calculate_and_display() {
   fi
 }
 
+calculate_and_display '*/check-pages*/malformed-more-info-link*pages.txt' "./malformed-more-info-link-pages.txt" "$total_pages" "malformed more info link page(s)"
+calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
 calculate_and_display '*/check-pages*/missing-tldr*commands.txt' "./missing-tldr-commands.txt" "$total_tldr_commands" "missing TLDR commands"
 calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-count.txt' "./outdated-pages-based-on-command-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
