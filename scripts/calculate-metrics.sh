@@ -21,6 +21,7 @@ run_python_script() {
   sed 's/\x1b\[[0-9;]*m//g' $script_name.log > $script_name.log.tmp
   mv $script_name.log.tmp $script_name.log
   sort -o $script_name.log $script_name.log
+  git submodule foreach --recursive git clean -ffdx
 }
 
 run_python_script "set-more-info-link"
