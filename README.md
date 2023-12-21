@@ -59,3 +59,8 @@ At the end of the [metrics](metrics.log) a summary is written. Some numbers incl
 - Total missing English page(s) [with percentage, calculated based on total unique non-English pages]
 - Total missing translated page(s) [with percentage, calculated based on total of pages that need translation (total of English pages multiplied with number of languages)]
 - Total lint error(s)
+
+## Artifacts
+
+After a [workflow run](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/calculate-metrics.yml) an artifact is created.  
+This artifact can be downloaded and viewed to see the exact output per language per metric to see which page needs attention.
