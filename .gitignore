@@ -15,5 +15,6 @@ npm-debug.log
 check-pages*/
 
 # calculate-metrics.sh generates these files. Exception made for metrics.log since we want to commit it.
+/*.txt
 /*.log
 !metrics.log
