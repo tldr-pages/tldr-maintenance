@@ -1,3 +1,2989 @@
+Entering 'tldr'
+Entering 'tldr'
+Removing pages.ar/common/azure-cli.md
+Removing pages.ar/common/docker-container-diff.md
+Removing pages.ar/common/docker-container-remove.md
+Removing pages.ar/common/docker-container-rename.md
+Removing pages.ar/common/docker-container-rm.md
+Removing pages.ar/common/docker-container-top.md
+Removing pages.ar/common/gemtopbm.md
+Removing pages.ar/common/git-stage.md
+Removing pages.ar/common/hd.md
+Removing pages.ar/common/hping.md
+Removing pages.ar/common/just.md
+Removing pages.ar/common/lima.md
+Removing pages.ar/common/linode-cli.md
+Removing pages.ar/common/lzcmp.md
+Removing pages.ar/common/lzegrep.md
+Removing pages.ar/common/lzfgrep.md
+Removing pages.ar/common/lzgrep.md
+Removing pages.ar/common/lzless.md
+Removing pages.ar/common/lzmore.md
+Removing pages.ar/common/musl-gcc.md
+Removing pages.ar/common/netcat.md
+Removing pages.ar/common/open.md
+Removing pages.ar/common/pamnoraw.md
+Removing pages.ar/common/pbmtox10bm.md
+Removing pages.ar/common/pgmoil.md
+Removing pages.ar/common/pnmdepth.md
+Removing pages.ar/common/pnmscale.md
+Removing pages.ar/common/pnmtoplainpnm.md
+Removing pages.ar/common/pnmtopnm.md
+Removing pages.ar/common/pnmtotiff.md
+Removing pages.ar/common/powershell.md
+Removing pages.ar/common/ppmquant.md
+Removing pages.ar/common/ppmtotga.md
+Removing pages.ar/common/ppmtowinicon.md
+Removing pages.ar/common/ps-nvm.md
+Removing pages.ar/common/unzstd.md
+Removing pages.ar/common/winicontoppm.md
+Removing pages.ar/common/xzegrep.md
+Removing pages.ar/common/xzfgrep.md
+Removing pages.ar/common/ykman.md
+Removing pages.ar/common/zstdcat.md
+Removing pages.ar/common/zstdmt.md
+Removing pages.ar/linux/apx.md
+Removing pages.ar/linux/distrobox.md
+Removing pages.ar/linux/ip6tables-restore.md
+Removing pages.ar/linux/ip6tables-save.md
+Removing pages.ar/linux/ip6tables.md
+Removing pages.ar/linux/mount.smb3.md
+Removing pages.ar/linux/nmcli.md
+Removing pages.ar/linux/nmtui-connect.md
+Removing pages.ar/linux/nmtui-edit.md
+Removing pages.ar/linux/nmtui-hostname.md
+Removing pages.ar/linux/pkgctl.md
+Removing pages.ar/linux/qm-import-disk.md
+Removing pages.ar/linux/qm-move-disk.md
+Removing pages.ar/linux/qm-move_disk.md
+Removing pages.ar/linux/qm-resize.md
+Removing pages.ar/linux/shntool-split.md
+Removing pages.ar/linux/systemd-confext.md
+Removing pages.ar/linux/systemd-resolve.md
+Removing pages.ar/linux/systemd-umount.md
+Removing pages.ar/linux/xbps.md
+Removing pages.ar/openbsd/
+Removing pages.ar/osx/llvm-lipo.md
+Removing pages.ar/windows/cd.md
+Removing pages.ar/windows/chdir.md
+Removing pages.ar/windows/clear.md
+Removing pages.ar/windows/cls.md
+Removing pages.ar/windows/del.md
+Removing pages.ar/windows/gal.md
+Removing pages.ar/windows/gl.md
+Removing pages.ar/windows/mi.md
+Removing pages.ar/windows/move.md
+Removing pages.ar/windows/mv.md
+Removing pages.ar/windows/ni.md
+Removing pages.ar/windows/pwd.md
+Removing pages.ar/windows/ri.md
+Removing pages.ar/windows/rm.md
+Removing pages.ar/windows/rmdir.md
+Removing pages.ar/windows/sc-config.md
+Removing pages.ar/windows/sc-create.md
+Removing pages.ar/windows/sc-delete.md
+Removing pages.ar/windows/sc-query.md
+Removing pages.ar/windows/sl.md
+Removing pages.ar/windows/slmgr.md
+Removing pages.bn/common/azure-cli.md
+Removing pages.bn/common/bundler.md
+Removing pages.bn/common/clamav.md
+Removing pages.bn/common/clang-cpp.md
+Removing pages.bn/common/clojure.md
+Removing pages.bn/common/cola.md
+Removing pages.bn/common/cron.md
+Removing pages.bn/common/docker-container-diff.md
+Removing pages.bn/common/docker-container-remove.md
+Removing pages.bn/common/docker-container-rename.md
+Removing pages.bn/common/docker-container-rm.md
+Removing pages.bn/common/docker-container-top.md
+Removing pages.bn/common/fossil-ci.md
+Removing pages.bn/common/fossil-delete.md
+Removing pages.bn/common/fossil-forget.md
+Removing pages.bn/common/fossil-new.md
+Removing pages.bn/common/gemtopbm.md
+Removing pages.bn/common/gh-cs.md
+Removing pages.bn/common/git-stage.md
+Removing pages.bn/common/gnmic-sub.md
+Removing pages.bn/common/google-chrome.md
+Removing pages.bn/common/hd.md
+Removing pages.bn/common/hping.md
+Removing pages.bn/common/hx.md
+Removing pages.bn/common/just.md
+Removing pages.bn/common/kafkacat.md
+Removing pages.bn/common/lima.md
+Removing pages.bn/common/linode-cli.md
+Removing pages.bn/common/llvm-ar.md
+Removing pages.bn/common/llvm-g++.md
+Removing pages.bn/common/llvm-gcc.md
+Removing pages.bn/common/llvm-nm.md
+Removing pages.bn/common/llvm-objdump.md
+Removing pages.bn/common/llvm-strings.md
+Removing pages.bn/common/lzcat.md
+Removing pages.bn/common/lzcmp.md
+Removing pages.bn/common/lzegrep.md
+Removing pages.bn/common/lzfgrep.md
+Removing pages.bn/common/lzgrep.md
+Removing pages.bn/common/lzless.md
+Removing pages.bn/common/lzma.md
+Removing pages.bn/common/lzmore.md
+Removing pages.bn/common/mscore.md
+Removing pages.bn/common/musl-gcc.md
+Removing pages.bn/common/netcat.md
+Removing pages.bn/common/nm-classic.md
+Removing pages.bn/common/ntl.md
+Removing pages.bn/common/open.md
+Removing pages.bn/common/pamnoraw.md
+Removing pages.bn/common/pbmtox10bm.md
+Removing pages.bn/common/pgmoil.md
+Removing pages.bn/common/pio-init.md
+Removing pages.bn/common/piodebuggdb.md
+Removing pages.bn/common/platformio.md
+Removing pages.bn/common/pnmdepth.md
+Removing pages.bn/common/pnmscale.md
+Removing pages.bn/common/pnmtoplainpnm.md
+Removing pages.bn/common/pnmtopnm.md
+Removing pages.bn/common/pnmtotiff.md
+Removing pages.bn/common/powershell.md
+Removing pages.bn/common/ppmquant.md
+Removing pages.bn/common/ppmtotga.md
+Removing pages.bn/common/ppmtowinicon.md
+Removing pages.bn/common/ps-nvm.md
+Removing pages.bn/common/ptpython3.md
+Removing pages.bn/common/python3.md
+Removing pages.bn/common/r2.md
+Removing pages.bn/common/rcat.md
+Removing pages.bn/common/ripgrep.md
+Removing pages.bn/common/tldrl.md
+Removing pages.bn/common/tlmgr-arch.md
+Removing pages.bn/common/todoman.md
+Removing pages.bn/common/transmission.md
+Removing pages.bn/common/unlzma.md
+Removing pages.bn/common/unxz.md
+Removing pages.bn/common/unzstd.md
+Removing pages.bn/common/vi.md
+Removing pages.bn/common/winicontoppm.md
+Removing pages.bn/common/xzcat.md
+Removing pages.bn/common/xzegrep.md
+Removing pages.bn/common/xzfgrep.md
+Removing pages.bn/common/ykman.md
+Removing pages.bn/common/zstdcat.md
+Removing pages.bn/common/zstdmt.md
+Removing pages.bn/linux/alternatives.md
+Removing pages.bn/linux/apx.md
+Removing pages.bn/linux/batcat.md
+Removing pages.bn/linux/bspwm.md
+Removing pages.bn/linux/cc.md
+Removing pages.bn/linux/cgroups.md
+Removing pages.bn/linux/distrobox.md
+Removing pages.bn/linux/ip-route-list.md
+Removing pages.bn/linux/ip6tables-restore.md
+Removing pages.bn/linux/ip6tables-save.md
+Removing pages.bn/linux/ip6tables.md
+Removing pages.bn/linux/megadl.md
+Removing pages.bn/linux/mount.smb3.md
+Removing pages.bn/linux/ncal.md
+Removing pages.bn/linux/nmcli.md
+Removing pages.bn/linux/nmtui-connect.md
+Removing pages.bn/linux/nmtui-edit.md
+Removing pages.bn/linux/nmtui-hostname.md
+Removing pages.bn/linux/pkgctl.md
+Removing pages.bn/linux/qm-import-disk.md
+Removing pages.bn/linux/qm-move-disk.md
+Removing pages.bn/linux/qm-move_disk.md
+Removing pages.bn/linux/qm-resize.md
+Removing pages.bn/linux/shntool-split.md
+Removing pages.bn/linux/systemd-confext.md
+Removing pages.bn/linux/systemd-resolve.md
+Removing pages.bn/linux/systemd-umount.md
+Removing pages.bn/linux/ubuntu-bug.md
+Removing pages.bn/linux/xbps.md
+Removing pages.bn/openbsd/
+Removing pages.bn/osx/aa.md
+Removing pages.bn/osx/g[.md
+Removing pages.bn/osx/gawk.md
+Removing pages.bn/osx/gb2sum.md
+Removing pages.bn/osx/gbase32.md
+Removing pages.bn/osx/gbase64.md
+Removing pages.bn/osx/gbasename.md
+Removing pages.bn/osx/gbasenc.md
+Removing pages.bn/osx/gcat.md
+Removing pages.bn/osx/gchcon.md
+Removing pages.bn/osx/gchgrp.md
+Removing pages.bn/osx/gchmod.md
+Removing pages.bn/osx/gchown.md
+Removing pages.bn/osx/gchroot.md
+Removing pages.bn/osx/gcksum.md
+Removing pages.bn/osx/gcomm.md
+Removing pages.bn/osx/gcp.md
+Removing pages.bn/osx/gcsplit.md
+Removing pages.bn/osx/gcut.md
+Removing pages.bn/osx/gdate.md
+Removing pages.bn/osx/gdd.md
+Removing pages.bn/osx/gdf.md
+Removing pages.bn/osx/gdir.md
+Removing pages.bn/osx/gdircolors.md
+Removing pages.bn/osx/gdirname.md
+Removing pages.bn/osx/gdnsdomainname.md
+Removing pages.bn/osx/gecho.md
+Removing pages.bn/osx/ged.md
+Removing pages.bn/osx/gegrep.md
+Removing pages.bn/osx/genv.md
+Removing pages.bn/osx/gexpand.md
+Removing pages.bn/osx/gexpr.md
+Removing pages.bn/osx/gfactor.md
+Removing pages.bn/osx/gfalse.md
+Removing pages.bn/osx/gfgrep.md
+Removing pages.bn/osx/gfind.md
+Removing pages.bn/osx/gfmt.md
+Removing pages.bn/osx/gfold.md
+Removing pages.bn/osx/gftp.md
+Removing pages.bn/osx/ggrep.md
+Removing pages.bn/osx/ggroups.md
+Removing pages.bn/osx/ghead.md
+Removing pages.bn/osx/ghostid.md
+Removing pages.bn/osx/ghostname.md
+Removing pages.bn/osx/gid.md
+Removing pages.bn/osx/gifconfig.md
+Removing pages.bn/osx/gindent.md
+Removing pages.bn/osx/ginstall.md
+Removing pages.bn/osx/gjoin.md
+Removing pages.bn/osx/gkill.md
+Removing pages.bn/osx/glibtool.md
+Removing pages.bn/osx/glibtoolize.md
+Removing pages.bn/osx/glink.md
+Removing pages.bn/osx/gln.md
+Removing pages.bn/osx/glocate.md
+Removing pages.bn/osx/glogger.md
+Removing pages.bn/osx/glogname.md
+Removing pages.bn/osx/gls.md
+Removing pages.bn/osx/gmake.md
+Removing pages.bn/osx/gmd5sum.md
+Removing pages.bn/osx/gmkdir.md
+Removing pages.bn/osx/gmkfifo.md
+Removing pages.bn/osx/gmknod.md
+Removing pages.bn/osx/gmktemp.md
+Removing pages.bn/osx/gmv.md
+Removing pages.bn/osx/gnice.md
+Removing pages.bn/osx/gnl.md
+Removing pages.bn/osx/gnohup.md
+Removing pages.bn/osx/gnproc.md
+Removing pages.bn/osx/gnumfmt.md
+Removing pages.bn/osx/god.md
+Removing pages.bn/osx/gpaste.md
+Removing pages.bn/osx/gpathchk.md
+Removing pages.bn/osx/gping.md
+Removing pages.bn/osx/gping6.md
+Removing pages.bn/osx/gpinky.md
+Removing pages.bn/osx/gpr.md
+Removing pages.bn/osx/gprintenv.md
+Removing pages.bn/osx/gprintf.md
+Removing pages.bn/osx/gptx.md
+Removing pages.bn/osx/gpwd.md
+Removing pages.bn/osx/grcp.md
+Removing pages.bn/osx/greadlink.md
+Removing pages.bn/osx/grealpath.md
+Removing pages.bn/osx/grexec.md
+Removing pages.bn/osx/grlogin.md
+Removing pages.bn/osx/grm.md
+Removing pages.bn/osx/grmdir.md
+Removing pages.bn/osx/grsh.md
+Removing pages.bn/osx/gruncon.md
+Removing pages.bn/osx/gsed.md
+Removing pages.bn/osx/gseq.md
+Removing pages.bn/osx/gsha1sum.md
+Removing pages.bn/osx/gsha224sum.md
+Removing pages.bn/osx/gsha256sum.md
+Removing pages.bn/osx/gsha384sum.md
+Removing pages.bn/osx/gsha512sum.md
+Removing pages.bn/osx/gshred.md
+Removing pages.bn/osx/gshuf.md
+Removing pages.bn/osx/gsleep.md
+Removing pages.bn/osx/gsort.md
+Removing pages.bn/osx/gsplit.md
+Removing pages.bn/osx/gstat.md
+Removing pages.bn/osx/gstdbuf.md
+Removing pages.bn/osx/gstty.md
+Removing pages.bn/osx/gsum.md
+Removing pages.bn/osx/gsync.md
+Removing pages.bn/osx/gtac.md
+Removing pages.bn/osx/gtail.md
+Removing pages.bn/osx/gtalk.md
+Removing pages.bn/osx/gtar.md
+Removing pages.bn/osx/gtee.md
+Removing pages.bn/osx/gtelnet.md
+Removing pages.bn/osx/gtest.md
+Removing pages.bn/osx/gtftp.md
+Removing pages.bn/osx/gtime.md
+Removing pages.bn/osx/gtimeout.md
+Removing pages.bn/osx/gtouch.md
+Removing pages.bn/osx/gtr.md
+Removing pages.bn/osx/gtraceroute.md
+Removing pages.bn/osx/gtrue.md
+Removing pages.bn/osx/gtruncate.md
+Removing pages.bn/osx/gtsort.md
+Removing pages.bn/osx/gtty.md
+Removing pages.bn/osx/guname.md
+Removing pages.bn/osx/gunexpand.md
+Removing pages.bn/osx/guniq.md
+Removing pages.bn/osx/gunits.md
+Removing pages.bn/osx/gunlink.md
+Removing pages.bn/osx/gupdatedb.md
+Removing pages.bn/osx/guptime.md
+Removing pages.bn/osx/gusers.md
+Removing pages.bn/osx/gvdir.md
+Removing pages.bn/osx/gwc.md
+Removing pages.bn/osx/gwhich.md
+Removing pages.bn/osx/gwho.md
+Removing pages.bn/osx/gwhoami.md
+Removing pages.bn/osx/gwhois.md
+Removing pages.bn/osx/gxargs.md
+Removing pages.bn/osx/gyes.md
+Removing pages.bn/osx/launchd.md
+Removing pages.bn/osx/llvm-lipo.md
+Removing pages.bn/windows/chdir.md
+Removing pages.bn/windows/cinst.md
+Removing pages.bn/windows/clear.md
+Removing pages.bn/windows/clist.md
+Removing pages.bn/windows/cls.md
+Removing pages.bn/windows/cpush.md
+Removing pages.bn/windows/cuninst.md
+Removing pages.bn/windows/del.md
+Removing pages.bn/windows/gal.md
+Removing pages.bn/windows/gl.md
+Removing pages.bn/windows/iwr.md
+Removing pages.bn/windows/mi.md
+Removing pages.bn/windows/move.md
+Removing pages.bn/windows/mv.md
+Removing pages.bn/windows/ni.md
+Removing pages.bn/windows/pwd.md
+Removing pages.bn/windows/pwsh-where.md
+Removing pages.bn/windows/rd.md
+Removing pages.bn/windows/ri.md
+Removing pages.bn/windows/rm.md
+Removing pages.bn/windows/rmdir.md
+Removing pages.bn/windows/sc-config.md
+Removing pages.bn/windows/sc-create.md
+Removing pages.bn/windows/sc-delete.md
+Removing pages.bn/windows/sc-query.md
+Removing pages.bn/windows/sl.md
+Removing pages.bn/windows/slmgr.md
+Removing pages.bn/windows/sls.md
+Removing pages.bn/windows/wget.md
+Removing pages.bs/common/azure-cli.md
+Removing pages.bs/common/docker-container-diff.md
+Removing pages.bs/common/docker-container-remove.md
+Removing pages.bs/common/docker-container-rename.md
+Removing pages.bs/common/docker-container-rm.md
+Removing pages.bs/common/docker-container-top.md
+Removing pages.bs/common/gemtopbm.md
+Removing pages.bs/common/git-stage.md
+Removing pages.bs/common/hd.md
+Removing pages.bs/common/hping.md
+Removing pages.bs/common/just.md
+Removing pages.bs/common/lima.md
+Removing pages.bs/common/linode-cli.md
+Removing pages.bs/common/lzcmp.md
+Removing pages.bs/common/lzegrep.md
+Removing pages.bs/common/lzfgrep.md
+Removing pages.bs/common/lzgrep.md
+Removing pages.bs/common/lzless.md
+Removing pages.bs/common/lzmore.md
+Removing pages.bs/common/musl-gcc.md
+Removing pages.bs/common/netcat.md
+Removing pages.bs/common/open.md
+Removing pages.bs/common/pamnoraw.md
+Removing pages.bs/common/pbmtox10bm.md
+Removing pages.bs/common/pgmoil.md
+Removing pages.bs/common/pnmdepth.md
+Removing pages.bs/common/pnmscale.md
+Removing pages.bs/common/pnmtoplainpnm.md
+Removing pages.bs/common/pnmtopnm.md
+Removing pages.bs/common/pnmtotiff.md
+Removing pages.bs/common/powershell.md
+Removing pages.bs/common/ppmquant.md
+Removing pages.bs/common/ppmtotga.md
+Removing pages.bs/common/ppmtowinicon.md
+Removing pages.bs/common/ps-nvm.md
+Removing pages.bs/common/unzstd.md
+Removing pages.bs/common/winicontoppm.md
+Removing pages.bs/common/xzegrep.md
+Removing pages.bs/common/xzfgrep.md
+Removing pages.bs/common/ykman.md
+Removing pages.bs/common/zstdcat.md
+Removing pages.bs/common/zstdmt.md
+Removing pages.bs/linux/apx.md
+Removing pages.bs/linux/distrobox.md
+Removing pages.bs/linux/ip6tables-restore.md
+Removing pages.bs/linux/ip6tables-save.md
+Removing pages.bs/linux/ip6tables.md
+Removing pages.bs/linux/mount.smb3.md
+Removing pages.bs/linux/nmcli.md
+Removing pages.bs/linux/nmtui-connect.md
+Removing pages.bs/linux/nmtui-edit.md
+Removing pages.bs/linux/nmtui-hostname.md
+Removing pages.bs/linux/pkgctl.md
+Removing pages.bs/linux/qm-import-disk.md
+Removing pages.bs/linux/qm-move-disk.md
+Removing pages.bs/linux/qm-move_disk.md
+Removing pages.bs/linux/qm-resize.md
+Removing pages.bs/linux/shntool-split.md
+Removing pages.bs/linux/systemd-confext.md
+Removing pages.bs/linux/systemd-resolve.md
+Removing pages.bs/linux/systemd-umount.md
+Removing pages.bs/linux/xbps.md
+Removing pages.bs/openbsd/
+Removing pages.bs/osx/llvm-lipo.md
+Removing pages.bs/windows/cd.md
+Removing pages.bs/windows/chdir.md
+Removing pages.bs/windows/clear.md
+Removing pages.bs/windows/cls.md
+Removing pages.bs/windows/del.md
+Removing pages.bs/windows/gal.md
+Removing pages.bs/windows/gl.md
+Removing pages.bs/windows/mi.md
+Removing pages.bs/windows/move.md
+Removing pages.bs/windows/mv.md
+Removing pages.bs/windows/ni.md
+Removing pages.bs/windows/pwd.md
+Removing pages.bs/windows/ri.md
+Removing pages.bs/windows/rm.md
+Removing pages.bs/windows/rmdir.md
+Removing pages.bs/windows/sc-config.md
+Removing pages.bs/windows/sc-create.md
+Removing pages.bs/windows/sc-delete.md
+Removing pages.bs/windows/sc-query.md
+Removing pages.bs/windows/sl.md
+Removing pages.bs/windows/slmgr.md
+Removing pages.ca/common/azure-cli.md
+Removing pages.ca/common/docker-container-diff.md
+Removing pages.ca/common/docker-container-remove.md
+Removing pages.ca/common/docker-container-rename.md
+Removing pages.ca/common/docker-container-rm.md
+Removing pages.ca/common/docker-container-top.md
+Removing pages.ca/common/gemtopbm.md
+Removing pages.ca/common/git-stage.md
+Removing pages.ca/common/hd.md
+Removing pages.ca/common/hping.md
+Removing pages.ca/common/just.md
+Removing pages.ca/common/lima.md
+Removing pages.ca/common/linode-cli.md
+Removing pages.ca/common/lzcmp.md
+Removing pages.ca/common/lzegrep.md
+Removing pages.ca/common/lzfgrep.md
+Removing pages.ca/common/lzgrep.md
+Removing pages.ca/common/lzless.md
+Removing pages.ca/common/lzmore.md
+Removing pages.ca/common/musl-gcc.md
+Removing pages.ca/common/netcat.md
+Removing pages.ca/common/open.md
+Removing pages.ca/common/pamnoraw.md
+Removing pages.ca/common/pbmtox10bm.md
+Removing pages.ca/common/pgmoil.md
+Removing pages.ca/common/pnmdepth.md
+Removing pages.ca/common/pnmscale.md
+Removing pages.ca/common/pnmtoplainpnm.md
+Removing pages.ca/common/pnmtopnm.md
+Removing pages.ca/common/pnmtotiff.md
+Removing pages.ca/common/powershell.md
+Removing pages.ca/common/ppmquant.md
+Removing pages.ca/common/ppmtotga.md
+Removing pages.ca/common/ppmtowinicon.md
+Removing pages.ca/common/ps-nvm.md
+Removing pages.ca/common/unzstd.md
+Removing pages.ca/common/winicontoppm.md
+Removing pages.ca/common/xzegrep.md
+Removing pages.ca/common/xzfgrep.md
+Removing pages.ca/common/ykman.md
+Removing pages.ca/common/zstdcat.md
+Removing pages.ca/common/zstdmt.md
+Removing pages.ca/linux/apx.md
+Removing pages.ca/linux/distrobox.md
+Removing pages.ca/linux/ip6tables-restore.md
+Removing pages.ca/linux/ip6tables-save.md
+Removing pages.ca/linux/ip6tables.md
+Removing pages.ca/linux/mount.smb3.md
+Removing pages.ca/linux/nmcli.md
+Removing pages.ca/linux/nmtui-connect.md
+Removing pages.ca/linux/nmtui-edit.md
+Removing pages.ca/linux/nmtui-hostname.md
+Removing pages.ca/linux/pkgctl.md
+Removing pages.ca/linux/qm-import-disk.md
+Removing pages.ca/linux/qm-move-disk.md
+Removing pages.ca/linux/qm-move_disk.md
+Removing pages.ca/linux/qm-resize.md
+Removing pages.ca/linux/shntool-split.md
+Removing pages.ca/linux/systemd-confext.md
+Removing pages.ca/linux/systemd-resolve.md
+Removing pages.ca/linux/systemd-umount.md
+Removing pages.ca/linux/xbps.md
+Removing pages.ca/openbsd/
+Removing pages.ca/osx/llvm-lipo.md
+Removing pages.ca/windows/cd.md
+Removing pages.ca/windows/chdir.md
+Removing pages.ca/windows/clear.md
+Removing pages.ca/windows/cls.md
+Removing pages.ca/windows/del.md
+Removing pages.ca/windows/gal.md
+Removing pages.ca/windows/gl.md
+Removing pages.ca/windows/mi.md
+Removing pages.ca/windows/move.md
+Removing pages.ca/windows/mv.md
+Removing pages.ca/windows/ni.md
+Removing pages.ca/windows/pwd.md
+Removing pages.ca/windows/ri.md
+Removing pages.ca/windows/rm.md
+Removing pages.ca/windows/rmdir.md
+Removing pages.ca/windows/sc-config.md
+Removing pages.ca/windows/sc-create.md
+Removing pages.ca/windows/sc-delete.md
+Removing pages.ca/windows/sc-query.md
+Removing pages.ca/windows/sl.md
+Removing pages.ca/windows/slmgr.md
+Removing pages.cs/common/azure-cli.md
+Removing pages.cs/common/bundler.md
+Removing pages.cs/common/clamav.md
+Removing pages.cs/common/clang-cpp.md
+Removing pages.cs/common/clojure.md
+Removing pages.cs/common/cola.md
+Removing pages.cs/common/cron.md
+Removing pages.cs/common/docker-container-diff.md
+Removing pages.cs/common/docker-container-remove.md
+Removing pages.cs/common/docker-container-rename.md
+Removing pages.cs/common/docker-container-rm.md
+Removing pages.cs/common/docker-container-top.md
+Removing pages.cs/common/fossil-ci.md
+Removing pages.cs/common/fossil-delete.md
+Removing pages.cs/common/fossil-forget.md
+Removing pages.cs/common/fossil-new.md
+Removing pages.cs/common/gemtopbm.md
+Removing pages.cs/common/gh-cs.md
+Removing pages.cs/common/git-stage.md
+Removing pages.cs/common/gnmic-sub.md
+Removing pages.cs/common/google-chrome.md
+Removing pages.cs/common/hd.md
+Removing pages.cs/common/hping.md
+Removing pages.cs/common/hx.md
+Removing pages.cs/common/just.md
+Removing pages.cs/common/kafkacat.md
+Removing pages.cs/common/lima.md
+Removing pages.cs/common/linode-cli.md
+Removing pages.cs/common/llvm-ar.md
+Removing pages.cs/common/llvm-g++.md
+Removing pages.cs/common/llvm-gcc.md
+Removing pages.cs/common/llvm-nm.md
+Removing pages.cs/common/llvm-objdump.md
+Removing pages.cs/common/llvm-strings.md
+Removing pages.cs/common/lzcat.md
+Removing pages.cs/common/lzcmp.md
+Removing pages.cs/common/lzegrep.md
+Removing pages.cs/common/lzfgrep.md
+Removing pages.cs/common/lzgrep.md
+Removing pages.cs/common/lzless.md
+Removing pages.cs/common/lzma.md
+Removing pages.cs/common/lzmore.md
+Removing pages.cs/common/mscore.md
+Removing pages.cs/common/musl-gcc.md
+Removing pages.cs/common/netcat.md
+Removing pages.cs/common/nm-classic.md
+Removing pages.cs/common/ntl.md
+Removing pages.cs/common/open.md
+Removing pages.cs/common/pamnoraw.md
+Removing pages.cs/common/pbmtox10bm.md
+Removing pages.cs/common/pgmoil.md
+Removing pages.cs/common/pio-init.md
+Removing pages.cs/common/piodebuggdb.md
+Removing pages.cs/common/platformio.md
+Removing pages.cs/common/pnmdepth.md
+Removing pages.cs/common/pnmscale.md
+Removing pages.cs/common/pnmtoplainpnm.md
+Removing pages.cs/common/pnmtopnm.md
+Removing pages.cs/common/pnmtotiff.md
+Removing pages.cs/common/powershell.md
+Removing pages.cs/common/ppmquant.md
+Removing pages.cs/common/ppmtotga.md
+Removing pages.cs/common/ppmtowinicon.md
+Removing pages.cs/common/ps-nvm.md
+Removing pages.cs/common/ptpython3.md
+Removing pages.cs/common/python3.md
+Removing pages.cs/common/r2.md
+Removing pages.cs/common/rcat.md
+Removing pages.cs/common/ripgrep.md
+Removing pages.cs/common/tldrl.md
+Removing pages.cs/common/tlmgr-arch.md
+Removing pages.cs/common/todoman.md
+Removing pages.cs/common/transmission.md
+Removing pages.cs/common/unlzma.md
+Removing pages.cs/common/unxz.md
+Removing pages.cs/common/unzstd.md
+Removing pages.cs/common/vi.md
+Removing pages.cs/common/winicontoppm.md
+Removing pages.cs/common/xzcat.md
+Removing pages.cs/common/xzegrep.md
+Removing pages.cs/common/xzfgrep.md
+Removing pages.cs/common/ykman.md
+Removing pages.cs/common/zstdcat.md
+Removing pages.cs/common/zstdmt.md
+Removing pages.cs/linux/
+Removing pages.cs/openbsd/
+Removing pages.cs/osx/
+Removing pages.cs/windows/chdir.md
+Removing pages.cs/windows/chrome.md
+Removing pages.cs/windows/cinst.md
+Removing pages.cs/windows/clear.md
+Removing pages.cs/windows/clist.md
+Removing pages.cs/windows/cls.md
+Removing pages.cs/windows/cpush.md
+Removing pages.cs/windows/cuninst.md
+Removing pages.cs/windows/curl.md
+Removing pages.cs/windows/del.md
+Removing pages.cs/windows/gal.md
+Removing pages.cs/windows/gl.md
+Removing pages.cs/windows/iwr.md
+Removing pages.cs/windows/mi.md
+Removing pages.cs/windows/move.md
+Removing pages.cs/windows/mv.md
+Removing pages.cs/windows/ni.md
+Removing pages.cs/windows/pwd.md
+Removing pages.cs/windows/pwsh-where.md
+Removing pages.cs/windows/rd.md
+Removing pages.cs/windows/ri.md
+Removing pages.cs/windows/rm.md
+Removing pages.cs/windows/rmdir.md
+Removing pages.cs/windows/sc-config.md
+Removing pages.cs/windows/sc-create.md
+Removing pages.cs/windows/sc-delete.md
+Removing pages.cs/windows/sc-query.md
+Removing pages.cs/windows/sl.md
+Removing pages.cs/windows/slmgr.md
+Removing pages.cs/windows/sls.md
+Removing pages.cs/windows/wget.md
+Removing pages.da/common/azure-cli.md
+Removing pages.da/common/docker-container-diff.md
+Removing pages.da/common/docker-container-remove.md
+Removing pages.da/common/docker-container-rename.md
+Removing pages.da/common/docker-container-rm.md
+Removing pages.da/common/docker-container-top.md
+Removing pages.da/common/gemtopbm.md
+Removing pages.da/common/git-stage.md
+Removing pages.da/common/hd.md
+Removing pages.da/common/hping.md
+Removing pages.da/common/just.md
+Removing pages.da/common/lima.md
+Removing pages.da/common/linode-cli.md
+Removing pages.da/common/lzcmp.md
+Removing pages.da/common/lzegrep.md
+Removing pages.da/common/lzfgrep.md
+Removing pages.da/common/lzgrep.md
+Removing pages.da/common/lzless.md
+Removing pages.da/common/lzmore.md
+Removing pages.da/common/musl-gcc.md
+Removing pages.da/common/netcat.md
+Removing pages.da/common/open.md
+Removing pages.da/common/pamnoraw.md
+Removing pages.da/common/pbmtox10bm.md
+Removing pages.da/common/pgmoil.md
+Removing pages.da/common/pnmdepth.md
+Removing pages.da/common/pnmscale.md
+Removing pages.da/common/pnmtoplainpnm.md
+Removing pages.da/common/pnmtopnm.md
+Removing pages.da/common/pnmtotiff.md
+Removing pages.da/common/powershell.md
+Removing pages.da/common/ppmquant.md
+Removing pages.da/common/ppmtotga.md
+Removing pages.da/common/ppmtowinicon.md
+Removing pages.da/common/ps-nvm.md
+Removing pages.da/common/unzstd.md
+Removing pages.da/common/winicontoppm.md
+Removing pages.da/common/xzegrep.md
+Removing pages.da/common/xzfgrep.md
+Removing pages.da/common/ykman.md
+Removing pages.da/common/zstdcat.md
+Removing pages.da/common/zstdmt.md
+Removing pages.da/linux/apx.md
+Removing pages.da/linux/distrobox.md
+Removing pages.da/linux/ip6tables-restore.md
+Removing pages.da/linux/ip6tables-save.md
+Removing pages.da/linux/ip6tables.md
+Removing pages.da/linux/mount.smb3.md
+Removing pages.da/linux/nmcli.md
+Removing pages.da/linux/nmtui-connect.md
+Removing pages.da/linux/nmtui-edit.md
+Removing pages.da/linux/nmtui-hostname.md
+Removing pages.da/linux/pkgctl.md
+Removing pages.da/linux/qm-import-disk.md
+Removing pages.da/linux/qm-move-disk.md
+Removing pages.da/linux/qm-move_disk.md
+Removing pages.da/linux/qm-resize.md
+Removing pages.da/linux/shntool-split.md
+Removing pages.da/linux/systemd-confext.md
+Removing pages.da/linux/systemd-resolve.md
+Removing pages.da/linux/systemd-umount.md
+Removing pages.da/linux/xbps.md
+Removing pages.da/openbsd/
+Removing pages.da/osx/llvm-lipo.md
+Removing pages.da/windows/cd.md
+Removing pages.da/windows/chdir.md
+Removing pages.da/windows/clear.md
+Removing pages.da/windows/cls.md
+Removing pages.da/windows/del.md
+Removing pages.da/windows/gal.md
+Removing pages.da/windows/gl.md
+Removing pages.da/windows/mi.md
+Removing pages.da/windows/move.md
+Removing pages.da/windows/mv.md
+Removing pages.da/windows/ni.md
+Removing pages.da/windows/pwd.md
+Removing pages.da/windows/ri.md
+Removing pages.da/windows/rm.md
+Removing pages.da/windows/rmdir.md
+Removing pages.da/windows/sc-config.md
+Removing pages.da/windows/sc-create.md
+Removing pages.da/windows/sc-delete.md
+Removing pages.da/windows/sc-query.md
+Removing pages.da/windows/sl.md
+Removing pages.da/windows/slmgr.md
+Removing pages.de/common/azure-cli.md
+Removing pages.de/common/docker-container-diff.md
+Removing pages.de/common/docker-container-remove.md
+Removing pages.de/common/docker-container-rename.md
+Removing pages.de/common/docker-container-rm.md
+Removing pages.de/common/docker-container-top.md
+Removing pages.de/common/gemtopbm.md
+Removing pages.de/common/git-stage.md
+Removing pages.de/common/hd.md
+Removing pages.de/common/hping.md
+Removing pages.de/common/just.md
+Removing pages.de/common/lima.md
+Removing pages.de/common/linode-cli.md
+Removing pages.de/common/lzcmp.md
+Removing pages.de/common/lzegrep.md
+Removing pages.de/common/lzfgrep.md
+Removing pages.de/common/lzgrep.md
+Removing pages.de/common/lzless.md
+Removing pages.de/common/lzmore.md
+Removing pages.de/common/musl-gcc.md
+Removing pages.de/common/netcat.md
+Removing pages.de/common/open.md
+Removing pages.de/common/pamnoraw.md
+Removing pages.de/common/pbmtox10bm.md
+Removing pages.de/common/pgmoil.md
+Removing pages.de/common/pnmdepth.md
+Removing pages.de/common/pnmscale.md
+Removing pages.de/common/pnmtoplainpnm.md
+Removing pages.de/common/pnmtopnm.md
+Removing pages.de/common/pnmtotiff.md
+Removing pages.de/common/powershell.md
+Removing pages.de/common/ppmquant.md
+Removing pages.de/common/ppmtotga.md
+Removing pages.de/common/ppmtowinicon.md
+Removing pages.de/common/ps-nvm.md
+Removing pages.de/common/unzstd.md
+Removing pages.de/common/winicontoppm.md
+Removing pages.de/common/xzegrep.md
+Removing pages.de/common/xzfgrep.md
+Removing pages.de/common/ykman.md
+Removing pages.de/common/zstdcat.md
+Removing pages.de/common/zstdmt.md
+Removing pages.de/linux/apx.md
+Removing pages.de/linux/distrobox.md
+Removing pages.de/linux/ip6tables-restore.md
+Removing pages.de/linux/ip6tables-save.md
+Removing pages.de/linux/ip6tables.md
+Removing pages.de/linux/mount.smb3.md
+Removing pages.de/linux/nmcli.md
+Removing pages.de/linux/nmtui-connect.md
+Removing pages.de/linux/nmtui-edit.md
+Removing pages.de/linux/nmtui-hostname.md
+Removing pages.de/linux/pkgctl.md
+Removing pages.de/linux/qm-import-disk.md
+Removing pages.de/linux/qm-move-disk.md
+Removing pages.de/linux/qm-move_disk.md
+Removing pages.de/linux/qm-resize.md
+Removing pages.de/linux/shntool-split.md
+Removing pages.de/linux/systemd-confext.md
+Removing pages.de/linux/systemd-resolve.md
+Removing pages.de/linux/systemd-umount.md
+Removing pages.de/linux/xbps.md
+Removing pages.de/openbsd/
+Removing pages.de/osx/llvm-lipo.md
+Removing pages.de/windows/chdir.md
+Removing pages.de/windows/clear.md
+Removing pages.de/windows/cls.md
+Removing pages.de/windows/gal.md
+Removing pages.de/windows/gl.md
+Removing pages.de/windows/mi.md
+Removing pages.de/windows/move.md
+Removing pages.de/windows/mv.md
+Removing pages.de/windows/ni.md
+Removing pages.de/windows/pwd.md
+Removing pages.de/windows/ri.md
+Removing pages.de/windows/rm.md
+Removing pages.de/windows/rmdir.md
+Removing pages.de/windows/sc-config.md
+Removing pages.de/windows/sc-create.md
+Removing pages.de/windows/sc-delete.md
+Removing pages.de/windows/sc-query.md
+Removing pages.de/windows/sl.md
+Removing pages.de/windows/slmgr.md
+Removing pages.es/common/azure-cli.md
+Removing pages.es/common/docker-container-diff.md
+Removing pages.es/common/docker-container-remove.md
+Removing pages.es/common/docker-container-rename.md
+Removing pages.es/common/docker-container-rm.md
+Removing pages.es/common/docker-container-top.md
+Removing pages.es/common/gemtopbm.md
+Removing pages.es/common/git-stage.md
+Removing pages.es/common/hd.md
+Removing pages.es/common/hping.md
+Removing pages.es/common/just.md
+Removing pages.es/common/lima.md
+Removing pages.es/common/linode-cli.md
+Removing pages.es/common/lzcmp.md
+Removing pages.es/common/lzegrep.md
+Removing pages.es/common/lzfgrep.md
+Removing pages.es/common/lzgrep.md
+Removing pages.es/common/lzless.md
+Removing pages.es/common/lzmore.md
+Removing pages.es/common/musl-gcc.md
+Removing pages.es/common/netcat.md
+Removing pages.es/common/open.md
+Removing pages.es/common/pamnoraw.md
+Removing pages.es/common/pbmtox10bm.md
+Removing pages.es/common/pgmoil.md
+Removing pages.es/common/pnmdepth.md
+Removing pages.es/common/pnmscale.md
+Removing pages.es/common/pnmtoplainpnm.md
+Removing pages.es/common/pnmtopnm.md
+Removing pages.es/common/pnmtotiff.md
+Removing pages.es/common/powershell.md
+Removing pages.es/common/ppmquant.md
+Removing pages.es/common/ppmtotga.md
+Removing pages.es/common/ppmtowinicon.md
+Removing pages.es/common/ps-nvm.md
+Removing pages.es/common/unzstd.md
+Removing pages.es/common/winicontoppm.md
+Removing pages.es/common/xzegrep.md
+Removing pages.es/common/xzfgrep.md
+Removing pages.es/common/ykman.md
+Removing pages.es/common/zstdcat.md
+Removing pages.es/common/zstdmt.md
+Removing pages.es/linux/apx.md
+Removing pages.es/linux/distrobox.md
+Removing pages.es/linux/ip6tables-restore.md
+Removing pages.es/linux/ip6tables-save.md
+Removing pages.es/linux/ip6tables.md
+Removing pages.es/linux/mount.smb3.md
+Removing pages.es/linux/nmcli.md
+Removing pages.es/linux/nmtui-connect.md
+Removing pages.es/linux/nmtui-edit.md
+Removing pages.es/linux/nmtui-hostname.md
+Removing pages.es/linux/pkgctl.md
+Removing pages.es/linux/qm-import-disk.md
+Removing pages.es/linux/qm-move-disk.md
+Removing pages.es/linux/qm-move_disk.md
+Removing pages.es/linux/qm-resize.md
+Removing pages.es/linux/shntool-split.md
+Removing pages.es/linux/systemd-confext.md
+Removing pages.es/linux/systemd-resolve.md
+Removing pages.es/linux/systemd-umount.md
+Removing pages.es/linux/xbps.md
+Removing pages.es/openbsd/
+Removing pages.es/windows/chdir.md
+Removing pages.es/windows/gal.md
+Removing pages.es/windows/gl.md
+Removing pages.es/windows/mi.md
+Removing pages.es/windows/move.md
+Removing pages.es/windows/mv.md
+Removing pages.es/windows/ni.md
+Removing pages.es/windows/pwd.md
+Removing pages.es/windows/ri.md
+Removing pages.es/windows/rm.md
+Removing pages.es/windows/rmdir.md
+Removing pages.es/windows/sc-config.md
+Removing pages.es/windows/sc-create.md
+Removing pages.es/windows/sc-delete.md
+Removing pages.es/windows/sc-query.md
+Removing pages.es/windows/sl.md
+Removing pages.es/windows/slmgr.md
+Removing pages.fa/common/azure-cli.md
+Removing pages.fa/common/bundler.md
+Removing pages.fa/common/clamav.md
+Removing pages.fa/common/clang-cpp.md
+Removing pages.fa/common/clojure.md
+Removing pages.fa/common/cola.md
+Removing pages.fa/common/cron.md
+Removing pages.fa/common/docker-container-diff.md
+Removing pages.fa/common/docker-container-remove.md
+Removing pages.fa/common/docker-container-rename.md
+Removing pages.fa/common/docker-container-rm.md
+Removing pages.fa/common/docker-container-top.md
+Removing pages.fa/common/fossil-ci.md
+Removing pages.fa/common/fossil-delete.md
+Removing pages.fa/common/fossil-forget.md
+Removing pages.fa/common/fossil-new.md
+Removing pages.fa/common/gemtopbm.md
+Removing pages.fa/common/gh-cs.md
+Removing pages.fa/common/git-stage.md
+Removing pages.fa/common/gnmic-sub.md
+Removing pages.fa/common/google-chrome.md
+Removing pages.fa/common/hd.md
+Removing pages.fa/common/hping.md
+Removing pages.fa/common/hx.md
+Removing pages.fa/common/just.md
+Removing pages.fa/common/kafkacat.md
+Removing pages.fa/common/lima.md
+Removing pages.fa/common/linode-cli.md
+Removing pages.fa/common/llvm-ar.md
+Removing pages.fa/common/llvm-g++.md
+Removing pages.fa/common/llvm-gcc.md
+Removing pages.fa/common/llvm-nm.md
+Removing pages.fa/common/llvm-objdump.md
+Removing pages.fa/common/llvm-strings.md
+Removing pages.fa/common/lzcat.md
+Removing pages.fa/common/lzcmp.md
+Removing pages.fa/common/lzegrep.md
+Removing pages.fa/common/lzfgrep.md
+Removing pages.fa/common/lzgrep.md
+Removing pages.fa/common/lzless.md
+Removing pages.fa/common/lzma.md
+Removing pages.fa/common/lzmore.md
+Removing pages.fa/common/mscore.md
+Removing pages.fa/common/musl-gcc.md
+Removing pages.fa/common/netcat.md
+Removing pages.fa/common/nm-classic.md
+Removing pages.fa/common/ntl.md
+Removing pages.fa/common/open.md
+Removing pages.fa/common/pamnoraw.md
+Removing pages.fa/common/pbmtox10bm.md
+Removing pages.fa/common/pgmoil.md
+Removing pages.fa/common/pio-init.md
+Removing pages.fa/common/piodebuggdb.md
+Removing pages.fa/common/platformio.md
+Removing pages.fa/common/pnmdepth.md
+Removing pages.fa/common/pnmscale.md
+Removing pages.fa/common/pnmtoplainpnm.md
+Removing pages.fa/common/pnmtopnm.md
+Removing pages.fa/common/pnmtotiff.md
+Removing pages.fa/common/powershell.md
+Removing pages.fa/common/ppmquant.md
+Removing pages.fa/common/ppmtotga.md
+Removing pages.fa/common/ppmtowinicon.md
+Removing pages.fa/common/ps-nvm.md
+Removing pages.fa/common/ptpython3.md
+Removing pages.fa/common/python3.md
+Removing pages.fa/common/r2.md
+Removing pages.fa/common/rcat.md
+Removing pages.fa/common/ripgrep.md
+Removing pages.fa/common/tldrl.md
+Removing pages.fa/common/tlmgr-arch.md
+Removing pages.fa/common/todoman.md
+Removing pages.fa/common/transmission.md
+Removing pages.fa/common/unlzma.md
+Removing pages.fa/common/unxz.md
+Removing pages.fa/common/unzstd.md
+Removing pages.fa/common/vi.md
+Removing pages.fa/common/winicontoppm.md
+Removing pages.fa/common/xzcat.md
+Removing pages.fa/common/xzegrep.md
+Removing pages.fa/common/xzfgrep.md
+Removing pages.fa/common/ykman.md
+Removing pages.fa/common/zstdcat.md
+Removing pages.fa/common/zstdmt.md
+Removing pages.fa/linux/alternatives.md
+Removing pages.fa/linux/apx.md
+Removing pages.fa/linux/batcat.md
+Removing pages.fa/linux/bspwm.md
+Removing pages.fa/linux/cc.md
+Removing pages.fa/linux/cgroups.md
+Removing pages.fa/linux/distrobox.md
+Removing pages.fa/linux/ip-route-list.md
+Removing pages.fa/linux/ip6tables-restore.md
+Removing pages.fa/linux/ip6tables-save.md
+Removing pages.fa/linux/ip6tables.md
+Removing pages.fa/linux/megadl.md
+Removing pages.fa/linux/mount.smb3.md
+Removing pages.fa/linux/ncal.md
+Removing pages.fa/linux/nmcli.md
+Removing pages.fa/linux/nmtui-connect.md
+Removing pages.fa/linux/nmtui-edit.md
+Removing pages.fa/linux/nmtui-hostname.md
+Removing pages.fa/linux/pkgctl.md
+Removing pages.fa/linux/qm-import-disk.md
+Removing pages.fa/linux/qm-move-disk.md
+Removing pages.fa/linux/qm-move_disk.md
+Removing pages.fa/linux/qm-resize.md
+Removing pages.fa/linux/shntool-split.md
+Removing pages.fa/linux/systemd-confext.md
+Removing pages.fa/linux/systemd-resolve.md
+Removing pages.fa/linux/systemd-umount.md
+Removing pages.fa/linux/ubuntu-bug.md
+Removing pages.fa/linux/xbps.md
+Removing pages.fa/openbsd/
+Removing pages.fa/osx/
+Removing pages.fa/windows/cd.md
+Removing pages.fa/windows/chdir.md
+Removing pages.fa/windows/chrome.md
+Removing pages.fa/windows/cinst.md
+Removing pages.fa/windows/clear.md
+Removing pages.fa/windows/clist.md
+Removing pages.fa/windows/cpush.md
+Removing pages.fa/windows/cuninst.md
+Removing pages.fa/windows/curl.md
+Removing pages.fa/windows/del.md
+Removing pages.fa/windows/gal.md
+Removing pages.fa/windows/gl.md
+Removing pages.fa/windows/iwr.md
+Removing pages.fa/windows/mi.md
+Removing pages.fa/windows/move.md
+Removing pages.fa/windows/mv.md
+Removing pages.fa/windows/ni.md
+Removing pages.fa/windows/pwd.md
+Removing pages.fa/windows/pwsh-where.md
+Removing pages.fa/windows/rd.md
+Removing pages.fa/windows/ri.md
+Removing pages.fa/windows/rm.md
+Removing pages.fa/windows/rmdir.md
+Removing pages.fa/windows/sc-config.md
+Removing pages.fa/windows/sc-create.md
+Removing pages.fa/windows/sc-delete.md
+Removing pages.fa/windows/sc-query.md
+Removing pages.fa/windows/sl.md
+Removing pages.fa/windows/slmgr.md
+Removing pages.fa/windows/sls.md
+Removing pages.fa/windows/wget.md
+Removing pages.fi/common/
+Removing pages.fi/linux/alternatives.md
+Removing pages.fi/linux/apx.md
+Removing pages.fi/linux/batcat.md
+Removing pages.fi/linux/bspwm.md
+Removing pages.fi/linux/cc.md
+Removing pages.fi/linux/cgroups.md
+Removing pages.fi/linux/distrobox.md
+Removing pages.fi/linux/ip-route-list.md
+Removing pages.fi/linux/ip6tables-restore.md
+Removing pages.fi/linux/ip6tables-save.md
+Removing pages.fi/linux/ip6tables.md
+Removing pages.fi/linux/megadl.md
+Removing pages.fi/linux/mount.smb3.md
+Removing pages.fi/linux/ncal.md
+Removing pages.fi/linux/nmcli.md
+Removing pages.fi/linux/nmtui-connect.md
+Removing pages.fi/linux/nmtui-edit.md
+Removing pages.fi/linux/nmtui-hostname.md
+Removing pages.fi/linux/pkgctl.md
+Removing pages.fi/linux/qm-import-disk.md
+Removing pages.fi/linux/qm-move-disk.md
+Removing pages.fi/linux/qm-move_disk.md
+Removing pages.fi/linux/qm-resize.md
+Removing pages.fi/linux/shntool-split.md
+Removing pages.fi/linux/systemd-confext.md
+Removing pages.fi/linux/systemd-resolve.md
+Removing pages.fi/linux/systemd-umount.md
+Removing pages.fi/linux/ubuntu-bug.md
+Removing pages.fi/linux/xbps.md
+Removing pages.fi/openbsd/
+Removing pages.fi/osx/
+Removing pages.fi/windows/
+Removing pages.fr/common/azure-cli.md
+Removing pages.fr/common/docker-container-diff.md
+Removing pages.fr/common/docker-container-remove.md
+Removing pages.fr/common/docker-container-rename.md
+Removing pages.fr/common/docker-container-rm.md
+Removing pages.fr/common/docker-container-top.md
+Removing pages.fr/common/gemtopbm.md
+Removing pages.fr/common/hd.md
+Removing pages.fr/common/just.md
+Removing pages.fr/common/lima.md
+Removing pages.fr/common/linode-cli.md
+Removing pages.fr/common/lzcmp.md
+Removing pages.fr/common/lzegrep.md
+Removing pages.fr/common/lzfgrep.md
+Removing pages.fr/common/lzgrep.md
+Removing pages.fr/common/lzless.md
+Removing pages.fr/common/lzmore.md
+Removing pages.fr/common/musl-gcc.md
+Removing pages.fr/common/netcat.md
+Removing pages.fr/common/open.md
+Removing pages.fr/common/pamnoraw.md
+Removing pages.fr/common/pbmtox10bm.md
+Removing pages.fr/common/pgmoil.md
+Removing pages.fr/common/pnmdepth.md
+Removing pages.fr/common/pnmscale.md
+Removing pages.fr/common/pnmtoplainpnm.md
+Removing pages.fr/common/pnmtopnm.md
+Removing pages.fr/common/pnmtotiff.md
+Removing pages.fr/common/ppmquant.md
+Removing pages.fr/common/ppmtotga.md
+Removing pages.fr/common/ppmtowinicon.md
+Removing pages.fr/common/ps-nvm.md
+Removing pages.fr/common/unzstd.md
+Removing pages.fr/common/winicontoppm.md
+Removing pages.fr/common/xzegrep.md
+Removing pages.fr/common/xzfgrep.md
+Removing pages.fr/common/ykman.md
+Removing pages.fr/common/zstdcat.md
+Removing pages.fr/common/zstdmt.md
+Removing pages.fr/linux/apx.md
+Removing pages.fr/linux/distrobox.md
+Removing pages.fr/linux/ip6tables-restore.md
+Removing pages.fr/linux/ip6tables-save.md
+Removing pages.fr/linux/ip6tables.md
+Removing pages.fr/linux/mount.smb3.md
+Removing pages.fr/linux/nmcli.md
+Removing pages.fr/linux/nmtui-connect.md
+Removing pages.fr/linux/nmtui-edit.md
+Removing pages.fr/linux/nmtui-hostname.md
+Removing pages.fr/linux/pkgctl.md
+Removing pages.fr/linux/qm-import-disk.md
+Removing pages.fr/linux/qm-move-disk.md
+Removing pages.fr/linux/qm-move_disk.md
+Removing pages.fr/linux/qm-resize.md
+Removing pages.fr/linux/shntool-split.md
+Removing pages.fr/linux/systemd-confext.md
+Removing pages.fr/linux/systemd-resolve.md
+Removing pages.fr/linux/systemd-umount.md
+Removing pages.fr/linux/xbps.md
+Removing pages.fr/openbsd/
+Removing pages.fr/osx/llvm-lipo.md
+Removing pages.fr/windows/cd.md
+Removing pages.fr/windows/chdir.md
+Removing pages.fr/windows/clear.md
+Removing pages.fr/windows/cls.md
+Removing pages.fr/windows/del.md
+Removing pages.fr/windows/gal.md
+Removing pages.fr/windows/gl.md
+Removing pages.fr/windows/mi.md
+Removing pages.fr/windows/move.md
+Removing pages.fr/windows/mv.md
+Removing pages.fr/windows/ni.md
+Removing pages.fr/windows/pwd.md
+Removing pages.fr/windows/ri.md
+Removing pages.fr/windows/rm.md
+Removing pages.fr/windows/rmdir.md
+Removing pages.fr/windows/sc-config.md
+Removing pages.fr/windows/sc-create.md
+Removing pages.fr/windows/sc-delete.md
+Removing pages.fr/windows/sc-query.md
+Removing pages.fr/windows/sl.md
+Removing pages.fr/windows/slmgr.md
+Removing pages.hi/common/azure-cli.md
+Removing pages.hi/common/docker-container-diff.md
+Removing pages.hi/common/docker-container-remove.md
+Removing pages.hi/common/docker-container-rename.md
+Removing pages.hi/common/docker-container-rm.md
+Removing pages.hi/common/docker-container-top.md
+Removing pages.hi/common/gemtopbm.md
+Removing pages.hi/common/git-stage.md
+Removing pages.hi/common/hd.md
+Removing pages.hi/common/hping.md
+Removing pages.hi/common/just.md
+Removing pages.hi/common/lima.md
+Removing pages.hi/common/linode-cli.md
+Removing pages.hi/common/lzcmp.md
+Removing pages.hi/common/lzegrep.md
+Removing pages.hi/common/lzfgrep.md
+Removing pages.hi/common/lzgrep.md
+Removing pages.hi/common/lzless.md
+Removing pages.hi/common/lzmore.md
+Removing pages.hi/common/musl-gcc.md
+Removing pages.hi/common/netcat.md
+Removing pages.hi/common/open.md
+Removing pages.hi/common/pamnoraw.md
+Removing pages.hi/common/pbmtox10bm.md
+Removing pages.hi/common/pgmoil.md
+Removing pages.hi/common/pnmdepth.md
+Removing pages.hi/common/pnmscale.md
+Removing pages.hi/common/pnmtoplainpnm.md
+Removing pages.hi/common/pnmtopnm.md
+Removing pages.hi/common/pnmtotiff.md
+Removing pages.hi/common/powershell.md
+Removing pages.hi/common/ppmquant.md
+Removing pages.hi/common/ppmtotga.md
+Removing pages.hi/common/ppmtowinicon.md
+Removing pages.hi/common/ps-nvm.md
+Removing pages.hi/common/unzstd.md
+Removing pages.hi/common/winicontoppm.md
+Removing pages.hi/common/xzegrep.md
+Removing pages.hi/common/xzfgrep.md
+Removing pages.hi/common/ykman.md
+Removing pages.hi/common/zstdcat.md
+Removing pages.hi/common/zstdmt.md
+Removing pages.hi/linux/apx.md
+Removing pages.hi/linux/distrobox.md
+Removing pages.hi/linux/ip6tables-restore.md
+Removing pages.hi/linux/ip6tables-save.md
+Removing pages.hi/linux/ip6tables.md
+Removing pages.hi/linux/mount.smb3.md
+Removing pages.hi/linux/nmcli.md
+Removing pages.hi/linux/nmtui-connect.md
+Removing pages.hi/linux/nmtui-edit.md
+Removing pages.hi/linux/nmtui-hostname.md
+Removing pages.hi/linux/pkgctl.md
+Removing pages.hi/linux/qm-import-disk.md
+Removing pages.hi/linux/qm-move-disk.md
+Removing pages.hi/linux/qm-move_disk.md
+Removing pages.hi/linux/qm-resize.md
+Removing pages.hi/linux/shntool-split.md
+Removing pages.hi/linux/systemd-confext.md
+Removing pages.hi/linux/systemd-resolve.md
+Removing pages.hi/linux/systemd-umount.md
+Removing pages.hi/linux/xbps.md
+Removing pages.hi/openbsd/
+Removing pages.hi/osx/llvm-lipo.md
+Removing pages.hi/windows/chdir.md
+Removing pages.hi/windows/clear.md
+Removing pages.hi/windows/cls.md
+Removing pages.hi/windows/del.md
+Removing pages.hi/windows/gal.md
+Removing pages.hi/windows/gl.md
+Removing pages.hi/windows/mi.md
+Removing pages.hi/windows/move.md
+Removing pages.hi/windows/mv.md
+Removing pages.hi/windows/ni.md
+Removing pages.hi/windows/pwd.md
+Removing pages.hi/windows/ri.md
+Removing pages.hi/windows/rm.md
+Removing pages.hi/windows/rmdir.md
+Removing pages.hi/windows/sc-config.md
+Removing pages.hi/windows/sc-create.md
+Removing pages.hi/windows/sc-delete.md
+Removing pages.hi/windows/sc-query.md
+Removing pages.hi/windows/sl.md
+Removing pages.hi/windows/slmgr.md
+Removing pages.id/common/azure-cli.md
+Removing pages.id/common/docker-container-diff.md
+Removing pages.id/common/docker-container-remove.md
+Removing pages.id/common/docker-container-rename.md
+Removing pages.id/common/docker-container-rm.md
+Removing pages.id/common/docker-container-top.md
+Removing pages.id/common/gemtopbm.md
+Removing pages.id/common/git-stage.md
+Removing pages.id/common/hd.md
+Removing pages.id/common/hping.md
+Removing pages.id/common/just.md
+Removing pages.id/common/lima.md
+Removing pages.id/common/linode-cli.md
+Removing pages.id/common/lzcmp.md
+Removing pages.id/common/lzegrep.md
+Removing pages.id/common/lzfgrep.md
+Removing pages.id/common/lzgrep.md
+Removing pages.id/common/lzless.md
+Removing pages.id/common/lzmore.md
+Removing pages.id/common/musl-gcc.md
+Removing pages.id/common/netcat.md
+Removing pages.id/common/pamnoraw.md
+Removing pages.id/common/pbmtox10bm.md
+Removing pages.id/common/pgmoil.md
+Removing pages.id/common/pnmdepth.md
+Removing pages.id/common/pnmscale.md
+Removing pages.id/common/pnmtoplainpnm.md
+Removing pages.id/common/pnmtopnm.md
+Removing pages.id/common/pnmtotiff.md
+Removing pages.id/common/ppmquant.md
+Removing pages.id/common/ppmtotga.md
+Removing pages.id/common/ppmtowinicon.md
+Removing pages.id/common/ps-nvm.md
+Removing pages.id/common/unzstd.md
+Removing pages.id/common/winicontoppm.md
+Removing pages.id/common/xzegrep.md
+Removing pages.id/common/xzfgrep.md
+Removing pages.id/common/ykman.md
+Removing pages.id/common/zstdcat.md
+Removing pages.id/common/zstdmt.md
+Removing pages.id/linux/apx.md
+Removing pages.id/linux/distrobox.md
+Removing pages.id/linux/ip6tables-restore.md
+Removing pages.id/linux/ip6tables-save.md
+Removing pages.id/linux/ip6tables.md
+Removing pages.id/linux/mount.smb3.md
+Removing pages.id/linux/nmcli.md
+Removing pages.id/linux/nmtui-connect.md
+Removing pages.id/linux/nmtui-edit.md
+Removing pages.id/linux/nmtui-hostname.md
+Removing pages.id/linux/pkgctl.md
+Removing pages.id/linux/qm-import-disk.md
+Removing pages.id/linux/qm-move-disk.md
+Removing pages.id/linux/qm-move_disk.md
+Removing pages.id/linux/qm-resize.md
+Removing pages.id/linux/shntool-split.md
+Removing pages.id/linux/systemd-confext.md
+Removing pages.id/linux/systemd-resolve.md
+Removing pages.id/linux/systemd-umount.md
+Removing pages.id/linux/xbps.md
+Removing pages.id/osx/llvm-lipo.md
+Removing pages.id/windows/chdir.md
+Removing pages.id/windows/clear.md
+Removing pages.id/windows/del.md
+Removing pages.id/windows/gal.md
+Removing pages.id/windows/gl.md
+Removing pages.id/windows/mi.md
+Removing pages.id/windows/move.md
+Removing pages.id/windows/mv.md
+Removing pages.id/windows/ni.md
+Removing pages.id/windows/pwd.md
+Removing pages.id/windows/ri.md
+Removing pages.id/windows/rm.md
+Removing pages.id/windows/rmdir.md
+Removing pages.id/windows/sc-config.md
+Removing pages.id/windows/sc-create.md
+Removing pages.id/windows/sc-delete.md
+Removing pages.id/windows/sc-query.md
+Removing pages.id/windows/slmgr.md
+Removing pages.it/common/azure-cli.md
+Removing pages.it/common/docker-container-diff.md
+Removing pages.it/common/docker-container-remove.md
+Removing pages.it/common/docker-container-rename.md
+Removing pages.it/common/docker-container-rm.md
+Removing pages.it/common/docker-container-top.md
+Removing pages.it/common/gemtopbm.md
+Removing pages.it/common/hd.md
+Removing pages.it/common/hping.md
+Removing pages.it/common/just.md
+Removing pages.it/common/lima.md
+Removing pages.it/common/linode-cli.md
+Removing pages.it/common/lzcmp.md
+Removing pages.it/common/lzegrep.md
+Removing pages.it/common/lzfgrep.md
+Removing pages.it/common/lzgrep.md
+Removing pages.it/common/lzless.md
+Removing pages.it/common/lzmore.md
+Removing pages.it/common/musl-gcc.md
+Removing pages.it/common/netcat.md
+Removing pages.it/common/open.md
+Removing pages.it/common/pamnoraw.md
+Removing pages.it/common/pbmtox10bm.md
+Removing pages.it/common/pgmoil.md
+Removing pages.it/common/pnmdepth.md
+Removing pages.it/common/pnmscale.md
+Removing pages.it/common/pnmtoplainpnm.md
+Removing pages.it/common/pnmtopnm.md
+Removing pages.it/common/pnmtotiff.md
+Removing pages.it/common/ppmquant.md
+Removing pages.it/common/ppmtotga.md
+Removing pages.it/common/ppmtowinicon.md
+Removing pages.it/common/ps-nvm.md
+Removing pages.it/common/unzstd.md
+Removing pages.it/common/winicontoppm.md
+Removing pages.it/common/xzegrep.md
+Removing pages.it/common/xzfgrep.md
+Removing pages.it/common/ykman.md
+Removing pages.it/common/zstdcat.md
+Removing pages.it/common/zstdmt.md
+Removing pages.it/linux/apx.md
+Removing pages.it/linux/distrobox.md
+Removing pages.it/linux/ip6tables-restore.md
+Removing pages.it/linux/ip6tables-save.md
+Removing pages.it/linux/ip6tables.md
+Removing pages.it/linux/mount.smb3.md
+Removing pages.it/linux/nmcli.md
+Removing pages.it/linux/nmtui-connect.md
+Removing pages.it/linux/nmtui-edit.md
+Removing pages.it/linux/nmtui-hostname.md
+Removing pages.it/linux/pkgctl.md
+Removing pages.it/linux/qm-import-disk.md
+Removing pages.it/linux/qm-move-disk.md
+Removing pages.it/linux/qm-move_disk.md
+Removing pages.it/linux/qm-resize.md
+Removing pages.it/linux/shntool-split.md
+Removing pages.it/linux/systemd-confext.md
+Removing pages.it/linux/systemd-resolve.md
+Removing pages.it/linux/systemd-umount.md
+Removing pages.it/linux/xbps.md
+Removing pages.it/openbsd/
+Removing pages.it/osx/llvm-lipo.md
+Removing pages.it/windows/chdir.md
+Removing pages.it/windows/clear.md
+Removing pages.it/windows/gal.md
+Removing pages.it/windows/gl.md
+Removing pages.it/windows/mi.md
+Removing pages.it/windows/move.md
+Removing pages.it/windows/mv.md
+Removing pages.it/windows/ni.md
+Removing pages.it/windows/pwd.md
+Removing pages.it/windows/ri.md
+Removing pages.it/windows/rm.md
+Removing pages.it/windows/rmdir.md
+Removing pages.it/windows/sc-config.md
+Removing pages.it/windows/sc-create.md
+Removing pages.it/windows/sc-delete.md
+Removing pages.it/windows/sc-query.md
+Removing pages.it/windows/sl.md
+Removing pages.it/windows/slmgr.md
+Removing pages.ja/common/azure-cli.md
+Removing pages.ja/common/docker-container-diff.md
+Removing pages.ja/common/docker-container-remove.md
+Removing pages.ja/common/docker-container-rename.md
+Removing pages.ja/common/docker-container-rm.md
+Removing pages.ja/common/docker-container-top.md
+Removing pages.ja/common/gemtopbm.md
+Removing pages.ja/common/git-stage.md
+Removing pages.ja/common/hd.md
+Removing pages.ja/common/hping.md
+Removing pages.ja/common/just.md
+Removing pages.ja/common/lima.md
+Removing pages.ja/common/linode-cli.md
+Removing pages.ja/common/lzcmp.md
+Removing pages.ja/common/lzegrep.md
+Removing pages.ja/common/lzfgrep.md
+Removing pages.ja/common/lzgrep.md
+Removing pages.ja/common/lzless.md
+Removing pages.ja/common/lzmore.md
+Removing pages.ja/common/musl-gcc.md
+Removing pages.ja/common/netcat.md
+Removing pages.ja/common/open.md
+Removing pages.ja/common/pamnoraw.md
+Removing pages.ja/common/pbmtox10bm.md
+Removing pages.ja/common/pgmoil.md
+Removing pages.ja/common/pnmdepth.md
+Removing pages.ja/common/pnmscale.md
+Removing pages.ja/common/pnmtoplainpnm.md
+Removing pages.ja/common/pnmtopnm.md
+Removing pages.ja/common/pnmtotiff.md
+Removing pages.ja/common/powershell.md
+Removing pages.ja/common/ppmquant.md
+Removing pages.ja/common/ppmtotga.md
+Removing pages.ja/common/ppmtowinicon.md
+Removing pages.ja/common/ps-nvm.md
+Removing pages.ja/common/unzstd.md
+Removing pages.ja/common/winicontoppm.md
+Removing pages.ja/common/xzegrep.md
+Removing pages.ja/common/xzfgrep.md
+Removing pages.ja/common/ykman.md
+Removing pages.ja/common/zstdcat.md
+Removing pages.ja/common/zstdmt.md
+Removing pages.ja/linux/apx.md
+Removing pages.ja/linux/distrobox.md
+Removing pages.ja/linux/ip6tables-restore.md
+Removing pages.ja/linux/ip6tables-save.md
+Removing pages.ja/linux/ip6tables.md
+Removing pages.ja/linux/mount.smb3.md
+Removing pages.ja/linux/nmcli.md
+Removing pages.ja/linux/nmtui-connect.md
+Removing pages.ja/linux/nmtui-edit.md
+Removing pages.ja/linux/nmtui-hostname.md
+Removing pages.ja/linux/pkgctl.md
+Removing pages.ja/linux/qm-import-disk.md
+Removing pages.ja/linux/qm-move-disk.md
+Removing pages.ja/linux/qm-move_disk.md
+Removing pages.ja/linux/qm-resize.md
+Removing pages.ja/linux/shntool-split.md
+Removing pages.ja/linux/systemd-confext.md
+Removing pages.ja/linux/systemd-resolve.md
+Removing pages.ja/linux/systemd-umount.md
+Removing pages.ja/linux/xbps.md
+Removing pages.ja/openbsd/
+Removing pages.ja/osx/llvm-lipo.md
+Removing pages.ja/windows/chdir.md
+Removing pages.ja/windows/clear.md
+Removing pages.ja/windows/del.md
+Removing pages.ja/windows/gal.md
+Removing pages.ja/windows/gl.md
+Removing pages.ja/windows/mi.md
+Removing pages.ja/windows/move.md
+Removing pages.ja/windows/mv.md
+Removing pages.ja/windows/ni.md
+Removing pages.ja/windows/pwd.md
+Removing pages.ja/windows/ri.md
+Removing pages.ja/windows/rm.md
+Removing pages.ja/windows/rmdir.md
+Removing pages.ja/windows/sc-config.md
+Removing pages.ja/windows/sc-create.md
+Removing pages.ja/windows/sc-delete.md
+Removing pages.ja/windows/sc-query.md
+Removing pages.ja/windows/sl.md
+Removing pages.ja/windows/slmgr.md
+Removing pages.ko/common/azure-cli.md
+Removing pages.ko/common/docker-container-diff.md
+Removing pages.ko/common/docker-container-remove.md
+Removing pages.ko/common/docker-container-rename.md
+Removing pages.ko/common/docker-container-rm.md
+Removing pages.ko/common/docker-container-top.md
+Removing pages.ko/common/gemtopbm.md
+Removing pages.ko/common/git-stage.md
+Removing pages.ko/common/hd.md
+Removing pages.ko/common/hping.md
+Removing pages.ko/common/just.md
+Removing pages.ko/common/lima.md
+Removing pages.ko/common/linode-cli.md
+Removing pages.ko/common/lzcmp.md
+Removing pages.ko/common/lzegrep.md
+Removing pages.ko/common/lzfgrep.md
+Removing pages.ko/common/lzgrep.md
+Removing pages.ko/common/lzless.md
+Removing pages.ko/common/lzmore.md
+Removing pages.ko/common/musl-gcc.md
+Removing pages.ko/common/netcat.md
+Removing pages.ko/common/open.md
+Removing pages.ko/common/pamnoraw.md
+Removing pages.ko/common/pbmtox10bm.md
+Removing pages.ko/common/pgmoil.md
+Removing pages.ko/common/pnmdepth.md
+Removing pages.ko/common/pnmscale.md
+Removing pages.ko/common/pnmtoplainpnm.md
+Removing pages.ko/common/pnmtopnm.md
+Removing pages.ko/common/pnmtotiff.md
+Removing pages.ko/common/powershell.md
+Removing pages.ko/common/ppmquant.md
+Removing pages.ko/common/ppmtotga.md
+Removing pages.ko/common/ppmtowinicon.md
+Removing pages.ko/common/ps-nvm.md
+Removing pages.ko/common/unzstd.md
+Removing pages.ko/common/winicontoppm.md
+Removing pages.ko/common/xzegrep.md
+Removing pages.ko/common/xzfgrep.md
+Removing pages.ko/common/ykman.md
+Removing pages.ko/common/zstdcat.md
+Removing pages.ko/common/zstdmt.md
+Removing pages.ko/linux/apx.md
+Removing pages.ko/linux/distrobox.md
+Removing pages.ko/linux/ip6tables-restore.md
+Removing pages.ko/linux/ip6tables-save.md
+Removing pages.ko/linux/ip6tables.md
+Removing pages.ko/linux/mount.smb3.md
+Removing pages.ko/linux/nmcli.md
+Removing pages.ko/linux/nmtui-connect.md
+Removing pages.ko/linux/nmtui-edit.md
+Removing pages.ko/linux/nmtui-hostname.md
+Removing pages.ko/linux/pkgctl.md
+Removing pages.ko/linux/qm-import-disk.md
+Removing pages.ko/linux/qm-move-disk.md
+Removing pages.ko/linux/qm-move_disk.md
+Removing pages.ko/linux/qm-resize.md
+Removing pages.ko/linux/shntool-split.md
+Removing pages.ko/linux/systemd-confext.md
+Removing pages.ko/linux/systemd-resolve.md
+Removing pages.ko/linux/systemd-umount.md
+Removing pages.ko/linux/xbps.md
+Removing pages.ko/openbsd/
+Removing pages.ko/osx/llvm-lipo.md
+Removing pages.ko/windows/cd.md
+Removing pages.ko/windows/chdir.md
+Removing pages.ko/windows/clear.md
+Removing pages.ko/windows/cls.md
+Removing pages.ko/windows/del.md
+Removing pages.ko/windows/gal.md
+Removing pages.ko/windows/gl.md
+Removing pages.ko/windows/mi.md
+Removing pages.ko/windows/move.md
+Removing pages.ko/windows/mv.md
+Removing pages.ko/windows/ni.md
+Removing pages.ko/windows/pwd.md
+Removing pages.ko/windows/ri.md
+Removing pages.ko/windows/rm.md
+Removing pages.ko/windows/rmdir.md
+Removing pages.ko/windows/sc-config.md
+Removing pages.ko/windows/sc-create.md
+Removing pages.ko/windows/sc-delete.md
+Removing pages.ko/windows/sc-query.md
+Removing pages.ko/windows/sl.md
+Removing pages.ko/windows/slmgr.md
+Removing pages.lo/common/azure-cli.md
+Removing pages.lo/common/docker-container-diff.md
+Removing pages.lo/common/docker-container-remove.md
+Removing pages.lo/common/docker-container-rename.md
+Removing pages.lo/common/docker-container-rm.md
+Removing pages.lo/common/docker-container-top.md
+Removing pages.lo/common/gemtopbm.md
+Removing pages.lo/common/git-stage.md
+Removing pages.lo/common/hd.md
+Removing pages.lo/common/hping.md
+Removing pages.lo/common/just.md
+Removing pages.lo/common/lima.md
+Removing pages.lo/common/linode-cli.md
+Removing pages.lo/common/lzcmp.md
+Removing pages.lo/common/lzegrep.md
+Removing pages.lo/common/lzfgrep.md
+Removing pages.lo/common/lzgrep.md
+Removing pages.lo/common/lzless.md
+Removing pages.lo/common/lzmore.md
+Removing pages.lo/common/musl-gcc.md
+Removing pages.lo/common/netcat.md
+Removing pages.lo/common/open.md
+Removing pages.lo/common/pamnoraw.md
+Removing pages.lo/common/pbmtox10bm.md
+Removing pages.lo/common/pgmoil.md
+Removing pages.lo/common/pnmdepth.md
+Removing pages.lo/common/pnmscale.md
+Removing pages.lo/common/pnmtoplainpnm.md
+Removing pages.lo/common/pnmtopnm.md
+Removing pages.lo/common/pnmtotiff.md
+Removing pages.lo/common/powershell.md
+Removing pages.lo/common/ppmquant.md
+Removing pages.lo/common/ppmtotga.md
+Removing pages.lo/common/ppmtowinicon.md
+Removing pages.lo/common/ps-nvm.md
+Removing pages.lo/common/unzstd.md
+Removing pages.lo/common/winicontoppm.md
+Removing pages.lo/common/xzegrep.md
+Removing pages.lo/common/xzfgrep.md
+Removing pages.lo/common/ykman.md
+Removing pages.lo/common/zstdcat.md
+Removing pages.lo/common/zstdmt.md
+Removing pages.lo/linux/apx.md
+Removing pages.lo/linux/distrobox.md
+Removing pages.lo/linux/ip6tables-restore.md
+Removing pages.lo/linux/ip6tables-save.md
+Removing pages.lo/linux/ip6tables.md
+Removing pages.lo/linux/mount.smb3.md
+Removing pages.lo/linux/nmcli.md
+Removing pages.lo/linux/nmtui-connect.md
+Removing pages.lo/linux/nmtui-edit.md
+Removing pages.lo/linux/nmtui-hostname.md
+Removing pages.lo/linux/pkgctl.md
+Removing pages.lo/linux/qm-import-disk.md
+Removing pages.lo/linux/qm-move-disk.md
+Removing pages.lo/linux/qm-move_disk.md
+Removing pages.lo/linux/qm-resize.md
+Removing pages.lo/linux/shntool-split.md
+Removing pages.lo/linux/systemd-confext.md
+Removing pages.lo/linux/systemd-resolve.md
+Removing pages.lo/linux/systemd-umount.md
+Removing pages.lo/linux/xbps.md
+Removing pages.lo/openbsd/
+Removing pages.lo/osx/llvm-lipo.md
+Removing pages.lo/windows/cd.md
+Removing pages.lo/windows/chdir.md
+Removing pages.lo/windows/clear.md
+Removing pages.lo/windows/del.md
+Removing pages.lo/windows/gal.md
+Removing pages.lo/windows/gl.md
+Removing pages.lo/windows/mi.md
+Removing pages.lo/windows/move.md
+Removing pages.lo/windows/mv.md
+Removing pages.lo/windows/ni.md
+Removing pages.lo/windows/pwd.md
+Removing pages.lo/windows/ri.md
+Removing pages.lo/windows/rm.md
+Removing pages.lo/windows/rmdir.md
+Removing pages.lo/windows/sc-config.md
+Removing pages.lo/windows/sc-create.md
+Removing pages.lo/windows/sc-delete.md
+Removing pages.lo/windows/sc-query.md
+Removing pages.lo/windows/sl.md
+Removing pages.lo/windows/slmgr.md
+Removing pages.ml/common/azure-cli.md
+Removing pages.ml/common/docker-container-diff.md
+Removing pages.ml/common/docker-container-remove.md
+Removing pages.ml/common/docker-container-rename.md
+Removing pages.ml/common/docker-container-rm.md
+Removing pages.ml/common/docker-container-top.md
+Removing pages.ml/common/gemtopbm.md
+Removing pages.ml/common/git-stage.md
+Removing pages.ml/common/hd.md
+Removing pages.ml/common/hping.md
+Removing pages.ml/common/just.md
+Removing pages.ml/common/lima.md
+Removing pages.ml/common/linode-cli.md
+Removing pages.ml/common/lzcmp.md
+Removing pages.ml/common/lzegrep.md
+Removing pages.ml/common/lzfgrep.md
+Removing pages.ml/common/lzgrep.md
+Removing pages.ml/common/lzless.md
+Removing pages.ml/common/lzmore.md
+Removing pages.ml/common/musl-gcc.md
+Removing pages.ml/common/netcat.md
+Removing pages.ml/common/open.md
+Removing pages.ml/common/pamnoraw.md
+Removing pages.ml/common/pbmtox10bm.md
+Removing pages.ml/common/pgmoil.md
+Removing pages.ml/common/pnmdepth.md
+Removing pages.ml/common/pnmscale.md
+Removing pages.ml/common/pnmtoplainpnm.md
+Removing pages.ml/common/pnmtopnm.md
+Removing pages.ml/common/pnmtotiff.md
+Removing pages.ml/common/powershell.md
+Removing pages.ml/common/ppmquant.md
+Removing pages.ml/common/ppmtotga.md
+Removing pages.ml/common/ppmtowinicon.md
+Removing pages.ml/common/ps-nvm.md
+Removing pages.ml/common/unzstd.md
+Removing pages.ml/common/winicontoppm.md
+Removing pages.ml/common/xzegrep.md
+Removing pages.ml/common/xzfgrep.md
+Removing pages.ml/common/ykman.md
+Removing pages.ml/common/zstdcat.md
+Removing pages.ml/common/zstdmt.md
+Removing pages.ml/linux/apx.md
+Removing pages.ml/linux/distrobox.md
+Removing pages.ml/linux/ip6tables-restore.md
+Removing pages.ml/linux/ip6tables-save.md
+Removing pages.ml/linux/ip6tables.md
+Removing pages.ml/linux/mount.smb3.md
+Removing pages.ml/linux/nmtui-connect.md
+Removing pages.ml/linux/nmtui-edit.md
+Removing pages.ml/linux/nmtui-hostname.md
+Removing pages.ml/linux/pkgctl.md
+Removing pages.ml/linux/qm-import-disk.md
+Removing pages.ml/linux/qm-move-disk.md
+Removing pages.ml/linux/qm-move_disk.md
+Removing pages.ml/linux/qm-resize.md
+Removing pages.ml/linux/shntool-split.md
+Removing pages.ml/linux/systemd-confext.md
+Removing pages.ml/linux/systemd-resolve.md
+Removing pages.ml/linux/systemd-umount.md
+Removing pages.ml/linux/xbps.md
+Removing pages.ml/openbsd/
+Removing pages.ml/osx/llvm-lipo.md
+Removing pages.ml/windows/cd.md
+Removing pages.ml/windows/chdir.md
+Removing pages.ml/windows/clear.md
+Removing pages.ml/windows/cls.md
+Removing pages.ml/windows/del.md
+Removing pages.ml/windows/gal.md
+Removing pages.ml/windows/gl.md
+Removing pages.ml/windows/mi.md
+Removing pages.ml/windows/move.md
+Removing pages.ml/windows/mv.md
+Removing pages.ml/windows/ni.md
+Removing pages.ml/windows/pwd.md
+Removing pages.ml/windows/ri.md
+Removing pages.ml/windows/rm.md
+Removing pages.ml/windows/rmdir.md
+Removing pages.ml/windows/sc-config.md
+Removing pages.ml/windows/sc-create.md
+Removing pages.ml/windows/sc-delete.md
+Removing pages.ml/windows/sc-query.md
+Removing pages.ml/windows/sl.md
+Removing pages.ml/windows/slmgr.md
+Removing pages.ne/common/azure-cli.md
+Removing pages.ne/common/docker-container-diff.md
+Removing pages.ne/common/docker-container-remove.md
+Removing pages.ne/common/docker-container-rename.md
+Removing pages.ne/common/docker-container-rm.md
+Removing pages.ne/common/docker-container-top.md
+Removing pages.ne/common/gemtopbm.md
+Removing pages.ne/common/git-stage.md
+Removing pages.ne/common/hd.md
+Removing pages.ne/common/hping.md
+Removing pages.ne/common/just.md
+Removing pages.ne/common/lima.md
+Removing pages.ne/common/linode-cli.md
+Removing pages.ne/common/lzcmp.md
+Removing pages.ne/common/lzegrep.md
+Removing pages.ne/common/lzfgrep.md
+Removing pages.ne/common/lzgrep.md
+Removing pages.ne/common/lzless.md
+Removing pages.ne/common/lzmore.md
+Removing pages.ne/common/musl-gcc.md
+Removing pages.ne/common/netcat.md
+Removing pages.ne/common/open.md
+Removing pages.ne/common/pamnoraw.md
+Removing pages.ne/common/pbmtox10bm.md
+Removing pages.ne/common/pgmoil.md
+Removing pages.ne/common/pnmdepth.md
+Removing pages.ne/common/pnmscale.md
+Removing pages.ne/common/pnmtoplainpnm.md
+Removing pages.ne/common/pnmtopnm.md
+Removing pages.ne/common/pnmtotiff.md
+Removing pages.ne/common/powershell.md
+Removing pages.ne/common/ppmquant.md
+Removing pages.ne/common/ppmtotga.md
+Removing pages.ne/common/ppmtowinicon.md
+Removing pages.ne/common/ps-nvm.md
+Removing pages.ne/common/unzstd.md
+Removing pages.ne/common/winicontoppm.md
+Removing pages.ne/common/xzegrep.md
+Removing pages.ne/common/xzfgrep.md
+Removing pages.ne/common/ykman.md
+Removing pages.ne/common/zstdcat.md
+Removing pages.ne/common/zstdmt.md
+Removing pages.ne/linux/apx.md
+Removing pages.ne/linux/distrobox.md
+Removing pages.ne/linux/ip6tables-restore.md
+Removing pages.ne/linux/ip6tables-save.md
+Removing pages.ne/linux/ip6tables.md
+Removing pages.ne/linux/mount.smb3.md
+Removing pages.ne/linux/nmcli.md
+Removing pages.ne/linux/nmtui-connect.md
+Removing pages.ne/linux/nmtui-edit.md
+Removing pages.ne/linux/nmtui-hostname.md
+Removing pages.ne/linux/pkgctl.md
+Removing pages.ne/linux/qm-import-disk.md
+Removing pages.ne/linux/qm-move-disk.md
+Removing pages.ne/linux/qm-move_disk.md
+Removing pages.ne/linux/qm-resize.md
+Removing pages.ne/linux/shntool-split.md
+Removing pages.ne/linux/systemd-confext.md
+Removing pages.ne/linux/systemd-resolve.md
+Removing pages.ne/linux/systemd-umount.md
+Removing pages.ne/linux/xbps.md
+Removing pages.ne/openbsd/
+Removing pages.ne/osx/llvm-lipo.md
+Removing pages.ne/windows/cd.md
+Removing pages.ne/windows/chdir.md
+Removing pages.ne/windows/clear.md
+Removing pages.ne/windows/cls.md
+Removing pages.ne/windows/del.md
+Removing pages.ne/windows/gal.md
+Removing pages.ne/windows/gl.md
+Removing pages.ne/windows/mi.md
+Removing pages.ne/windows/move.md
+Removing pages.ne/windows/mv.md
+Removing pages.ne/windows/ni.md
+Removing pages.ne/windows/pwd.md
+Removing pages.ne/windows/ri.md
+Removing pages.ne/windows/rm.md
+Removing pages.ne/windows/rmdir.md
+Removing pages.ne/windows/sc-config.md
+Removing pages.ne/windows/sc-create.md
+Removing pages.ne/windows/sc-delete.md
+Removing pages.ne/windows/sc-query.md
+Removing pages.ne/windows/sl.md
+Removing pages.ne/windows/slmgr.md
+Removing pages.nl/common/ppmquant.md
+Removing pages.no/common/azure-cli.md
+Removing pages.no/common/docker-container-diff.md
+Removing pages.no/common/docker-container-remove.md
+Removing pages.no/common/docker-container-rename.md
+Removing pages.no/common/docker-container-rm.md
+Removing pages.no/common/docker-container-top.md
+Removing pages.no/common/gemtopbm.md
+Removing pages.no/common/git-stage.md
+Removing pages.no/common/hd.md
+Removing pages.no/common/hping.md
+Removing pages.no/common/just.md
+Removing pages.no/common/lima.md
+Removing pages.no/common/linode-cli.md
+Removing pages.no/common/lzcmp.md
+Removing pages.no/common/lzegrep.md
+Removing pages.no/common/lzfgrep.md
+Removing pages.no/common/lzgrep.md
+Removing pages.no/common/lzless.md
+Removing pages.no/common/lzmore.md
+Removing pages.no/common/musl-gcc.md
+Removing pages.no/common/netcat.md
+Removing pages.no/common/open.md
+Removing pages.no/common/pamnoraw.md
+Removing pages.no/common/pbmtox10bm.md
+Removing pages.no/common/pgmoil.md
+Removing pages.no/common/pnmdepth.md
+Removing pages.no/common/pnmscale.md
+Removing pages.no/common/pnmtoplainpnm.md
+Removing pages.no/common/pnmtopnm.md
+Removing pages.no/common/pnmtotiff.md
+Removing pages.no/common/powershell.md
+Removing pages.no/common/ppmquant.md
+Removing pages.no/common/ppmtotga.md
+Removing pages.no/common/ppmtowinicon.md
+Removing pages.no/common/ps-nvm.md
+Removing pages.no/common/unzstd.md
+Removing pages.no/common/winicontoppm.md
+Removing pages.no/common/xzegrep.md
+Removing pages.no/common/xzfgrep.md
+Removing pages.no/common/ykman.md
+Removing pages.no/common/zstdcat.md
+Removing pages.no/common/zstdmt.md
+Removing pages.no/linux/apx.md
+Removing pages.no/linux/distrobox.md
+Removing pages.no/linux/ip6tables-restore.md
+Removing pages.no/linux/ip6tables-save.md
+Removing pages.no/linux/ip6tables.md
+Removing pages.no/linux/mount.smb3.md
+Removing pages.no/linux/nmcli.md
+Removing pages.no/linux/nmtui-connect.md
+Removing pages.no/linux/nmtui-edit.md
+Removing pages.no/linux/nmtui-hostname.md
+Removing pages.no/linux/pkgctl.md
+Removing pages.no/linux/qm-import-disk.md
+Removing pages.no/linux/qm-move-disk.md
+Removing pages.no/linux/qm-move_disk.md
+Removing pages.no/linux/qm-resize.md
+Removing pages.no/linux/shntool-split.md
+Removing pages.no/linux/systemd-confext.md
+Removing pages.no/linux/systemd-resolve.md
+Removing pages.no/linux/systemd-umount.md
+Removing pages.no/linux/xbps.md
+Removing pages.no/openbsd/
+Removing pages.no/osx/llvm-lipo.md
+Removing pages.no/windows/cd.md
+Removing pages.no/windows/chdir.md
+Removing pages.no/windows/clear.md
+Removing pages.no/windows/cls.md
+Removing pages.no/windows/del.md
+Removing pages.no/windows/gal.md
+Removing pages.no/windows/gl.md
+Removing pages.no/windows/mi.md
+Removing pages.no/windows/move.md
+Removing pages.no/windows/mv.md
+Removing pages.no/windows/ni.md
+Removing pages.no/windows/pwd.md
+Removing pages.no/windows/ri.md
+Removing pages.no/windows/rm.md
+Removing pages.no/windows/rmdir.md
+Removing pages.no/windows/sc-config.md
+Removing pages.no/windows/sc-create.md
+Removing pages.no/windows/sc-delete.md
+Removing pages.no/windows/sc-query.md
+Removing pages.no/windows/sl.md
+Removing pages.no/windows/slmgr.md
+Removing pages.pl/common/gemtopbm.md
+Removing pages.pl/common/pamnoraw.md
+Removing pages.pl/common/pbmtox10bm.md
+Removing pages.pl/common/pgmoil.md
+Removing pages.pl/common/pnmdepth.md
+Removing pages.pl/common/pnmscale.md
+Removing pages.pl/common/pnmtoplainpnm.md
+Removing pages.pl/common/pnmtopnm.md
+Removing pages.pl/common/pnmtotiff.md
+Removing pages.pl/common/powershell.md
+Removing pages.pl/common/ppmquant.md
+Removing pages.pl/common/ppmtotga.md
+Removing pages.pl/common/ppmtowinicon.md
+Removing pages.pl/common/ps-nvm.md
+Removing pages.pl/common/winicontoppm.md
+Removing pages.pl/common/ykman.md
+Removing pages.pl/linux/apx.md
+Removing pages.pl/linux/distrobox.md
+Removing pages.pl/linux/ip6tables-restore.md
+Removing pages.pl/linux/ip6tables-save.md
+Removing pages.pl/linux/ip6tables.md
+Removing pages.pl/linux/mount.smb3.md
+Removing pages.pl/linux/nmcli.md
+Removing pages.pl/linux/nmtui-connect.md
+Removing pages.pl/linux/nmtui-edit.md
+Removing pages.pl/linux/nmtui-hostname.md
+Removing pages.pl/linux/pkgctl.md
+Removing pages.pl/linux/qm-import-disk.md
+Removing pages.pl/linux/qm-move-disk.md
+Removing pages.pl/linux/qm-move_disk.md
+Removing pages.pl/linux/qm-resize.md
+Removing pages.pl/linux/shntool-split.md
+Removing pages.pl/linux/systemd-confext.md
+Removing pages.pl/linux/systemd-resolve.md
+Removing pages.pl/linux/systemd-umount.md
+Removing pages.pl/linux/xbps.md
+Removing pages.pl/windows/cd.md
+Removing pages.pl/windows/chdir.md
+Removing pages.pl/windows/clear.md
+Removing pages.pl/windows/cls.md
+Removing pages.pl/windows/del.md
+Removing pages.pl/windows/gal.md
+Removing pages.pl/windows/gl.md
+Removing pages.pl/windows/mi.md
+Removing pages.pl/windows/move.md
+Removing pages.pl/windows/mv.md
+Removing pages.pl/windows/ni.md
+Removing pages.pl/windows/pwd.md
+Removing pages.pl/windows/ri.md
+Removing pages.pl/windows/rm.md
+Removing pages.pl/windows/rmdir.md
+Removing pages.pl/windows/sc-config.md
+Removing pages.pl/windows/sc-create.md
+Removing pages.pl/windows/sc-delete.md
+Removing pages.pl/windows/sc-query.md
+Removing pages.pl/windows/sl.md
+Removing pages.pl/windows/slmgr.md
+Removing pages.pt_BR/common/azure-cli.md
+Removing pages.pt_BR/common/docker-container-diff.md
+Removing pages.pt_BR/common/docker-container-remove.md
+Removing pages.pt_BR/common/docker-container-rename.md
+Removing pages.pt_BR/common/docker-container-rm.md
+Removing pages.pt_BR/common/docker-container-top.md
+Removing pages.pt_BR/common/gemtopbm.md
+Removing pages.pt_BR/common/git-stage.md
+Removing pages.pt_BR/common/hd.md
+Removing pages.pt_BR/common/hping.md
+Removing pages.pt_BR/common/just.md
+Removing pages.pt_BR/common/lima.md
+Removing pages.pt_BR/common/linode-cli.md
+Removing pages.pt_BR/common/lzcmp.md
+Removing pages.pt_BR/common/lzegrep.md
+Removing pages.pt_BR/common/lzfgrep.md
+Removing pages.pt_BR/common/lzgrep.md
+Removing pages.pt_BR/common/lzless.md
+Removing pages.pt_BR/common/lzmore.md
+Removing pages.pt_BR/common/musl-gcc.md
+Removing pages.pt_BR/common/netcat.md
+Removing pages.pt_BR/common/open.md
+Removing pages.pt_BR/common/pamnoraw.md
+Removing pages.pt_BR/common/pbmtox10bm.md
+Removing pages.pt_BR/common/pgmoil.md
+Removing pages.pt_BR/common/pnmdepth.md
+Removing pages.pt_BR/common/pnmscale.md
+Removing pages.pt_BR/common/pnmtoplainpnm.md
+Removing pages.pt_BR/common/pnmtopnm.md
+Removing pages.pt_BR/common/pnmtotiff.md
+Removing pages.pt_BR/common/powershell.md
+Removing pages.pt_BR/common/ppmquant.md
+Removing pages.pt_BR/common/ppmtotga.md
+Removing pages.pt_BR/common/ppmtowinicon.md
+Removing pages.pt_BR/common/ps-nvm.md
+Removing pages.pt_BR/common/unzstd.md
+Removing pages.pt_BR/common/winicontoppm.md
+Removing pages.pt_BR/common/xzegrep.md
+Removing pages.pt_BR/common/xzfgrep.md
+Removing pages.pt_BR/common/ykman.md
+Removing pages.pt_BR/common/zstdcat.md
+Removing pages.pt_BR/common/zstdmt.md
+Removing pages.pt_BR/linux/apx.md
+Removing pages.pt_BR/linux/ip6tables-restore.md
+Removing pages.pt_BR/linux/ip6tables-save.md
+Removing pages.pt_BR/linux/ip6tables.md
+Removing pages.pt_BR/linux/mount.smb3.md
+Removing pages.pt_BR/linux/nmcli.md
+Removing pages.pt_BR/linux/nmtui-connect.md
+Removing pages.pt_BR/linux/nmtui-edit.md
+Removing pages.pt_BR/linux/nmtui-hostname.md
+Removing pages.pt_BR/linux/pkgctl.md
+Removing pages.pt_BR/linux/qm-import-disk.md
+Removing pages.pt_BR/linux/qm-move-disk.md
+Removing pages.pt_BR/linux/qm-move_disk.md
+Removing pages.pt_BR/linux/qm-resize.md
+Removing pages.pt_BR/linux/shntool-split.md
+Removing pages.pt_BR/linux/systemd-confext.md
+Removing pages.pt_BR/linux/systemd-resolve.md
+Removing pages.pt_BR/linux/systemd-umount.md
+Removing pages.pt_BR/linux/xbps.md
+Removing pages.pt_BR/openbsd/
+Removing pages.pt_BR/osx/llvm-lipo.md
+Removing pages.pt_BR/windows/chdir.md
+Removing pages.pt_BR/windows/clear.md
+Removing pages.pt_BR/windows/del.md
+Removing pages.pt_BR/windows/gal.md
+Removing pages.pt_BR/windows/gl.md
+Removing pages.pt_BR/windows/mi.md
+Removing pages.pt_BR/windows/move.md
+Removing pages.pt_BR/windows/mv.md
+Removing pages.pt_BR/windows/ni.md
+Removing pages.pt_BR/windows/pwd.md
+Removing pages.pt_BR/windows/ri.md
+Removing pages.pt_BR/windows/rm.md
+Removing pages.pt_BR/windows/rmdir.md
+Removing pages.pt_BR/windows/sc-config.md
+Removing pages.pt_BR/windows/sc-create.md
+Removing pages.pt_BR/windows/sc-delete.md
+Removing pages.pt_BR/windows/sc-query.md
+Removing pages.pt_BR/windows/sl.md
+Removing pages.pt_BR/windows/slmgr.md
+Removing pages.pt_PT/common/azure-cli.md
+Removing pages.pt_PT/common/docker-container-diff.md
+Removing pages.pt_PT/common/docker-container-remove.md
+Removing pages.pt_PT/common/docker-container-rename.md
+Removing pages.pt_PT/common/docker-container-rm.md
+Removing pages.pt_PT/common/docker-container-top.md
+Removing pages.pt_PT/common/gemtopbm.md
+Removing pages.pt_PT/common/git-stage.md
+Removing pages.pt_PT/common/hd.md
+Removing pages.pt_PT/common/hping.md
+Removing pages.pt_PT/common/just.md
+Removing pages.pt_PT/common/lima.md
+Removing pages.pt_PT/common/linode-cli.md
+Removing pages.pt_PT/common/lzcmp.md
+Removing pages.pt_PT/common/lzegrep.md
+Removing pages.pt_PT/common/lzfgrep.md
+Removing pages.pt_PT/common/lzgrep.md
+Removing pages.pt_PT/common/lzless.md
+Removing pages.pt_PT/common/lzmore.md
+Removing pages.pt_PT/common/musl-gcc.md
+Removing pages.pt_PT/common/netcat.md
+Removing pages.pt_PT/common/open.md
+Removing pages.pt_PT/common/pamnoraw.md
+Removing pages.pt_PT/common/pbmtox10bm.md
+Removing pages.pt_PT/common/pgmoil.md
+Removing pages.pt_PT/common/pnmdepth.md
+Removing pages.pt_PT/common/pnmscale.md
+Removing pages.pt_PT/common/pnmtoplainpnm.md
+Removing pages.pt_PT/common/pnmtopnm.md
+Removing pages.pt_PT/common/pnmtotiff.md
+Removing pages.pt_PT/common/powershell.md
+Removing pages.pt_PT/common/ppmquant.md
+Removing pages.pt_PT/common/ppmtotga.md
+Removing pages.pt_PT/common/ppmtowinicon.md
+Removing pages.pt_PT/common/ps-nvm.md
+Removing pages.pt_PT/common/unzstd.md
+Removing pages.pt_PT/common/winicontoppm.md
+Removing pages.pt_PT/common/xzegrep.md
+Removing pages.pt_PT/common/xzfgrep.md
+Removing pages.pt_PT/common/ykman.md
+Removing pages.pt_PT/common/zstdcat.md
+Removing pages.pt_PT/common/zstdmt.md
+Removing pages.pt_PT/linux/apx.md
+Removing pages.pt_PT/linux/distrobox.md
+Removing pages.pt_PT/linux/ip6tables-restore.md
+Removing pages.pt_PT/linux/ip6tables-save.md
+Removing pages.pt_PT/linux/ip6tables.md
+Removing pages.pt_PT/linux/mount.smb3.md
+Removing pages.pt_PT/linux/nmcli.md
+Removing pages.pt_PT/linux/nmtui-connect.md
+Removing pages.pt_PT/linux/nmtui-edit.md
+Removing pages.pt_PT/linux/nmtui-hostname.md
+Removing pages.pt_PT/linux/pkgctl.md
+Removing pages.pt_PT/linux/qm-import-disk.md
+Removing pages.pt_PT/linux/qm-move-disk.md
+Removing pages.pt_PT/linux/qm-move_disk.md
+Removing pages.pt_PT/linux/qm-resize.md
+Removing pages.pt_PT/linux/shntool-split.md
+Removing pages.pt_PT/linux/systemd-confext.md
+Removing pages.pt_PT/linux/systemd-resolve.md
+Removing pages.pt_PT/linux/systemd-umount.md
+Removing pages.pt_PT/linux/xbps.md
+Removing pages.pt_PT/openbsd/
+Removing pages.pt_PT/osx/llvm-lipo.md
+Removing pages.pt_PT/windows/cd.md
+Removing pages.pt_PT/windows/chdir.md
+Removing pages.pt_PT/windows/clear.md
+Removing pages.pt_PT/windows/cls.md
+Removing pages.pt_PT/windows/del.md
+Removing pages.pt_PT/windows/gal.md
+Removing pages.pt_PT/windows/gl.md
+Removing pages.pt_PT/windows/mi.md
+Removing pages.pt_PT/windows/move.md
+Removing pages.pt_PT/windows/mv.md
+Removing pages.pt_PT/windows/ni.md
+Removing pages.pt_PT/windows/pwd.md
+Removing pages.pt_PT/windows/ri.md
+Removing pages.pt_PT/windows/rm.md
+Removing pages.pt_PT/windows/rmdir.md
+Removing pages.pt_PT/windows/sc-config.md
+Removing pages.pt_PT/windows/sc-create.md
+Removing pages.pt_PT/windows/sc-delete.md
+Removing pages.pt_PT/windows/sc-query.md
+Removing pages.pt_PT/windows/sl.md
+Removing pages.pt_PT/windows/slmgr.md
+Removing pages.ro/common/azure-cli.md
+Removing pages.ro/common/bundler.md
+Removing pages.ro/common/clamav.md
+Removing pages.ro/common/clang-cpp.md
+Removing pages.ro/common/clojure.md
+Removing pages.ro/common/cola.md
+Removing pages.ro/common/cron.md
+Removing pages.ro/common/docker-container-diff.md
+Removing pages.ro/common/docker-container-remove.md
+Removing pages.ro/common/docker-container-rename.md
+Removing pages.ro/common/docker-container-rm.md
+Removing pages.ro/common/docker-container-top.md
+Removing pages.ro/common/fossil-ci.md
+Removing pages.ro/common/fossil-delete.md
+Removing pages.ro/common/fossil-forget.md
+Removing pages.ro/common/fossil-new.md
+Removing pages.ro/common/gemtopbm.md
+Removing pages.ro/common/gh-cs.md
+Removing pages.ro/common/git-stage.md
+Removing pages.ro/common/gnmic-sub.md
+Removing pages.ro/common/google-chrome.md
+Removing pages.ro/common/hd.md
+Removing pages.ro/common/hping.md
+Removing pages.ro/common/hx.md
+Removing pages.ro/common/just.md
+Removing pages.ro/common/kafkacat.md
+Removing pages.ro/common/lima.md
+Removing pages.ro/common/linode-cli.md
+Removing pages.ro/common/llvm-ar.md
+Removing pages.ro/common/llvm-g++.md
+Removing pages.ro/common/llvm-gcc.md
+Removing pages.ro/common/llvm-nm.md
+Removing pages.ro/common/llvm-objdump.md
+Removing pages.ro/common/llvm-strings.md
+Removing pages.ro/common/lzcat.md
+Removing pages.ro/common/lzcmp.md
+Removing pages.ro/common/lzegrep.md
+Removing pages.ro/common/lzfgrep.md
+Removing pages.ro/common/lzgrep.md
+Removing pages.ro/common/lzless.md
+Removing pages.ro/common/lzma.md
+Removing pages.ro/common/lzmore.md
+Removing pages.ro/common/mscore.md
+Removing pages.ro/common/musl-gcc.md
+Removing pages.ro/common/netcat.md
+Removing pages.ro/common/nm-classic.md
+Removing pages.ro/common/ntl.md
+Removing pages.ro/common/open.md
+Removing pages.ro/common/pamnoraw.md
+Removing pages.ro/common/pbmtox10bm.md
+Removing pages.ro/common/pgmoil.md
+Removing pages.ro/common/pio-init.md
+Removing pages.ro/common/piodebuggdb.md
+Removing pages.ro/common/platformio.md
+Removing pages.ro/common/pnmdepth.md
+Removing pages.ro/common/pnmscale.md
+Removing pages.ro/common/pnmtoplainpnm.md
+Removing pages.ro/common/pnmtopnm.md
+Removing pages.ro/common/pnmtotiff.md
+Removing pages.ro/common/powershell.md
+Removing pages.ro/common/ppmquant.md
+Removing pages.ro/common/ppmtotga.md
+Removing pages.ro/common/ppmtowinicon.md
+Removing pages.ro/common/ps-nvm.md
+Removing pages.ro/common/ptpython3.md
+Removing pages.ro/common/python3.md
+Removing pages.ro/common/r2.md
+Removing pages.ro/common/rcat.md
+Removing pages.ro/common/ripgrep.md
+Removing pages.ro/common/tldrl.md
+Removing pages.ro/common/tlmgr-arch.md
+Removing pages.ro/common/todoman.md
+Removing pages.ro/common/transmission.md
+Removing pages.ro/common/unlzma.md
+Removing pages.ro/common/unxz.md
+Removing pages.ro/common/unzstd.md
+Removing pages.ro/common/vi.md
+Removing pages.ro/common/winicontoppm.md
+Removing pages.ro/common/xzcat.md
+Removing pages.ro/common/xzegrep.md
+Removing pages.ro/common/xzfgrep.md
+Removing pages.ro/common/ykman.md
+Removing pages.ro/common/zstdcat.md
+Removing pages.ro/common/zstdmt.md
+Removing pages.ro/linux/
+Removing pages.ro/openbsd/
+Removing pages.ro/osx/
+Removing pages.ro/windows/
+Removing pages.ru/common/azure-cli.md
+Removing pages.ru/common/docker-container-diff.md
+Removing pages.ru/common/docker-container-remove.md
+Removing pages.ru/common/docker-container-rename.md
+Removing pages.ru/common/docker-container-rm.md
+Removing pages.ru/common/docker-container-top.md
+Removing pages.ru/common/gemtopbm.md
+Removing pages.ru/common/git-stage.md
+Removing pages.ru/common/hd.md
+Removing pages.ru/common/hping.md
+Removing pages.ru/common/just.md
+Removing pages.ru/common/lima.md
+Removing pages.ru/common/linode-cli.md
+Removing pages.ru/common/lzcmp.md
+Removing pages.ru/common/lzegrep.md
+Removing pages.ru/common/lzfgrep.md
+Removing pages.ru/common/lzgrep.md
+Removing pages.ru/common/lzless.md
+Removing pages.ru/common/lzmore.md
+Removing pages.ru/common/musl-gcc.md
+Removing pages.ru/common/netcat.md
+Removing pages.ru/common/open.md
+Removing pages.ru/common/pamnoraw.md
+Removing pages.ru/common/pbmtox10bm.md
+Removing pages.ru/common/pgmoil.md
+Removing pages.ru/common/pnmdepth.md
+Removing pages.ru/common/pnmscale.md
+Removing pages.ru/common/pnmtoplainpnm.md
+Removing pages.ru/common/pnmtopnm.md
+Removing pages.ru/common/pnmtotiff.md
+Removing pages.ru/common/powershell.md
+Removing pages.ru/common/ppmquant.md
+Removing pages.ru/common/ppmtotga.md
+Removing pages.ru/common/ppmtowinicon.md
+Removing pages.ru/common/ps-nvm.md
+Removing pages.ru/common/unzstd.md
+Removing pages.ru/common/winicontoppm.md
+Removing pages.ru/common/xzegrep.md
+Removing pages.ru/common/xzfgrep.md
+Removing pages.ru/common/ykman.md
+Removing pages.ru/common/zstdcat.md
+Removing pages.ru/common/zstdmt.md
+Removing pages.ru/linux/apx.md
+Removing pages.ru/linux/distrobox.md
+Removing pages.ru/linux/ip6tables-restore.md
+Removing pages.ru/linux/ip6tables-save.md
+Removing pages.ru/linux/ip6tables.md
+Removing pages.ru/linux/mount.smb3.md
+Removing pages.ru/linux/nmcli.md
+Removing pages.ru/linux/nmtui-connect.md
+Removing pages.ru/linux/nmtui-edit.md
+Removing pages.ru/linux/nmtui-hostname.md
+Removing pages.ru/linux/pkgctl.md
+Removing pages.ru/linux/qm-import-disk.md
+Removing pages.ru/linux/qm-move-disk.md
+Removing pages.ru/linux/qm-move_disk.md
+Removing pages.ru/linux/qm-resize.md
+Removing pages.ru/linux/shntool-split.md
+Removing pages.ru/linux/systemd-confext.md
+Removing pages.ru/linux/systemd-resolve.md
+Removing pages.ru/linux/systemd-umount.md
+Removing pages.ru/linux/xbps.md
+Removing pages.ru/openbsd/
+Removing pages.ru/osx/llvm-lipo.md
+Removing pages.ru/windows/chdir.md
+Removing pages.ru/windows/clear.md
+Removing pages.ru/windows/cls.md
+Removing pages.ru/windows/del.md
+Removing pages.ru/windows/gal.md
+Removing pages.ru/windows/gl.md
+Removing pages.ru/windows/mi.md
+Removing pages.ru/windows/move.md
+Removing pages.ru/windows/mv.md
+Removing pages.ru/windows/ni.md
+Removing pages.ru/windows/pwd.md
+Removing pages.ru/windows/ri.md
+Removing pages.ru/windows/rm.md
+Removing pages.ru/windows/rmdir.md
+Removing pages.ru/windows/sc-config.md
+Removing pages.ru/windows/sc-create.md
+Removing pages.ru/windows/sc-delete.md
+Removing pages.ru/windows/sc-query.md
+Removing pages.ru/windows/sl.md
+Removing pages.ru/windows/slmgr.md
+Removing pages.sr/common/azure-cli.md
+Removing pages.sr/common/bundler.md
+Removing pages.sr/common/clamav.md
+Removing pages.sr/common/clang-cpp.md
+Removing pages.sr/common/clojure.md
+Removing pages.sr/common/cola.md
+Removing pages.sr/common/cron.md
+Removing pages.sr/common/docker-container-diff.md
+Removing pages.sr/common/docker-container-remove.md
+Removing pages.sr/common/docker-container-rename.md
+Removing pages.sr/common/docker-container-rm.md
+Removing pages.sr/common/docker-container-top.md
+Removing pages.sr/common/fossil-ci.md
+Removing pages.sr/common/fossil-delete.md
+Removing pages.sr/common/fossil-forget.md
+Removing pages.sr/common/fossil-new.md
+Removing pages.sr/common/gemtopbm.md
+Removing pages.sr/common/gh-cs.md
+Removing pages.sr/common/git-stage.md
+Removing pages.sr/common/gnmic-sub.md
+Removing pages.sr/common/google-chrome.md
+Removing pages.sr/common/hd.md
+Removing pages.sr/common/hping.md
+Removing pages.sr/common/hx.md
+Removing pages.sr/common/just.md
+Removing pages.sr/common/kafkacat.md
+Removing pages.sr/common/lima.md
+Removing pages.sr/common/linode-cli.md
+Removing pages.sr/common/llvm-ar.md
+Removing pages.sr/common/llvm-g++.md
+Removing pages.sr/common/llvm-gcc.md
+Removing pages.sr/common/llvm-nm.md
+Removing pages.sr/common/llvm-objdump.md
+Removing pages.sr/common/llvm-strings.md
+Removing pages.sr/common/lzcat.md
+Removing pages.sr/common/lzcmp.md
+Removing pages.sr/common/lzegrep.md
+Removing pages.sr/common/lzfgrep.md
+Removing pages.sr/common/lzgrep.md
+Removing pages.sr/common/lzless.md
+Removing pages.sr/common/lzma.md
+Removing pages.sr/common/lzmore.md
+Removing pages.sr/common/mscore.md
+Removing pages.sr/common/musl-gcc.md
+Removing pages.sr/common/netcat.md
+Removing pages.sr/common/nm-classic.md
+Removing pages.sr/common/ntl.md
+Removing pages.sr/common/open.md
+Removing pages.sr/common/pamnoraw.md
+Removing pages.sr/common/pbmtox10bm.md
+Removing pages.sr/common/pgmoil.md
+Removing pages.sr/common/pio-init.md
+Removing pages.sr/common/piodebuggdb.md
+Removing pages.sr/common/platformio.md
+Removing pages.sr/common/pnmdepth.md
+Removing pages.sr/common/pnmscale.md
+Removing pages.sr/common/pnmtoplainpnm.md
+Removing pages.sr/common/pnmtopnm.md
+Removing pages.sr/common/pnmtotiff.md
+Removing pages.sr/common/powershell.md
+Removing pages.sr/common/ppmquant.md
+Removing pages.sr/common/ppmtotga.md
+Removing pages.sr/common/ppmtowinicon.md
+Removing pages.sr/common/ps-nvm.md
+Removing pages.sr/common/ptpython3.md
+Removing pages.sr/common/python3.md
+Removing pages.sr/common/r2.md
+Removing pages.sr/common/rcat.md
+Removing pages.sr/common/ripgrep.md
+Removing pages.sr/common/tldrl.md
+Removing pages.sr/common/tlmgr-arch.md
+Removing pages.sr/common/todoman.md
+Removing pages.sr/common/transmission.md
+Removing pages.sr/common/unlzma.md
+Removing pages.sr/common/unxz.md
+Removing pages.sr/common/unzstd.md
+Removing pages.sr/common/vi.md
+Removing pages.sr/common/winicontoppm.md
+Removing pages.sr/common/xzcat.md
+Removing pages.sr/common/xzegrep.md
+Removing pages.sr/common/xzfgrep.md
+Removing pages.sr/common/ykman.md
+Removing pages.sr/common/zstdcat.md
+Removing pages.sr/common/zstdmt.md
+Removing pages.sr/linux/
+Removing pages.sr/openbsd/
+Removing pages.sr/osx/
+Removing pages.sr/windows/
+Removing pages.sv/common/azure-cli.md
+Removing pages.sv/common/docker-container-diff.md
+Removing pages.sv/common/docker-container-remove.md
+Removing pages.sv/common/docker-container-rename.md
+Removing pages.sv/common/docker-container-rm.md
+Removing pages.sv/common/docker-container-top.md
+Removing pages.sv/common/gemtopbm.md
+Removing pages.sv/common/git-stage.md
+Removing pages.sv/common/hd.md
+Removing pages.sv/common/hping.md
+Removing pages.sv/common/just.md
+Removing pages.sv/common/lima.md
+Removing pages.sv/common/linode-cli.md
+Removing pages.sv/common/lzcmp.md
+Removing pages.sv/common/lzegrep.md
+Removing pages.sv/common/lzfgrep.md
+Removing pages.sv/common/lzgrep.md
+Removing pages.sv/common/lzless.md
+Removing pages.sv/common/lzmore.md
+Removing pages.sv/common/musl-gcc.md
+Removing pages.sv/common/netcat.md
+Removing pages.sv/common/open.md
+Removing pages.sv/common/pamnoraw.md
+Removing pages.sv/common/pbmtox10bm.md
+Removing pages.sv/common/pgmoil.md
+Removing pages.sv/common/pnmdepth.md
+Removing pages.sv/common/pnmscale.md
+Removing pages.sv/common/pnmtoplainpnm.md
+Removing pages.sv/common/pnmtopnm.md
+Removing pages.sv/common/pnmtotiff.md
+Removing pages.sv/common/powershell.md
+Removing pages.sv/common/ppmquant.md
+Removing pages.sv/common/ppmtotga.md
+Removing pages.sv/common/ppmtowinicon.md
+Removing pages.sv/common/ps-nvm.md
+Removing pages.sv/common/unzstd.md
+Removing pages.sv/common/winicontoppm.md
+Removing pages.sv/common/xzegrep.md
+Removing pages.sv/common/xzfgrep.md
+Removing pages.sv/common/ykman.md
+Removing pages.sv/common/zstdcat.md
+Removing pages.sv/common/zstdmt.md
+Removing pages.sv/linux/apx.md
+Removing pages.sv/linux/distrobox.md
+Removing pages.sv/linux/ip6tables-restore.md
+Removing pages.sv/linux/ip6tables-save.md
+Removing pages.sv/linux/ip6tables.md
+Removing pages.sv/linux/mount.smb3.md
+Removing pages.sv/linux/nmcli.md
+Removing pages.sv/linux/nmtui-connect.md
+Removing pages.sv/linux/nmtui-edit.md
+Removing pages.sv/linux/nmtui-hostname.md
+Removing pages.sv/linux/pkgctl.md
+Removing pages.sv/linux/qm-import-disk.md
+Removing pages.sv/linux/qm-move-disk.md
+Removing pages.sv/linux/qm-move_disk.md
+Removing pages.sv/linux/qm-resize.md
+Removing pages.sv/linux/shntool-split.md
+Removing pages.sv/linux/systemd-confext.md
+Removing pages.sv/linux/systemd-resolve.md
+Removing pages.sv/linux/systemd-umount.md
+Removing pages.sv/linux/xbps.md
+Removing pages.sv/openbsd/
+Removing pages.sv/osx/llvm-lipo.md
+Removing pages.sv/windows/cd.md
+Removing pages.sv/windows/chdir.md
+Removing pages.sv/windows/clear.md
+Removing pages.sv/windows/cls.md
+Removing pages.sv/windows/del.md
+Removing pages.sv/windows/gal.md
+Removing pages.sv/windows/gl.md
+Removing pages.sv/windows/mi.md
+Removing pages.sv/windows/move.md
+Removing pages.sv/windows/mv.md
+Removing pages.sv/windows/ni.md
+Removing pages.sv/windows/pwd.md
+Removing pages.sv/windows/ri.md
+Removing pages.sv/windows/rm.md
+Removing pages.sv/windows/rmdir.md
+Removing pages.sv/windows/sc-config.md
+Removing pages.sv/windows/sc-create.md
+Removing pages.sv/windows/sc-delete.md
+Removing pages.sv/windows/sc-query.md
+Removing pages.sv/windows/sl.md
+Removing pages.sv/windows/slmgr.md
+Removing pages.ta/common/azure-cli.md
+Removing pages.ta/common/docker-container-diff.md
+Removing pages.ta/common/docker-container-remove.md
+Removing pages.ta/common/docker-container-rename.md
+Removing pages.ta/common/docker-container-rm.md
+Removing pages.ta/common/docker-container-top.md
+Removing pages.ta/common/gemtopbm.md
+Removing pages.ta/common/git-stage.md
+Removing pages.ta/common/hd.md
+Removing pages.ta/common/hping.md
+Removing pages.ta/common/just.md
+Removing pages.ta/common/lima.md
+Removing pages.ta/common/linode-cli.md
+Removing pages.ta/common/lzcmp.md
+Removing pages.ta/common/lzegrep.md
+Removing pages.ta/common/lzfgrep.md
+Removing pages.ta/common/lzgrep.md
+Removing pages.ta/common/lzless.md
+Removing pages.ta/common/lzmore.md
+Removing pages.ta/common/musl-gcc.md
+Removing pages.ta/common/netcat.md
+Removing pages.ta/common/open.md
+Removing pages.ta/common/pamnoraw.md
+Removing pages.ta/common/pbmtox10bm.md
+Removing pages.ta/common/pgmoil.md
+Removing pages.ta/common/pnmdepth.md
+Removing pages.ta/common/pnmscale.md
+Removing pages.ta/common/pnmtoplainpnm.md
+Removing pages.ta/common/pnmtopnm.md
+Removing pages.ta/common/pnmtotiff.md
+Removing pages.ta/common/ppmquant.md
+Removing pages.ta/common/ppmtotga.md
+Removing pages.ta/common/ppmtowinicon.md
+Removing pages.ta/common/ps-nvm.md
+Removing pages.ta/common/unzstd.md
+Removing pages.ta/common/winicontoppm.md
+Removing pages.ta/common/xzegrep.md
+Removing pages.ta/common/xzfgrep.md
+Removing pages.ta/common/ykman.md
+Removing pages.ta/common/zstdcat.md
+Removing pages.ta/common/zstdmt.md
+Removing pages.ta/linux/distrobox.md
+Removing pages.ta/linux/ip6tables-restore.md
+Removing pages.ta/linux/ip6tables-save.md
+Removing pages.ta/linux/ip6tables.md
+Removing pages.ta/linux/mount.smb3.md
+Removing pages.ta/linux/nmcli.md
+Removing pages.ta/linux/nmtui-connect.md
+Removing pages.ta/linux/nmtui-edit.md
+Removing pages.ta/linux/nmtui-hostname.md
+Removing pages.ta/linux/pkgctl.md
+Removing pages.ta/linux/qm-import-disk.md
+Removing pages.ta/linux/qm-move-disk.md
+Removing pages.ta/linux/qm-move_disk.md
+Removing pages.ta/linux/qm-resize.md
+Removing pages.ta/linux/shntool-split.md
+Removing pages.ta/linux/systemd-confext.md
+Removing pages.ta/linux/systemd-resolve.md
+Removing pages.ta/linux/systemd-umount.md
+Removing pages.ta/linux/xbps.md
+Removing pages.ta/openbsd/
+Removing pages.ta/osx/llvm-lipo.md
+Removing pages.ta/windows/chdir.md
+Removing pages.ta/windows/clear.md
+Removing pages.ta/windows/gal.md
+Removing pages.ta/windows/gl.md
+Removing pages.ta/windows/mi.md
+Removing pages.ta/windows/move.md
+Removing pages.ta/windows/mv.md
+Removing pages.ta/windows/ni.md
+Removing pages.ta/windows/pwd.md
+Removing pages.ta/windows/ri.md
+Removing pages.ta/windows/rm.md
+Removing pages.ta/windows/sc-config.md
+Removing pages.ta/windows/sc-create.md
+Removing pages.ta/windows/sc-delete.md
+Removing pages.ta/windows/sc-query.md
+Removing pages.ta/windows/sl.md
+Removing pages.ta/windows/slmgr.md
+Removing pages.th/common/azure-cli.md
+Removing pages.th/common/docker-container-diff.md
+Removing pages.th/common/docker-container-remove.md
+Removing pages.th/common/docker-container-rename.md
+Removing pages.th/common/docker-container-rm.md
+Removing pages.th/common/docker-container-top.md
+Removing pages.th/common/gemtopbm.md
+Removing pages.th/common/git-stage.md
+Removing pages.th/common/hd.md
+Removing pages.th/common/hping.md
+Removing pages.th/common/just.md
+Removing pages.th/common/lima.md
+Removing pages.th/common/linode-cli.md
+Removing pages.th/common/lzcmp.md
+Removing pages.th/common/lzegrep.md
+Removing pages.th/common/lzfgrep.md
+Removing pages.th/common/lzgrep.md
+Removing pages.th/common/lzless.md
+Removing pages.th/common/lzmore.md
+Removing pages.th/common/musl-gcc.md
+Removing pages.th/common/netcat.md
+Removing pages.th/common/open.md
+Removing pages.th/common/pamnoraw.md
+Removing pages.th/common/pbmtox10bm.md
+Removing pages.th/common/pgmoil.md
+Removing pages.th/common/pnmdepth.md
+Removing pages.th/common/pnmscale.md
+Removing pages.th/common/pnmtoplainpnm.md
+Removing pages.th/common/pnmtopnm.md
+Removing pages.th/common/pnmtotiff.md
+Removing pages.th/common/powershell.md
+Removing pages.th/common/ppmquant.md
+Removing pages.th/common/ppmtotga.md
+Removing pages.th/common/ppmtowinicon.md
+Removing pages.th/common/ps-nvm.md
+Removing pages.th/common/unzstd.md
+Removing pages.th/common/winicontoppm.md
+Removing pages.th/common/xzegrep.md
+Removing pages.th/common/xzfgrep.md
+Removing pages.th/common/ykman.md
+Removing pages.th/common/zstdcat.md
+Removing pages.th/common/zstdmt.md
+Removing pages.th/linux/apx.md
+Removing pages.th/linux/distrobox.md
+Removing pages.th/linux/ip6tables-restore.md
+Removing pages.th/linux/ip6tables-save.md
+Removing pages.th/linux/ip6tables.md
+Removing pages.th/linux/mount.smb3.md
+Removing pages.th/linux/nmcli.md
+Removing pages.th/linux/nmtui-connect.md
+Removing pages.th/linux/nmtui-edit.md
+Removing pages.th/linux/nmtui-hostname.md
+Removing pages.th/linux/pkgctl.md
+Removing pages.th/linux/qm-import-disk.md
+Removing pages.th/linux/qm-move-disk.md
+Removing pages.th/linux/qm-move_disk.md
+Removing pages.th/linux/qm-resize.md
+Removing pages.th/linux/shntool-split.md
+Removing pages.th/linux/systemd-confext.md
+Removing pages.th/linux/systemd-resolve.md
+Removing pages.th/linux/systemd-umount.md
+Removing pages.th/linux/xbps.md
+Removing pages.th/openbsd/
+Removing pages.th/osx/llvm-lipo.md
+Removing pages.th/windows/chdir.md
+Removing pages.th/windows/clear.md
+Removing pages.th/windows/del.md
+Removing pages.th/windows/gal.md
+Removing pages.th/windows/gl.md
+Removing pages.th/windows/mi.md
+Removing pages.th/windows/move.md
+Removing pages.th/windows/mv.md
+Removing pages.th/windows/ni.md
+Removing pages.th/windows/pwd.md
+Removing pages.th/windows/ri.md
+Removing pages.th/windows/rm.md
+Removing pages.th/windows/rmdir.md
+Removing pages.th/windows/sc-config.md
+Removing pages.th/windows/sc-create.md
+Removing pages.th/windows/sc-delete.md
+Removing pages.th/windows/sc-query.md
+Removing pages.th/windows/sl.md
+Removing pages.th/windows/slmgr.md
+Removing pages.tr/common/azure-cli.md
+Removing pages.tr/common/docker-container-diff.md
+Removing pages.tr/common/docker-container-remove.md
+Removing pages.tr/common/docker-container-rename.md
+Removing pages.tr/common/docker-container-rm.md
+Removing pages.tr/common/docker-container-top.md
+Removing pages.tr/common/gemtopbm.md
+Removing pages.tr/common/hd.md
+Removing pages.tr/common/hping.md
+Removing pages.tr/common/just.md
+Removing pages.tr/common/lima.md
+Removing pages.tr/common/linode-cli.md
+Removing pages.tr/common/lzcmp.md
+Removing pages.tr/common/lzegrep.md
+Removing pages.tr/common/lzfgrep.md
+Removing pages.tr/common/lzgrep.md
+Removing pages.tr/common/lzless.md
+Removing pages.tr/common/lzmore.md
+Removing pages.tr/common/musl-gcc.md
+Removing pages.tr/common/netcat.md
+Removing pages.tr/common/open.md
+Removing pages.tr/common/pamnoraw.md
+Removing pages.tr/common/pbmtox10bm.md
+Removing pages.tr/common/pgmoil.md
+Removing pages.tr/common/pnmdepth.md
+Removing pages.tr/common/pnmscale.md
+Removing pages.tr/common/pnmtoplainpnm.md
+Removing pages.tr/common/pnmtopnm.md
+Removing pages.tr/common/pnmtotiff.md
+Removing pages.tr/common/powershell.md
+Removing pages.tr/common/ppmquant.md
+Removing pages.tr/common/ppmtotga.md
+Removing pages.tr/common/ppmtowinicon.md
+Removing pages.tr/common/ps-nvm.md
+Removing pages.tr/common/unzstd.md
+Removing pages.tr/common/winicontoppm.md
+Removing pages.tr/common/xzegrep.md
+Removing pages.tr/common/xzfgrep.md
+Removing pages.tr/common/ykman.md
+Removing pages.tr/common/zstdcat.md
+Removing pages.tr/common/zstdmt.md
+Removing pages.tr/linux/apx.md
+Removing pages.tr/linux/distrobox.md
+Removing pages.tr/linux/ip6tables-restore.md
+Removing pages.tr/linux/ip6tables-save.md
+Removing pages.tr/linux/ip6tables.md
+Removing pages.tr/linux/mount.smb3.md
+Removing pages.tr/linux/nmtui-connect.md
+Removing pages.tr/linux/nmtui-edit.md
+Removing pages.tr/linux/nmtui-hostname.md
+Removing pages.tr/linux/pkgctl.md
+Removing pages.tr/linux/qm-import-disk.md
+Removing pages.tr/linux/qm-move-disk.md
+Removing pages.tr/linux/qm-move_disk.md
+Removing pages.tr/linux/qm-resize.md
+Removing pages.tr/linux/shntool-split.md
+Removing pages.tr/linux/systemd-confext.md
+Removing pages.tr/linux/systemd-resolve.md
+Removing pages.tr/linux/systemd-umount.md
+Removing pages.tr/linux/xbps.md
+Removing pages.tr/openbsd/
+Removing pages.tr/osx/llvm-lipo.md
+Removing pages.tr/windows/cd.md
+Removing pages.tr/windows/chdir.md
+Removing pages.tr/windows/clear.md
+Removing pages.tr/windows/cls.md
+Removing pages.tr/windows/del.md
+Removing pages.tr/windows/gal.md
+Removing pages.tr/windows/gl.md
+Removing pages.tr/windows/mi.md
+Removing pages.tr/windows/move.md
+Removing pages.tr/windows/mv.md
+Removing pages.tr/windows/ni.md
+Removing pages.tr/windows/pwd.md
+Removing pages.tr/windows/ri.md
+Removing pages.tr/windows/rm.md
+Removing pages.tr/windows/rmdir.md
+Removing pages.tr/windows/sc-config.md
+Removing pages.tr/windows/sc-create.md
+Removing pages.tr/windows/sc-delete.md
+Removing pages.tr/windows/sc-query.md
+Removing pages.tr/windows/sl.md
+Removing pages.tr/windows/slmgr.md
+Removing pages.uk/common/azure-cli.md
+Removing pages.uk/common/docker-container-diff.md
+Removing pages.uk/common/docker-container-remove.md
+Removing pages.uk/common/docker-container-rename.md
+Removing pages.uk/common/docker-container-rm.md
+Removing pages.uk/common/docker-container-top.md
+Removing pages.uk/common/gemtopbm.md
+Removing pages.uk/common/git-stage.md
+Removing pages.uk/common/hd.md
+Removing pages.uk/common/hping.md
+Removing pages.uk/common/just.md
+Removing pages.uk/common/lima.md
+Removing pages.uk/common/linode-cli.md
+Removing pages.uk/common/lzcmp.md
+Removing pages.uk/common/lzegrep.md
+Removing pages.uk/common/lzfgrep.md
+Removing pages.uk/common/lzgrep.md
+Removing pages.uk/common/lzless.md
+Removing pages.uk/common/lzmore.md
+Removing pages.uk/common/musl-gcc.md
+Removing pages.uk/common/netcat.md
+Removing pages.uk/common/open.md
+Removing pages.uk/common/pamnoraw.md
+Removing pages.uk/common/pbmtox10bm.md
+Removing pages.uk/common/pgmoil.md
+Removing pages.uk/common/pnmdepth.md
+Removing pages.uk/common/pnmscale.md
+Removing pages.uk/common/pnmtoplainpnm.md
+Removing pages.uk/common/pnmtopnm.md
+Removing pages.uk/common/pnmtotiff.md
+Removing pages.uk/common/powershell.md
+Removing pages.uk/common/ppmquant.md
+Removing pages.uk/common/ppmtotga.md
+Removing pages.uk/common/ppmtowinicon.md
+Removing pages.uk/common/ps-nvm.md
+Removing pages.uk/common/unzstd.md
+Removing pages.uk/common/winicontoppm.md
+Removing pages.uk/common/xzegrep.md
+Removing pages.uk/common/xzfgrep.md
+Removing pages.uk/common/ykman.md
+Removing pages.uk/common/zstdcat.md
+Removing pages.uk/common/zstdmt.md
+Removing pages.uk/linux/apx.md
+Removing pages.uk/linux/distrobox.md
+Removing pages.uk/linux/ip6tables-restore.md
+Removing pages.uk/linux/ip6tables-save.md
+Removing pages.uk/linux/ip6tables.md
+Removing pages.uk/linux/mount.smb3.md
+Removing pages.uk/linux/nmcli.md
+Removing pages.uk/linux/nmtui-connect.md
+Removing pages.uk/linux/nmtui-edit.md
+Removing pages.uk/linux/nmtui-hostname.md
+Removing pages.uk/linux/pkgctl.md
+Removing pages.uk/linux/qm-import-disk.md
+Removing pages.uk/linux/qm-move-disk.md
+Removing pages.uk/linux/qm-move_disk.md
+Removing pages.uk/linux/qm-resize.md
+Removing pages.uk/linux/shntool-split.md
+Removing pages.uk/linux/systemd-confext.md
+Removing pages.uk/linux/systemd-resolve.md
+Removing pages.uk/linux/systemd-umount.md
+Removing pages.uk/linux/xbps.md
+Removing pages.uk/openbsd/
+Removing pages.uk/osx/llvm-lipo.md
+Removing pages.uk/windows/cd.md
+Removing pages.uk/windows/chdir.md
+Removing pages.uk/windows/clear.md
+Removing pages.uk/windows/cls.md
+Removing pages.uk/windows/del.md
+Removing pages.uk/windows/gal.md
+Removing pages.uk/windows/gl.md
+Removing pages.uk/windows/mi.md
+Removing pages.uk/windows/move.md
+Removing pages.uk/windows/mv.md
+Removing pages.uk/windows/ni.md
+Removing pages.uk/windows/pwd.md
+Removing pages.uk/windows/ri.md
+Removing pages.uk/windows/rm.md
+Removing pages.uk/windows/rmdir.md
+Removing pages.uk/windows/sc-config.md
+Removing pages.uk/windows/sc-create.md
+Removing pages.uk/windows/sc-delete.md
+Removing pages.uk/windows/sc-query.md
+Removing pages.uk/windows/sl.md
+Removing pages.uk/windows/slmgr.md
+Removing pages.uz/common/
+Removing pages.uz/linux/
+Removing pages.uz/openbsd/
+Removing pages.uz/osx/
+Removing pages.uz/windows/
+Removing pages.zh/common/azure-cli.md
+Removing pages.zh/common/docker-container-diff.md
+Removing pages.zh/common/docker-container-remove.md
+Removing pages.zh/common/docker-container-rename.md
+Removing pages.zh/common/docker-container-rm.md
+Removing pages.zh/common/docker-container-top.md
+Removing pages.zh/common/gemtopbm.md
+Removing pages.zh/common/git-stage.md
+Removing pages.zh/common/hd.md
+Removing pages.zh/common/hping.md
+Removing pages.zh/common/just.md
+Removing pages.zh/common/lima.md
+Removing pages.zh/common/linode-cli.md
+Removing pages.zh/common/lzcmp.md
+Removing pages.zh/common/lzegrep.md
+Removing pages.zh/common/lzfgrep.md
+Removing pages.zh/common/lzgrep.md
+Removing pages.zh/common/lzless.md
+Removing pages.zh/common/lzmore.md
+Removing pages.zh/common/musl-gcc.md
+Removing pages.zh/common/netcat.md
+Removing pages.zh/common/open.md
+Removing pages.zh/common/pamnoraw.md
+Removing pages.zh/common/pbmtox10bm.md
+Removing pages.zh/common/pgmoil.md
+Removing pages.zh/common/pnmdepth.md
+Removing pages.zh/common/pnmscale.md
+Removing pages.zh/common/pnmtoplainpnm.md
+Removing pages.zh/common/pnmtopnm.md
+Removing pages.zh/common/pnmtotiff.md
+Removing pages.zh/common/ppmquant.md
+Removing pages.zh/common/ppmtotga.md
+Removing pages.zh/common/ppmtowinicon.md
+Removing pages.zh/common/ps-nvm.md
+Removing pages.zh/common/unzstd.md
+Removing pages.zh/common/winicontoppm.md
+Removing pages.zh/common/xzegrep.md
+Removing pages.zh/common/xzfgrep.md
+Removing pages.zh/common/ykman.md
+Removing pages.zh/common/zstdcat.md
+Removing pages.zh/common/zstdmt.md
+Removing pages.zh/linux/apx.md
+Removing pages.zh/linux/distrobox.md
+Removing pages.zh/linux/ip6tables-restore.md
+Removing pages.zh/linux/ip6tables-save.md
+Removing pages.zh/linux/ip6tables.md
+Removing pages.zh/linux/mount.smb3.md
+Removing pages.zh/linux/nmcli.md
+Removing pages.zh/linux/nmtui-connect.md
+Removing pages.zh/linux/nmtui-edit.md
+Removing pages.zh/linux/nmtui-hostname.md
+Removing pages.zh/linux/pkgctl.md
+Removing pages.zh/linux/qm-import-disk.md
+Removing pages.zh/linux/qm-move-disk.md
+Removing pages.zh/linux/qm-move_disk.md
+Removing pages.zh/linux/qm-resize.md
+Removing pages.zh/linux/shntool-split.md
+Removing pages.zh/linux/systemd-confext.md
+Removing pages.zh/linux/systemd-resolve.md
+Removing pages.zh/linux/systemd-umount.md
+Removing pages.zh/linux/xbps.md
+Removing pages.zh/openbsd/
+Removing pages.zh/osx/llvm-lipo.md
+Removing pages.zh/windows/cd.md
+Removing pages.zh/windows/chdir.md
+Removing pages.zh/windows/clear.md
+Removing pages.zh/windows/gal.md
+Removing pages.zh/windows/gl.md
+Removing pages.zh/windows/mi.md
+Removing pages.zh/windows/move.md
+Removing pages.zh/windows/mv.md
+Removing pages.zh/windows/ni.md
+Removing pages.zh/windows/pwd.md
+Removing pages.zh/windows/ri.md
+Removing pages.zh/windows/rm.md
+Removing pages.zh/windows/sc-config.md
+Removing pages.zh/windows/sc-create.md
+Removing pages.zh/windows/sc-delete.md
+Removing pages.zh/windows/sc-query.md
+Removing pages.zh/windows/sl.md
+Removing pages.zh/windows/slmgr.md
+Removing pages.zh_TW/common/azure-cli.md
+Removing pages.zh_TW/common/docker-container-diff.md
+Removing pages.zh_TW/common/docker-container-remove.md
+Removing pages.zh_TW/common/docker-container-rename.md
+Removing pages.zh_TW/common/docker-container-rm.md
+Removing pages.zh_TW/common/docker-container-top.md
+Removing pages.zh_TW/common/gemtopbm.md
+Removing pages.zh_TW/common/git-stage.md
+Removing pages.zh_TW/common/hd.md
+Removing pages.zh_TW/common/hping.md
+Removing pages.zh_TW/common/just.md
+Removing pages.zh_TW/common/lima.md
+Removing pages.zh_TW/common/linode-cli.md
+Removing pages.zh_TW/common/lzcmp.md
+Removing pages.zh_TW/common/lzegrep.md
+Removing pages.zh_TW/common/lzfgrep.md
+Removing pages.zh_TW/common/lzgrep.md
+Removing pages.zh_TW/common/lzless.md
+Removing pages.zh_TW/common/lzmore.md
+Removing pages.zh_TW/common/musl-gcc.md
+Removing pages.zh_TW/common/netcat.md
+Removing pages.zh_TW/common/open.md
+Removing pages.zh_TW/common/pamnoraw.md
+Removing pages.zh_TW/common/pbmtox10bm.md
+Removing pages.zh_TW/common/pgmoil.md
+Removing pages.zh_TW/common/pnmdepth.md
+Removing pages.zh_TW/common/pnmscale.md
+Removing pages.zh_TW/common/pnmtoplainpnm.md
+Removing pages.zh_TW/common/pnmtopnm.md
+Removing pages.zh_TW/common/pnmtotiff.md
+Removing pages.zh_TW/common/powershell.md
+Removing pages.zh_TW/common/ppmquant.md
+Removing pages.zh_TW/common/ppmtotga.md
+Removing pages.zh_TW/common/ppmtowinicon.md
+Removing pages.zh_TW/common/ps-nvm.md
+Removing pages.zh_TW/common/unzstd.md
+Removing pages.zh_TW/common/winicontoppm.md
+Removing pages.zh_TW/common/xzegrep.md
+Removing pages.zh_TW/common/xzfgrep.md
+Removing pages.zh_TW/common/ykman.md
+Removing pages.zh_TW/common/zstdcat.md
+Removing pages.zh_TW/common/zstdmt.md
+Removing pages.zh_TW/linux/apx.md
+Removing pages.zh_TW/linux/distrobox.md
+Removing pages.zh_TW/linux/ip6tables-restore.md
+Removing pages.zh_TW/linux/ip6tables-save.md
+Removing pages.zh_TW/linux/ip6tables.md
+Removing pages.zh_TW/linux/mount.smb3.md
+Removing pages.zh_TW/linux/nmcli.md
+Removing pages.zh_TW/linux/nmtui-connect.md
+Removing pages.zh_TW/linux/nmtui-edit.md
+Removing pages.zh_TW/linux/nmtui-hostname.md
+Removing pages.zh_TW/linux/pkgctl.md
+Removing pages.zh_TW/linux/qm-import-disk.md
+Removing pages.zh_TW/linux/qm-move-disk.md
+Removing pages.zh_TW/linux/qm-move_disk.md
+Removing pages.zh_TW/linux/qm-resize.md
+Removing pages.zh_TW/linux/shntool-split.md
+Removing pages.zh_TW/linux/systemd-confext.md
+Removing pages.zh_TW/linux/systemd-resolve.md
+Removing pages.zh_TW/linux/systemd-umount.md
+Removing pages.zh_TW/linux/xbps.md
+Removing pages.zh_TW/openbsd/
+Removing pages.zh_TW/osx/llvm-lipo.md
+Removing pages.zh_TW/windows/cd.md
+Removing pages.zh_TW/windows/chdir.md
+Removing pages.zh_TW/windows/clear.md
+Removing pages.zh_TW/windows/gal.md
+Removing pages.zh_TW/windows/gl.md
+Removing pages.zh_TW/windows/mi.md
+Removing pages.zh_TW/windows/move.md
+Removing pages.zh_TW/windows/mv.md
+Removing pages.zh_TW/windows/ni.md
+Removing pages.zh_TW/windows/pwd.md
+Removing pages.zh_TW/windows/ri.md
+Removing pages.zh_TW/windows/rm.md
+Removing pages.zh_TW/windows/sc-config.md
+Removing pages.zh_TW/windows/sc-create.md
+Removing pages.zh_TW/windows/sc-delete.md
+Removing pages.zh_TW/windows/sc-query.md
+Removing pages.zh_TW/windows/sl.md
+Removing pages.zh_TW/windows/slmgr.md
 0 malformed more info link page(s) in check-pages/malformed-more-info-link-pages.txt.
 0 missing TLDR page(s) in check-pages/missing-tldr-commands.txt.
 0 misplaced page(s) in check-pages/misplaced-pages.txt.
@@ -5,362 +2991,322 @@
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ar/malformed-more-info-link-ar-pages.txt.
 85 missing alias page(s) in check-pages.ar/missing-ar-alias-pages.txt.
-247 missing TLDR page(s) in check-pages.ar/missing-tldr-ar-commands.txt.
+190 missing TLDR page(s) in check-pages.ar/missing-tldr-ar-commands.txt.
 0 misplaced page(s) in check-pages.ar/misplaced-ar-pages.txt.
-29 outdated page(s) based on number of commands in check-pages.ar/outdated-ar-pages-based-on-command-count.txt.
+8 outdated page(s) based on number of commands in check-pages.ar/outdated-ar-pages-based-on-command-count.txt.
 1 outdated page(s) based on the commands itself in check-pages.ar/outdated-ar-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ar/missing-english-ar-pages.txt.
-4278 missing translated page(s) in check-pages.ar/missing-translated-ar-pages.txt.
+4363 missing translated page(s) in check-pages.ar/missing-translated-ar-pages.txt.
 0 linter error(s) in check-pages.ar/lint-errors-ar.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.bn/malformed-more-info-link-bn-pages.txt.
 286 missing alias page(s) in check-pages.bn/missing-bn-alias-pages.txt.
-242 missing TLDR page(s) in check-pages.bn/missing-tldr-bn-commands.txt.
+3 missing TLDR page(s) in check-pages.bn/missing-tldr-bn-commands.txt.
 0 misplaced page(s) in check-pages.bn/misplaced-bn-pages.txt.
-32 outdated page(s) based on number of commands in check-pages.bn/outdated-bn-pages-based-on-command-count.txt.
+5 outdated page(s) based on number of commands in check-pages.bn/outdated-bn-pages-based-on-command-count.txt.
 3 outdated page(s) based on the commands itself in check-pages.bn/outdated-bn-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.bn/missing-english-bn-pages.txt.
-4238 missing translated page(s) in check-pages.bn/missing-translated-bn-pages.txt.
+4523 missing translated page(s) in check-pages.bn/missing-translated-bn-pages.txt.
 0 linter error(s) in check-pages.bn/lint-errors-bn.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.bs/malformed-more-info-link-bs-pages.txt.
 85 missing alias page(s) in check-pages.bs/missing-bs-alias-pages.txt.
-243 missing TLDR page(s) in check-pages.bs/missing-tldr-bs-commands.txt.
+188 missing TLDR page(s) in check-pages.bs/missing-tldr-bs-commands.txt.
 0 misplaced page(s) in check-pages.bs/misplaced-bs-pages.txt.
-30 outdated page(s) based on number of commands in check-pages.bs/outdated-bs-pages-based-on-command-count.txt.
+9 outdated page(s) based on number of commands in check-pages.bs/outdated-bs-pages-based-on-command-count.txt.
 1 outdated page(s) based on the commands itself in check-pages.bs/outdated-bs-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.bs/missing-english-bs-pages.txt.
-4278 missing translated page(s) in check-pages.bs/missing-translated-bs-pages.txt.
+4363 missing translated page(s) in check-pages.bs/missing-translated-bs-pages.txt.
 0 linter error(s) in check-pages.bs/lint-errors-bs.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ca/malformed-more-info-link-ca-pages.txt.
 85 missing alias page(s) in check-pages.ca/missing-ca-alias-pages.txt.
-244 missing TLDR page(s) in check-pages.ca/missing-tldr-ca-commands.txt.
+189 missing TLDR page(s) in check-pages.ca/missing-tldr-ca-commands.txt.
 0 misplaced page(s) in check-pages.ca/misplaced-ca-pages.txt.
-36 outdated page(s) based on number of commands in check-pages.ca/outdated-ca-pages-based-on-command-count.txt.
+15 outdated page(s) based on number of commands in check-pages.ca/outdated-ca-pages-based-on-command-count.txt.
 9 outdated page(s) based on the commands itself in check-pages.ca/outdated-ca-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ca/missing-english-ca-pages.txt.
-4204 missing translated page(s) in check-pages.ca/missing-translated-ca-pages.txt.
+4289 missing translated page(s) in check-pages.ca/missing-translated-ca-pages.txt.
 0 linter error(s) in check-pages.ca/lint-errors-ca.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed more info link page(s) in check-pages.cs/malformed-more-info-link-cs-pages.txt.
-288 missing alias page(s) in check-pages.cs/missing-cs-alias-pages.txt.
-247 missing TLDR page(s) in check-pages.cs/missing-tldr-cs-commands.txt.
-0 misplaced page(s) in check-pages.cs/misplaced-cs-pages.txt.
-29 outdated page(s) based on number of commands in check-pages.cs/outdated-cs-pages-based-on-command-count.txt.
-0 outdated page(s) based on the commands itself in check-pages.cs/outdated-cs-pages-based-on-command-contents.txt.
-0 missing English page(s) in check-pages.cs/missing-english-cs-pages.txt.
-4288 missing translated page(s) in check-pages.cs/missing-translated-cs-pages.txt.
-0 linter error(s) in check-pages.cs/lint-errors-cs.txt.
+Skipping pages.cs since it only has 2 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.da/malformed-more-info-link-da-pages.txt.
 85 missing alias page(s) in check-pages.da/missing-da-alias-pages.txt.
-245 missing TLDR page(s) in check-pages.da/missing-tldr-da-commands.txt.
+190 missing TLDR page(s) in check-pages.da/missing-tldr-da-commands.txt.
 0 misplaced page(s) in check-pages.da/misplaced-da-pages.txt.
-33 outdated page(s) based on number of commands in check-pages.da/outdated-da-pages-based-on-command-count.txt.
+12 outdated page(s) based on number of commands in check-pages.da/outdated-da-pages-based-on-command-count.txt.
 1 outdated page(s) based on the commands itself in check-pages.da/outdated-da-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.da/missing-english-da-pages.txt.
-4280 missing translated page(s) in check-pages.da/missing-translated-da-pages.txt.
+4365 missing translated page(s) in check-pages.da/missing-translated-da-pages.txt.
 0 linter error(s) in check-pages.da/lint-errors-da.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.de/malformed-more-info-link-de-pages.txt.
 85 missing alias page(s) in check-pages.de/missing-de-alias-pages.txt.
-208 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
+154 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-68 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+49 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 61 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
-3868 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
+3951 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.es/malformed-more-info-link-es-pages.txt.
 82 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
-209 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
+158 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
-71 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
+53 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 46 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
-3832 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
+3912 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.fa/malformed-more-info-link-fa-pages.txt.
 288 missing alias page(s) in check-pages.fa/missing-fa-alias-pages.txt.
-227 missing TLDR page(s) in check-pages.fa/missing-tldr-fa-commands.txt.
+1 missing TLDR page(s) in check-pages.fa/missing-tldr-fa-commands.txt.
 0 misplaced page(s) in check-pages.fa/misplaced-fa-pages.txt.
-40 outdated page(s) based on number of commands in check-pages.fa/outdated-fa-pages-based-on-command-count.txt.
+12 outdated page(s) based on number of commands in check-pages.fa/outdated-fa-pages-based-on-command-count.txt.
 2 outdated page(s) based on the commands itself in check-pages.fa/outdated-fa-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.fa/missing-english-fa-pages.txt.
-4231 missing translated page(s) in check-pages.fa/missing-translated-fa-pages.txt.
+4518 missing translated page(s) in check-pages.fa/missing-translated-fa-pages.txt.
 0 linter error(s) in check-pages.fa/lint-errors-fa.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed more info link page(s) in check-pages.fi/malformed-more-info-link-fi-pages.txt.
-288 missing alias page(s) in check-pages.fi/missing-fi-alias-pages.txt.
-247 missing TLDR page(s) in check-pages.fi/missing-tldr-fi-commands.txt.
-0 misplaced page(s) in check-pages.fi/misplaced-fi-pages.txt.
-29 outdated page(s) based on number of commands in check-pages.fi/outdated-fi-pages-based-on-command-count.txt.
-0 outdated page(s) based on the commands itself in check-pages.fi/outdated-fi-pages-based-on-command-contents.txt.
-0 missing English page(s) in check-pages.fi/missing-english-fi-pages.txt.
-4288 missing translated page(s) in check-pages.fi/missing-translated-fi-pages.txt.
-0 linter error(s) in check-pages.fi/lint-errors-fi.txt.
+Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.fr/malformed-more-info-link-fr-pages.txt.
 84 missing alias page(s) in check-pages.fr/missing-fr-alias-pages.txt.
-201 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
+153 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
-77 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
+57 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
 41 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
-3861 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
+3943 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
 0 linter error(s) in check-pages.fr/lint-errors-fr.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.hi/malformed-more-info-link-hi-pages.txt.
 85 missing alias page(s) in check-pages.hi/missing-hi-alias-pages.txt.
-233 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
+176 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
 0 misplaced page(s) in check-pages.hi/misplaced-hi-pages.txt.
-41 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
+21 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.hi/outdated-hi-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.hi/missing-english-hi-pages.txt.
-4176 missing translated page(s) in check-pages.hi/missing-translated-hi-pages.txt.
+4260 missing translated page(s) in check-pages.hi/missing-translated-hi-pages.txt.
 0 linter error(s) in check-pages.hi/lint-errors-hi.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.id/malformed-more-info-link-id-pages.txt.
 80 missing alias page(s) in check-pages.id/missing-id-alias-pages.txt.
-222 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
+169 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
-44 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
+28 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
 22 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
-4087 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
+4166 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
 0 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.it/malformed-more-info-link-it-pages.txt.
 85 missing alias page(s) in check-pages.it/missing-it-alias-pages.txt.
-196 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
+147 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
-136 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
+119 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
 45 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.it/missing-english-it-pages.txt.
-3866 missing translated page(s) in check-pages.it/missing-translated-it-pages.txt.
+3946 missing translated page(s) in check-pages.it/missing-translated-it-pages.txt.
 0 linter error(s) in check-pages.it/lint-errors-it.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ja/malformed-more-info-link-ja-pages.txt.
 85 missing alias page(s) in check-pages.ja/missing-ja-alias-pages.txt.
-234 missing TLDR page(s) in check-pages.ja/missing-tldr-ja-commands.txt.
+180 missing TLDR page(s) in check-pages.ja/missing-tldr-ja-commands.txt.
 0 misplaced page(s) in check-pages.ja/misplaced-ja-pages.txt.
-43 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
+24 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
 12 outdated page(s) based on the commands itself in check-pages.ja/outdated-ja-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ja/missing-english-ja-pages.txt.
-4220 missing translated page(s) in check-pages.ja/missing-translated-ja-pages.txt.
+4303 missing translated page(s) in check-pages.ja/missing-translated-ja-pages.txt.
 0 linter error(s) in check-pages.ja/lint-errors-ja.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ko/malformed-more-info-link-ko-pages.txt.
 85 missing alias page(s) in check-pages.ko/missing-ko-alias-pages.txt.
-201 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
+148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
-80 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
+59 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
 24 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
-3961 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
+4046 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.lo/malformed-more-info-link-lo-pages.txt.
 85 missing alias page(s) in check-pages.lo/missing-lo-alias-pages.txt.
-247 missing TLDR page(s) in check-pages.lo/missing-tldr-lo-commands.txt.
+192 missing TLDR page(s) in check-pages.lo/missing-tldr-lo-commands.txt.
 0 misplaced page(s) in check-pages.lo/misplaced-lo-pages.txt.
-30 outdated page(s) based on number of commands in check-pages.lo/outdated-lo-pages-based-on-command-count.txt.
+10 outdated page(s) based on number of commands in check-pages.lo/outdated-lo-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.lo/outdated-lo-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.lo/missing-english-lo-pages.txt.
-4285 missing translated page(s) in check-pages.lo/missing-translated-lo-pages.txt.
+4369 missing translated page(s) in check-pages.lo/missing-translated-lo-pages.txt.
 0 linter error(s) in check-pages.lo/lint-errors-lo.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ml/malformed-more-info-link-ml-pages.txt.
 85 missing alias page(s) in check-pages.ml/missing-ml-alias-pages.txt.
-242 missing TLDR page(s) in check-pages.ml/missing-tldr-ml-commands.txt.
+188 missing TLDR page(s) in check-pages.ml/missing-tldr-ml-commands.txt.
 0 misplaced page(s) in check-pages.ml/misplaced-ml-pages.txt.
-33 outdated page(s) based on number of commands in check-pages.ml/outdated-ml-pages-based-on-command-count.txt.
+13 outdated page(s) based on number of commands in check-pages.ml/outdated-ml-pages-based-on-command-count.txt.
 2 outdated page(s) based on the commands itself in check-pages.ml/outdated-ml-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ml/missing-english-ml-pages.txt.
-4268 missing translated page(s) in check-pages.ml/missing-translated-ml-pages.txt.
+4352 missing translated page(s) in check-pages.ml/missing-translated-ml-pages.txt.
 0 linter error(s) in check-pages.ml/lint-errors-ml.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ne/malformed-more-info-link-ne-pages.txt.
 85 missing alias page(s) in check-pages.ne/missing-ne-alias-pages.txt.
-244 missing TLDR page(s) in check-pages.ne/missing-tldr-ne-commands.txt.
+189 missing TLDR page(s) in check-pages.ne/missing-tldr-ne-commands.txt.
 0 misplaced page(s) in check-pages.ne/misplaced-ne-pages.txt.
-30 outdated page(s) based on number of commands in check-pages.ne/outdated-ne-pages-based-on-command-count.txt.
+9 outdated page(s) based on number of commands in check-pages.ne/outdated-ne-pages-based-on-command-count.txt.
 3 outdated page(s) based on the commands itself in check-pages.ne/outdated-ne-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ne/missing-english-ne-pages.txt.
-4276 missing translated page(s) in check-pages.ne/missing-translated-ne-pages.txt.
+4361 missing translated page(s) in check-pages.ne/missing-translated-ne-pages.txt.
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.nl/malformed-more-info-link-nl-pages.txt.
-3 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
-129 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+1 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
+121 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
-1 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
+0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-3991 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+3985 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.no/malformed-more-info-link-no-pages.txt.
 85 missing alias page(s) in check-pages.no/missing-no-alias-pages.txt.
-241 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
+186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
 0 misplaced page(s) in check-pages.no/misplaced-no-pages.txt.
-30 outdated page(s) based on number of commands in check-pages.no/outdated-no-pages-based-on-command-count.txt.
+9 outdated page(s) based on number of commands in check-pages.no/outdated-no-pages-based-on-command-count.txt.
 2 outdated page(s) based on the commands itself in check-pages.no/outdated-no-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.no/missing-english-no-pages.txt.
-4270 missing translated page(s) in check-pages.no/missing-translated-no-pages.txt.
+4355 missing translated page(s) in check-pages.no/missing-translated-no-pages.txt.
 0 linter error(s) in check-pages.no/lint-errors-no.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.pl/malformed-more-info-link-pl-pages.txt.
 57 missing alias page(s) in check-pages.pl/missing-pl-alias-pages.txt.
-233 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
+199 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
-44 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
+27 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
 14 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
-4095 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
+4152 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.pt_BR/malformed-more-info-link-pt_BR-pages.txt.
 84 missing alias page(s) in check-pages.pt_BR/missing-pt_BR-alias-pages.txt.
-196 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
+143 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
-81 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
+63 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
 44 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_BR/missing-english-pt_BR-pages.txt.
-3734 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
+3816 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
 0 linter error(s) in check-pages.pt_BR/lint-errors-pt_BR.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.pt_PT/malformed-more-info-link-pt_PT-pages.txt.
 85 missing alias page(s) in check-pages.pt_PT/missing-pt_PT-alias-pages.txt.
-244 missing TLDR page(s) in check-pages.pt_PT/missing-tldr-pt_PT-commands.txt.
+189 missing TLDR page(s) in check-pages.pt_PT/missing-tldr-pt_PT-commands.txt.
 0 misplaced page(s) in check-pages.pt_PT/misplaced-pt_PT-pages.txt.
-39 outdated page(s) based on number of commands in check-pages.pt_PT/outdated-pt_PT-pages-based-on-command-count.txt.
+18 outdated page(s) based on number of commands in check-pages.pt_PT/outdated-pt_PT-pages-based-on-command-count.txt.
 9 outdated page(s) based on the commands itself in check-pages.pt_PT/outdated-pt_PT-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_PT/missing-english-pt_PT-pages.txt.
-4238 missing translated page(s) in check-pages.pt_PT/missing-translated-pt_PT-pages.txt.
+4323 missing translated page(s) in check-pages.pt_PT/missing-translated-pt_PT-pages.txt.
 0 linter error(s) in check-pages.pt_PT/lint-errors-pt_PT.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed more info link page(s) in check-pages.ro/malformed-more-info-link-ro-pages.txt.
-288 missing alias page(s) in check-pages.ro/missing-ro-alias-pages.txt.
-247 missing TLDR page(s) in check-pages.ro/missing-tldr-ro-commands.txt.
-0 misplaced page(s) in check-pages.ro/misplaced-ro-pages.txt.
-29 outdated page(s) based on number of commands in check-pages.ro/outdated-ro-pages-based-on-command-count.txt.
-0 outdated page(s) based on the commands itself in check-pages.ro/outdated-ro-pages-based-on-command-contents.txt.
-0 missing English page(s) in check-pages.ro/missing-english-ro-pages.txt.
-4288 missing translated page(s) in check-pages.ro/missing-translated-ro-pages.txt.
-0 linter error(s) in check-pages.ro/lint-errors-ro.txt.
+Skipping pages.ro since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ru/malformed-more-info-link-ru-pages.txt.
 85 missing alias page(s) in check-pages.ru/missing-ru-alias-pages.txt.
-229 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
+175 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
-41 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
+21 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
 15 outdated page(s) based on the commands itself in check-pages.ru/outdated-ru-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ru/missing-english-ru-pages.txt.
-4194 missing translated page(s) in check-pages.ru/missing-translated-ru-pages.txt.
+4278 missing translated page(s) in check-pages.ru/missing-translated-ru-pages.txt.
 0 linter error(s) in check-pages.ru/lint-errors-ru.txt.
 ----------------------------------------------------------------------------------------------------
 Skipping pages.sh since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
-0 malformed more info link page(s) in check-pages.sr/malformed-more-info-link-sr-pages.txt.
-288 missing alias page(s) in check-pages.sr/missing-sr-alias-pages.txt.
-244 missing TLDR page(s) in check-pages.sr/missing-tldr-sr-commands.txt.
-0 misplaced page(s) in check-pages.sr/misplaced-sr-pages.txt.
-31 outdated page(s) based on number of commands in check-pages.sr/outdated-sr-pages-based-on-command-count.txt.
-1 outdated page(s) based on the commands itself in check-pages.sr/outdated-sr-pages-based-on-command-contents.txt.
-0 missing English page(s) in check-pages.sr/missing-english-sr-pages.txt.
-4284 missing translated page(s) in check-pages.sr/missing-translated-sr-pages.txt.
-0 linter error(s) in check-pages.sr/lint-errors-sr.txt.
+Skipping pages.sr since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.sv/malformed-more-info-link-sv-pages.txt.
 85 missing alias page(s) in check-pages.sv/missing-sv-alias-pages.txt.
-237 missing TLDR page(s) in check-pages.sv/missing-tldr-sv-commands.txt.
+181 missing TLDR page(s) in check-pages.sv/missing-tldr-sv-commands.txt.
 0 misplaced page(s) in check-pages.sv/misplaced-sv-pages.txt.
-36 outdated page(s) based on number of commands in check-pages.sv/outdated-sv-pages-based-on-command-count.txt.
+15 outdated page(s) based on number of commands in check-pages.sv/outdated-sv-pages-based-on-command-count.txt.
 2 outdated page(s) based on the commands itself in check-pages.sv/outdated-sv-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.sv/missing-english-sv-pages.txt.
-4255 missing translated page(s) in check-pages.sv/missing-translated-sv-pages.txt.
+4340 missing translated page(s) in check-pages.sv/missing-translated-sv-pages.txt.
 0 linter error(s) in check-pages.sv/lint-errors-sv.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ta/malformed-more-info-link-ta-pages.txt.
 79 missing alias page(s) in check-pages.ta/missing-ta-alias-pages.txt.
-234 missing TLDR page(s) in check-pages.ta/missing-tldr-ta-commands.txt.
+183 missing TLDR page(s) in check-pages.ta/missing-tldr-ta-commands.txt.
 0 misplaced page(s) in check-pages.ta/misplaced-ta-pages.txt.
-17 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
+2 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.ta/outdated-ta-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ta/missing-english-ta-pages.txt.
-4118 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
+4197 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
 0 linter error(s) in check-pages.ta/lint-errors-ta.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.th/malformed-more-info-link-th-pages.txt.
 85 missing alias page(s) in check-pages.th/missing-th-alias-pages.txt.
-244 missing TLDR page(s) in check-pages.th/missing-tldr-th-commands.txt.
+190 missing TLDR page(s) in check-pages.th/missing-tldr-th-commands.txt.
 0 misplaced page(s) in check-pages.th/misplaced-th-pages.txt.
-30 outdated page(s) based on number of commands in check-pages.th/outdated-th-pages-based-on-command-count.txt.
+11 outdated page(s) based on number of commands in check-pages.th/outdated-th-pages-based-on-command-count.txt.
 3 outdated page(s) based on the commands itself in check-pages.th/outdated-th-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.th/missing-english-th-pages.txt.
-4270 missing translated page(s) in check-pages.th/missing-translated-th-pages.txt.
+4353 missing translated page(s) in check-pages.th/missing-translated-th-pages.txt.
 0 linter error(s) in check-pages.th/lint-errors-th.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.tr/malformed-more-info-link-tr-pages.txt.
 85 missing alias page(s) in check-pages.tr/missing-tr-alias-pages.txt.
-230 missing TLDR page(s) in check-pages.tr/missing-tldr-tr-commands.txt.
+177 missing TLDR page(s) in check-pages.tr/missing-tldr-tr-commands.txt.
 0 misplaced page(s) in check-pages.tr/misplaced-tr-pages.txt.
-61 outdated page(s) based on number of commands in check-pages.tr/outdated-tr-pages-based-on-command-count.txt.
+41 outdated page(s) based on number of commands in check-pages.tr/outdated-tr-pages-based-on-command-count.txt.
 22 outdated page(s) based on the commands itself in check-pages.tr/outdated-tr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.tr/missing-english-tr-pages.txt.
-4050 missing translated page(s) in check-pages.tr/missing-translated-tr-pages.txt.
+4133 missing translated page(s) in check-pages.tr/missing-translated-tr-pages.txt.
 0 linter error(s) in check-pages.tr/lint-errors-tr.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.uk/malformed-more-info-link-uk-pages.txt.
 85 missing alias page(s) in check-pages.uk/missing-uk-alias-pages.txt.
-243 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
+189 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
 0 misplaced page(s) in check-pages.uk/misplaced-uk-pages.txt.
-33 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
+12 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
 4 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.uk/missing-english-uk-pages.txt.
-4238 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
+4323 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
 0 linter error(s) in check-pages.uk/lint-errors-uk.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed more info link page(s) in check-pages.uz/malformed-more-info-link-uz-pages.txt.
-288 missing alias page(s) in check-pages.uz/missing-uz-alias-pages.txt.
-247 missing TLDR page(s) in check-pages.uz/missing-tldr-uz-commands.txt.
-0 misplaced page(s) in check-pages.uz/misplaced-uz-pages.txt.
-29 outdated page(s) based on number of commands in check-pages.uz/outdated-uz-pages-based-on-command-count.txt.
-0 outdated page(s) based on the commands itself in check-pages.uz/outdated-uz-pages-based-on-command-contents.txt.
-0 missing English page(s) in check-pages.uz/missing-english-uz-pages.txt.
-4283 missing translated page(s) in check-pages.uz/missing-translated-uz-pages.txt.
-2 linter error(s) in check-pages.uz/lint-errors-uz.txt.
+Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
 85 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
-194 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
+142 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
-102 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
+85 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 67 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
-3775 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
+3856 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.zh_TW/malformed-more-info-link-zh_TW-pages.txt.
 85 missing alias page(s) in check-pages.zh_TW/missing-zh_TW-alias-pages.txt.
-231 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
+175 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
 0 misplaced page(s) in check-pages.zh_TW/misplaced-zh_TW-pages.txt.
-45 outdated page(s) based on number of commands in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-count.txt.
+27 outdated page(s) based on number of commands in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-count.txt.
 10 outdated page(s) based on the commands itself in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh_TW/missing-english-zh_TW-pages.txt.
-4214 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
+4296 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total malformed more info link page(s): 0/15466 - 0%
-Total missing alias page(s): 4268
-Total missing TLDR commands: 272/360 - 75%
-Total misplaced page(s): 0/15466 - 0%
-Total outdated page(s) based on number of commands: 1560/10889 - 14%
-Total outdated page(s) based on the commands itself: 471/10889 - 4%
-Total missing English page(s): 0/2007 - 0%
-Total missing translated page(s): 145082/164772 - 88%
-Total lint error(s): 2
+Total malformed more info link page(s): 0/15475 - 0%
+Total missing alias page(s): 2826
+Total missing TLDR commands: 240/360 - 66%
+Total misplaced page(s): 0/15475 - 0%
+Total outdated page(s) based on number of commands: 834/10898 - 7%
+Total outdated page(s) based on the commands itself: 470/10898 - 4%
+Total missing English page(s): 0/2014 - 0%
+Total missing translated page(s): 126437/164772 - 76%
+Total lint error(s): 0
