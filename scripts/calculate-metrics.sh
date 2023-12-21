@@ -22,6 +22,7 @@ run_python_script() {
   mv $script_name.log.tmp $script_name.log
   sort -o $script_name.log $script_name.log
   git submodule foreach --recursive git clean -ffdx > /dev/null 2>&1
+  git submodule foreach --recursive git restore . > /dev/null 2>&1
 }
 
 run_python_script "set-more-info-link"
