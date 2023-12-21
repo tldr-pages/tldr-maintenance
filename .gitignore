@@ -13,3 +13,7 @@ npm-debug.log
 
 # check-pages.sh generates these files
 check-pages*/
+
+# calculate-metrics.sh generates these files. Exception made for metrics.log since we want to commit it.
+/*.log
+!metrics.log
