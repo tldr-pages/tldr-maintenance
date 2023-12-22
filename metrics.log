@@ -15,7 +15,7 @@
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.bn/malformed-more-info-link-bn-pages.txt.
 286 missing alias page(s) in check-pages.bn/missing-bn-alias-pages.txt.
-3 missing TLDR page(s) in check-pages.bn/missing-tldr-bn-commands.txt.
+2 missing TLDR page(s) in check-pages.bn/missing-tldr-bn-commands.txt.
 0 misplaced page(s) in check-pages.bn/misplaced-bn-pages.txt.
 5 outdated page(s) based on number of commands in check-pages.bn/outdated-bn-pages-based-on-command-count.txt.
 3 outdated page(s) based on the commands itself in check-pages.bn/outdated-bn-pages-based-on-command-contents.txt.
@@ -57,7 +57,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.de/malformed-more-info-link-de-pages.txt.
 85 missing alias page(s) in check-pages.de/missing-de-alias-pages.txt.
-154 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
+152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
 49 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 61 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
@@ -67,7 +67,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.es/malformed-more-info-link-es-pages.txt.
 82 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
-158 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
+157 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 53 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 46 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
@@ -77,7 +77,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.fa/malformed-more-info-link-fa-pages.txt.
 288 missing alias page(s) in check-pages.fa/missing-fa-alias-pages.txt.
-1 missing TLDR page(s) in check-pages.fa/missing-tldr-fa-commands.txt.
+0 missing TLDR page(s) in check-pages.fa/missing-tldr-fa-commands.txt.
 0 misplaced page(s) in check-pages.fa/misplaced-fa-pages.txt.
 12 outdated page(s) based on number of commands in check-pages.fa/outdated-fa-pages-based-on-command-count.txt.
 2 outdated page(s) based on the commands itself in check-pages.fa/outdated-fa-pages-based-on-command-contents.txt.
@@ -89,17 +89,17 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.fr/malformed-more-info-link-fr-pages.txt.
 84 missing alias page(s) in check-pages.fr/missing-fr-alias-pages.txt.
-153 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
+152 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
 57 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
-41 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
+42 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
 3943 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
 0 linter error(s) in check-pages.fr/lint-errors-fr.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.hi/malformed-more-info-link-hi-pages.txt.
 85 missing alias page(s) in check-pages.hi/missing-hi-alias-pages.txt.
-176 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
+175 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
 0 misplaced page(s) in check-pages.hi/misplaced-hi-pages.txt.
 21 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.hi/outdated-hi-pages-based-on-command-contents.txt.
@@ -109,7 +109,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.id/malformed-more-info-link-id-pages.txt.
 80 missing alias page(s) in check-pages.id/missing-id-alias-pages.txt.
-169 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
+168 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
 28 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
 22 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
@@ -119,17 +119,17 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.it/malformed-more-info-link-it-pages.txt.
 85 missing alias page(s) in check-pages.it/missing-it-alias-pages.txt.
-147 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
+143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
 119 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
-45 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
+46 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.it/missing-english-it-pages.txt.
 3946 missing translated page(s) in check-pages.it/missing-translated-it-pages.txt.
 0 linter error(s) in check-pages.it/lint-errors-it.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ja/malformed-more-info-link-ja-pages.txt.
 85 missing alias page(s) in check-pages.ja/missing-ja-alias-pages.txt.
-180 missing TLDR page(s) in check-pages.ja/missing-tldr-ja-commands.txt.
+178 missing TLDR page(s) in check-pages.ja/missing-tldr-ja-commands.txt.
 0 misplaced page(s) in check-pages.ja/misplaced-ja-pages.txt.
 24 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
 12 outdated page(s) based on the commands itself in check-pages.ja/outdated-ja-pages-based-on-command-contents.txt.
@@ -149,7 +149,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.lo/malformed-more-info-link-lo-pages.txt.
 85 missing alias page(s) in check-pages.lo/missing-lo-alias-pages.txt.
-192 missing TLDR page(s) in check-pages.lo/missing-tldr-lo-commands.txt.
+191 missing TLDR page(s) in check-pages.lo/missing-tldr-lo-commands.txt.
 0 misplaced page(s) in check-pages.lo/misplaced-lo-pages.txt.
 10 outdated page(s) based on number of commands in check-pages.lo/outdated-lo-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.lo/outdated-lo-pages-based-on-command-contents.txt.
@@ -159,7 +159,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ml/malformed-more-info-link-ml-pages.txt.
 85 missing alias page(s) in check-pages.ml/missing-ml-alias-pages.txt.
-188 missing TLDR page(s) in check-pages.ml/missing-tldr-ml-commands.txt.
+187 missing TLDR page(s) in check-pages.ml/missing-tldr-ml-commands.txt.
 0 misplaced page(s) in check-pages.ml/misplaced-ml-pages.txt.
 13 outdated page(s) based on number of commands in check-pages.ml/outdated-ml-pages-based-on-command-count.txt.
 2 outdated page(s) based on the commands itself in check-pages.ml/outdated-ml-pages-based-on-command-contents.txt.
@@ -209,7 +209,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.pt_BR/malformed-more-info-link-pt_BR-pages.txt.
 84 missing alias page(s) in check-pages.pt_BR/missing-pt_BR-alias-pages.txt.
-143 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
+141 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
 63 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
 44 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
@@ -231,7 +231,7 @@ Skipping pages.ro since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.ru/malformed-more-info-link-ru-pages.txt.
 85 missing alias page(s) in check-pages.ru/missing-ru-alias-pages.txt.
-175 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
+174 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
 21 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
 15 outdated page(s) based on the commands itself in check-pages.ru/outdated-ru-pages-based-on-command-contents.txt.
@@ -265,7 +265,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.th/malformed-more-info-link-th-pages.txt.
 85 missing alias page(s) in check-pages.th/missing-th-alias-pages.txt.
-190 missing TLDR page(s) in check-pages.th/missing-tldr-th-commands.txt.
+188 missing TLDR page(s) in check-pages.th/missing-tldr-th-commands.txt.
 0 misplaced page(s) in check-pages.th/misplaced-th-pages.txt.
 11 outdated page(s) based on number of commands in check-pages.th/outdated-th-pages-based-on-command-count.txt.
 3 outdated page(s) based on the commands itself in check-pages.th/outdated-th-pages-based-on-command-contents.txt.
@@ -275,10 +275,10 @@ Skipping pages.sr since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.tr/malformed-more-info-link-tr-pages.txt.
 85 missing alias page(s) in check-pages.tr/missing-tr-alias-pages.txt.
-177 missing TLDR page(s) in check-pages.tr/missing-tldr-tr-commands.txt.
+176 missing TLDR page(s) in check-pages.tr/missing-tldr-tr-commands.txt.
 0 misplaced page(s) in check-pages.tr/misplaced-tr-pages.txt.
 41 outdated page(s) based on number of commands in check-pages.tr/outdated-tr-pages-based-on-command-count.txt.
-22 outdated page(s) based on the commands itself in check-pages.tr/outdated-tr-pages-based-on-command-contents.txt.
+23 outdated page(s) based on the commands itself in check-pages.tr/outdated-tr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.tr/missing-english-tr-pages.txt.
 4133 missing translated page(s) in check-pages.tr/missing-translated-tr-pages.txt.
 0 linter error(s) in check-pages.tr/lint-errors-tr.txt.
@@ -297,7 +297,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
 85 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
-142 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
+139 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
 85 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 67 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
@@ -307,7 +307,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.zh_TW/malformed-more-info-link-zh_TW-pages.txt.
 85 missing alias page(s) in check-pages.zh_TW/missing-zh_TW-alias-pages.txt.
-175 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
+173 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
 0 misplaced page(s) in check-pages.zh_TW/misplaced-zh_TW-pages.txt.
 27 outdated page(s) based on number of commands in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-count.txt.
 10 outdated page(s) based on the commands itself in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-contents.txt.
@@ -317,10 +317,10 @@ Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 Total malformed more info link page(s): 0/15478 - 0%
 Total missing alias page(s): 2825
-Total missing TLDR commands: 240/360 - 66%
+Total missing TLDR commands: 239/360 - 66%
 Total misplaced page(s): 0/15478 - 0%
 Total outdated page(s) based on number of commands: 834/10901 - 7%
-Total outdated page(s) based on the commands itself: 470/10901 - 4%
+Total outdated page(s) based on the commands itself: 473/10901 - 4%
 Total missing English page(s): 0/2017 - 0%
 Total missing translated page(s): 126434/164772 - 76%
 Total lint error(s): 0
