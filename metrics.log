@@ -179,12 +179,12 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.nl/malformed-more-info-link-nl-pages.txt.
 0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
-121 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+117 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-3982 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+3978 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.no/malformed-more-info-link-no-pages.txt.
@@ -302,7 +302,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 85 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 67 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
-3856 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
+3854 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
 ----------------------------------------------------------------------------------------------------
 0 malformed more info link page(s) in check-pages.zh_TW/malformed-more-info-link-zh_TW-pages.txt.
@@ -315,12 +315,12 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4296 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total malformed more info link page(s): 0/15479 - 0%
+Total malformed more info link page(s): 0/15485 - 0%
 Total missing alias page(s): 2825
 Total missing TLDR commands: 239/360 - 66%
-Total misplaced page(s): 0/15479 - 0%
-Total outdated page(s) based on number of commands: 834/10902 - 7%
-Total outdated page(s) based on the commands itself: 473/10902 - 4%
-Total missing English page(s): 0/2018 - 0%
-Total missing translated page(s): 126433/164772 - 76%
+Total misplaced page(s): 0/15485 - 0%
+Total outdated page(s) based on number of commands: 834/10908 - 7%
+Total outdated page(s) based on the commands itself: 473/10908 - 4%
+Total missing English page(s): 0/2022 - 0%
+Total missing translated page(s): 126427/164772 - 76%
 Total lint error(s): 0
