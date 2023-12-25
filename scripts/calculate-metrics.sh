@@ -61,7 +61,7 @@ grep_count_and_display() {
   count_and_display "$output_file" "$message"
 }
 
-grep_count_and_display "pages" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
+grep_count_and_display "pages/" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
 grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
 
 grep "does not exist yet!" ./check-pages/missing-tldr-pages.txt | sed 's/Command referenced in.*$//' > ./check-pages/missing-tldr-commands.txt
@@ -86,7 +86,7 @@ for folder in $folders; do
 
   ./scripts/check-pages.sh -l "$folder_suffix"
 
-  grep_count_and_display "pages.$folder_suffix" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
+  grep_count_and_display "pages.$folder_suffix/" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-more-info-link-$folder_suffix-pages.txt" "malformed more info link page(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-alias-page.txt" "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
 
