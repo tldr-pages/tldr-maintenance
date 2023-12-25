@@ -29,7 +29,7 @@ run_python_script "set-more-info-link"
 run_python_script "set-alias-page"
 
 if [[ "$OSTYPE" != "darwin"* ]]; then
-  (cd tldr && ./scripts/wrong-filename.sh)
+  (cd tldr && ./scripts/wrong-filename.sh && mv ./inconsistent-filenames.txt ../inconsistent-filenames.txt)
 fi
 
 ./scripts/check-pages.sh
