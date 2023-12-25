@@ -17,10 +17,10 @@ EXIT_CODE=0
 run_python_script() {
   local script_name="$1"
 
-  ./tldr/scripts/${script_name}.py -S > $script_name.log
-  sed 's/\x1b\[[0-9;]*m//g' $script_name.log > $script_name.log.tmp
-  mv $script_name.log.tmp $script_name.log
-  sort -o $script_name.log $script_name.log
+  ./tldr/scripts/${script_name}.py -S > $script_name.txt
+  sed 's/\x1b\[[0-9;]*m//g' $script_name.txt > $script_name.txt.tmp
+  mv $script_name.txt.tmp $script_name.txt
+  sort -o $script_name.txt $script_name.txt
   git submodule foreach --recursive git clean -ffdx > /dev/null 2>&1
   git submodule foreach --recursive git restore . > /dev/null 2>&1
 }
@@ -28,22 +28,41 @@ run_python_script() {
 run_python_script "set-more-info-link"
 run_python_script "set-alias-page"
 
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  (cd tldr && ./scripts/wrong-filename.sh)
+fi
+
 ./scripts/check-pages.sh
 
 count_and_display() {
   local file="$1"
+  local message="$2"
   local count
   count=$(wc -l < "$file")
 
-  echo "$count $2 in ${file#./}."
+  echo "$count $message in ${file#./}."
 }
 
 uniqify_file() {
   sort -u "$1" -o "$1"
 }
 
-grep "pages.en/" ./set-more-info-link.log > ./check-pages/malformed-more-info-link-pages.txt
-count_and_display "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
+grep_count_and_display() {
+  local grep_string="$1"
+  local input_file="$2"
+  local output_file="$3"
+  local message="$4"
+
+  if [ ! -e "$input_file" ]; then
+    return
+  fi
+
+  grep "$grep_string" $input_file > $output_file
+  count_and_display $output_file $message
+}
+
+grep_count_and_display "pages" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
+grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
 
 grep "does not exist yet!" ./check-pages/missing-tldr-pages.txt | sed 's/Command referenced in.*$//' > ./check-pages/missing-tldr-commands.txt
 uniqify_file ./check-pages/missing-tldr-commands.txt
@@ -67,11 +86,9 @@ for folder in $folders; do
 
   ./scripts/check-pages.sh -l "$folder_suffix"
 
-  grep "pages.$folder_suffix/" ./set-more-info-link.log > ./check-pages.$folder_suffix/malformed-more-info-link-$folder_suffix-pages.txt
-  count_and_display "./check-pages.$folder_suffix/malformed-more-info-link-$folder_suffix-pages.txt" "malformed more info link page(s)"
-
-  grep "pages.$folder_suffix/" ./set-alias-page.log > ./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt
-  count_and_display "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
+  grep_count_and_display "pages.$folder_suffix" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
+  grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-more-info-link-$folder_suffix-pages.txt" "malformed more info link page(s)"
+  grep_count_and_display "pages.$folder_suffix/" "./set-alias-page.txt" "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
 
   grep "does not exist yet!" ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt | sed 's/Command referenced in.*$//' > ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt
   uniqify_file ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt
@@ -117,6 +134,11 @@ calculate_percentage() {
 calculate_and_display() {
   local files_pattern="$1"
   local output_file="$2"
+
+  if [ ! -e "$output_file" ]; then
+    return
+  fi
+
   local total
   total=$(merge_files_and_calculate_total "$files_pattern" "$output_file")
 
@@ -133,6 +155,7 @@ calculate_and_display() {
   fi
 }
 
+calculate_and_display '*/check-pages*/inconsistent*filenames.txt' "./inconsistent-filenames.txt" "$total_pages" "inconsistent filename(s)"
 calculate_and_display '*/check-pages*/malformed-more-info-link*pages.txt' "./malformed-more-info-link-pages.txt" "$total_pages" "malformed more info link page(s)"
 calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
 calculate_and_display '*/check-pages*/missing-tldr*commands.txt' "./missing-tldr-commands.txt" "$total_tldr_commands" "missing TLDR commands"
