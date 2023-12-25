@@ -58,7 +58,7 @@ grep_count_and_display() {
   fi
 
   grep "$grep_string" $input_file > $output_file
-  count_and_display $output_file $message
+  count_and_display "$output_file" "$message"
 }
 
 grep_count_and_display "pages" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
@@ -134,10 +134,6 @@ calculate_percentage() {
 calculate_and_display() {
   local files_pattern="$1"
   local output_file="$2"
-
-  if [ ! -e "$output_file" ]; then
-    return
-  fi
 
   local total
   total=$(merge_files_and_calculate_total "$files_pattern" "$output_file")
