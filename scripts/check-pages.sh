@@ -14,23 +14,28 @@
 #   A page is marked as missing when the filename can't be found as translated page.
 # - Run the markdownlint and tldr-lint.
 
-# Usage: ./check-pages.sh [-l language_id] [-c check_names]
+# Usage: ./check-pages.sh [-l language_id] [-c check_names] [-v]
 #   - language_id (optional): Specify a language identifier (e.g., 'id', 'fr') to filter results for a specific language.
 #   - check_names (optional): Provide an array splitted by "," to only run specific checks [missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint]
+#   - Adding -v enables verbose logging.
 
 ROOT_DIR="./tldr"
 PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows")
 
 COMMAND_REGEX='^`[^`]\+`$'
 CHECK_NAMES="missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
+VERBOSE=false
 
-while getopts ":l:c:" opt; do
+while getopts ":l:c:v" opt; do
   case "$opt" in
   l)
     LANGUAGE_ID="$OPTARG"
     ;;
   c)
     CHECK_NAMES="$OPTARG"
+    ;;
+  v)
+    VERBOSE=true
     ;;
   *)
     echo "This argument is not valid for this script."
@@ -46,6 +51,14 @@ fi
 
 OUTPUT_DIR="check-pages${LANGUAGE_ID:+.$LANGUAGE_ID}"
 mkdir -p $OUTPUT_DIR
+
+if [ $VERBOSE = true ]; then
+  DEBUG_LOG="$OUTPUT_DIR/debug.log"
+  rm -f $DEBUG_LOG && touch $DEBUG_LOG
+  exec {BASH_XTRACEFD}> "$DEBUG_LOG"
+  export BASH_XTRACEFD
+  set -x
+fi
 
 MISSING_TLDR_OUTPUT_FILE="$OUTPUT_DIR/missing-tldr${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 MISPLACED_OUTPUT_FILE="$OUTPUT_DIR/misplaced${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
