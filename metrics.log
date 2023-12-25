@@ -1,10 +1,10 @@
-0 malformed in check-pages/malformed-more-info-link-pages.txt.
+0 malformed more info link page(s) in check-pages/malformed-more-info-link-pages.txt.
 0 missing TLDR page(s) in check-pages/missing-tldr-commands.txt.
 0 misplaced page(s) in check-pages/misplaced-pages.txt.
 0 linter error(s) in check-pages/lint-errors.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ar/malformed-more-info-link-ar-pages.txt.
-85 missing in check-pages.ar/missing-ar-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ar/malformed-more-info-link-ar-pages.txt.
+85 missing alias page(s) in check-pages.ar/missing-ar-alias-pages.txt.
 190 missing TLDR page(s) in check-pages.ar/missing-tldr-ar-commands.txt.
 0 misplaced page(s) in check-pages.ar/misplaced-ar-pages.txt.
 8 outdated page(s) based on number of commands in check-pages.ar/outdated-ar-pages-based-on-command-count.txt.
@@ -13,8 +13,8 @@
 4363 missing translated page(s) in check-pages.ar/missing-translated-ar-pages.txt.
 0 linter error(s) in check-pages.ar/lint-errors-ar.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.bn/malformed-more-info-link-bn-pages.txt.
-286 missing in check-pages.bn/missing-bn-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.bn/malformed-more-info-link-bn-pages.txt.
+286 missing alias page(s) in check-pages.bn/missing-bn-alias-pages.txt.
 2 missing TLDR page(s) in check-pages.bn/missing-tldr-bn-commands.txt.
 0 misplaced page(s) in check-pages.bn/misplaced-bn-pages.txt.
 5 outdated page(s) based on number of commands in check-pages.bn/outdated-bn-pages-based-on-command-count.txt.
@@ -23,8 +23,8 @@
 4523 missing translated page(s) in check-pages.bn/missing-translated-bn-pages.txt.
 0 linter error(s) in check-pages.bn/lint-errors-bn.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.bs/malformed-more-info-link-bs-pages.txt.
-85 missing in check-pages.bs/missing-bs-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.bs/malformed-more-info-link-bs-pages.txt.
+85 missing alias page(s) in check-pages.bs/missing-bs-alias-pages.txt.
 188 missing TLDR page(s) in check-pages.bs/missing-tldr-bs-commands.txt.
 0 misplaced page(s) in check-pages.bs/misplaced-bs-pages.txt.
 9 outdated page(s) based on number of commands in check-pages.bs/outdated-bs-pages-based-on-command-count.txt.
@@ -33,8 +33,8 @@
 4363 missing translated page(s) in check-pages.bs/missing-translated-bs-pages.txt.
 0 linter error(s) in check-pages.bs/lint-errors-bs.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ca/malformed-more-info-link-ca-pages.txt.
-85 missing in check-pages.ca/missing-ca-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ca/malformed-more-info-link-ca-pages.txt.
+85 missing alias page(s) in check-pages.ca/missing-ca-alias-pages.txt.
 189 missing TLDR page(s) in check-pages.ca/missing-tldr-ca-commands.txt.
 0 misplaced page(s) in check-pages.ca/misplaced-ca-pages.txt.
 15 outdated page(s) based on number of commands in check-pages.ca/outdated-ca-pages-based-on-command-count.txt.
@@ -45,8 +45,8 @@
 ----------------------------------------------------------------------------------------------------
 Skipping pages.cs since it only has 2 supported platform(s).
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.da/malformed-more-info-link-da-pages.txt.
-85 missing in check-pages.da/missing-da-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.da/malformed-more-info-link-da-pages.txt.
+85 missing alias page(s) in check-pages.da/missing-da-alias-pages.txt.
 190 missing TLDR page(s) in check-pages.da/missing-tldr-da-commands.txt.
 0 misplaced page(s) in check-pages.da/misplaced-da-pages.txt.
 12 outdated page(s) based on number of commands in check-pages.da/outdated-da-pages-based-on-command-count.txt.
@@ -55,8 +55,8 @@ Skipping pages.cs since it only has 2 supported platform(s).
 4365 missing translated page(s) in check-pages.da/missing-translated-da-pages.txt.
 0 linter error(s) in check-pages.da/lint-errors-da.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.de/malformed-more-info-link-de-pages.txt.
-85 missing in check-pages.de/missing-de-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.de/malformed-more-info-link-de-pages.txt.
+85 missing alias page(s) in check-pages.de/missing-de-alias-pages.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
 49 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
@@ -65,8 +65,8 @@ Skipping pages.cs since it only has 2 supported platform(s).
 3951 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.es/malformed-more-info-link-es-pages.txt.
-82 missing in check-pages.es/missing-es-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.es/malformed-more-info-link-es-pages.txt.
+82 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
 156 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 49 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
@@ -75,8 +75,8 @@ Skipping pages.cs since it only has 2 supported platform(s).
 3909 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.fa/malformed-more-info-link-fa-pages.txt.
-288 missing in check-pages.fa/missing-fa-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.fa/malformed-more-info-link-fa-pages.txt.
+288 missing alias page(s) in check-pages.fa/missing-fa-alias-pages.txt.
 0 missing TLDR page(s) in check-pages.fa/missing-tldr-fa-commands.txt.
 0 misplaced page(s) in check-pages.fa/misplaced-fa-pages.txt.
 12 outdated page(s) based on number of commands in check-pages.fa/outdated-fa-pages-based-on-command-count.txt.
@@ -87,8 +87,8 @@ Skipping pages.cs since it only has 2 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.fr/malformed-more-info-link-fr-pages.txt.
-84 missing in check-pages.fr/missing-fr-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.fr/malformed-more-info-link-fr-pages.txt.
+84 missing alias page(s) in check-pages.fr/missing-fr-alias-pages.txt.
 152 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
 57 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
@@ -97,8 +97,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 3943 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
 0 linter error(s) in check-pages.fr/lint-errors-fr.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.hi/malformed-more-info-link-hi-pages.txt.
-85 missing in check-pages.hi/missing-hi-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.hi/malformed-more-info-link-hi-pages.txt.
+85 missing alias page(s) in check-pages.hi/missing-hi-alias-pages.txt.
 175 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
 0 misplaced page(s) in check-pages.hi/misplaced-hi-pages.txt.
 21 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
@@ -107,8 +107,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4260 missing translated page(s) in check-pages.hi/missing-translated-hi-pages.txt.
 0 linter error(s) in check-pages.hi/lint-errors-hi.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.id/malformed-more-info-link-id-pages.txt.
-80 missing in check-pages.id/missing-id-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.id/malformed-more-info-link-id-pages.txt.
+80 missing alias page(s) in check-pages.id/missing-id-alias-pages.txt.
 168 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
 28 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
@@ -117,8 +117,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4166 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
 0 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.it/malformed-more-info-link-it-pages.txt.
-85 missing in check-pages.it/missing-it-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.it/malformed-more-info-link-it-pages.txt.
+85 missing alias page(s) in check-pages.it/missing-it-alias-pages.txt.
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
 118 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
@@ -127,8 +127,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 3946 missing translated page(s) in check-pages.it/missing-translated-it-pages.txt.
 0 linter error(s) in check-pages.it/lint-errors-it.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ja/malformed-more-info-link-ja-pages.txt.
-85 missing in check-pages.ja/missing-ja-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ja/malformed-more-info-link-ja-pages.txt.
+85 missing alias page(s) in check-pages.ja/missing-ja-alias-pages.txt.
 178 missing TLDR page(s) in check-pages.ja/missing-tldr-ja-commands.txt.
 0 misplaced page(s) in check-pages.ja/misplaced-ja-pages.txt.
 24 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
@@ -137,8 +137,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4303 missing translated page(s) in check-pages.ja/missing-translated-ja-pages.txt.
 0 linter error(s) in check-pages.ja/lint-errors-ja.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ko/malformed-more-info-link-ko-pages.txt.
-85 missing in check-pages.ko/missing-ko-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ko/malformed-more-info-link-ko-pages.txt.
+85 missing alias page(s) in check-pages.ko/missing-ko-alias-pages.txt.
 148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
 59 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
@@ -147,8 +147,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4046 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.lo/malformed-more-info-link-lo-pages.txt.
-85 missing in check-pages.lo/missing-lo-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.lo/malformed-more-info-link-lo-pages.txt.
+85 missing alias page(s) in check-pages.lo/missing-lo-alias-pages.txt.
 191 missing TLDR page(s) in check-pages.lo/missing-tldr-lo-commands.txt.
 0 misplaced page(s) in check-pages.lo/misplaced-lo-pages.txt.
 10 outdated page(s) based on number of commands in check-pages.lo/outdated-lo-pages-based-on-command-count.txt.
@@ -157,8 +157,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4369 missing translated page(s) in check-pages.lo/missing-translated-lo-pages.txt.
 0 linter error(s) in check-pages.lo/lint-errors-lo.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ml/malformed-more-info-link-ml-pages.txt.
-85 missing in check-pages.ml/missing-ml-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ml/malformed-more-info-link-ml-pages.txt.
+85 missing alias page(s) in check-pages.ml/missing-ml-alias-pages.txt.
 187 missing TLDR page(s) in check-pages.ml/missing-tldr-ml-commands.txt.
 0 misplaced page(s) in check-pages.ml/misplaced-ml-pages.txt.
 13 outdated page(s) based on number of commands in check-pages.ml/outdated-ml-pages-based-on-command-count.txt.
@@ -167,8 +167,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4352 missing translated page(s) in check-pages.ml/missing-translated-ml-pages.txt.
 0 linter error(s) in check-pages.ml/lint-errors-ml.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ne/malformed-more-info-link-ne-pages.txt.
-85 missing in check-pages.ne/missing-ne-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ne/malformed-more-info-link-ne-pages.txt.
+85 missing alias page(s) in check-pages.ne/missing-ne-alias-pages.txt.
 189 missing TLDR page(s) in check-pages.ne/missing-tldr-ne-commands.txt.
 0 misplaced page(s) in check-pages.ne/misplaced-ne-pages.txt.
 9 outdated page(s) based on number of commands in check-pages.ne/outdated-ne-pages-based-on-command-count.txt.
@@ -177,8 +177,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4361 missing translated page(s) in check-pages.ne/missing-translated-ne-pages.txt.
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.nl/malformed-more-info-link-nl-pages.txt.
-0 missing in check-pages.nl/missing-nl-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.nl/malformed-more-info-link-nl-pages.txt.
+0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
 117 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
@@ -187,8 +187,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 3978 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.no/malformed-more-info-link-no-pages.txt.
-85 missing in check-pages.no/missing-no-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.no/malformed-more-info-link-no-pages.txt.
+85 missing alias page(s) in check-pages.no/missing-no-alias-pages.txt.
 186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
 0 misplaced page(s) in check-pages.no/misplaced-no-pages.txt.
 9 outdated page(s) based on number of commands in check-pages.no/outdated-no-pages-based-on-command-count.txt.
@@ -197,8 +197,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4355 missing translated page(s) in check-pages.no/missing-translated-no-pages.txt.
 0 linter error(s) in check-pages.no/lint-errors-no.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.pl/malformed-more-info-link-pl-pages.txt.
-57 missing in check-pages.pl/missing-pl-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.pl/malformed-more-info-link-pl-pages.txt.
+57 missing alias page(s) in check-pages.pl/missing-pl-alias-pages.txt.
 199 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
 27 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
@@ -207,8 +207,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 4152 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.pt_BR/malformed-more-info-link-pt_BR-pages.txt.
-84 missing in check-pages.pt_BR/missing-pt_BR-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.pt_BR/malformed-more-info-link-pt_BR-pages.txt.
+84 missing alias page(s) in check-pages.pt_BR/missing-pt_BR-alias-pages.txt.
 141 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
 63 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
@@ -217,8 +217,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 3816 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
 0 linter error(s) in check-pages.pt_BR/lint-errors-pt_BR.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.pt_PT/malformed-more-info-link-pt_PT-pages.txt.
-85 missing in check-pages.pt_PT/missing-pt_PT-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.pt_PT/malformed-more-info-link-pt_PT-pages.txt.
+85 missing alias page(s) in check-pages.pt_PT/missing-pt_PT-alias-pages.txt.
 189 missing TLDR page(s) in check-pages.pt_PT/missing-tldr-pt_PT-commands.txt.
 0 misplaced page(s) in check-pages.pt_PT/misplaced-pt_PT-pages.txt.
 18 outdated page(s) based on number of commands in check-pages.pt_PT/outdated-pt_PT-pages-based-on-command-count.txt.
@@ -229,8 +229,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 Skipping pages.ro since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ru/malformed-more-info-link-ru-pages.txt.
-85 missing in check-pages.ru/missing-ru-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ru/malformed-more-info-link-ru-pages.txt.
+85 missing alias page(s) in check-pages.ru/missing-ru-alias-pages.txt.
 174 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
 21 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
@@ -243,8 +243,8 @@ Skipping pages.sh since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 Skipping pages.sr since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.sv/malformed-more-info-link-sv-pages.txt.
-85 missing in check-pages.sv/missing-sv-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.sv/malformed-more-info-link-sv-pages.txt.
+85 missing alias page(s) in check-pages.sv/missing-sv-alias-pages.txt.
 181 missing TLDR page(s) in check-pages.sv/missing-tldr-sv-commands.txt.
 0 misplaced page(s) in check-pages.sv/misplaced-sv-pages.txt.
 15 outdated page(s) based on number of commands in check-pages.sv/outdated-sv-pages-based-on-command-count.txt.
@@ -253,8 +253,8 @@ Skipping pages.sr since it only has 1 supported platform(s).
 4340 missing translated page(s) in check-pages.sv/missing-translated-sv-pages.txt.
 0 linter error(s) in check-pages.sv/lint-errors-sv.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.ta/malformed-more-info-link-ta-pages.txt.
-79 missing in check-pages.ta/missing-ta-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.ta/malformed-more-info-link-ta-pages.txt.
+79 missing alias page(s) in check-pages.ta/missing-ta-alias-pages.txt.
 183 missing TLDR page(s) in check-pages.ta/missing-tldr-ta-commands.txt.
 0 misplaced page(s) in check-pages.ta/misplaced-ta-pages.txt.
 2 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
@@ -263,8 +263,8 @@ Skipping pages.sr since it only has 1 supported platform(s).
 4197 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
 0 linter error(s) in check-pages.ta/lint-errors-ta.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.th/malformed-more-info-link-th-pages.txt.
-85 missing in check-pages.th/missing-th-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.th/malformed-more-info-link-th-pages.txt.
+85 missing alias page(s) in check-pages.th/missing-th-alias-pages.txt.
 188 missing TLDR page(s) in check-pages.th/missing-tldr-th-commands.txt.
 0 misplaced page(s) in check-pages.th/misplaced-th-pages.txt.
 11 outdated page(s) based on number of commands in check-pages.th/outdated-th-pages-based-on-command-count.txt.
@@ -273,8 +273,8 @@ Skipping pages.sr since it only has 1 supported platform(s).
 4353 missing translated page(s) in check-pages.th/missing-translated-th-pages.txt.
 0 linter error(s) in check-pages.th/lint-errors-th.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.tr/malformed-more-info-link-tr-pages.txt.
-85 missing in check-pages.tr/missing-tr-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.tr/malformed-more-info-link-tr-pages.txt.
+85 missing alias page(s) in check-pages.tr/missing-tr-alias-pages.txt.
 176 missing TLDR page(s) in check-pages.tr/missing-tldr-tr-commands.txt.
 0 misplaced page(s) in check-pages.tr/misplaced-tr-pages.txt.
 41 outdated page(s) based on number of commands in check-pages.tr/outdated-tr-pages-based-on-command-count.txt.
@@ -283,8 +283,8 @@ Skipping pages.sr since it only has 1 supported platform(s).
 4133 missing translated page(s) in check-pages.tr/missing-translated-tr-pages.txt.
 0 linter error(s) in check-pages.tr/lint-errors-tr.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.uk/malformed-more-info-link-uk-pages.txt.
-85 missing in check-pages.uk/missing-uk-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.uk/malformed-more-info-link-uk-pages.txt.
+85 missing alias page(s) in check-pages.uk/missing-uk-alias-pages.txt.
 189 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
 0 misplaced page(s) in check-pages.uk/misplaced-uk-pages.txt.
 12 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
@@ -295,8 +295,8 @@ Skipping pages.sr since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.zh/malformed-more-info-link-zh-pages.txt.
-85 missing in check-pages.zh/missing-zh-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
+85 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 139 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
 85 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
@@ -305,8 +305,8 @@ Skipping pages.uz since it only has 1 supported platform(s).
 3854 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
 ----------------------------------------------------------------------------------------------------
-0 malformed in check-pages.zh_TW/malformed-more-info-link-zh_TW-pages.txt.
-85 missing in check-pages.zh_TW/missing-zh_TW-alias-pages.txt.
+0 malformed more info link page(s) in check-pages.zh_TW/malformed-more-info-link-zh_TW-pages.txt.
+85 missing alias page(s) in check-pages.zh_TW/missing-zh_TW-alias-pages.txt.
 173 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
 0 misplaced page(s) in check-pages.zh_TW/misplaced-zh_TW-pages.txt.
 27 outdated page(s) based on number of commands in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-count.txt.
@@ -315,3 +315,13 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4296 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
+Total inconsistent filename(s): 0/15487 - 0%
+Total malformed more info link page(s): 0/15487 - 0%
+Total missing alias page(s): 2825
+Total missing TLDR commands: 239/360 - 66%
+Total misplaced page(s): 0/15487 - 0%
+Total outdated page(s) based on number of commands: 829/10910 - 7%
+Total outdated page(s) based on the commands itself: 472/10910 - 4%
+Total missing English page(s): 0/2023 - 0%
+Total missing translated page(s): 126425/164772 - 76%
+Total lint error(s): 0
