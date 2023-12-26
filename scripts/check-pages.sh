@@ -174,8 +174,8 @@ check_outdated_page() {
   english_commands=$(count_commands "$english_file")
   commands=$(count_commands "$file")
   
-  english_commands_as_string=$(stripped_commands "$english_file")
-  commands_as_string=$(stripped_commands "$file")
+  english_commands_as_string=$(strip_commands "$english_file")
+  commands_as_string=$(strip_commands "$file")
 
   if [ $english_commands != $commands ]; then
     echo "$file is outdated (based on number of commands)!" >> "$OUTDATED_OUTPUT_FILE"
