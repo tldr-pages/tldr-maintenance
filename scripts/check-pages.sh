@@ -7,7 +7,7 @@
 # - Check if a page is misplaced. 
 #   A page is marked as misplaced when the page isn’t inside a folder in the list of supported platforms.
 # - Check if a page is outdated. 
-#   A page is marked as outdated when the number of commands differ from the number of commands in the English page.
+#   A page is marked as outdated when the number of commands differ from the number of commands in the English page or the contents of the commands differ from the English page.
 # - Check if a page is missing as English page (n/a for English).
 #   A page is marked as missing when the filename can't be found as English page.
 # - Check if a page is missing in the translation (n/a for English).
