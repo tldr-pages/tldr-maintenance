@@ -115,6 +115,7 @@ strip_commands() {
     grep "$COMMAND_REGEX" "$file" | 
     sed 's/{{[^}]*}}/{{}}/g' | 
     sed 's/<[^>]*>//g' | 
+    sed 's/([^)]*)//g' | 
     sed 's/"[^"]*"/""/g' | 
     sed "s/'[^']*'//g" | 
     sed 's/`//g'
