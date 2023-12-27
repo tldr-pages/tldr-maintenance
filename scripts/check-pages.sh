@@ -7,7 +7,7 @@
 # - Check if a page is misplaced. 
 #   A page is marked as misplaced when the page isn’t inside a folder in the list of supported platforms.
 # - Check if a page is outdated. 
-#   A page is marked as outdated when the number of commands differ from the number of commands in the English page.
+#   A page is marked as outdated when the number of commands differ from the number of commands in the English page or the contents of the commands differ from the English page.
 # - Check if a page is missing as English page (n/a for English).
 #   A page is marked as missing when the filename can't be found as English page.
 # - Check if a page is missing in the translation (n/a for English).
@@ -100,6 +100,29 @@ get_platform() {
   echo "$file" | awk -F/ '{print $(NF-1)}'
 }
 
+count_commands() {
+  local file="$1"
+
+  grep -c "$COMMAND_REGEX" "$file"
+}
+
+strip_commands() {
+  local file="$1"
+
+  local stripped_commands=()
+  
+  mapfile -t stripped_commands < <(
+    grep "$COMMAND_REGEX" "$file" | 
+    sed 's/{{[^}]*}}/{{}}/g' | 
+    sed 's/<[^>]*>//g' | 
+    sed 's/"[^"]*"/""/g' | 
+    sed "s/'[^']*'//g" | 
+    sed 's/`//g'
+  )
+
+  printf "%s\n" "${stripped_commands[*]}"
+}
+
 check_missing_tldr_page() {
   local file="$1"
   
@@ -148,13 +171,11 @@ check_outdated_page() {
 
   local english_commands
   local commands
-  english_commands=$(grep -c $COMMAND_REGEX "$english_file")
-  mapfile -t stripped_english_commands < <(grep $COMMAND_REGEX "$english_file" | sed 's/{{[^}]*}}/{{}}/g' | sed 's/"[^"]*"/""/g' | sed "s/'[^']*'//g" | sed 's/`//g')
-  commands=$(grep -c $COMMAND_REGEX $file)
-  mapfile -t stripped_commands < <(grep $COMMAND_REGEX "$file" | sed 's/{{[^}]*}}/{{}}/g' | sed 's/"[^"]*"/""/g' | sed "s/'[^']*'//g" | sed 's/`//g')
-
-  english_commands_as_string=$(printf "%s\n" "${stripped_english_commands[*]}")
-  commands_as_string=$(printf "%s\n" "${stripped_commands[*]}")
+  english_commands=$(count_commands "$english_file")
+  commands=$(count_commands "$file")
+  
+  english_commands_as_string=$(strip_commands "$english_file")
+  commands_as_string=$(strip_commands "$file")
 
   if [ $english_commands != $commands ]; then
     echo "$file is outdated (based on number of commands)!" >> "$OUTDATED_OUTPUT_FILE"
