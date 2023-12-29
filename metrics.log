@@ -237,7 +237,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 45 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_BR/missing-english-pt_BR-pages.txt.
 3818 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
-1 linter error(s) in check-pages.pt_BR/lint-errors-pt_BR.txt.
+0 linter error(s) in check-pages.pt_BR/lint-errors-pt_BR.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.pt_PT/inconsistent-pt_PT-filenames.txt.
 0 malformed more info link page(s) in check-pages.pt_PT/malformed-more-info-link-pt_PT-pages.txt.
@@ -355,4 +355,4 @@ Total outdated page(s) based on number of commands: 857/10927 - 7%
 Total outdated page(s) based on the commands itself: 310/10927 - 2%
 Total missing English page(s): 0/2029 - 0%
 Total missing translated page(s): 126738/165168 - 76%
-Total lint error(s): 1
+Total lint error(s): 0
