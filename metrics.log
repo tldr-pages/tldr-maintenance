@@ -112,8 +112,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.hi/missing-hi-alias-pages.txt.
 175 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
 0 misplaced page(s) in check-pages.hi/misplaced-hi-pages.txt.
-22 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
-1 outdated page(s) based on the commands itself in check-pages.hi/outdated-hi-pages-based-on-command-contents.txt.
+23 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.hi/outdated-hi-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.hi/missing-english-hi-pages.txt.
 4271 missing translated page(s) in check-pages.hi/missing-translated-hi-pages.txt.
 0 linter error(s) in check-pages.hi/lint-errors-hi.txt.
@@ -123,8 +123,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 81 missing alias page(s) in check-pages.id/missing-id-alias-pages.txt.
 168 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
-30 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
-18 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
+34 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
+1 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
 4177 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
 0 linter error(s) in check-pages.id/lint-errors-id.txt.
@@ -351,8 +351,8 @@ Total malformed more info link page(s): 0/15515 - 0%
 Total missing alias page(s): 2853
 Total missing TLDR commands: 239/366 - 65%
 Total misplaced page(s): 0/15515 - 0%
-Total outdated page(s) based on number of commands: 869/10927 - 7%
-Total outdated page(s) based on the commands itself: 280/10927 - 2%
+Total outdated page(s) based on number of commands: 874/10927 - 7%
+Total outdated page(s) based on the commands itself: 262/10927 - 2%
 Total missing English page(s): 0/2029 - 0%
 Total missing translated page(s): 126738/165168 - 76%
 Total lint error(s): 0
