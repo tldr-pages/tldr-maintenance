@@ -145,8 +145,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.ja/missing-ja-alias-pages.txt.
 178 missing TLDR page(s) in check-pages.ja/missing-tldr-ja-commands.txt.
 0 misplaced page(s) in check-pages.ja/misplaced-ja-pages.txt.
-24 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
-9 outdated page(s) based on the commands itself in check-pages.ja/outdated-ja-pages-based-on-command-contents.txt.
+28 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.ja/outdated-ja-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ja/missing-english-ja-pages.txt.
 4314 missing translated page(s) in check-pages.ja/missing-translated-ja-pages.txt.
 0 linter error(s) in check-pages.ja/lint-errors-ja.txt.
@@ -178,8 +178,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.ml/missing-ml-alias-pages.txt.
 187 missing TLDR page(s) in check-pages.ml/missing-tldr-ml-commands.txt.
 0 misplaced page(s) in check-pages.ml/misplaced-ml-pages.txt.
-13 outdated page(s) based on number of commands in check-pages.ml/outdated-ml-pages-based-on-command-count.txt.
-2 outdated page(s) based on the commands itself in check-pages.ml/outdated-ml-pages-based-on-command-contents.txt.
+15 outdated page(s) based on number of commands in check-pages.ml/outdated-ml-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.ml/outdated-ml-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ml/missing-english-ml-pages.txt.
 4363 missing translated page(s) in check-pages.ml/missing-translated-ml-pages.txt.
 0 linter error(s) in check-pages.ml/lint-errors-ml.txt.
@@ -211,8 +211,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.no/missing-no-alias-pages.txt.
 186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
 0 misplaced page(s) in check-pages.no/misplaced-no-pages.txt.
-9 outdated page(s) based on number of commands in check-pages.no/outdated-no-pages-based-on-command-count.txt.
-1 outdated page(s) based on the commands itself in check-pages.no/outdated-no-pages-based-on-command-contents.txt.
+10 outdated page(s) based on number of commands in check-pages.no/outdated-no-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.no/outdated-no-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.no/missing-english-no-pages.txt.
 4366 missing translated page(s) in check-pages.no/missing-translated-no-pages.txt.
 0 linter error(s) in check-pages.no/lint-errors-no.txt.
@@ -257,8 +257,8 @@ Skipping pages.ro since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.ru/missing-ru-alias-pages.txt.
 174 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
-23 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
-12 outdated page(s) based on the commands itself in check-pages.ru/outdated-ru-pages-based-on-command-contents.txt.
+25 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.ru/outdated-ru-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ru/missing-english-ru-pages.txt.
 4289 missing translated page(s) in check-pages.ru/missing-translated-ru-pages.txt.
 0 linter error(s) in check-pages.ru/lint-errors-ru.txt.
@@ -295,7 +295,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 188 missing TLDR page(s) in check-pages.th/missing-tldr-th-commands.txt.
 0 misplaced page(s) in check-pages.th/misplaced-th-pages.txt.
 11 outdated page(s) based on number of commands in check-pages.th/outdated-th-pages-based-on-command-count.txt.
-3 outdated page(s) based on the commands itself in check-pages.th/outdated-th-pages-based-on-command-contents.txt.
+0 outdated page(s) based on the commands itself in check-pages.th/outdated-th-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.th/missing-english-th-pages.txt.
 4364 missing translated page(s) in check-pages.th/missing-translated-th-pages.txt.
 0 linter error(s) in check-pages.th/lint-errors-th.txt.
@@ -316,8 +316,8 @@ Skipping pages.sr since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.uk/missing-uk-alias-pages.txt.
 189 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
 0 misplaced page(s) in check-pages.uk/misplaced-uk-pages.txt.
-12 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
-3 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
+15 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.uk/missing-english-uk-pages.txt.
 4334 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
 0 linter error(s) in check-pages.uk/lint-errors-uk.txt.
@@ -351,8 +351,8 @@ Total malformed more info link page(s): 0/15515 - 0%
 Total missing alias page(s): 2853
 Total missing TLDR commands: 239/366 - 65%
 Total misplaced page(s): 0/15515 - 0%
-Total outdated page(s) based on number of commands: 857/10927 - 7%
-Total outdated page(s) based on the commands itself: 310/10927 - 2%
+Total outdated page(s) based on number of commands: 869/10927 - 7%
+Total outdated page(s) based on the commands itself: 280/10927 - 2%
 Total missing English page(s): 0/2029 - 0%
 Total missing translated page(s): 126738/165168 - 76%
 Total lint error(s): 0
