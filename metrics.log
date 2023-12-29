@@ -223,7 +223,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 199 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
 28 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
-12 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
+13 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4173 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
@@ -317,7 +317,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 189 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
 0 misplaced page(s) in check-pages.uk/misplaced-uk-pages.txt.
 15 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
-0 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
+1 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.uk/missing-english-uk-pages.txt.
 4344 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
 0 linter error(s) in check-pages.uk/lint-errors-uk.txt.
@@ -352,7 +352,7 @@ Total missing alias page(s): 2853
 Total missing TLDR commands: 239/366 - 65%
 Total misplaced page(s): 0/15531 - 0%
 Total outdated page(s) based on number of commands: 878/10933 - 8%
-Total outdated page(s) based on the commands itself: 261/10933 - 2%
+Total outdated page(s) based on the commands itself: 263/10933 - 2%
 Total missing English page(s): 0/2034 - 0%
 Total missing translated page(s): 127032/165528 - 76%
 Total lint error(s): 0
