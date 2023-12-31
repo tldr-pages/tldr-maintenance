@@ -20,7 +20,7 @@
 287 missing alias page(s) in check-pages.bn/missing-bn-alias-pages.txt.
 2 missing TLDR page(s) in check-pages.bn/missing-tldr-bn-commands.txt.
 0 misplaced page(s) in check-pages.bn/misplaced-bn-pages.txt.
-5 outdated page(s) based on number of commands in check-pages.bn/outdated-bn-pages-based-on-command-count.txt.
+6 outdated page(s) based on number of commands in check-pages.bn/outdated-bn-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.bn/outdated-bn-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.bn/missing-english-bn-pages.txt.
 4547 missing translated page(s) in check-pages.bn/missing-translated-bn-pages.txt.
@@ -66,7 +66,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 86 missing alias page(s) in check-pages.de/missing-de-alias-pages.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-57 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+58 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
 3975 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
@@ -77,7 +77,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 83 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
 156 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
-51 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
+52 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 26 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
 3933 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
@@ -101,7 +101,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 84 missing alias page(s) in check-pages.fr/missing-fr-alias-pages.txt.
 152 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
-67 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
+68 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
 9 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
 3967 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
@@ -123,7 +123,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 81 missing alias page(s) in check-pages.id/missing-id-alias-pages.txt.
 168 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
-34 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
+35 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
 1 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
 4190 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
@@ -134,7 +134,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 85 missing alias page(s) in check-pages.it/missing-it-alias-pages.txt.
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
-127 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
+128 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
 4 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.it/missing-english-it-pages.txt.
 3970 missing translated page(s) in check-pages.it/missing-translated-it-pages.txt.
@@ -145,7 +145,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.ja/missing-ja-alias-pages.txt.
 178 missing TLDR page(s) in check-pages.ja/missing-tldr-ja-commands.txt.
 0 misplaced page(s) in check-pages.ja/misplaced-ja-pages.txt.
-28 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
+29 outdated page(s) based on number of commands in check-pages.ja/outdated-ja-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.ja/outdated-ja-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ja/missing-english-ja-pages.txt.
 4327 missing translated page(s) in check-pages.ja/missing-translated-ja-pages.txt.
@@ -156,7 +156,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.ko/missing-ko-alias-pages.txt.
 148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
-61 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
+62 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
 18 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
 4068 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
@@ -200,7 +200,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
 117 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
-0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
+1 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 3996 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
@@ -211,7 +211,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.no/missing-no-alias-pages.txt.
 186 missing TLDR page(s) in check-pages.no/missing-tldr-no-commands.txt.
 0 misplaced page(s) in check-pages.no/misplaced-no-pages.txt.
-10 outdated page(s) based on number of commands in check-pages.no/outdated-no-pages-based-on-command-count.txt.
+11 outdated page(s) based on number of commands in check-pages.no/outdated-no-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.no/outdated-no-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.no/missing-english-no-pages.txt.
 4379 missing translated page(s) in check-pages.no/missing-translated-no-pages.txt.
@@ -233,7 +233,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 85 missing alias page(s) in check-pages.pt_BR/missing-pt_BR-alias-pages.txt.
 148 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
-54 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
+53 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
 41 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_BR/missing-english-pt_BR-pages.txt.
 3819 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
@@ -257,7 +257,7 @@ Skipping pages.ro since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.ru/missing-ru-alias-pages.txt.
 174 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
-25 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
+26 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.ru/outdated-ru-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ru/missing-english-ru-pages.txt.
 4302 missing translated page(s) in check-pages.ru/missing-translated-ru-pages.txt.
@@ -283,7 +283,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 80 missing alias page(s) in check-pages.ta/missing-ta-alias-pages.txt.
 183 missing TLDR page(s) in check-pages.ta/missing-tldr-ta-commands.txt.
 0 misplaced page(s) in check-pages.ta/misplaced-ta-pages.txt.
-2 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
+3 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.ta/outdated-ta-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ta/missing-english-ta-pages.txt.
 4221 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
@@ -329,7 +329,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 86 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 139 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
-88 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
+89 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 60 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
 3877 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
@@ -351,7 +351,7 @@ Total malformed more info link page(s): 15/15541 - 0%
 Total missing alias page(s): 2852
 Total missing TLDR commands: 239/366 - 65%
 Total misplaced page(s): 0/15541 - 0%
-Total outdated page(s) based on number of commands: 888/10940 - 8%
+Total outdated page(s) based on number of commands: 900/10940 - 8%
 Total outdated page(s) based on the commands itself: 204/10940 - 1%
 Total missing English page(s): 0/2038 - 0%
 Total missing translated page(s): 127115/165636 - 76%
