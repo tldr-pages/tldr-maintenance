@@ -78,7 +78,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 156 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 51 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
-24 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
+22 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
 3936 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
@@ -352,7 +352,7 @@ Total missing alias page(s): 2852
 Total missing TLDR commands: 239/366 - 65%
 Total misplaced page(s): 0/15547 - 0%
 Total outdated page(s) based on number of commands: 910/10942 - 8%
-Total outdated page(s) based on the commands itself: 126/10942 - 1%
+Total outdated page(s) based on the commands itself: 124/10942 - 1%
 Total missing English page(s): 0/2038 - 0%
 Total missing translated page(s): 127233/165780 - 76%
 Total lint error(s): 0
