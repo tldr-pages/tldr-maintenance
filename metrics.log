@@ -302,11 +302,11 @@ Skipping pages.sr since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 3 inconsistent filename(s) in check-pages.tr/inconsistent-tr-filenames.txt.
 0 malformed more info link page(s) in check-pages.tr/malformed-more-info-link-tr-pages.txt.
-86 missing alias page(s) in check-pages.tr/missing-tr-alias-pages.txt.
+85 missing alias page(s) in check-pages.tr/missing-tr-alias-pages.txt.
 176 missing TLDR page(s) in check-pages.tr/missing-tldr-tr-commands.txt.
 0 misplaced page(s) in check-pages.tr/misplaced-tr-pages.txt.
-42 outdated page(s) based on number of commands in check-pages.tr/outdated-tr-pages-based-on-command-count.txt.
-22 outdated page(s) based on the commands itself in check-pages.tr/outdated-tr-pages-based-on-command-contents.txt.
+49 outdated page(s) based on number of commands in check-pages.tr/outdated-tr-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.tr/outdated-tr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.tr/missing-english-tr-pages.txt.
 4161 missing translated page(s) in check-pages.tr/missing-translated-tr-pages.txt.
 0 linter error(s) in check-pages.tr/lint-errors-tr.txt.
@@ -348,11 +348,11 @@ Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 88/15548 - 0%
 Total malformed more info link page(s): 0/15548 - 0%
-Total missing alias page(s): 2852
-Total missing TLDR commands: 239/366 - 65%
+Total missing alias page(s): 2851
+Total missing TLDR commands: 239/365 - 65%
 Total misplaced page(s): 0/15548 - 0%
-Total outdated page(s) based on number of commands: 909/10943 - 8%
-Total outdated page(s) based on the commands itself: 103/10943 - 0%
+Total outdated page(s) based on number of commands: 916/10943 - 8%
+Total outdated page(s) based on the commands itself: 81/10943 - 0%
 Total missing English page(s): 0/2038 - 0%
 Total missing translated page(s): 127232/165780 - 76%
 Total lint error(s): 0
