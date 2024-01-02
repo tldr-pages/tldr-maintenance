@@ -17,12 +17,10 @@ EXIT_CODE=0
 run_python_script() {
   local script_name="$1"
 
-  ./tldr/scripts/${script_name}.py -S > $script_name.txt
+  ./tldr/scripts/${script_name}.py -Sn > $script_name.txt
   sed 's/\x1b\[[0-9;]*m//g' $script_name.txt > $script_name.txt.tmp
   mv $script_name.txt.tmp $script_name.txt
   sort -o $script_name.txt $script_name.txt
-  git submodule foreach --recursive git clean -ffdx > /dev/null 2>&1
-  git submodule foreach --recursive git restore . > /dev/null 2>&1
 }
 
 run_python_script "set-more-info-link"
