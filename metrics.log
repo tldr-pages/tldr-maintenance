@@ -306,7 +306,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 176 missing TLDR page(s) in check-pages.tr/missing-tldr-tr-commands.txt.
 0 misplaced page(s) in check-pages.tr/misplaced-tr-pages.txt.
 49 outdated page(s) based on number of commands in check-pages.tr/outdated-tr-pages-based-on-command-count.txt.
-0 outdated page(s) based on the commands itself in check-pages.tr/outdated-tr-pages-based-on-command-contents.txt.
+1 outdated page(s) based on the commands itself in check-pages.tr/outdated-tr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.tr/missing-english-tr-pages.txt.
 4163 missing translated page(s) in check-pages.tr/missing-translated-tr-pages.txt.
 0 linter error(s) in check-pages.tr/lint-errors-tr.txt.
@@ -352,7 +352,7 @@ Total missing alias page(s): 2851
 Total missing TLDR commands: 239/365 - 65%
 Total misplaced page(s): 0/15553 - 0%
 Total outdated page(s) based on number of commands: 915/10946 - 8%
-Total outdated page(s) based on the commands itself: 81/10946 - 0%
+Total outdated page(s) based on the commands itself: 82/10946 - 0%
 Total missing English page(s): 0/2041 - 0%
 Total missing translated page(s): 127289/165852 - 76%
 Total lint error(s): 0
