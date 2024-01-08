@@ -325,14 +325,14 @@ Skipping pages.sr since it only has 1 supported platform(s).
 Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 2 inconsistent filename(s) in check-pages.zh/inconsistent-zh-filenames.txt.
-4 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
+5 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
 86 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
-139 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
+138 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
 102 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 1 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
-3893 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
+3890 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.zh_TW/inconsistent-zh_TW-filenames.txt.
@@ -346,13 +346,13 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4336 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 88/15620 - 0%
-Total malformed more info link page(s): 21/15620 - 0%
+Total inconsistent filename(s): 88/15623 - 0%
+Total malformed more info link page(s): 22/15623 - 0%
 Total missing alias page(s): 2851
 Total missing TLDR commands: 239/365 - 65%
-Total misplaced page(s): 0/15620 - 0%
-Total outdated page(s) based on number of commands: 915/11003 - 8%
-Total outdated page(s) based on the commands itself: 71/11003 - 0%
+Total misplaced page(s): 0/15623 - 0%
+Total outdated page(s) based on number of commands: 915/11006 - 8%
+Total outdated page(s) based on the commands itself: 71/11006 - 0%
 Total missing English page(s): 1/2055 - 0%
-Total missing translated page(s): 127533/166212 - 76%
+Total missing translated page(s): 127530/166212 - 76%
 Total lint error(s): 1
