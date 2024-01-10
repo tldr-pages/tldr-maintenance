@@ -5,7 +5,7 @@
 0 linter error(s) in check-pages/lint-errors.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.ar/inconsistent-ar-filenames.txt.
-1 malformed more info link page(s) in check-pages.ar/malformed-more-info-link-ar-pages.txt.
+0 malformed more info link page(s) in check-pages.ar/malformed-more-info-link-ar-pages.txt.
 87 missing alias page(s) in check-pages.ar/missing-ar-alias-pages.txt.
 190 missing TLDR page(s) in check-pages.ar/missing-tldr-ar-commands.txt.
 0 misplaced page(s) in check-pages.ar/misplaced-ar-pages.txt.
@@ -325,7 +325,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 2 inconsistent filename(s) in check-pages.zh/inconsistent-zh-filenames.txt.
-1 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
+0 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
 87 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 138 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
@@ -347,7 +347,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 88/15665 - 0%
-Total malformed more info link page(s): 8/15665 - 0%
+Total malformed more info link page(s): 6/15665 - 0%
 Total missing alias page(s): 2881
 Total missing TLDR commands: 239/368 - 64%
 Total misplaced page(s): 0/15665 - 0%
