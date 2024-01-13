@@ -156,8 +156,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 87 missing alias page(s) in check-pages.ko/missing-ko-alias-pages.txt.
 148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
-62 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
-19 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
+65 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
+2 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
 4102 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
@@ -351,8 +351,8 @@ Total malformed more info link page(s): 0/15667 - 0%
 Total missing alias page(s): 2880
 Total missing TLDR commands: 239/368 - 64%
 Total misplaced page(s): 0/15667 - 0%
-Total outdated page(s) based on number of commands: 915/11031 - 8%
-Total outdated page(s) based on the commands itself: 53/11031 - 0%
+Total outdated page(s) based on number of commands: 918/11031 - 8%
+Total outdated page(s) based on the commands itself: 36/11031 - 0%
 Total missing English page(s): 0/2062 - 0%
 Total missing translated page(s): 128074/166896 - 76%
 Total lint error(s): 0
