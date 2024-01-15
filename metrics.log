@@ -101,8 +101,8 @@ Skipping pages.fi since it only has 1 supported platform(s).
 85 missing alias page(s) in check-pages.fr/missing-fr-alias-pages.txt.
 152 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
-70 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
-10 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
+76 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
+1 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
 4014 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
 0 linter error(s) in check-pages.fr/lint-errors-fr.txt.
@@ -351,8 +351,8 @@ Total malformed more info link page(s): 0/15685 - 0%
 Total missing alias page(s): 2880
 Total missing TLDR commands: 239/368 - 64%
 Total misplaced page(s): 0/15685 - 0%
-Total outdated page(s) based on number of commands: 919/11037 - 8%
-Total outdated page(s) based on the commands itself: 27/11037 - 0%
+Total outdated page(s) based on number of commands: 925/11037 - 8%
+Total outdated page(s) based on the commands itself: 18/11037 - 0%
 Total missing English page(s): 0/2062 - 0%
 Total missing translated page(s): 128428/167328 - 76%
 Total lint error(s): 0
