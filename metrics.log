@@ -283,10 +283,10 @@ Skipping pages.sr since it only has 1 supported platform(s).
 82 missing alias page(s) in check-pages.ta/missing-ta-alias-pages.txt.
 183 missing TLDR page(s) in check-pages.ta/missing-tldr-ta-commands.txt.
 0 misplaced page(s) in check-pages.ta/misplaced-ta-pages.txt.
-4 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
-1 outdated page(s) based on the commands itself in check-pages.ta/outdated-ta-pages-based-on-command-contents.txt.
+0 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
+0 outdated page(s) based on the commands itself in check-pages.ta/outdated-ta-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ta/missing-english-ta-pages.txt.
-4287 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
+4285 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
 0 linter error(s) in check-pages.ta/lint-errors-ta.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.th/inconsistent-th-filenames.txt.
@@ -346,13 +346,13 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4386 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 91/15708 - 0%
-Total malformed more info link page(s): 1/15708 - 0%
+Total inconsistent filename(s): 91/15710 - 0%
+Total malformed more info link page(s): 1/15710 - 0%
 Total missing alias page(s): 2909
 Total missing TLDR commands: 239/369 - 64%
-Total misplaced page(s): 0/15708 - 0%
-Total outdated page(s) based on number of commands: 925/11041 - 8%
-Total outdated page(s) based on the commands itself: 18/11041 - 0%
+Total misplaced page(s): 0/15710 - 0%
+Total outdated page(s) based on number of commands: 921/11043 - 8%
+Total outdated page(s) based on the commands itself: 17/11043 - 0%
 Total missing English page(s): 0/2064 - 0%
-Total missing translated page(s): 128994/168012 - 76%
+Total missing translated page(s): 128992/168012 - 76%
 Total lint error(s): 0
