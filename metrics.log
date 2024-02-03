@@ -73,7 +73,7 @@ Skipping pages.cs since it only has 2 supported platform(s).
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
 3 inconsistent filename(s) in check-pages.es/inconsistent-es-filenames.txt.
-7 malformed more info link page(s) in check-pages.es/malformed-more-info-link-es-pages.txt.
+0 malformed more info link page(s) in check-pages.es/malformed-more-info-link-es-pages.txt.
 86 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
 155 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
@@ -119,7 +119,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.hi/lint-errors-hi.txt.
 ----------------------------------------------------------------------------------------------------
 7 inconsistent filename(s) in check-pages.id/inconsistent-id-filenames.txt.
-1 malformed more info link page(s) in check-pages.id/malformed-more-info-link-id-pages.txt.
+0 malformed more info link page(s) in check-pages.id/malformed-more-info-link-id-pages.txt.
 85 missing alias page(s) in check-pages.id/missing-id-alias-pages.txt.
 168 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
@@ -130,7 +130,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.it/inconsistent-it-filenames.txt.
-1 malformed more info link page(s) in check-pages.it/malformed-more-info-link-it-pages.txt.
+0 malformed more info link page(s) in check-pages.it/malformed-more-info-link-it-pages.txt.
 89 missing alias page(s) in check-pages.it/missing-it-alias-pages.txt.
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
@@ -229,7 +229,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.pt_BR/inconsistent-pt_BR-filenames.txt.
-3 malformed more info link page(s) in check-pages.pt_BR/malformed-more-info-link-pt_BR-pages.txt.
+0 malformed more info link page(s) in check-pages.pt_BR/malformed-more-info-link-pt_BR-pages.txt.
 89 missing alias page(s) in check-pages.pt_BR/missing-pt_BR-alias-pages.txt.
 148 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
@@ -253,7 +253,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 Skipping pages.ro since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.ru/inconsistent-ru-filenames.txt.
-1 malformed more info link page(s) in check-pages.ru/malformed-more-info-link-ru-pages.txt.
+0 malformed more info link page(s) in check-pages.ru/malformed-more-info-link-ru-pages.txt.
 90 missing alias page(s) in check-pages.ru/missing-ru-alias-pages.txt.
 174 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
@@ -325,7 +325,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 2 inconsistent filename(s) in check-pages.zh/inconsistent-zh-filenames.txt.
-2 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
+0 malformed more info link page(s) in check-pages.zh/malformed-more-info-link-zh-pages.txt.
 90 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 137 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
@@ -347,7 +347,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 92/15745 - 0%
-Total malformed more info link page(s): 17/15745 - 0%
+Total malformed more info link page(s): 2/15745 - 0%
 Total missing alias page(s): 2967
 Total missing TLDR commands: 239/371 - 64%
 Total misplaced page(s): 0/15745 - 0%
