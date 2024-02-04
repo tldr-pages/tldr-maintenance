@@ -24,8 +24,8 @@ These [metrics](metrics.log) will help contributors to quickly spot where there 
 ### Other languages
 
 - **Malformed or outdated more-info link page(s)**  
-  A page is malformed when the `> More information: <link>.` does not match the format in the Python script.
-  A page is outdated when the `> More information: <link>.` does not match the link in the English page.
+  A page is malformed when the `> More information: <link>.` does not match the format in the Python script.  
+   A page is outdated when the `> More information: <link>.` does not match the link in the English page.
 - **Missing TLDR page(s)**  
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
 - **Misplaced page(s)**  
