@@ -23,8 +23,9 @@ These [metrics](metrics.log) will help contributors to quickly spot where there 
 
 ### Other languages
 
-- **Malformed more-info link page(s)**  
+- **Malformed or outdated more-info link page(s)**  
   A page is malformed when the `> More information: <link>.` does not match the format in the Python script.
+  A page is outdated when the `> More information: <link>.` does not match the link in the English page.
 - **Missing TLDR page(s)**  
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
 - **Misplaced page(s)**  
@@ -48,7 +49,7 @@ These [metrics](metrics.log) will help contributors to quickly spot where there 
 
 At the end of the [metrics](metrics.log) a summary is written. Some numbers include a percentage:
 
-- Total malformed more info link page(s) [with percentage, calculated based on total pages]
+- Total malformed or outdated more info link page(s) [with percentage, calculated based on total pages]
 - Total missing alias page(s)
 - Total missing TLDR commands [with percentage, calculated based on total of TLDR commands]
 - Total misplaced page(s) [with percentage, calculated based on total pages]
