@@ -73,12 +73,12 @@ Skipping pages.cs since it only has 2 supported platform(s).
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
 3 inconsistent filename(s) in check-pages.es/inconsistent-es-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.es/malformed-or-outdated-more-info-link-es-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.es/malformed-or-outdated-more-info-link-es-pages.txt.
 98 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
 155 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 51 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
-17 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
+16 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
 4101 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
@@ -97,12 +97,12 @@ Skipping pages.cs since it only has 2 supported platform(s).
 Skipping pages.fi since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 8 inconsistent filename(s) in check-pages.fr/inconsistent-fr-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.fr/malformed-or-outdated-more-info-link-fr-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.fr/malformed-or-outdated-more-info-link-fr-pages.txt.
 100 missing alias page(s) in check-pages.fr/missing-fr-alias-pages.txt.
 152 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
 79 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
-17 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
+16 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
 4162 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
 0 linter error(s) in check-pages.fr/lint-errors-fr.txt.
@@ -130,12 +130,12 @@ Skipping pages.fi since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.it/inconsistent-it-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.it/malformed-or-outdated-more-info-link-it-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.it/malformed-or-outdated-more-info-link-it-pages.txt.
 101 missing alias page(s) in check-pages.it/missing-it-alias-pages.txt.
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
 128 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
-16 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
+15 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.it/missing-english-it-pages.txt.
 4165 missing translated page(s) in check-pages.it/missing-translated-it-pages.txt.
 0 linter error(s) in check-pages.it/lint-errors-it.txt.
@@ -152,7 +152,7 @@ Skipping pages.fi since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.ja/lint-errors-ja.txt.
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.ko/inconsistent-ko-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.ko/malformed-or-outdated-more-info-link-ko-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.ko/malformed-or-outdated-more-info-link-ko-pages.txt.
 102 missing alias page(s) in check-pages.ko/missing-ko-alias-pages.txt.
 148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
@@ -196,14 +196,14 @@ Skipping pages.fi since it only has 1 supported platform(s).
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
 6 inconsistent filename(s) in check-pages.nl/inconsistent-nl-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
-12 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
-102 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+3 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
+0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
+105 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 3 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 1 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4157 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+4145 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.no/inconsistent-no-filenames.txt.
@@ -325,7 +325,7 @@ Skipping pages.sr since it only has 1 supported platform(s).
 Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
 2 inconsistent filename(s) in check-pages.zh/inconsistent-zh-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.zh/malformed-or-outdated-more-info-link-zh-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.zh/malformed-or-outdated-more-info-link-zh-pages.txt.
 102 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 137 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
@@ -346,13 +346,13 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4515 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 92/15869 - 0%
-Total malformed or outdated more info link page(s): 6/15869 - 0%
-Total missing alias page(s): 3326
-Total missing TLDR commands: 239/376 - 63%
-Total misplaced page(s): 0/15869 - 0%
-Total outdated page(s) based on number of commands: 951/11073 - 8%
-Total outdated page(s) based on the commands itself: 177/11073 - 1%
-Total missing English page(s): 0/2085 - 0%
-Total missing translated page(s): 132832/172656 - 76%
+Total inconsistent filename(s): 92/15881 - 0%
+Total malformed or outdated more info link page(s): 3/15881 - 0%
+Total missing alias page(s): 3314
+Total missing TLDR commands: 242/376 - 64%
+Total misplaced page(s): 0/15881 - 0%
+Total outdated page(s) based on number of commands: 951/11085 - 8%
+Total outdated page(s) based on the commands itself: 174/11085 - 1%
+Total missing English page(s): 0/2092 - 0%
+Total missing translated page(s): 132820/172656 - 76%
 Total lint error(s): 0
