@@ -6,7 +6,7 @@
   "homepage": "https://github.com/tldr-pages/tldr-maintenance",
   "dependencies": {
     "markdownlint-cli": "^0.39.0",
-    "tldr-lint": "^0.0.13"
+    "tldr-lint": "^0.0.14"
   },
   "private": true
 }
