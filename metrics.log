@@ -62,14 +62,14 @@ Skipping pages.cs since it only has 2 supported platform(s).
 0 linter error(s) in check-pages.da/lint-errors-da.txt.
 ----------------------------------------------------------------------------------------------------
 9 inconsistent filename(s) in check-pages.de/inconsistent-de-filenames.txt.
-5 malformed or outdated more info link page(s) in check-pages.de/malformed-or-outdated-more-info-link-de-pages.txt.
+8 malformed or outdated more info link page(s) in check-pages.de/malformed-or-outdated-more-info-link-de-pages.txt.
 131 missing alias page(s) in check-pages.de/missing-de-alias-pages.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
 69 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 15 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
-4275 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
+4272 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
 3 inconsistent filename(s) in check-pages.es/inconsistent-es-filenames.txt.
@@ -346,13 +346,13 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4636 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 94/16194 - 0%
-Total malformed or outdated more info link page(s): 39/16194 - 0%
+Total inconsistent filename(s): 94/16197 - 0%
+Total malformed or outdated more info link page(s): 42/16197 - 0%
 Total missing alias page(s): 4140
 Total missing TLDR commands: 271/410 - 66%
-Total misplaced page(s): 0/16194 - 0%
-Total outdated page(s) based on number of commands: 1008/11277 - 8%
-Total outdated page(s) based on the commands itself: 232/11277 - 2%
-Total missing English page(s): 1/2225 - 0%
-Total missing translated page(s): 136259/177012 - 76%
+Total misplaced page(s): 0/16197 - 0%
+Total outdated page(s) based on number of commands: 1008/11280 - 8%
+Total outdated page(s) based on the commands itself: 232/11280 - 2%
+Total missing English page(s): 1/2228 - 0%
+Total missing translated page(s): 136256/177012 - 76%
 Total lint error(s): 2
