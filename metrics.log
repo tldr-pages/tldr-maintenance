@@ -314,13 +314,13 @@ Skipping pages.sr since it only has 1 supported platform(s).
 0 inconsistent filename(s) in check-pages.uk/inconsistent-uk-filenames.txt.
 0 malformed or outdated more info link page(s) in check-pages.uk/malformed-or-outdated-more-info-link-uk-pages.txt.
 131 missing alias page(s) in check-pages.uk/missing-uk-alias-pages.txt.
-189 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
+186 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
 0 misplaced page(s) in check-pages.uk/misplaced-uk-pages.txt.
 16 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
 6 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.uk/missing-english-uk-pages.txt.
-4663 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
-0 linter error(s) in check-pages.uk/lint-errors-uk.txt.
+4652 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
+1 linter error(s) in check-pages.uk/lint-errors-uk.txt.
 ----------------------------------------------------------------------------------------------------
 Skipping pages.uz since it only has 1 supported platform(s).
 ----------------------------------------------------------------------------------------------------
@@ -346,13 +346,13 @@ Skipping pages.uz since it only has 1 supported platform(s).
 4636 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 94/16203 - 0%
-Total malformed or outdated more info link page(s): 42/16203 - 0%
+Total inconsistent filename(s): 94/16214 - 0%
+Total malformed or outdated more info link page(s): 42/16214 - 0%
 Total missing alias page(s): 4139
 Total missing TLDR commands: 271/410 - 66%
-Total misplaced page(s): 0/16203 - 0%
-Total outdated page(s) based on number of commands: 1008/11286 - 8%
-Total outdated page(s) based on the commands itself: 308/11286 - 2%
-Total missing English page(s): 1/2228 - 0%
-Total missing translated page(s): 136250/177012 - 76%
-Total lint error(s): 2
+Total misplaced page(s): 0/16214 - 0%
+Total outdated page(s) based on number of commands: 1008/11297 - 8%
+Total outdated page(s) based on the commands itself: 308/11297 - 2%
+Total missing English page(s): 1/2231 - 0%
+Total missing translated page(s): 136239/177012 - 76%
+Total lint error(s): 3
