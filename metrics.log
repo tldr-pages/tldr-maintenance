@@ -329,7 +329,7 @@ Skipping pages.uz since it only has 1 supported platform(s).
 131 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 137 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
-113 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
+114 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 26 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
 4140 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
@@ -351,7 +351,7 @@ Total malformed or outdated more info link page(s): 42/16229 - 0%
 Total missing alias page(s): 4138
 Total missing TLDR commands: 271/410 - 66%
 Total misplaced page(s): 0/16229 - 0%
-Total outdated page(s) based on number of commands: 1008/11310 - 8%
+Total outdated page(s) based on number of commands: 1009/11310 - 8%
 Total outdated page(s) based on the commands itself: 308/11310 - 2%
 Total missing English page(s): 1/2237 - 0%
 Total missing translated page(s): 136286/177084 - 76%
