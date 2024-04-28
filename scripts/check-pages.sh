@@ -206,7 +206,7 @@ check_missing_translated_page() {
 lint() {
   local file="$1"
 
-  markdownlint "$file" -c "./tldr/.markdownlintrc" >> "$LINT_FILE" 2>&1
+  markdownlint "$file" -c "./tldr/.markdownlint.json" >> "$LINT_FILE" 2>&1
 
   local ignore_checks=("TLDR104")
 
