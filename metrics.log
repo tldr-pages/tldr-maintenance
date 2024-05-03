@@ -241,7 +241,7 @@
 199 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
 35 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
-9 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
+10 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4499 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
@@ -406,7 +406,7 @@ Total missing alias page(s): 5800
 Total missing TLDR commands: 271/410 - 66%
 Total misplaced page(s): 0/16254 - 0%
 Total outdated page(s) based on number of commands: 1022/11329 - 9%
-Total outdated page(s) based on the commands itself: 309/11329 - 2%
+Total outdated page(s) based on the commands itself: 310/11329 - 2%
 Total missing English page(s): 0/2248 - 0%
 Total missing translated page(s): 165971/177300 - 93%
 Total lint error(s): 5
