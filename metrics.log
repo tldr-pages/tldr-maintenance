@@ -89,7 +89,7 @@
 58 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 24 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
-4146 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
+4145 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.fa/inconsistent-fa-filenames.txt.
@@ -400,13 +400,13 @@
 4645 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 96/16255 - 0%
-Total malformed or outdated more info link page(s): 41/16255 - 0%
+Total inconsistent filename(s): 96/16256 - 0%
+Total malformed or outdated more info link page(s): 41/16256 - 0%
 Total missing alias page(s): 5800
 Total missing TLDR commands: 271/410 - 66%
-Total misplaced page(s): 0/16255 - 0%
-Total outdated page(s) based on number of commands: 1022/11329 - 9%
-Total outdated page(s) based on the commands itself: 310/11329 - 2%
-Total missing English page(s): 0/2248 - 0%
-Total missing translated page(s): 166007/177336 - 93%
+Total misplaced page(s): 0/16256 - 0%
+Total outdated page(s) based on number of commands: 1022/11330 - 9%
+Total outdated page(s) based on the commands itself: 310/11330 - 2%
+Total missing English page(s): 0/2249 - 0%
+Total missing translated page(s): 166006/177336 - 93%
 Total lint error(s): 5
