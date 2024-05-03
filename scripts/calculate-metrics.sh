@@ -73,13 +73,6 @@ printf -- '-%.0s' {1..100}; echo
 
 folders=$(find ./tldr -type d -name "pages.*" | sort -u)
 for folder in $folders; do
-  number_of_platforms="$(find $folder -mindepth 1 -type d | wc -l)"
-  if [[ "$number_of_platforms" -le 2 ]]; then
-    echo "Skipping ${folder##*/} since it only has $number_of_platforms supported platform(s)."
-    printf -- '-%.0s' {1..100}; echo
-    continue
-  fi
-
   folder_suffix="${folder##*/pages.}"
 
   ./scripts/check-pages.sh -l "$folder_suffix"
