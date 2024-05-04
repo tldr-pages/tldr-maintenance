@@ -240,10 +240,10 @@
 103 missing alias page(s) in check-pages.pl/missing-pl-alias-pages.txt.
 199 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
-35 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
+34 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
 10 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
-4500 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
+4499 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.pt_BR/inconsistent-pt_BR-filenames.txt.
@@ -400,13 +400,13 @@
 4645 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 96/16256 - 0%
-Total malformed or outdated more info link page(s): 41/16256 - 0%
+Total inconsistent filename(s): 96/16257 - 0%
+Total malformed or outdated more info link page(s): 41/16257 - 0%
 Total missing alias page(s): 5800
 Total missing TLDR commands: 271/410 - 66%
-Total misplaced page(s): 0/16256 - 0%
-Total outdated page(s) based on number of commands: 1022/11330 - 9%
-Total outdated page(s) based on the commands itself: 307/11330 - 2%
+Total misplaced page(s): 0/16257 - 0%
+Total outdated page(s) based on number of commands: 1021/11331 - 9%
+Total outdated page(s) based on the commands itself: 307/11331 - 2%
 Total missing English page(s): 0/2249 - 0%
-Total missing translated page(s): 166006/177336 - 93%
+Total missing translated page(s): 166005/177336 - 93%
 Total lint error(s): 5
