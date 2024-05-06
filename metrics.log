@@ -1,6 +1,6 @@
 9 inconsistent filename(s) in check-pages/inconsistent-filenames.txt.
 0 malformed more info link page(s) in check-pages/malformed-more-info-link-pages.txt.
-1 missing TLDR page(s) in check-pages/missing-tldr-commands.txt.
+0 missing TLDR page(s) in check-pages/missing-tldr-commands.txt.
 0 misplaced page(s) in check-pages/misplaced-pages.txt.
 0 linter error(s) in check-pages/lint-errors.txt.
 ----------------------------------------------------------------------------------------------------
@@ -215,11 +215,11 @@
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.nl/inconsistent-nl-filenames.txt.
 0 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
-0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
+1 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
 134 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 2 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
-0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
+1 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 4248 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
@@ -402,11 +402,11 @@
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 14/16262 - 0%
 Total malformed or outdated more info link page(s): 0/16262 - 0%
-Total missing alias page(s): 5800
-Total missing TLDR commands: 271/410 - 66%
+Total missing alias page(s): 5801
+Total missing TLDR commands: 271/411 - 65%
 Total misplaced page(s): 0/16262 - 0%
 Total outdated page(s) based on number of commands: 1029/11335 - 9%
-Total outdated page(s) based on the commands itself: 272/11335 - 2%
+Total outdated page(s) based on the commands itself: 273/11335 - 2%
 Total missing English page(s): 0/2249 - 0%
 Total missing translated page(s): 166037/177372 - 93%
 Total lint error(s): 0
