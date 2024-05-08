@@ -147,7 +147,7 @@ calculate_and_display() {
 calculate_and_display '*/check-pages*/inconsistent*filenames.txt' "./inconsistent-filenames.txt" "$total_pages" "inconsistent filename(s)"
 calculate_and_display '*/check-pages*/malformed*more-info-link*pages.txt' "./malformed-or-outdated-more-info-link-pages.txt" "$total_pages" "malformed or outdated more info link page(s)"
 calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
-calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles" "$total_unique_non_english_pages" "mismatched page title(s)"
+calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles.txt" "$total_unique_non_english_pages" "mismatched page title(s)"
 calculate_and_display '*/check-pages*/missing-tldr*commands.txt' "./missing-tldr-commands.txt" "$total_tldr_commands" "missing TLDR commands"
 calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-count.txt' "./outdated-pages-based-on-command-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
