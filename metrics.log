@@ -47,7 +47,7 @@
 189 missing TLDR page(s) in check-pages.ca/missing-tldr-ca-commands.txt.
 0 misplaced page(s) in check-pages.ca/misplaced-ca-pages.txt.
 17 outdated page(s) based on number of commands in check-pages.ca/outdated-ca-pages-based-on-command-count.txt.
-4 outdated page(s) based on the commands itself in check-pages.ca/outdated-ca-pages-based-on-command-contents.txt.
+5 outdated page(s) based on the commands itself in check-pages.ca/outdated-ca-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ca/missing-english-ca-pages.txt.
 4645 missing translated page(s) in check-pages.ca/missing-translated-ca-pages.txt.
 0 linter error(s) in check-pages.ca/lint-errors-ca.txt.
@@ -95,7 +95,7 @@
 166 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 59 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
-20 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
+21 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
 4150 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
@@ -143,7 +143,7 @@
 175 missing TLDR page(s) in check-pages.hi/missing-tldr-hi-commands.txt.
 0 misplaced page(s) in check-pages.hi/misplaced-hi-pages.txt.
 23 outdated page(s) based on number of commands in check-pages.hi/outdated-hi-pages-based-on-command-count.txt.
-7 outdated page(s) based on the commands itself in check-pages.hi/outdated-hi-pages-based-on-command-contents.txt.
+8 outdated page(s) based on the commands itself in check-pages.hi/outdated-hi-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.hi/missing-english-hi-pages.txt.
 4615 missing translated page(s) in check-pages.hi/missing-translated-hi-pages.txt.
 0 linter error(s) in check-pages.hi/lint-errors-hi.txt.
@@ -191,7 +191,7 @@
 148 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
 71 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
-32 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
+33 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
 4394 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
@@ -263,7 +263,7 @@
 192 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
 34 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
-9 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
+10 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4484 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
@@ -275,7 +275,7 @@
 147 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
 68 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
-28 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
+29 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_BR/missing-english-pt_BR-pages.txt.
 4140 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
 0 linter error(s) in check-pages.pt_BR/lint-errors-pt_BR.txt.
@@ -395,7 +395,7 @@
 186 missing TLDR page(s) in check-pages.uk/missing-tldr-uk-commands.txt.
 0 misplaced page(s) in check-pages.uk/misplaced-uk-pages.txt.
 16 outdated page(s) based on number of commands in check-pages.uk/outdated-uk-pages-based-on-command-count.txt.
-5 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
+6 outdated page(s) based on the commands itself in check-pages.uk/outdated-uk-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.uk/missing-english-uk-pages.txt.
 4668 missing translated page(s) in check-pages.uk/missing-translated-uk-pages.txt.
 0 linter error(s) in check-pages.uk/lint-errors-uk.txt.
@@ -443,7 +443,7 @@ Total mismatched page title(s): 0/2253 - 0%
 Total missing TLDR commands: 267/410 - 65%
 Total misplaced page(s): 0/16294 - 0%
 Total outdated page(s) based on number of commands: 1027/11361 - 9%
-Total outdated page(s) based on the commands itself: 272/11361 - 2%
+Total outdated page(s) based on the commands itself: 279/11361 - 2%
 Total missing English page(s): 0/2253 - 0%
 Total missing translated page(s): 166227/177588 - 93%
 Total lint error(s): 0
