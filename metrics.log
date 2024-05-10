@@ -82,7 +82,7 @@
 0 mismatched page title(s) in check-pages.de/mismatched-de-page-titles.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-72 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+73 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 16 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
 4288 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 5798
 Total mismatched page title(s): 0/2253 - 0%
 Total missing TLDR commands: 267/410 - 65%
 Total misplaced page(s): 0/16294 - 0%
-Total outdated page(s) based on number of commands: 1027/11361 - 9%
+Total outdated page(s) based on number of commands: 1028/11361 - 9%
 Total outdated page(s) based on the commands itself: 279/11361 - 2%
 Total missing English page(s): 0/2253 - 0%
 Total missing translated page(s): 166227/177588 - 93%
