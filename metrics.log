@@ -97,7 +97,7 @@
 59 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 21 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
-4150 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
+4149 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.fa/inconsistent-fa-filenames.txt.
@@ -416,12 +416,12 @@
 1 malformed or outdated more info link page(s) in check-pages.zh/malformed-or-outdated-more-info-link-zh-pages.txt.
 131 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 0 mismatched page title(s) in check-pages.zh/mismatched-zh-page-titles.txt.
-136 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
+135 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
 115 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 24 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
-4166 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
+4165 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.zh_TW/inconsistent-zh_TW-filenames.txt.
@@ -436,14 +436,14 @@
 4665 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 14/16323 - 0%
-Total malformed or outdated more info link page(s): 1/16323 - 0%
+Total inconsistent filename(s): 14/16325 - 0%
+Total malformed or outdated more info link page(s): 1/16325 - 0%
 Total missing alias page(s): 5798
 Total mismatched page title(s): 0/2265 - 0%
 Total missing TLDR commands: 267/410 - 65%
-Total misplaced page(s): 0/16323 - 0%
-Total outdated page(s) based on number of commands: 1030/11377 - 9%
-Total outdated page(s) based on the commands itself: 280/11377 - 2%
+Total misplaced page(s): 0/16325 - 0%
+Total outdated page(s) based on number of commands: 1030/11379 - 9%
+Total outdated page(s) based on the commands itself: 280/11379 - 2%
 Total missing English page(s): 0/2265 - 0%
-Total missing translated page(s): 166679/178056 - 93%
+Total missing translated page(s): 166677/178056 - 93%
 Total lint error(s): 0
