@@ -89,7 +89,7 @@
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
 1 inconsistent filename(s) in check-pages.es/inconsistent-es-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.es/malformed-or-outdated-more-info-link-es-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.es/malformed-or-outdated-more-info-link-es-pages.txt.
 109 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
 0 mismatched page title(s) in check-pages.es/mismatched-es-page-titles.txt.
 165 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
@@ -269,7 +269,7 @@
 0 linter error(s) in check-pages.pl/lint-errors-pl.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.pt_BR/inconsistent-pt_BR-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.pt_BR/malformed-or-outdated-more-info-link-pt_BR-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.pt_BR/malformed-or-outdated-more-info-link-pt_BR-pages.txt.
 130 missing alias page(s) in check-pages.pt_BR/missing-pt_BR-alias-pages.txt.
 0 mismatched page title(s) in check-pages.pt_BR/mismatched-pt_BR-page-titles.txt.
 147 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
@@ -437,7 +437,7 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 14/16330 - 0%
-Total malformed or outdated more info link page(s): 2/16330 - 0%
+Total malformed or outdated more info link page(s): 0/16330 - 0%
 Total missing alias page(s): 5798
 Total mismatched page title(s): 0/2266 - 0%
 Total missing TLDR commands: 267/410 - 65%
