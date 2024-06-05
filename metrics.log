@@ -274,7 +274,7 @@
 0 mismatched page title(s) in check-pages.pt_BR/mismatched-pt_BR-page-titles.txt.
 147 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
-69 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
+70 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
 30 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_BR/missing-english-pt_BR-pages.txt.
 4186 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 6008
 Total mismatched page title(s): 0/2293 - 0%
 Total missing TLDR commands: 246/409 - 60%
 Total misplaced page(s): 0/16397 - 0%
-Total outdated page(s) based on number of commands: 1032/11418 - 9%
+Total outdated page(s) based on number of commands: 1033/11418 - 9%
 Total outdated page(s) based on the commands itself: 283/11418 - 2%
 Total missing English page(s): 0/2293 - 0%
 Total missing translated page(s): 167826/179244 - 93%
