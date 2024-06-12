@@ -157,7 +157,7 @@
 29 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
 12 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
-4511 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
+4500 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
 0 linter error(s) in check-pages.id/lint-errors-id.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.it/inconsistent-it-filenames.txt.
@@ -193,7 +193,7 @@
 69 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
 34 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
-4426 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
+4405 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
 0 linter error(s) in check-pages.ko/lint-errors-ko.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.lo/inconsistent-lo-filenames.txt.
@@ -233,7 +233,7 @@
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.nl/inconsistent-nl-filenames.txt.
-0 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
+1 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
 0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
 0 mismatched page title(s) in check-pages.nl/mismatched-nl-page-titles.txt.
 100 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
@@ -241,7 +241,7 @@
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4249 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+4243 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.no/inconsistent-no-filenames.txt.
@@ -436,14 +436,14 @@
 4705 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 0/16468 - 0%
-Total malformed or outdated more info link page(s): 0/16468 - 0%
+Total inconsistent filename(s): 0/16506 - 0%
+Total malformed or outdated more info link page(s): 1/16506 - 0%
 Total missing alias page(s): 6002
-Total mismatched page title(s): 0/2313 - 0%
+Total mismatched page title(s): 0/2315 - 0%
 Total missing TLDR commands: 246/409 - 60%
-Total misplaced page(s): 0/16468 - 0%
-Total outdated page(s) based on number of commands: 1033/11482 - 8%
-Total outdated page(s) based on the commands itself: 285/11482 - 2%
-Total missing English page(s): 0/2313 - 0%
-Total missing translated page(s): 168014/179496 - 93%
+Total misplaced page(s): 0/16506 - 0%
+Total outdated page(s) based on number of commands: 1033/11520 - 8%
+Total outdated page(s) based on the commands itself: 285/11520 - 2%
+Total missing English page(s): 0/2315 - 0%
+Total missing translated page(s): 167976/179496 - 93%
 Total lint error(s): 0
