@@ -71,7 +71,7 @@
 190 missing TLDR page(s) in check-pages.da/missing-tldr-da-commands.txt.
 0 misplaced page(s) in check-pages.da/misplaced-da-pages.txt.
 11 outdated page(s) based on number of commands in check-pages.da/outdated-da-pages-based-on-command-count.txt.
-2 outdated page(s) based on the commands itself in check-pages.da/outdated-da-pages-based-on-command-contents.txt.
+1 outdated page(s) based on the commands itself in check-pages.da/outdated-da-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.da/missing-english-da-pages.txt.
 4774 missing translated page(s) in check-pages.da/missing-translated-da-pages.txt.
 0 linter error(s) in check-pages.da/lint-errors-da.txt.
@@ -443,7 +443,7 @@ Total mismatched page title(s): 0/2316 - 0%
 Total missing TLDR commands: 246/409 - 60%
 Total misplaced page(s): 0/16512 - 0%
 Total outdated page(s) based on number of commands: 1034/11526 - 8%
-Total outdated page(s) based on the commands itself: 286/11526 - 2%
+Total outdated page(s) based on the commands itself: 285/11526 - 2%
 Total missing English page(s): 0/2316 - 0%
 Total missing translated page(s): 167970/179496 - 93%
 Total lint error(s): 0
