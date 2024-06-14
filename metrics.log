@@ -82,10 +82,10 @@
 0 mismatched page title(s) in check-pages.de/mismatched-de-page-titles.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-76 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+75 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 18 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
-4344 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
+4342 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.es/inconsistent-es-filenames.txt.
@@ -436,14 +436,14 @@
 4708 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 0/16531 - 0%
-Total malformed or outdated more info link page(s): 2/16531 - 0%
+Total inconsistent filename(s): 0/16533 - 0%
+Total malformed or outdated more info link page(s): 2/16533 - 0%
 Total missing alias page(s): 6037
 Total mismatched page title(s): 0/2319 - 0%
 Total missing TLDR commands: 246/411 - 59%
-Total misplaced page(s): 0/16531 - 0%
-Total outdated page(s) based on number of commands: 1030/11542 - 8%
-Total outdated page(s) based on the commands itself: 285/11542 - 2%
+Total misplaced page(s): 0/16533 - 0%
+Total outdated page(s) based on number of commands: 1029/11544 - 8%
+Total outdated page(s) based on the commands itself: 285/11544 - 2%
 Total missing English page(s): 0/2319 - 0%
-Total missing translated page(s): 168062/179604 - 93%
+Total missing translated page(s): 168060/179604 - 93%
 Total lint error(s): 0
