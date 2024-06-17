@@ -149,7 +149,7 @@
 0 linter error(s) in check-pages.hi/lint-errors-hi.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.id/inconsistent-id-filenames.txt.
-2 malformed or outdated more info link page(s) in check-pages.id/malformed-or-outdated-more-info-link-id-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.id/malformed-or-outdated-more-info-link-id-pages.txt.
 133 missing alias page(s) in check-pages.id/missing-id-alias-pages.txt.
 0 mismatched page title(s) in check-pages.id/mismatched-id-page-titles.txt.
 166 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
@@ -437,7 +437,7 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 0/16539 - 0%
-Total malformed or outdated more info link page(s): 2/16539 - 0%
+Total malformed or outdated more info link page(s): 0/16539 - 0%
 Total missing alias page(s): 6036
 Total mismatched page title(s): 0/2323 - 0%
 Total missing TLDR commands: 246/411 - 59%
