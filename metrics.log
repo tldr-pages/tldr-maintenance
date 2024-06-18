@@ -89,13 +89,13 @@
 0 linter error(s) in check-pages.de/lint-errors-de.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.es/inconsistent-es-filenames.txt.
-0 malformed or outdated more info link page(s) in check-pages.es/malformed-or-outdated-more-info-link-es-pages.txt.
+1 malformed or outdated more info link page(s) in check-pages.es/malformed-or-outdated-more-info-link-es-pages.txt.
 116 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
 0 mismatched page title(s) in check-pages.es/mismatched-es-page-titles.txt.
-165 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
+164 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 58 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
-22 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
+0 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
 4180 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
 0 linter error(s) in check-pages.es/lint-errors-es.txt.
@@ -166,8 +166,8 @@
 0 mismatched page title(s) in check-pages.it/mismatched-it-page-titles.txt.
 143 missing TLDR page(s) in check-pages.it/missing-tldr-it-commands.txt.
 0 misplaced page(s) in check-pages.it/misplaced-it-pages.txt.
-133 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
-26 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
+134 outdated page(s) based on number of commands in check-pages.it/outdated-it-pages-based-on-command-count.txt.
+25 outdated page(s) based on the commands itself in check-pages.it/outdated-it-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.it/missing-english-it-pages.txt.
 4359 missing translated page(s) in check-pages.it/missing-translated-it-pages.txt.
 0 linter error(s) in check-pages.it/lint-errors-it.txt.
@@ -418,8 +418,8 @@
 0 mismatched page title(s) in check-pages.zh/mismatched-zh-page-titles.txt.
 135 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
-115 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
-24 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
+116 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
+23 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
 4206 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
 0 linter error(s) in check-pages.zh/lint-errors-zh.txt.
@@ -437,13 +437,13 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 0/16583 - 0%
-Total malformed or outdated more info link page(s): 0/16583 - 0%
+Total malformed or outdated more info link page(s): 1/16583 - 0%
 Total missing alias page(s): 6036
 Total mismatched page title(s): 0/2326 - 0%
-Total missing TLDR commands: 246/411 - 59%
+Total missing TLDR commands: 246/410 - 60%
 Total misplaced page(s): 0/16583 - 0%
-Total outdated page(s) based on number of commands: 1029/11592 - 8%
-Total outdated page(s) based on the commands itself: 285/11592 - 2%
+Total outdated page(s) based on number of commands: 1031/11592 - 8%
+Total outdated page(s) based on the commands itself: 261/11592 - 2%
 Total missing English page(s): 0/2326 - 0%
 Total missing translated page(s): 168084/179676 - 93%
 Total lint error(s): 0
