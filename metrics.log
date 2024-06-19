@@ -236,12 +236,12 @@
 0 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
 0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
 0 mismatched page title(s) in check-pages.nl/mismatched-nl-page-titles.txt.
-61 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
+57 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4181 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+4175 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.no/inconsistent-no-filenames.txt.
@@ -436,14 +436,14 @@
 4711 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 0/16623 - 0%
-Total malformed or outdated more info link page(s): 1/16623 - 0%
+Total inconsistent filename(s): 0/16629 - 0%
+Total malformed or outdated more info link page(s): 1/16629 - 0%
 Total missing alias page(s): 6025
-Total mismatched page title(s): 0/2330 - 0%
+Total mismatched page title(s): 0/2333 - 0%
 Total missing TLDR commands: 261/410 - 63%
-Total misplaced page(s): 0/16623 - 0%
-Total outdated page(s) based on number of commands: 1031/11631 - 8%
-Total outdated page(s) based on the commands itself: 259/11631 - 2%
-Total missing English page(s): 0/2330 - 0%
-Total missing translated page(s): 168081/179712 - 93%
+Total misplaced page(s): 0/16629 - 0%
+Total outdated page(s) based on number of commands: 1031/11637 - 8%
+Total outdated page(s) based on the commands itself: 259/11637 - 2%
+Total missing English page(s): 0/2333 - 0%
+Total missing translated page(s): 168075/179712 - 93%
 Total lint error(s): 0
