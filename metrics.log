@@ -413,7 +413,7 @@
 0 linter error(s) in check-pages.uz/lint-errors-uz.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.zh/inconsistent-zh-filenames.txt.
-5 malformed or outdated more info link page(s) in check-pages.zh/malformed-or-outdated-more-info-link-zh-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.zh/malformed-or-outdated-more-info-link-zh-pages.txt.
 138 missing alias page(s) in check-pages.zh/missing-zh-alias-pages.txt.
 0 mismatched page title(s) in check-pages.zh/mismatched-zh-page-titles.txt.
 133 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
@@ -437,7 +437,7 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 0/16684 - 0%
-Total malformed or outdated more info link page(s): 5/16684 - 0%
+Total malformed or outdated more info link page(s): 0/16684 - 0%
 Total missing alias page(s): 6015
 Total mismatched page title(s): 0/2335 - 0%
 Total missing TLDR commands: 261/410 - 63%
