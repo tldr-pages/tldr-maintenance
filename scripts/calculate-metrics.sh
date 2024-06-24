@@ -31,7 +31,7 @@ if [[ "$OSTYPE" != "darwin"* ]]; then
   (cd tldr && ./scripts/wrong-filename.sh && mv ./inconsistent-filenames.txt ../inconsistent-filenames.txt)
 fi
 
-./scripts/check-pages.sh
+./scripts/check-pages.sh -v
 
 count_and_display() {
   local file="$1"
@@ -76,7 +76,7 @@ folders=$(find ./tldr -type d -name "pages.*" | sort -u)
 for folder in $folders; do
   folder_suffix="${folder##*/pages.}"
 
-  ./scripts/check-pages.sh -l "$folder_suffix"
+  ./scripts/check-pages.sh -l "$folder_suffix" -v
 
   grep_count_and_display "pages.$folder_suffix/" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-or-outdated-more-info-link-$folder_suffix-pages.txt" "malformed or outdated more info link page(s)"

@@ -44,4 +44,4 @@ jobs:
           path: | 
             metrics.log
             *.txt
-            check-pages*/*.txt
+            check-pages*/
