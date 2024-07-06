@@ -82,7 +82,7 @@
 0 mismatched page title(s) in check-pages.de/mismatched-de-page-titles.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-77 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+78 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 18 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
 4360 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
@@ -238,7 +238,7 @@
 0 mismatched page title(s) in check-pages.nl/mismatched-nl-page-titles.txt.
 0 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
-0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
+1 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 4122 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
@@ -274,7 +274,7 @@
 0 mismatched page title(s) in check-pages.pt_BR/mismatched-pt_BR-page-titles.txt.
 147 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
-71 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
+72 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
 31 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_BR/missing-english-pt_BR-pages.txt.
 4214 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 6050
 Total mismatched page title(s): 0/2381 - 0%
 Total missing TLDR commands: 261/411 - 63%
 Total misplaced page(s): 0/16773 - 0%
-Total outdated page(s) based on number of commands: 1039/11766 - 8%
+Total outdated page(s) based on number of commands: 1042/11766 - 8%
 Total outdated page(s) based on the commands itself: 257/11766 - 2%
 Total missing English page(s): 0/2381 - 0%
 Total missing translated page(s): 168486/180252 - 93%
