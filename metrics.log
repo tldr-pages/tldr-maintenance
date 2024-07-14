@@ -82,7 +82,7 @@
 0 mismatched page title(s) in check-pages.de/mismatched-de-page-titles.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-78 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+79 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 18 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
 4379 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
@@ -130,7 +130,7 @@
 0 mismatched page title(s) in check-pages.fr/mismatched-fr-page-titles.txt.
 151 missing TLDR page(s) in check-pages.fr/missing-tldr-fr-commands.txt.
 0 misplaced page(s) in check-pages.fr/misplaced-fr-pages.txt.
-93 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
+94 outdated page(s) based on number of commands in check-pages.fr/outdated-fr-pages-based-on-command-count.txt.
 23 outdated page(s) based on the commands itself in check-pages.fr/outdated-fr-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.fr/missing-english-fr-pages.txt.
 4384 missing translated page(s) in check-pages.fr/missing-translated-fr-pages.txt.
@@ -310,7 +310,7 @@
 0 mismatched page title(s) in check-pages.ru/mismatched-ru-page-titles.txt.
 171 missing TLDR page(s) in check-pages.ru/missing-tldr-ru-commands.txt.
 0 misplaced page(s) in check-pages.ru/misplaced-ru-pages.txt.
-28 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
+29 outdated page(s) based on number of commands in check-pages.ru/outdated-ru-pages-based-on-command-count.txt.
 7 outdated page(s) based on the commands itself in check-pages.ru/outdated-ru-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ru/missing-english-ru-pages.txt.
 4723 missing translated page(s) in check-pages.ru/missing-translated-ru-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 6050
 Total mismatched page title(s): 4/2387 - 0%
 Total missing TLDR commands: 261/411 - 63%
 Total misplaced page(s): 0/16803 - 0%
-Total outdated page(s) based on number of commands: 1041/11777 - 8%
+Total outdated page(s) based on number of commands: 1044/11777 - 8%
 Total outdated page(s) based on the commands itself: 257/11777 - 2%
 Total missing English page(s): 0/2387 - 0%
 Total missing translated page(s): 169159/180936 - 93%
