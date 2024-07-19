@@ -262,7 +262,7 @@
 0 mismatched page title(s) in check-pages.pl/mismatched-pl-page-titles.txt.
 208 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
-31 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
+32 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4567 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
@@ -274,7 +274,7 @@
 0 mismatched page title(s) in check-pages.pt_BR/mismatched-pt_BR-page-titles.txt.
 147 missing TLDR page(s) in check-pages.pt_BR/missing-tldr-pt_BR-commands.txt.
 0 misplaced page(s) in check-pages.pt_BR/misplaced-pt_BR-pages.txt.
-72 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
+73 outdated page(s) based on number of commands in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-count.txt.
 31 outdated page(s) based on the commands itself in check-pages.pt_BR/outdated-pt_BR-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pt_BR/missing-english-pt_BR-pages.txt.
 4237 missing translated page(s) in check-pages.pt_BR/missing-translated-pt_BR-pages.txt.
@@ -358,7 +358,7 @@
 0 mismatched page title(s) in check-pages.ta/mismatched-ta-page-titles.txt.
 183 missing TLDR page(s) in check-pages.ta/missing-tldr-ta-commands.txt.
 0 misplaced page(s) in check-pages.ta/misplaced-ta-pages.txt.
-3 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
+5 outdated page(s) based on number of commands in check-pages.ta/outdated-ta-pages-based-on-command-count.txt.
 11 outdated page(s) based on the commands itself in check-pages.ta/outdated-ta-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ta/missing-english-ta-pages.txt.
 4648 missing translated page(s) in check-pages.ta/missing-translated-ta-pages.txt.
@@ -418,7 +418,7 @@
 1 mismatched page title(s) in check-pages.zh/mismatched-zh-page-titles.txt.
 132 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
-108 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
+109 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 24 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
 4228 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
@@ -440,9 +440,9 @@ Total inconsistent filename(s): 0/16811 - 0%
 Total malformed or outdated more info link page(s): 5/16811 - 0%
 Total missing alias page(s): 6049
 Total mismatched page title(s): 4/2389 - 0%
-Total missing TLDR commands: 261/411 - 63%
+Total missing TLDR commands: 261/412 - 63%
 Total misplaced page(s): 0/16811 - 0%
-Total outdated page(s) based on number of commands: 1044/11781 - 8%
+Total outdated page(s) based on number of commands: 1049/11781 - 8%
 Total outdated page(s) based on the commands itself: 257/11781 - 2%
 Total missing English page(s): 0/2389 - 0%
 Total missing translated page(s): 169299/181080 - 93%
