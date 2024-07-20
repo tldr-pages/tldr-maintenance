@@ -234,14 +234,14 @@
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.nl/inconsistent-nl-filenames.txt.
 0 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
-1 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
+0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
 1 mismatched page title(s) in check-pages.nl/mismatched-nl-page-titles.txt.
 0 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
-4145 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
+4142 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.no/inconsistent-no-filenames.txt.
@@ -436,14 +436,14 @@
 4749 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
-Total inconsistent filename(s): 0/16811 - 0%
-Total malformed or outdated more info link page(s): 5/16811 - 0%
-Total missing alias page(s): 6049
-Total mismatched page title(s): 4/2389 - 0%
+Total inconsistent filename(s): 0/16814 - 0%
+Total malformed or outdated more info link page(s): 5/16814 - 0%
+Total missing alias page(s): 6048
+Total mismatched page title(s): 4/2392 - 0%
 Total missing TLDR commands: 261/412 - 63%
-Total misplaced page(s): 0/16811 - 0%
-Total outdated page(s) based on number of commands: 1049/11781 - 8%
-Total outdated page(s) based on the commands itself: 257/11781 - 2%
-Total missing English page(s): 0/2389 - 0%
-Total missing translated page(s): 169299/181080 - 93%
+Total misplaced page(s): 0/16814 - 0%
+Total outdated page(s) based on number of commands: 1049/11784 - 8%
+Total outdated page(s) based on the commands itself: 257/11784 - 2%
+Total missing English page(s): 0/2392 - 0%
+Total missing translated page(s): 169296/181080 - 93%
 Total lint error(s): 0
