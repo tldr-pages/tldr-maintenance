@@ -82,7 +82,7 @@
 0 mismatched page title(s) in check-pages.de/mismatched-de-page-titles.txt.
 152 missing TLDR page(s) in check-pages.de/missing-tldr-de-commands.txt.
 0 misplaced page(s) in check-pages.de/misplaced-de-pages.txt.
-79 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
+80 outdated page(s) based on number of commands in check-pages.de/outdated-de-pages-based-on-command-count.txt.
 19 outdated page(s) based on the commands itself in check-pages.de/outdated-de-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.de/missing-english-de-pages.txt.
 4394 missing translated page(s) in check-pages.de/missing-translated-de-pages.txt.
@@ -94,7 +94,7 @@
 0 mismatched page title(s) in check-pages.es/mismatched-es-page-titles.txt.
 163 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
-61 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
+62 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
 4198 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
@@ -154,7 +154,7 @@
 0 mismatched page title(s) in check-pages.id/mismatched-id-page-titles.txt.
 166 missing TLDR page(s) in check-pages.id/missing-tldr-id-commands.txt.
 0 misplaced page(s) in check-pages.id/misplaced-id-pages.txt.
-30 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
+31 outdated page(s) based on number of commands in check-pages.id/outdated-id-pages-based-on-command-count.txt.
 13 outdated page(s) based on the commands itself in check-pages.id/outdated-id-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.id/missing-english-id-pages.txt.
 4534 missing translated page(s) in check-pages.id/missing-translated-id-pages.txt.
@@ -238,7 +238,7 @@
 0 mismatched page title(s) in check-pages.nl/mismatched-nl-page-titles.txt.
 0 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
-2 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
+3 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 4153 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
@@ -430,7 +430,7 @@
 0 mismatched page title(s) in check-pages.zh_TW/mismatched-zh_TW-page-titles.txt.
 173 missing TLDR page(s) in check-pages.zh_TW/missing-tldr-zh_TW-commands.txt.
 0 misplaced page(s) in check-pages.zh_TW/misplaced-zh_TW-pages.txt.
-34 outdated page(s) based on number of commands in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-count.txt.
+35 outdated page(s) based on number of commands in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.zh_TW/outdated-zh_TW-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh_TW/missing-english-zh_TW-pages.txt.
 4760 missing translated page(s) in check-pages.zh_TW/missing-translated-zh_TW-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 6048
 Total mismatched page title(s): 0/2397 - 0%
 Total missing TLDR commands: 261/413 - 63%
 Total misplaced page(s): 0/16837 - 0%
-Total outdated page(s) based on number of commands: 1063/11796 - 9%
+Total outdated page(s) based on number of commands: 1068/11796 - 9%
 Total outdated page(s) based on the commands itself: 269/11796 - 2%
 Total missing English page(s): 0/2397 - 0%
 Total missing translated page(s): 169680/181476 - 93%
