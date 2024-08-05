@@ -91,7 +91,7 @@
 0 inconsistent filename(s) in check-pages.es/inconsistent-es-filenames.txt.
 0 malformed or outdated more info link page(s) in check-pages.es/malformed-or-outdated-more-info-link-es-pages.txt.
 116 missing alias page(s) in check-pages.es/missing-es-alias-pages.txt.
-1 mismatched page title(s) in check-pages.es/mismatched-es-page-titles.txt.
+0 mismatched page title(s) in check-pages.es/mismatched-es-page-titles.txt.
 163 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
 62 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
@@ -439,7 +439,7 @@
 Total inconsistent filename(s): 1/16856 - 0%
 Total malformed or outdated more info link page(s): 0/16856 - 0%
 Total missing alias page(s): 6048
-Total mismatched page title(s): 1/2408 - 0%
+Total mismatched page title(s): 0/2408 - 0%
 Total missing TLDR commands: 261/417 - 62%
 Total misplaced page(s): 0/16856 - 0%
 Total outdated page(s) based on number of commands: 1072/11810 - 9%
