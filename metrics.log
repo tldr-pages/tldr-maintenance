@@ -190,7 +190,7 @@
 0 mismatched page title(s) in check-pages.ko/mismatched-ko-page-titles.txt.
 142 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
 0 misplaced page(s) in check-pages.ko/misplaced-ko-pages.txt.
-74 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
+75 outdated page(s) based on number of commands in check-pages.ko/outdated-ko-pages-based-on-command-count.txt.
 36 outdated page(s) based on the commands itself in check-pages.ko/outdated-ko-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ko/missing-english-ko-pages.txt.
 4432 missing translated page(s) in check-pages.ko/missing-translated-ko-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 6048
 Total mismatched page title(s): 0/2424 - 0%
 Total missing TLDR commands: 261/417 - 62%
 Total misplaced page(s): 0/16949 - 0%
-Total outdated page(s) based on number of commands: 1074/11893 - 9%
+Total outdated page(s) based on number of commands: 1075/11893 - 9%
 Total outdated page(s) based on the commands itself: 280/11893 - 2%
 Total missing English page(s): 0/2424 - 0%
 Total missing translated page(s): 170123/182016 - 93%
