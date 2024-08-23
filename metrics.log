@@ -185,7 +185,7 @@
 0 linter error(s) in check-pages.ja/lint-errors-ja.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.ko/inconsistent-ko-filenames.txt.
-5 malformed or outdated more info link page(s) in check-pages.ko/malformed-or-outdated-more-info-link-ko-pages.txt.
+0 malformed or outdated more info link page(s) in check-pages.ko/malformed-or-outdated-more-info-link-ko-pages.txt.
 130 missing alias page(s) in check-pages.ko/missing-ko-alias-pages.txt.
 0 mismatched page title(s) in check-pages.ko/mismatched-ko-page-titles.txt.
 142 missing TLDR page(s) in check-pages.ko/missing-tldr-ko-commands.txt.
@@ -437,7 +437,7 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 0/14924 - 0%
-Total malformed or outdated more info link page(s): 5/14924 - 0%
+Total malformed or outdated more info link page(s): 0/14924 - 0%
 Total missing alias page(s): 8142
 Total mismatched page title(s): 0/2437 - 0%
 Total missing TLDR commands: 262/418 - 62%
