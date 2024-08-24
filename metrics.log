@@ -238,7 +238,7 @@
 0 mismatched page title(s) in check-pages.nl/mismatched-nl-page-titles.txt.
 0 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
-1 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
+0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 0 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 4081 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 8142
 Total mismatched page title(s): 0/2438 - 0%
 Total missing TLDR commands: 262/418 - 62%
 Total misplaced page(s): 0/14928 - 0%
-Total outdated page(s) based on number of commands: 1035/9866 - 10%
+Total outdated page(s) based on number of commands: 1034/9866 - 10%
 Total outdated page(s) based on the commands itself: 267/9866 - 2%
 Total missing English page(s): 0/2438 - 0%
 Total missing translated page(s): 172366/182232 - 94%
