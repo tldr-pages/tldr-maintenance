@@ -233,12 +233,12 @@
 0 linter error(s) in check-pages.ne/lint-errors-ne.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.nl/inconsistent-nl-filenames.txt.
-1 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
+2 malformed or outdated more info link page(s) in check-pages.nl/malformed-or-outdated-more-info-link-nl-pages.txt.
 0 missing alias page(s) in check-pages.nl/missing-nl-alias-pages.txt.
 0 mismatched page title(s) in check-pages.nl/mismatched-nl-page-titles.txt.
 0 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
-1 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
+2 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
 1 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 4081 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
@@ -257,12 +257,12 @@
 0 linter error(s) in check-pages.no/lint-errors-no.txt.
 ----------------------------------------------------------------------------------------------------
 0 inconsistent filename(s) in check-pages.pl/inconsistent-pl-filenames.txt.
-0 malformed or outdated more info link page(s) in check-pages.pl/malformed-or-outdated-more-info-link-pl-pages.txt.
+1 malformed or outdated more info link page(s) in check-pages.pl/malformed-or-outdated-more-info-link-pl-pages.txt.
 99 missing alias page(s) in check-pages.pl/missing-pl-alias-pages.txt.
 0 mismatched page title(s) in check-pages.pl/mismatched-pl-page-titles.txt.
 208 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
-33 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
+34 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4599 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
@@ -437,12 +437,12 @@
 0 linter error(s) in check-pages.zh_TW/lint-errors-zh_TW.txt.
 ----------------------------------------------------------------------------------------------------
 Total inconsistent filename(s): 0/14929 - 0%
-Total malformed or outdated more info link page(s): 2/14929 - 0%
+Total malformed or outdated more info link page(s): 4/14929 - 0%
 Total missing alias page(s): 8142
 Total mismatched page title(s): 0/2438 - 0%
 Total missing TLDR commands: 262/418 - 62%
 Total misplaced page(s): 0/14929 - 0%
-Total outdated page(s) based on number of commands: 1036/9867 - 10%
+Total outdated page(s) based on number of commands: 1038/9867 - 10%
 Total outdated page(s) based on the commands itself: 281/9867 - 2%
 Total missing English page(s): 0/2438 - 0%
 Total missing translated page(s): 172365/182232 - 94%
