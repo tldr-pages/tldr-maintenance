@@ -46,7 +46,7 @@
 0 mismatched page title(s) in check-pages.ca/mismatched-ca-page-titles.txt.
 16 missing TLDR page(s) in check-pages.ca/missing-tldr-ca-commands.txt.
 0 misplaced page(s) in check-pages.ca/misplaced-ca-pages.txt.
-13 outdated page(s) based on number of commands in check-pages.ca/outdated-ca-pages-based-on-command-count.txt.
+14 outdated page(s) based on number of commands in check-pages.ca/outdated-ca-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.ca/outdated-ca-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.ca/missing-english-ca-pages.txt.
 4966 missing translated page(s) in check-pages.ca/missing-translated-ca-pages.txt.
@@ -94,7 +94,7 @@
 0 mismatched page title(s) in check-pages.es/mismatched-es-page-titles.txt.
 164 missing TLDR page(s) in check-pages.es/missing-tldr-es-commands.txt.
 0 misplaced page(s) in check-pages.es/misplaced-es-pages.txt.
-64 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
+65 outdated page(s) based on number of commands in check-pages.es/outdated-es-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.es/outdated-es-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.es/missing-english-es-pages.txt.
 4185 missing translated page(s) in check-pages.es/missing-translated-es-pages.txt.
@@ -418,7 +418,7 @@
 0 mismatched page title(s) in check-pages.zh/mismatched-zh-page-titles.txt.
 132 missing TLDR page(s) in check-pages.zh/missing-tldr-zh-commands.txt.
 0 misplaced page(s) in check-pages.zh/misplaced-zh-pages.txt.
-112 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
+116 outdated page(s) based on number of commands in check-pages.zh/outdated-zh-pages-based-on-command-count.txt.
 27 outdated page(s) based on the commands itself in check-pages.zh/outdated-zh-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.zh/missing-english-zh-pages.txt.
 4264 missing translated page(s) in check-pages.zh/missing-translated-zh-pages.txt.
@@ -442,7 +442,7 @@ Total missing alias page(s): 8141
 Total mismatched page title(s): 0/2441 - 0%
 Total missing TLDR commands: 262/418 - 62%
 Total misplaced page(s): 0/14942 - 0%
-Total outdated page(s) based on number of commands: 1036/9873 - 10%
+Total outdated page(s) based on number of commands: 1042/9873 - 10%
 Total outdated page(s) based on the commands itself: 280/9873 - 2%
 Total missing English page(s): 0/2441 - 0%
 Total missing translated page(s): 172611/182484 - 94%
