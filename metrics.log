@@ -239,7 +239,7 @@
 0 missing TLDR page(s) in check-pages.nl/missing-tldr-nl-commands.txt.
 0 misplaced page(s) in check-pages.nl/misplaced-nl-pages.txt.
 0 outdated page(s) based on number of commands in check-pages.nl/outdated-nl-pages-based-on-command-count.txt.
-2 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
+1 outdated page(s) based on the commands itself in check-pages.nl/outdated-nl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.nl/missing-english-nl-pages.txt.
 4089 missing translated page(s) in check-pages.nl/missing-translated-nl-pages.txt.
 0 linter error(s) in check-pages.nl/lint-errors-nl.txt.
@@ -262,7 +262,7 @@
 0 mismatched page title(s) in check-pages.pl/mismatched-pl-page-titles.txt.
 208 missing TLDR page(s) in check-pages.pl/missing-tldr-pl-commands.txt.
 0 misplaced page(s) in check-pages.pl/misplaced-pl-pages.txt.
-33 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
+31 outdated page(s) based on number of commands in check-pages.pl/outdated-pl-pages-based-on-command-count.txt.
 5 outdated page(s) based on the commands itself in check-pages.pl/outdated-pl-pages-based-on-command-contents.txt.
 0 missing English page(s) in check-pages.pl/missing-english-pl-pages.txt.
 4607 missing translated page(s) in check-pages.pl/missing-translated-pl-pages.txt.
@@ -442,8 +442,8 @@ Total missing alias page(s): 8141
 Total mismatched page title(s): 0/2446 - 0%
 Total missing TLDR commands: 262/418 - 62%
 Total misplaced page(s): 0/14950 - 0%
-Total outdated page(s) based on number of commands: 1040/9880 - 10%
-Total outdated page(s) based on the commands itself: 342/9880 - 3%
+Total outdated page(s) based on number of commands: 1038/9880 - 10%
+Total outdated page(s) based on the commands itself: 341/9880 - 3%
 Total missing English page(s): 0/2446 - 0%
 Total missing translated page(s): 172640/182520 - 94%
 Total lint error(s): 0
