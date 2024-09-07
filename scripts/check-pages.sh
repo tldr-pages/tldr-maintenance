@@ -97,7 +97,14 @@ get_translated_file() {
 
 get_platform() {
   local file="$1"
+
   echo "$file" | awk -F/ '{print $(NF-1)}'
+}
+
+get_filepath_without_tldr() {
+  local file="$1"
+
+  echo "${file#./tldr/}"
 }
 
 count_commands() {
@@ -146,7 +153,9 @@ check_missing_tldr_page() {
       done
 
       if [ "$missing" = true ]; then
-        echo "$command does not exist yet! Command referenced in $file" >> "$MISSING_TLDR_OUTPUT_FILE"
+        local filepath=$(get_filepath_without_tldr "$file")
+
+        echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_TLDR_OUTPUT_FILE"
       fi
     fi
   done
@@ -158,7 +167,9 @@ check_misplaced_page() {
   platform=$(get_platform "$file")
 
   if [[ ! " ${PLATFORMS[*]} " =~ $platform ]]; then
-    echo "$file is misplaced!" >> "$MISPLACED_OUTPUT_FILE"
+    local filepath=$(get_filepath_without_tldr "$file")
+
+    echo "$filepath is misplaced!" >> "$MISPLACED_OUTPUT_FILE"
   fi
 }
 
@@ -178,10 +189,12 @@ check_outdated_page() {
   english_commands_as_string=$(strip_commands "$english_file")
   commands_as_string=$(strip_commands "$file")
 
+  local filepath=$(get_filepath_without_tldr "$file")
+
   if [ $english_commands != $commands ]; then
-    echo "$file is outdated (based on number of commands)!" >> "$OUTDATED_OUTPUT_FILE"
+    echo "$filepath is outdated (based on number of commands)!" >> "$OUTDATED_OUTPUT_FILE"
   elif [ "$english_commands_as_string" != "$commands_as_string" ]; then
-    echo "$file is outdated (based on the commands itself)!" >> "$OUTDATED_OUTPUT_FILE"
+    echo "$filepath is outdated (based on the commands itself)!" >> "$OUTDATED_OUTPUT_FILE"
   fi
 }
 
@@ -190,7 +203,9 @@ check_missing_english_page() {
   local english_file="$2"
 
   if [ ! -f "$english_file" ]; then
-    echo "$file does not exist in English yet!" >> "$MISSING_ENGLISH_OUTPUT_FILE"
+    local filepath=$(get_filepath_without_tldr "$file")
+
+    echo "$filepath does not exist in English yet!" >> "$MISSING_ENGLISH_OUTPUT_FILE"
   fi
 }
 
@@ -199,7 +214,9 @@ check_missing_translated_page() {
   local translated_file="$2"
 
   if [ ! -f "$translated_file" ]; then
-    echo "$translated_file does not exist yet!" >> "$MISSING_TRANSLATED_OUTPUT_FILE"
+    local filepath=$(get_filepath_without_tldr "$translated_file")
+
+    echo "$filepath does not exist yet!" >> "$MISSING_TRANSLATED_OUTPUT_FILE"
   fi
 }
 
