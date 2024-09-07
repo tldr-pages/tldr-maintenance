@@ -101,7 +101,7 @@ for folder in $folders; do
   printf -- '-%.0s' {1..100}; echo
 done
 
-rm -f "./set-alias-page.txt"
+rm -f "./set-alias-page.txt" "./set-more-info-link.txt"
 
 merge_files_and_calculate_total() {
   local files_pattern="$1"
