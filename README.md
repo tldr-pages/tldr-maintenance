@@ -63,3 +63,4 @@ At the end of the [metrics](metrics.log) a summary is written. Some numbers incl
 
 After a [workflow run](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/calculate-metrics.yml) an artifact is created.  
 This artifact can be downloaded and viewed to see the exact output per language per metric to see which page needs attention.
+A summary can also be downloaded at the [latest GitHub Release](https://github.com/tldr-pages/tldr-maintenance/releases/tag/latest).
