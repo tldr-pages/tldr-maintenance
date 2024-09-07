@@ -54,4 +54,3 @@ jobs:
           files: |
             metrics.log
             *.txt
-            check-pages*/
