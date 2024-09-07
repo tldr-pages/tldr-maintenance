@@ -45,3 +45,13 @@ jobs:
             metrics.log
             *.txt
             check-pages*/
+
+      - name: Upload artifacts to GitHub Release
+        if: always()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          files: |
+            metrics.log
+            *.txt
+            check-pages*/
