@@ -16,16 +16,17 @@ EXIT_CODE=0
 
 run_python_script() {
   local script_name="$1"
+  local remove_text="$2"
 
   ./tldr/scripts/${script_name}.py -Sn > $script_name.txt
-  sed 's/\x1b\[[0-9;]*m//g' $script_name.txt > $script_name.txt.tmp
+  sed 's/\x1b\[[0-9;]*m//g' $script_name.txt | sed "$remove_text" > $script_name.txt.tmp
   mv $script_name.txt.tmp $script_name.txt
   sort -o $script_name.txt $script_name.txt
 }
 
-run_python_script "set-more-info-link"
-run_python_script "set-alias-page"
-run_python_script "set-page-title"
+run_python_script "set-more-info-link" 's/link would be updated$//'
+run_python_script "set-alias-page" 's/page would be added$//'
+run_python_script "set-page-title" 's/title would be updated$//'
 
 if [[ "$OSTYPE" != "darwin"* ]]; then
   (cd tldr && ./scripts/wrong-filename.sh && mv ./inconsistent-filenames.txt ../inconsistent-filenames.txt)
