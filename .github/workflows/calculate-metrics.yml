@@ -29,6 +29,16 @@ jobs:
           ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
           exit ${PIPESTATUS[0]}
 
+      - name: Upload Calculate Metrics artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metrics
+          path: |
+            metrics.log
+            *.txt
+            check-pages*/
+
       - name: Commit the Calculate Metrics log file
         if: github.ref == 'refs/heads/main'
         run: |
@@ -37,15 +47,8 @@ jobs:
           git add metrics.log && git commit -m "metrics: update metrics log" && git push
 
       - name: Create metrics.zip
-        if: always()
+        if: github.ref == 'refs/heads/main'
         run: zip -r metrics.zip metrics.log *.txt check-pages*/
-
-      - name: Upload Calculate Metrics artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: metrics
-          path: metrics.zip
 
       - name: Upload artifacts to GitHub Release
         if: github.ref == 'refs/heads/main'
