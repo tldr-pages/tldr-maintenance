@@ -9,7 +9,7 @@ total_english_pages=$(find ./tldr/pages -type f | wc -l)
 
 total_translation_folders=$(find ./tldr -maxdepth 1 -type d -name "pages.*" | wc -l)
 total_pages_need_translation=$((total_english_pages * total_translation_folders))
-total_tldr_commands=$(find ./tldr/pages* -type f -exec grep -o '`tldr [^`]*' {} + | awk -F':' '{print $2}' | sort -u | wc -l)
+total_tldr_pages=$(find ./tldr/pages* -type f -exec grep -o '`tldr [^`]*' {} + | awk -F':' '{print $2}' | wc -l)
 total_unique_non_english_pages=$(find ./tldr/pages.* -type f | awk -F/ '{print $NF}' | sort -u | wc -l)
 
 EXIT_CODE=0
@@ -42,10 +42,6 @@ count_and_display() {
   echo "$count $message in ${file#./}."
 }
 
-uniqify_file() {
-  sort -u "$1" -o "$1"
-}
-
 grep_count_and_display() {
   local grep_string="$1"
   local input_file="$2"
@@ -63,10 +59,7 @@ grep_count_and_display() {
 grep_count_and_display "pages/" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
 grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
 
-grep "does not exist yet!" ./check-pages/missing-tldr-pages.txt | sed 's/Command referenced in.*$//' > ./check-pages/missing-tldr-commands.txt
-uniqify_file ./check-pages/missing-tldr-commands.txt
-
-count_and_display "./check-pages/missing-tldr-commands.txt" "missing TLDR page(s)"
+count_and_display "./check-pages/missing-tldr-pages.txt" "missing TLDR page(s)"
 count_and_display "./check-pages/misplaced-pages.txt" "misplaced page(s)"
 count_and_display "./check-pages/lint-errors.txt" "linter error(s)"
 
@@ -83,10 +76,7 @@ for folder in $folders; do
   grep_count_and_display "pages.$folder_suffix/" "./set-alias-page.txt" "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-page-title.txt" "./check-pages.$folder_suffix/mismatched-$folder_suffix-page-titles.txt" "mismatched page title(s)"
 
-  grep "does not exist yet!" ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt | sed 's/Command referenced in.*$//' > ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt
-  uniqify_file ./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt
-
-  count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-commands.txt" "missing TLDR page(s)"
+  count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt" "missing TLDR page(s)"
   count_and_display "./check-pages.$folder_suffix/misplaced-$folder_suffix-pages.txt" "misplaced page(s)"
 
   grep "based on number of commands" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt | sed 's/ (.*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-count.txt
@@ -150,7 +140,7 @@ calculate_and_display '*/check-pages*/inconsistent*filenames.txt' "./inconsisten
 calculate_and_display '*/check-pages*/malformed*more-info-link*pages.txt' "./malformed-or-outdated-more-info-link-pages.txt" "$total_pages" "malformed or outdated more info link page(s)"
 calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
 calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles.txt" "$total_unique_non_english_pages" "mismatched page title(s)"
-calculate_and_display '*/check-pages*/missing-tldr*commands.txt' "./missing-tldr-commands.txt" "$total_tldr_commands" "missing TLDR commands"
+calculate_and_display '*/check-pages*/missing-tldr*paged.txt' "./missing-tldr-pages.txt" "$total_tldr_pages" "missing TLDR page(s)"
 calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-count.txt' "./outdated-pages-based-on-command-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-contents.txt' "./outdated-pages-based-on-command-contents.txt" "$total_non_english_pages" "outdated page(s) based on the commands itself"
