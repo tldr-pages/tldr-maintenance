@@ -30,7 +30,7 @@ jobs:
           exit ${PIPESTATUS[0]}
 
       - name: Commit the Calculate Metrics log file
-        if: always()
+        if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
