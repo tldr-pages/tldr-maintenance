@@ -42,6 +42,10 @@ count_and_display() {
   echo "$count $message in ${file#./}."
 }
 
+uniqify_file() {
+  sort -u "$1" -o "$1"
+}
+
 grep_count_and_display() {
   local grep_string="$1"
   local input_file="$2"
