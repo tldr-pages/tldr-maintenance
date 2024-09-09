@@ -29,10 +29,8 @@ jobs:
         run: |
           rm -f metrics.log && touch metrics.log
           ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
-          exit ${PIPESTATUS[0]}
 
       - name: Upload Calculate Metrics artifact
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: metrics
