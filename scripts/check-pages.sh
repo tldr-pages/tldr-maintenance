@@ -62,12 +62,13 @@ fi
 
 MISSING_TLDR_OUTPUT_FILE="$OUTPUT_DIR/missing-tldr${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 MISPLACED_OUTPUT_FILE="$OUTPUT_DIR/misplaced${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
-OUTDATED_OUTPUT_FILE="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
+OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages-based-on-command-contents.txt"
+OUTDATED_BASED_ON_COMMAND_COUNT_FILE="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages-based-on-command-count.txt"
 MISSING_ENGLISH_OUTPUT_FILE="$OUTPUT_DIR/missing-english${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 MISSING_TRANSLATED_OUTPUT_FILE="$OUTPUT_DIR/missing-translated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 LINT_FILE="$OUTPUT_DIR/lint-errors${LANGUAGE_ID:+-$LANGUAGE_ID}.txt"
 
-OUTPUT_FILES=( "$MISSING_TLDR_OUTPUT_FILE" "$MISPLACED_OUTPUT_FILE" "$OUTDATED_OUTPUT_FILE" "$MISSING_ENGLISH_OUTPUT_FILE" "$MISSING_TRANSLATED_OUTPUT_FILE" "$LINT_FILE" )
+OUTPUT_FILES=( "$MISSING_TLDR_OUTPUT_FILE" "$MISPLACED_OUTPUT_FILE" "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE" "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE" "$MISSING_ENGLISH_OUTPUT_FILE" "$MISSING_TRANSLATED_OUTPUT_FILE" "$LINT_FILE" )
 
 for OUTPUT_FILE in  "${OUTPUT_FILES[@]}"; do
   rm -rf "$OUTPUT_FILE"
@@ -192,9 +193,9 @@ check_outdated_page() {
   local filepath=$(get_filepath_without_tldr "$file")
 
   if [ $english_commands != $commands ]; then
-    echo "$filepath is outdated (based on number of commands)!" >> "$OUTDATED_OUTPUT_FILE"
+    echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE"
   elif [ "$english_commands_as_string" != "$commands_as_string" ]; then
-    echo "$filepath is outdated (based on the commands itself)!" >> "$OUTDATED_OUTPUT_FILE"
+    echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE"
   fi
 }
 

@@ -83,10 +83,6 @@ for folder in $folders; do
 
   count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt" "missing TLDR page(s)"
   count_and_display "./check-pages.$folder_suffix/misplaced-$folder_suffix-pages.txt" "misplaced page(s)"
-
-  grep "based on number of commands" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt | sed 's/ (.*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-count.txt
-  grep "based on the commands itself" ./check-pages.$folder_suffix/outdated-$folder_suffix-pages.txt  | sed 's/ (.*$//' > ./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-contents.txt
-
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-count.txt" "outdated page(s) based on number of commands"
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-contents.txt" "outdated page(s) based on the commands itself"
   count_and_display "./check-pages.$folder_suffix/missing-english-$folder_suffix-pages.txt" "missing English page(s)"
