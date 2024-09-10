@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
 
-from enum import Enum
+import os
+import re
 import subprocess
 import sys
-import time
-import re
-from pathlib import Path
 import urllib.parse
+
+from pathlib import Path
+from enum import Enum
 from _common import (
-    Colors,
     get_tldr_root,
     get_check_pages_dir,
     get_locale,
@@ -170,13 +170,15 @@ def update_github_issue(issue_number, body, title):
         "-f",
         f"title={title}",
     ]
-    result = subprocess.run(command, capture_output=True, text=True)
-    return result.returncode, result.stderr
+    subprocess.run(command, capture_output=True, text=True)
 
 
 def main():
     # Check if running in CI and in the correct repository
-    if "true" == "true":
+    if (
+        os.getenv("CI") == "true"
+        and os.getenv("GITHUB_REPOSITORY") == "tldr-pages/tldr-maintenance"
+    ):
         root = get_tldr_root()
         check_pages_dir = get_check_pages_dir(root)
 
@@ -192,14 +194,7 @@ def main():
             lang_data = parse_language_directory(lang_dir)
             markdown_content += generate_markdown_for_language(locale, lang_data)
 
-            status_code = update_github_issue(issue_number, markdown_content, title)
-            print(
-                create_colored_line(
-                    Colors.GREEN,
-                    f"Done updating issue {issue_number} ({title}) - {status_code}!",
-                )
-            )
-            # time.sleep(3)
+            update_github_issue(issue_number, markdown_content, title)
 
             issue_number += 1
     else:
