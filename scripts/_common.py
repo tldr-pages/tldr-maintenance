@@ -126,7 +126,7 @@ def create_github_issue(title: str) -> list[dict]:
     result = subprocess.run(command, capture_output=True, text=True)
     data = json.loads(result.stdout)
 
-    return = [
+    return [
         {"number": issue["number"], "title": issue["title"], "url": issue["html_url"]}
         for issue in data
     ]
