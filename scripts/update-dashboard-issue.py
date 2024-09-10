@@ -113,14 +113,21 @@ def main():
         log_file_path = Path("metrics.log")
 
         if not log_file_path.exists():
+            print("metrics.log not found.", file=sys.stderr)
             sys.exit(0)
 
-        issue_number = get_github_issue("Translation Dashboard Status")["number"]
+        issue_title = "Translation Dashboard Status"
+        issue_data = get_github_issue(issue_title)
+
+        if not issue_data:
+            print(f"{issue_title}-issue not found.", file=sys.stderr)
+            sys.exit(0)
+        
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)
 
         result = update_github_issue(
-            issue_number, "Translation Dashboard Status", markdown_content
+            issue_data["number"], issue_title, markdown_content
         )
 
         sys.exit(result.returncode)

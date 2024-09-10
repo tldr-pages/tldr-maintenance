@@ -162,7 +162,7 @@ def get_github_issue(title: str = None) -> list[dict]:
                 for issue in data
                 if issue["title"] == title
             ),
-            simplified_data,
+            None,
         )
     else:
         return simplified_data

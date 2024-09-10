@@ -169,17 +169,17 @@ def main():
 
             title = f"Translation Dashboard Status for {locale}"
 
-            issue_number = get_github_issue(title)["number"]
+            issue_data = get_github_issue(title)
 
-            if not issue_number:
-                issue_number = create_github_issue(title)["number"]
+            if not issue_data:
+                issue_data = create_github_issue(title)
 
             markdown_content = f"# {title}\n\n"
 
             lang_data = parse_language_directory(lang_dir)
             markdown_content += generate_markdown_for_language(locale, lang_data)
 
-            update_github_issue(issue_number, title, markdown_content)
+            update_github_issue(issue_data["number"], title, markdown_content)
     else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
