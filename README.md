@@ -1,7 +1,7 @@
 # tldr-maintenance
 
 This repo runs a Bash script that calculates metrics about the current state of the [tldr-repo](https://github.com/tldr-pages/tldr).  
-These [metrics](metrics.log) will help contributors to quickly spot where there is still work to do to maintain and improve the quality. It also helps to detect any issues in the [tldr-repo](https://github.com/tldr-pages/tldr).
+These [metrics](https://github.com/tldr-pages/tldr-maintenance/issues/25) will help contributors to quickly spot whether there is still work to do to maintain and improve the quality. It also helps to detect any issues in the [tldr-repo](https://github.com/tldr-pages/tldr).
 
 > [!NOTE]
 > Running [`set-alias-page.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/set-alias-page.py) and [`wrong-filename.sh`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.sh) generates false-positives and the results need to be checked by hand. It can be used by [CODEOWNERS](https://github.com/tldr-pages/tldr/blob/main/.github/CODEOWNERS) to watch their owned language to detect if there are changes needed.
@@ -47,7 +47,7 @@ These [metrics](metrics.log) will help contributors to quickly spot where there 
 
 ## Summary
 
-At the end of the [metrics](metrics.log) a summary is written. Some numbers include a percentage:
+At the end of the metrics.log a summary is written. This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), alobg with the metrics per translation. Some numbers include a percentage:
 
 - Total malformed or outdated more info link page(s) [with percentage, calculated based on total pages]
 - Total missing alias page(s)
