@@ -119,7 +119,8 @@ def create_github_issue(title: str) -> list[dict]:
         "-H", 
         "X-GitHub-Api-Version: 2022-11-28",
         "/repos/tldr-pages/tldr-maintenance/issues",
-        "-f", f"title={title}"
+        "-f", 
+        f"title={title}"
     ]
 
     result = subprocess.run(command, capture_output=True, text=True)
