@@ -22,31 +22,31 @@ def parse_log_file(path: Path) -> dict:
             data["details"][current_language][key] = int(match.group(1))
 
     overview_patterns = {
-        "Total Inconsistent Filenames": r"Total inconsistent filename\(s\): (.+)",
-        "Total Malformed or Outdated More Info Links": r"Total malformed or outdated more info link page\(s\): (.+)",
-        "Total Missing Alias Pages": r"Total missing alias page\(s\): (.+)",
-        "Total Mismatched Page Titles": r"Total mismatched page title\(s\): (.+)",
-        "Total Missing TLDR Pages": r"Total missing TLDR page\(s\): (.+)",
-        "Total Misplaced Pages": r"Total misplaced page\(s\): (.+)",
-        "Total Outdated Pages (Command Count)": r"Total outdated page\(s\) based on number of commands: (.+)",
-        "Total Outdated Pages (Command Content)": r"Total outdated page\(s\) based on the commands itself: (.+)",
-        "Total Missing English Pages": r"Total missing English page\(s\): (.+)",
-        "Total Missing Translated Pages": r"Total missing translated page\(s\): (.+)",
-        "Total Lint Errors": r"Total lint error\(s\): (.+)",
+        "Total inconsistent filenames": r"Total inconsistent filename\(s\): (.+)",
+        "Total malformed or outdated more info link pages": r"Total malformed or outdated more info link page\(s\): (.+)",
+        "Total missing alias pages": r"Total missing alias page\(s\): (.+)",
+        "Total mismatched page titles": r"Total mismatched page title\(s\): (.+)",
+        "Total missing TLDR pages": r"Total missing TLDR page\(s\): (.+)",
+        "Total misplaced pages": r"Total misplaced page\(s\): (.+)",
+        "Total outdated pages (based on number of commands)": r"Total outdated page\(s\) based on number of commands: (.+)",
+        "Total outdated pages (based on the commands itself)": r"Total outdated page\(s\) based on the commands itself: (.+)",
+        "Total missing English pages": r"Total missing English page\(s\): (.+)",
+        "Total missing translated pages": r"Total missing translated page\(s\): (.+)",
+        "Total linter errors": r"Total lint error\(s\): (.+)",
     }
 
     detail_patterns = {
-        "Inconsistent Filenames": r"(\d+) inconsistent filename",
-        "Malformed Or Outdated More Info Links": r"(\d+) malformed or outdated",
-        "Missing Alias Pages": r"(\d+) missing alias",
-        "Mismatched Page Titles": r"(\d+) mismatched page title",
-        "Missing TLDR Pages": r"(\d+) missing TLDR",
-        "Misplaced Pages": r"(\d+) misplaced page",
-        "Outdated Pages (Command Count)": r"(\d+) outdated page\(s\) based on number of commands",
-        "Outdated Pages (Command Content)": r"(\d+) outdated page\(s\) based on the commands itself",
-        "Missing English Pages": r"(\d+) missing English",
-        "Missing Translated Pages": r"(\d+) missing translated",
-        "Linter Errors": r"(\d+) linter error",
+        "inconsistent filename(s)": r"(\d+) inconsistent filename",
+        "malformed or outdated more info link page(s)": r"(\d+) malformed or outdated",
+        "missing alias page(s)": r"(\d+) missing alias",
+        "mismatched page title(s)": r"(\d+) mismatched page title",
+        "missing TLDR page(s)": r"(\d+) missing TLDR",
+        "misplaced page(s)": r"(\d+) misplaced page",
+        "outdated pages (based on number of commands)": r"(\d+) outdated page\(s\) based on number of commands",
+        "outdated pages (based on the commands itself)": r"(\d+) outdated page\(s\) based on the commands itself",
+        "missing English page(s)": r"(\d+) missing English",
+        "missing translated page(s)": r"(\d+) missing translated",
+        "linter error(s)": r"(\d+) linter error",
     }
 
     with path.open(encoding="utf-8") as f:
@@ -97,7 +97,7 @@ def generate_dashboard(data):
             markdown += f"\n<summary>{lang}</summary>\n\n"
 
         for key, value in details.items():
-            markdown += f"- **{key}**: {value}\n"
+            markdown += f"- {value} {key}\n"
 
         markdown += "</details>\n"
 
