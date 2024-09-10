@@ -36,9 +36,7 @@ jobs:
         run: pip install -r requirements.txt
   
       - name: Run the script and generate artifacts
-        run: |
-          rm -f metrics.log && touch metrics.log
-          ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
+        run: ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
 
       - name: Upload Calculate Metrics artifact
         uses: actions/upload-artifact@v4
@@ -48,13 +46,6 @@ jobs:
             metrics.log
             *.txt
             check-pages*/
-
-      - name: Commit the Calculate Metrics log file
-        if: github.ref == 'refs/heads/main'
-        run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
-          git add metrics.log && git commit -m "metrics: update metrics log [skip ci]" && git push
 
       - name: Create metrics.zip
         if: github.ref == 'refs/heads/main'
