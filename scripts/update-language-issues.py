@@ -13,6 +13,7 @@ from _common import (
     get_tldr_root,
     get_check_pages_dir,
     get_locale,
+    create_github_issue,
     get_github_issue,
     update_github_issue,
 )
@@ -170,6 +171,9 @@ def main():
             title = f"Translation Dashboard Status for {locale}"
 
             issue_number = get_github_issue(title)["number"]
+
+            if not issue_number:
+                issue_number = create_github_issue(title)["number"]
 
             markdown_content = f"# {title}\n\n"
 

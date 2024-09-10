@@ -108,6 +108,30 @@ def create_colored_line(start_color: str, text: str) -> str:
     return f"{start_color}{text}{Colors.RESET}"
 
 
+def create_github_issue(title: str) -> list[dict]:
+    command = [
+        "gh",
+        "api",
+        "--method", 
+        "POST",
+        "-H", 
+        "Accept: application/vnd.github+json",
+        "-H", 
+        "X-GitHub-Api-Version: 2022-11-28",
+        "/repos/tldr-pages/tldr-maintenance/issues",
+        "-f", 
+        f"title={title}"
+    ]
+
+    result = subprocess.run(command, capture_output=True, text=True)
+    data = json.loads(result.stdout)
+
+    return = [
+        {"number": issue["number"], "title": issue["title"], "url": issue["html_url"]}
+        for issue in data
+    ]
+
+
 def get_github_issue(title: str = None) -> list[dict]:
     command = [
         "gh",
