@@ -8,6 +8,8 @@ A Python file that makes some commonly used functions available for other script
 from enum import Enum
 from pathlib import Path
 import os
+import json
+import subprocess
 
 
 class Colors(str, Enum):
@@ -104,3 +106,58 @@ def create_colored_line(start_color: str, text: str) -> str:
     """
 
     return f"{start_color}{text}{Colors.RESET}"
+
+
+def get_github_issue(title: str = None) -> list[dict]:
+    command = [
+        "gh",
+        "api",
+        "-H",
+        "Accept: application/vnd.github+json",
+        "-H",
+        "X-GitHub-Api-Version: 2022-11-28",
+        "/repos/tldr-pages/tldr-maintenance/issues?per_page=100",
+    ]
+
+    result = subprocess.run(command, capture_output=True, text=True)
+    data = json.loads(result.stdout)
+
+    simplified_data = [
+        {"number": issue["number"], "title": issue["title"], "url": issue["html_url"]}
+        for issue in data
+    ]
+
+    if title:
+        return next(
+            (
+                {
+                    "number": issue["number"],
+                    "title": issue["title"],
+                    "url": issue["html_url"],
+                }
+                for issue in data
+                if issue["title"] == title
+            ),
+            simplified_data,
+        )
+    else:
+        return simplified_data
+
+
+def update_github_issue(body, issue_number):
+    command = [
+        "gh",
+        "api",
+        "--method",
+        "PATCH",
+        "-H",
+        "Accept: application/vnd.github+json",
+        "-H",
+        "X-GitHub-Api-Version: 2022-11-28",
+        f"/repos/tldr-pages/tldr-maintenance/issues/{issue_number}",
+        "-f",
+        f"body={body}",
+    ]
+
+    result = subprocess.run(command, capture_output=True, text=True)
+    return result.returncode

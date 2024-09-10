@@ -6,6 +6,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from _common import get_github_issue, update_github_issue
 
 
 def parse_log_file(path: Path) -> dict:
@@ -64,7 +65,7 @@ def parse_log_file(path: Path) -> dict:
             current_language = None
         match = re.match(r"^\d+.+in check-pages\.(\w+)/", line)
         if match:
-            current_language = match.group(1).upper()
+            current_language = match.group(1)
             if current_language not in data["details"]:
                 data["details"][current_language] = {}
 
@@ -88,7 +89,13 @@ def generate_dashboard(data):
 
     for lang, details in data["details"].items():
         markdown += "<details>\n"
-        markdown += f"\n<summary>{lang}</summary>\n\n"
+        link_to_github_issue = get_github_issue(
+            f"Translation Dashboard Status for {lang}"
+        )
+        if link_to_github_issue:
+            markdown += f'\n<summary><a href="{link_to_github_issue["url"]}">{lang}</a></summary>\n\n'
+        else:
+            markdown += f"\n<summary>{lang}</summary>\n\n"
 
         for key, value in details.items():
             markdown += f"- **{key}**: {value}\n"
@@ -96,25 +103,6 @@ def generate_dashboard(data):
         markdown += "</details>\n"
 
     return markdown
-
-
-def update_github_issue(body):
-    command = [
-        "gh",
-        "api",
-        "--method",
-        "PATCH",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        "/repos/tldr-pages/tldr-maintenance/issues/25",
-        "-f",
-        f"body={body}",
-    ]
-
-    result = subprocess.run(command, capture_output=True, text=True)
-    return result.returncode
 
 
 def main():
@@ -128,10 +116,11 @@ def main():
         if not log_file_path.exists():
             sys.exit(0)
 
+        github_issue = get_github_issue("Translation Dashboard Status")
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)
 
-        status_code = update_github_issue(markdown_content)
+        status_code = update_github_issue(markdown_content, github_issue["number"])
 
         sys.exit(status_code)
     else:

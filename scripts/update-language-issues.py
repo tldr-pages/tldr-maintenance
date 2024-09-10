@@ -13,7 +13,8 @@ from _common import (
     get_tldr_root,
     get_check_pages_dir,
     get_locale,
-    create_colored_line,
+    get_github_issue,
+    update_github_issue,
 )
 
 
@@ -154,25 +155,6 @@ def generate_markdown_for_language(language, data):
     return markdown
 
 
-def update_github_issue(issue_number, body, title):
-    command = [
-        "gh",
-        "api",
-        "--method",
-        "PATCH",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        f"/repos/tldr-pages/tldr-maintenance/issues/{issue_number}",
-        "-f",
-        f"body={body}",
-        "-f",
-        f"title={title}",
-    ]
-    subprocess.run(command, capture_output=True, text=True)
-
-
 def main():
     # Check if running in CI and in the correct repository
     if (
@@ -182,21 +164,19 @@ def main():
         root = get_tldr_root()
         check_pages_dir = get_check_pages_dir(root)
 
-        issue_number = 87
-
         for lang_dir in check_pages_dir:
             locale = get_locale(lang_dir)
 
             title = f"Translation Dashboard Status for {locale}"
+
+            issue_number = get_github_issue(title)["number"]
 
             markdown_content = f"# {title}\n\n"
 
             lang_data = parse_language_directory(lang_dir)
             markdown_content += generate_markdown_for_language(locale, lang_data)
 
-            update_github_issue(issue_number, markdown_content, title)
-
-            issue_number += 1
+            update_github_issue(issue_number, markdown_content)
     else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
