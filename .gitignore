@@ -18,3 +18,7 @@ check-pages*/
 /*.txt
 /*.log
 !metrics.log
+!requirements.txt
+
+# Generated pycache
+__pycache__
