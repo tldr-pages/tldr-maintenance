@@ -33,7 +33,7 @@ jobs:
 
       - name: Install pip dependencies
         if: github.ref == 'refs/heads/main'
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt && rm -f requirements.txt
   
       - name: Run the script and generate artifacts
         run: ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log

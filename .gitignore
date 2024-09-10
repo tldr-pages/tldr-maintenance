@@ -17,7 +17,7 @@ check-pages*/
 # calculate-metrics.sh generates these files. Exception made for metrics.log since we want to commit it.
 /*.txt
 /*.log
-!metrics.log
+metrics.zip
 !requirements.txt
 
 # Generated pycache
