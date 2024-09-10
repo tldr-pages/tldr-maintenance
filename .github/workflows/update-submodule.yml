@@ -26,5 +26,19 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git commit -am "ci: update TLDR submodule"
-          git push
+          if git commit -am "ci: update TLDR submodule" && git push; then
+            exit 0
+          else
+            exit 1
+          fi
+
+      - name: Trigger Calculate Metrics
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'calculate-metrics.yml',
+                ref: 'main',
+              })
