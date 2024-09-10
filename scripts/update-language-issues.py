@@ -3,7 +3,6 @@
 
 import os
 import re
-import subprocess
 import sys
 import urllib.parse
 
@@ -180,7 +179,7 @@ def main():
             lang_data = parse_language_directory(lang_dir)
             markdown_content += generate_markdown_for_language(locale, lang_data)
 
-            update_github_issue(issue_number, markdown_content)
+            update_github_issue(issue_number, title, markdown_content)
     else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)

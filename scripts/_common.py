@@ -112,15 +112,15 @@ def create_github_issue(title: str) -> list[dict]:
     command = [
         "gh",
         "api",
-        "--method", 
+        "--method",
         "POST",
-        "-H", 
+        "-H",
         "Accept: application/vnd.github+json",
-        "-H", 
+        "-H",
         "X-GitHub-Api-Version: 2022-11-28",
         "/repos/tldr-pages/tldr-maintenance/issues",
-        "-f", 
-        f"title={title}"
+        "-f",
+        f"title={title}",
     ]
 
     result = subprocess.run(command, capture_output=True, text=True)
@@ -168,7 +168,7 @@ def get_github_issue(title: str = None) -> list[dict]:
         return simplified_data
 
 
-def update_github_issue(body, issue_number):
+def update_github_issue(issue_number, title, body):
     command = [
         "gh",
         "api",
@@ -180,8 +180,25 @@ def update_github_issue(body, issue_number):
         "X-GitHub-Api-Version: 2022-11-28",
         f"/repos/tldr-pages/tldr-maintenance/issues/{issue_number}",
         "-f",
+        f"title={title}",
+        "-f",
         f"body={body}",
     ]
 
     result = subprocess.run(command, capture_output=True, text=True)
-    return result.returncode
+
+    if result.returncode != 0:
+        print(
+            create_colored_line(
+                Colors.RED,
+                f"Updating {title} (#{issue_number}) failed: {result.stderr}",
+            )
+        )
+    else:
+        print(
+            create_colored_line(
+                Colors.GREEN, f"Updating {title} (#{issue_number}) succeeded"
+            )
+        )
+
+    return result

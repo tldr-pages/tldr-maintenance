@@ -3,7 +3,6 @@
 
 import os
 import re
-import subprocess
 import sys
 from pathlib import Path
 from _common import get_github_issue, update_github_issue
@@ -116,13 +115,15 @@ def main():
         if not log_file_path.exists():
             sys.exit(0)
 
-        github_issue = get_github_issue("Translation Dashboard Status")
+        issue_number = get_github_issue("Translation Dashboard Status")["number"]
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)
 
-        status_code = update_github_issue(markdown_content, github_issue["number"])
+        result = update_github_issue(
+            issue_number, "Translation Dashboard Status", markdown_content
+        )
 
-        sys.exit(status_code)
+        sys.exit(result.returncode)
     else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
