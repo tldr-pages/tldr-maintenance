@@ -78,11 +78,11 @@ def parse_log_file(path: Path) -> dict:
 def generate_dashboard(data):
     markdown = "# Translation Dashboard Status\n\n## Overview\n"
     overview = data["overview"]
-    markdown += "| Metric                                       | Value             |\n"
-    markdown += "|----------------------------------------------|-------------------|\n"
+    markdown += "| Metric | Value |\n"
+    markdown += "|--------|-------|\n"
 
     for key, value in overview.items():
-        markdown += f"| **{key}**                      | {value}            |\n"
+        markdown += f"| **{key}**  | {value} |\n"
 
     markdown += "\n## Detailed Breakdown by Language\n"
 
@@ -126,7 +126,7 @@ def main():
         log_file_path = Path("metrics.log")
 
         if not log_file_path.exists():
-          sys.exit(0)
+            sys.exit(0)
 
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)

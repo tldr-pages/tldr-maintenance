@@ -70,8 +70,14 @@ jobs:
             *.txt
             metrics.zip
 
-      - name: Update Metrics Dashboard Issue
+      - name: Update Translation Dashboard Status Issue
         if: github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main'
-        run: python3 scripts/update-dashboard.py
+        run: python3 scripts/update-dashboard-issue.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Language-specific Translation Dashboard Status Issues
+        if: github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main'
+        run: python3 scripts/update-language-issues.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
