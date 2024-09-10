@@ -47,7 +47,7 @@ These [metrics](https://github.com/tldr-pages/tldr-maintenance/issues/25) will h
 
 ## Summary
 
-At the end of the metrics.log a summary is written. This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), alobg with the metrics per translation. Some numbers include a percentage:
+At the end of the metrics.log a summary is written. This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation. Some numbers include a percentage:
 
 - Total malformed or outdated more info link page(s) [with percentage, calculated based on total pages]
 - Total missing alias page(s)
