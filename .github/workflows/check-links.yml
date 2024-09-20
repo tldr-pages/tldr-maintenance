@@ -8,6 +8,8 @@ on:
 jobs:
   check-links:
     runs-on: ubuntu-latest
+    env:
+      LYCHEE_FILE: "lychee/out.md"
     steps:
       - name: Restore lychee cache
         id: restore-cache
@@ -36,11 +38,17 @@ jobs:
             --accept 100..=103,200..=299,429
             --max-concurrency 25
             --exclude-all-private
+            --format markdown
+            --output ${{ env.LYCHEE_FILE }}
             links.txt
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Sort failed URLs alphabetically
+        run: python3 scripts/sort-lychee-output.py
+
       - name: Find the last report issue open
+        if: github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main'
         uses: micalevisk/last-issue-action@v2
         id: last-issue
         with:
@@ -50,16 +58,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update last report open issue created
-        if: ${{ env.lychee_exit_code != 0 }}
+        if: github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && ${{ env.lychee_exit_code != 0 }}
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: Link checker report
-          content-filepath: lychee/out.md
+          content-filepath: ${{ env.LYCHEE_FILE }}
           issue-number: ${{ steps.last-issue.outputs.issue-number }}
           labels: check links
 
       - name: Close last report open issue
-        if: ${{ env.lychee_exit_code == 0 }}
+        if: github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && ${{ env.lychee_exit_code == 0 }}
         uses: peter-evans/close-issue@v2
         with:
           issue-number: ${{ steps.last-issue.outputs.issue-number }}
