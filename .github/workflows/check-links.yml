@@ -41,7 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - run: |
-          echo "output: ${{ steps.lychee.outputs.exit_code }}"
+          echo "output: ${{ steps.lychee.outputs.exit_code }} --- ${{ env.lychee_exit_code }} --- $lychee_exit_code"
 
       - name: Find the last report issue open
         uses: micalevisk/last-issue-action@v2
