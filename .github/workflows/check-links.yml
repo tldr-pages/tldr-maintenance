@@ -2,8 +2,8 @@ name: Check links with Lychee
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
+  schedule:
+     - cron: "0 0 * * 1"
 
 jobs:
   check-links:
@@ -32,9 +32,9 @@ jobs:
         id: lychee
         with:
           args: >-
-            --cache 
-            --verbose 
-            --no-progress 
+            --cache
+            --verbose
+            --no-progress
             --accept 100..=103,200..=299,429
             --max-concurrency 25
             --exclude-all-private
