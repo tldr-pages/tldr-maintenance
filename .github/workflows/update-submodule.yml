@@ -42,14 +42,3 @@ jobs:
                 workflow_id: 'calculate-metrics.yml',
                 ref: 'main',
               })
-
-      - name: Trigger Check Links
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.actions.createWorkflowDispatch({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                workflow_id: 'check-links.yml',
-                ref: 'main',
-              })
