@@ -57,7 +57,7 @@ jobs:
 
       - name: Update last report open issue created
         if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && env.lychee_exit_code != 0 }}
-        uses: peter-evans/create-issue-from-file@v4
+        uses: peter-evans/create-issue-from-file@v5
         with:
           title: Link checker report
           content-filepath: ${{ env.LYCHEE_FILE }}
