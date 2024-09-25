@@ -36,7 +36,9 @@ jobs:
         run: pip install -r requirements.txt && rm -f requirements.txt
   
       - name: Run the script and generate artifacts
-        run: ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
+        run: |
+          ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
+          cat metrics.log >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Calculate Metrics artifact
         uses: actions/upload-artifact@v4
