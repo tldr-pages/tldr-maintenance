@@ -110,7 +110,7 @@ def main():
         os.getenv("CI") == "true"
         and os.getenv("GITHUB_REPOSITORY") == "tldr-pages/tldr-maintenance"
     ):
-        log_file_path = Path("metrics.log")
+        log_file_path = Path("metrics-log.md")
 
         if not log_file_path.exists():
             print("metrics.log not found.", file=sys.stderr)
