@@ -37,21 +37,21 @@ jobs:
   
       - name: Run the script and generate artifacts
         run: |
-          ./scripts/calculate-metrics.sh 2>&1 | tee metrics.log
-          cat metrics.log >> $GITHUB_STEP_SUMMARY
+          ./scripts/calculate-metrics.sh 2>&1 | tee metrics-log.md
+          cat metrics-log.md >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Calculate Metrics artifact
         uses: actions/upload-artifact@v4
         with:
           name: metrics
           path: |
-            metrics.log
+            metrics-log.md
             *.txt
             check-pages*/
 
       - name: Create metrics.zip
         if: github.ref == 'refs/heads/main'
-        run: zip -r metrics.zip metrics.log *.txt check-pages*/
+        run: zip -r metrics.zip metrics-log.md *.txt check-pages*/
 
       - name: Upload artifacts to GitHub Release
         if: github.ref == 'refs/heads/main'
@@ -59,7 +59,7 @@ jobs:
         with:
           tag_name: latest
           files: |
-            metrics.log
+            metrics-log.md
             *.txt
             metrics.zip
 
