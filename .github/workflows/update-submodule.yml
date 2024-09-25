@@ -33,6 +33,9 @@ jobs:
             echo "anything-committed=false" >> $GITHUB_OUTPUT
           fi
 
+      - run: |
+          echo "Anything committed?: " ${{ steps.commit.output.anything-committed }}
+
       - name: Trigger Calculate Metrics
         uses: actions/github-script@v7
         if: ${{ steps.commit.output.anything-committed == 'true' }}
