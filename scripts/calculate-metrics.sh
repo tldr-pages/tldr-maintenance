@@ -68,7 +68,7 @@ count_and_display "./check-pages/missing-tldr-pages.txt" "missing TLDR page(s)"
 count_and_display "./check-pages/misplaced-pages.txt" "misplaced page(s)"
 count_and_display "./check-pages/lint-errors.txt" "linter error(s)"
 
-printf -- '-%.0s' {1..100}; echo
+printf -- '_%.0s' {1..100}; echo
 
 folders=$(find ./tldr -type d -name "pages.*" | sort -u)
 for folder in $folders; do
@@ -89,7 +89,7 @@ for folder in $folders; do
   count_and_display "./check-pages.$folder_suffix/missing-translated-$folder_suffix-pages.txt" "missing translated page(s)"
   count_and_display "./check-pages.$folder_suffix/lint-errors-$folder_suffix.txt" "linter error(s)"
 
-  printf -- '-%.0s' {1..100}; echo
+  printf -- '_%.0s' {1..100}; echo
 done
 
 rm -f "./set-alias-page.txt" "./set-more-info-link.txt" "./set-page-title.txt"
