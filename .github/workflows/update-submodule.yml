@@ -23,18 +23,20 @@ jobs:
           git submodule update --remote --recursive
 
       - name: Commit update
+        id: commit
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           if git commit -am "ci: update TLDR submodule" && git push; then
-            echo "anything-committed=true" >> $GITHUB_ENV
+            echo "anything-committed=true" >> $GITHUB_OUTPUT
           else
-            echo "anything-committed=false" >> $GITHUB_ENV
+            echo "anything-committed=false" >> $GITHUB_OUTPUT
           fi
+        shell: bash
 
       - name: Trigger Calculate Metrics
         uses: actions/github-script@v7
-        if: ${{ env.anything-committed == 'true' }}
+        if: ${{ steps.commit.outputs.anything-committed == 'true' }}
         with:
           script: |
             github.rest.actions.createWorkflowDispatch({
