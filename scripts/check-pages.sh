@@ -19,7 +19,7 @@
 #   - check_names (optional): Provide an array splitted by "," to only run specific checks [missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint]
 #   - Adding -v enables verbose logging.
 
-ROOT_DIR="./tldr"
+ROOT_DIR="${TLDR_ROOT:-./tldr}"
 PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows")
 
 COMMAND_REGEX='^`[^`]\+`$'
