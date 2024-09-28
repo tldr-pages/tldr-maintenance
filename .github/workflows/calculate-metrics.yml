@@ -4,6 +4,12 @@ on:
   workflow_dispatch:
   push: 
     branches: [main]
+    paths:
+      - tldr/
+      - .github/workflows/calculate-metrics.yml
+      - scripts/*.sh
+      - scripts/*.py
+      - !scripts/sort-lychee-output.py
 
 jobs:
   calculate-metrics:
