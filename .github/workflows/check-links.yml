@@ -8,6 +8,7 @@ on:
     paths:
         - .lycheeignore
         - .github/workflows/check-links.yml
+        - scripts/sort-lychee-output.py
 
 jobs:
   check-links:
