@@ -9,7 +9,7 @@ on:
       - .github/workflows/calculate-metrics.yml
       - scripts/*.sh
       - scripts/*.py
-      - !scripts/sort-lychee-output.py
+      - '!scripts/sort-lychee-output.py'
 
 jobs:
   calculate-metrics:
