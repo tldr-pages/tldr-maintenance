@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   schedule:
      - cron: "0 0 * * 1"
+  push:
+    paths:
+        - .lycheeignore
+        - .github/workflows/check-links.yml
 
 jobs:
   check-links:
