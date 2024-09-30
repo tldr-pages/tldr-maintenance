@@ -31,6 +31,7 @@ jobs:
 
       - run: |
           echo $(grep -rh "More information: " tldr/pages | sort -u) > links.txt
+          echo "Checking" $(wc -l < links.txt) "links"
 
       - name: Lychee URL checker
         uses: lycheeverse/lychee-action@v1
