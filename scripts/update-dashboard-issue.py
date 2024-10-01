@@ -6,7 +6,17 @@ import re
 import sys
 from pathlib import Path
 from _common import get_github_issue, update_github_issue
+from datetime import datetime, timezone
+import re
 
+def get_datetime_pretty():
+    date = datetime.now(timezone.utc) # Guarantee UTC to be fair to everyone, since we can't make this dynamic based on the browser's timezone
+    date = date.isoformat() # Start with a date string in a standard format
+    date = date.replace("T", " ") # Insert space in between date and time
+    date = date.replace("+00:00", " UTC") # Make timezone easier to read & explicit
+    date = re.sub(r"\.[0-9]+", "", date) # Remove microseconds for easier groking
+    
+    return date
 
 def parse_log_file(path: Path) -> dict:
     data = {"overview": {}, "details": {}}
@@ -76,7 +86,12 @@ def parse_log_file(path: Path) -> dict:
 
 
 def generate_dashboard(data):
-    markdown = "# Translation Dashboard Status\n\n## Overview\n"
+    markdown = "# Translation Dashboard Status\n\n"
+    
+    markdown += f"**Last updated:** {get_datetime_pretty()}\n"
+    
+    markdown += f"## Overview\n"
+    
     overview = data["overview"]
     markdown += "| Metric | Value |\n"
     markdown += "|--------|-------|\n"
