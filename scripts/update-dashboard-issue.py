@@ -87,9 +87,9 @@ def parse_log_file(path: Path) -> dict:
 
 def generate_dashboard(data):
     markdown = "# Translation Dashboard Status\n\n"
-    markdown += "<!-- __NOUPDATE__ -->"
+    markdown += "<!-- __NOUPDATE__ -->\n"
     markdown += f"**Last updated:** {get_datetime_pretty()}\n"
-    markdown += "<!-- __END_NOUPDATE__ -->"
+    markdown += "<!-- __END_NOUPDATE__ -->\n"
     
     markdown += f"## Overview\n"
     
