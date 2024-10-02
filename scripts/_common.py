@@ -157,6 +157,7 @@ def get_github_issue(title: str = None) -> list[dict]:
                 {
                     "number": issue["number"],
                     "title": issue["title"],
+					"body": issue["body"],
                     "url": issue["html_url"],
                 }
                 for issue in data
