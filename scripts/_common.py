@@ -147,7 +147,7 @@ def get_github_issue(title: str = None) -> list[dict]:
     data = json.loads(result.stdout)
 
     simplified_data = [
-        {"number": issue["number"], "title": issue["title"], "url": issue["html_url"]}
+        {"number": issue["number"], "title": issue["title"], "body": issue["body"], "url": issue["html_url"]}
         for issue in data
     ]
 

@@ -87,8 +87,9 @@ def parse_log_file(path: Path) -> dict:
 
 def generate_dashboard(data):
     markdown = "# Translation Dashboard Status\n\n"
-    
+    markdown += "<!-- __NOUPDATE__ -->"
     markdown += f"**Last updated:** {get_datetime_pretty()}\n"
+    markdown += "<!-- __END_NOUPDATE__ -->"
     
     markdown += f"## Overview\n"
     
@@ -118,6 +119,20 @@ def generate_dashboard(data):
 
     return markdown
 
+def strip_dynamic_content(markdown):
+	"""
+	Removes any dynamic content enclosed within `<!-- __NOUPDATE__ -->` and `<!-- __END_NOUPDATE__ -->` tags from the provided Markdown string.
+	
+	This function is used to remove any dynamic content (e.g. the last updated time) from the given string before updating a GitHub issue, ensuring that the issue content remains static if not *actual* content has changed
+
+	Args:
+		markdown (str): The Markdown content to be processed.
+
+	Returns:
+		str: The Markdown content with the dynamic content removed.
+	"""
+	regex = re.compile(r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE)
+	return re.sub(regex, "", markdown)
 
 def main():
     # Check if running in CI and in the correct repository
@@ -140,7 +155,11 @@ def main():
         
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)
-
+        
+        if strip_dynamic_content(markdown_content) == strip_dynamic_content(issue_data["body"]):
+            print("new issue body (sans dynamic content) identical to existing issue body, not updating")
+            sys.exit(0)
+        
         result = update_github_issue(
             issue_data["number"], issue_title, markdown_content
         )
@@ -149,7 +168,6 @@ def main():
     else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
-
 
 if __name__ == "__main__":
     main()
