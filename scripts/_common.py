@@ -202,3 +202,33 @@ def update_github_issue(issue_number, title, body):
         )
 
     return result
+
+
+def get_datetime_pretty():
+    # Guarantee UTC to be fair to everyone, since we can't make this dynamic based on the browser's timezone
+    date = datetime.now(timezone.utc)
+    date = date.isoformat()  # Start with a date string in a standard format
+    date = date.replace("T", " ")  # Insert space in between date and time
+    # Make timezone easier to read & explicit
+    date = date.replace("+00:00", " UTC")
+    # Remove microseconds for easier groking
+    date = re.sub(r"\.[0-9]+", "", date)
+
+    return date
+
+
+def strip_dynamic_content(markdown):
+	"""
+	Removes any dynamic content enclosed within `<!-- __NOUPDATE__ -->` and `<!-- __END_NOUPDATE__ -->` tags from the provided Markdown string.
+	
+	This function is used to remove any dynamic content (e.g. the last updated time) from the given string before updating a GitHub issue, ensuring that the issue content remains static if not *actual* content has changed
+
+	Args:
+		markdown (str): The Markdown content to be processed.
+
+	Returns:
+		str: The Markdown content with the dynamic content removed.
+	"""
+	regex = re.compile(
+	    r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE)
+	return re.sub(regex, "", markdown)
