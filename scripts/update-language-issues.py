@@ -191,7 +191,7 @@ def main():
                 print(
                     f"new issue body (sans dynamic content) for language {locale} identical to existing issue body, not updating"
                 )
-                sys.exit(0)
+                continue
 
             update_github_issue(issue_data["number"], title, markdown_content)
     else:
