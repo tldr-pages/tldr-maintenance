@@ -8,5 +8,14 @@
     "markdownlint-cli": "^0.42.0",
     "tldr-lint": "^0.0.15"
   },
+  "devDependencies": {
+    "husky": "^9.1.6"
+  },
+  "scripts": {
+    "lint-markdown": "markdownlint *.md",
+    "lint-python": "black scripts --check && flake8 scripts",
+    "lint": "npm run lint-markdown && npm run lint-python",
+    "prepare": "husky"
+  },
   "private": true
 }
