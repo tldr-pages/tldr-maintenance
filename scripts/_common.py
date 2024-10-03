@@ -7,9 +7,11 @@ A Python file that makes some commonly used functions available for other script
 
 from enum import Enum
 from pathlib import Path
+from datetime import datetime, timezone
 import os
 import json
 import subprocess
+import re
 
 
 class Colors(str, Enum):
@@ -147,7 +149,12 @@ def get_github_issue(title: str = None) -> list[dict]:
     data = json.loads(result.stdout)
 
     simplified_data = [
-        {"number": issue["number"], "title": issue["title"], "body": issue["body"], "url": issue["html_url"]}
+        {
+            "number": issue["number"],
+            "title": issue["title"],
+            "body": issue["body"],
+            "url": issue["html_url"],
+        }
         for issue in data
     ]
 
@@ -157,7 +164,7 @@ def get_github_issue(title: str = None) -> list[dict]:
                 {
                     "number": issue["number"],
                     "title": issue["title"],
-					"body": issue["body"],
+                    "body": issue["body"],
                     "url": issue["html_url"],
                 }
                 for issue in data
@@ -219,17 +226,18 @@ def get_datetime_pretty():
 
 
 def strip_dynamic_content(markdown):
-	"""
-	Removes any dynamic content enclosed within `<!-- __NOUPDATE__ -->` and `<!-- __END_NOUPDATE__ -->` tags from the provided Markdown string.
-	
-	This function is used to remove any dynamic content (e.g. the last updated time) from the given string before updating a GitHub issue, ensuring that the issue content remains static if not *actual* content has changed
+    """
+    Removes any dynamic content enclosed within `<!-- __NOUPDATE__ -->` and `<!-- __END_NOUPDATE__ -->` tags from the provided Markdown string.
 
-	Args:
-		markdown (str): The Markdown content to be processed.
+    This function is used to remove any dynamic content (e.g. the last updated time) from the given string before updating a GitHub issue, ensuring that the issue content remains static if not *actual* content has changed
 
-	Returns:
-		str: The Markdown content with the dynamic content removed.
-	"""
-	regex = re.compile(
-	    r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE)
-	return re.sub(regex, "", markdown)
+    Args:
+            markdown (str): The Markdown content to be processed.
+
+    Returns:
+            str: The Markdown content with the dynamic content removed.
+    """
+    regex = re.compile(
+        r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE
+    )
+    return re.sub(regex, "", markdown)

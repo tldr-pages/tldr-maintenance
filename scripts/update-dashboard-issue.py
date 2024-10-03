@@ -5,9 +5,13 @@ import os
 import re
 import sys
 from pathlib import Path
-from _common import get_github_issue, update_github_issue, get_datetime_pretty, strip_dynamic_content
-from datetime import datetime, timezone
-import re
+from _common import (
+    get_github_issue,
+    update_github_issue,
+    get_datetime_pretty,
+    strip_dynamic_content,
+)
+
 
 def parse_log_file(path: Path) -> dict:
     data = {"overview": {}, "details": {}}
@@ -81,9 +85,9 @@ def generate_dashboard(data):
     markdown += "<!-- __NOUPDATE__ -->\n"
     markdown += f"**Last updated:** {get_datetime_pretty()}\n"
     markdown += "<!-- __END_NOUPDATE__ -->\n"
-    
-    markdown += f"## Overview\n"
-    
+
+    markdown += "## Overview\n"
+
     overview = data["overview"]
     markdown += "| Metric | Value |\n"
     markdown += "|--------|-------|\n"
@@ -129,14 +133,18 @@ def main():
         if not issue_data:
             print(f"{issue_title}-issue not found.", file=sys.stderr)
             sys.exit(0)
-        
+
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)
-        
-        if strip_dynamic_content(markdown_content) == strip_dynamic_content(issue_data["body"]):
-            print("new issue body (sans dynamic content) identical to existing issue body, not updating")
+
+        if strip_dynamic_content(markdown_content) == strip_dynamic_content(
+            issue_data["body"]
+        ):
+            print(
+                "new issue body (sans dynamic content) identical to existing issue body, not updating"
+            )
             sys.exit(0)
-        
+
         result = update_github_issue(
             issue_data["number"], issue_title, markdown_content
         )
@@ -145,6 +153,7 @@ def main():
     else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()
