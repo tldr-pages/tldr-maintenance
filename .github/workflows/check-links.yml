@@ -40,7 +40,7 @@ jobs:
           path: ${{ env.LYCHEE_INPUT_FILE }}
 
       - name: Lychee URL checker
-        uses: lycheeverse/lychee-action@v1
+        uses: lycheeverse/lychee-action@897f08a07f689df1a43076f4374af272f66a6dd1
         id: lychee
         with:
           args: >-
@@ -68,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update last report open issue created
-        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && env.lychee_exit_code != 0 }}
+        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.lychee.outputs.exit_code != 0 }}
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: Link checker report
@@ -77,7 +77,7 @@ jobs:
           labels: check links
 
       - name: Close last report open issue
-        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && env.lychee_exit_code == 0 && steps.last-issue.outputs.has-found == 'true' }}
+        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.lychee.outputs.exit_code == 0 && steps.last-issue.outputs.has-found == 'true' }}
         run: gh issue close ${{ steps.last-issue.outputs.issue-number }}
   
       - name: Save lychee cache
