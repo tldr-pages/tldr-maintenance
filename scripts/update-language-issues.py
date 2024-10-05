@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 
 import os
-import re
 import sys
 
 from pathlib import Path
@@ -24,7 +23,7 @@ class Topics(str, Enum):
     def __str__(self):
         return str(
             self.value
-        )  # make str(Colors.COLOR) return the ANSI code instead of an Enum object
+        )  # make str(Topics.TOPIC) return the Topic instead of an Enum object
 
     INCONSISTENT = "inconsistent filename(s)"
     MALFORMED_OR_OUTDATED_MORE_INFO_LINK = (

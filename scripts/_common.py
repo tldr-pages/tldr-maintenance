@@ -8,6 +8,7 @@ A Python file that makes some commonly used functions available for other script
 from enum import Enum
 from pathlib import Path
 import os
+import re
 import json
 import subprocess
 import urllib.parse
@@ -205,8 +206,7 @@ def update_github_issue(issue_number, title, body):
     return result
 
 
-def replace_characters_for_link(filename):
-    filename = urllib.parse.quote(filename)
+def replace_characters_for_link(page):
     return str(
         page.replace("[", "\\[")
         .replace("]", "\\]")
@@ -220,9 +220,9 @@ def generate_github_link(item):
         page = match.group(0)
 
         directory = Path(page).parent
-        filename = Path(page).name
+        filename = urllib.parse.quote(Path(page).name)
 
-        page = replace_characters_for_link(filename)
+        page = replace_characters_for_link(page)
 
         return f"[{page}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename})"
 
@@ -231,9 +231,9 @@ def generate_github_link(item):
 
 def generate_github_edit_link(page):
     directory = Path(page).parent
-    filename = Path(page).name
+    filename = urllib.parse.quote(Path(page).name)
 
-    page = replace_characters_for_link(filename)
+    page = replace_characters_for_link(page)
 
     return (
         f"[{page}](https://github.com/tldr-pages/tldr/edit/main/{directory}/{filename})"
@@ -242,8 +242,8 @@ def generate_github_edit_link(page):
 
 def generate_github_new_link(page):
     directory = Path(page).parent
-    filename = Path(page).name
+    filename = urllib.parse.quote(Path(page).name)
 
-    page = replace_characters_for_link(filename)
+    page = replace_characters_for_link(page)
 
     return f"[{page}](https://github.com/tldr-pages/tldr/new/main/{directory}?filename={filename})"
