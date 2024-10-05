@@ -9,6 +9,7 @@ total_english_pages=$(find ./tldr/pages -type f | wc -l)
 
 total_translation_folders=$(find ./tldr -maxdepth 1 -type d -name "pages.*" | wc -l)
 total_pages_need_translation=$((total_english_pages * total_translation_folders))
+# shellcheck disable=SC2016
 total_tldr_pages=$(find ./tldr/pages* -type f -exec grep -o '`tldr [^`]*' {} + | awk -F':' '{print $2}' | wc -l)
 total_unique_non_english_pages=$(find ./tldr/pages.* -type f | awk -F/ '{print $NF}' | sort -u | wc -l)
 
@@ -18,10 +19,10 @@ run_python_script() {
   local script_name="$1"
   local remove_text="$2"
 
-  ./tldr/scripts/${script_name}.py -Sn > $script_name.txt
-  sed 's/\x1b\[[0-9;]*m//g' $script_name.txt | sed "$remove_text" > $script_name.txt.tmp
-  mv $script_name.txt.tmp $script_name.txt
-  sort -o $script_name.txt $script_name.txt
+  ./tldr/scripts/"${script_name}".py -Sn > "$script_name".txt
+  sed 's/\x1b\[[0-9;]*m//g' "$script_name".txt | sed "$remove_text" > "$script_name".txt.tmp
+  mv "$script_name".txt.tmp "$script_name".txt
+  sort -o "$script_name".txt "$script_name".txt
 }
 
 run_python_script "set-more-info-link" 's/ link would be.*$//'
@@ -57,7 +58,7 @@ grep_count_and_display() {
     return
   fi
 
-  grep "$grep_string" $input_file > $output_file
+  grep "$grep_string" "$input_file" > "$output_file"
   count_and_display "$output_file" "$message"
 }
 
@@ -98,7 +99,7 @@ merge_files_and_calculate_total() {
   local files_pattern="$1"
   local merge_file="$2"
 
-  for file in $(find . -type f -path $files_pattern | sort -u); do
+  for file in $(find . -type f -path "$files_pattern" | sort -u); do
     cat "$file"
   done > "$merge_file"
   uniqify_file "$merge_file"
