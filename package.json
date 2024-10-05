@@ -15,7 +15,7 @@
     "lint-markdown": "markdownlint *.md",
     "lint-python": "black scripts --check && flake8 scripts",
     "lint-bash": "shellcheck scripts/*.sh",
-    "lint": "npm run lint-markdown && npm run lint-python",
+    "lint": "npm run lint-markdown && npm run lint-python && npm run lint-bash",
     "prepare": "husky"
   },
   "private": true
