@@ -14,7 +14,8 @@ jobs:
   check-links:
     runs-on: ubuntu-latest
     env:
-      LYCHEE_FILE: "lychee/out.md"
+      LYCHEE_INPUT_FILE: "links.txt"
+      LYCHEE_OUTPUT_FILE: "lychee/out.md"
     steps:
       - name: Restore lychee cache
         id: restore-cache
@@ -30,7 +31,13 @@ jobs:
           submodules: true
 
       - run: |
-          echo $(grep -rh "More information: " tldr/pages | sort -u) > links.txt
+          grep -rh "More information: " tldr/pages/ | sort -u > ${{ env.LYCHEE_INPUT_FILE }}
+          echo "Checking" $(wc -l < ${{ env.LYCHEE_INPUT_FILE }}) "links"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: links
+          path: ${{ env.LYCHEE_INPUT_FILE }}
 
       - name: Lychee URL checker
         uses: lycheeverse/lychee-action@v1
@@ -43,7 +50,7 @@ jobs:
             --accept 100..=103,200..=299,429
             --max-concurrency 25
             --exclude-all-private
-            links.txt
+            ${{ env.LYCHEE_INPUT_FILE }}
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
@@ -65,7 +72,7 @@ jobs:
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: Link checker report
-          content-filepath: ${{ env.LYCHEE_FILE }}
+          content-filepath: ${{ env.LYCHEE_OUTPUT_FILE }}
           issue-number: ${{ steps.last-issue.outputs.issue-number }}
           labels: check links
 

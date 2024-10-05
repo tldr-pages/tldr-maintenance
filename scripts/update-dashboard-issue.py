@@ -113,7 +113,7 @@ def main():
         log_file_path = Path("metrics-log.md")
 
         if not log_file_path.exists():
-            print("metrics.log not found.", file=sys.stderr)
+            print("metrics-log.md not found.", file=sys.stderr)
             sys.exit(0)
 
         issue_title = "Translation Dashboard Status"
@@ -122,7 +122,7 @@ def main():
         if not issue_data:
             print(f"{issue_title}-issue not found.", file=sys.stderr)
             sys.exit(0)
-        
+
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)
 

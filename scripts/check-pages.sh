@@ -22,6 +22,7 @@
 ROOT_DIR="${TLDR_ROOT:-./tldr}"
 PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows")
 
+# shellcheck disable=SC2016
 COMMAND_REGEX='^`[^`]\+`$'
 CHECK_NAMES="missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
 VERBOSE=false
@@ -50,11 +51,11 @@ if [ -z "$LANGUAGE_ID" ]; then
 fi
 
 OUTPUT_DIR="check-pages${LANGUAGE_ID:+.$LANGUAGE_ID}"
-mkdir -p $OUTPUT_DIR
+mkdir -p "$OUTPUT_DIR"
 
 if [ $VERBOSE = true ]; then
   DEBUG_LOG="$OUTPUT_DIR/debug.log"
-  rm -f $DEBUG_LOG && touch $DEBUG_LOG
+  rm -f "$DEBUG_LOG" && touch "$DEBUG_LOG"
   exec {BASH_XTRACEFD}> "$DEBUG_LOG"
   export BASH_XTRACEFD
   set -x
@@ -195,7 +196,7 @@ check_outdated_page() {
   local filepath
   filepath=$(get_filepath_without_tldr "$file")
 
-  if [ $english_commands != $commands ]; then
+  if [ "$english_commands" != "$commands" ]; then
     echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE"
   elif [ "$english_commands_as_string" != "$commands_as_string" ]; then
     echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE"
@@ -248,7 +249,7 @@ lint() {
   mapfile -t ignore_checks < <(IFS=,; echo "${ignore_checks[*]}")
 
   if [ -n "$LANGUAGE_ID" ]; then
-    tldr-lint --ignore ${ignore_checks[0]} "$file" >> "$LINT_FILE" 2>&1
+    tldr-lint --ignore "${ignore_checks[0]}" "$file" >> "$LINT_FILE" 2>&1
   else
     tldr-lint "$file" >> "$LINT_FILE" 2>&1
   fi
@@ -266,6 +267,7 @@ for file in "${files[@]}"; do
   for check_name in "${CHECK_NAMES[@]}"; do
     case "$check_name" in
         "missing_tldr_page")
+            # shellcheck disable=SC2016
             grep -o '`tldr \(.*\)`$' "$file" | check_missing_tldr_page "$file"
             ;;
         "misplaced_page")
