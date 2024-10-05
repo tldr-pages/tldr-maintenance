@@ -122,7 +122,7 @@ def main():
         if not issue_data:
             print(f"{issue_title}-issue not found.", file=sys.stderr)
             sys.exit(0)
-        
+
         parsed_data = parse_log_file(log_file_path)
         markdown_content = generate_dashboard(parsed_data)
 
