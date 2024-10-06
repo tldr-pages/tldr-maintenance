@@ -62,6 +62,8 @@ grep_count_and_display() {
   count_and_display "$output_file" "$message"
 }
 
+printf "# Metrics for tldr\n\n"
+
 grep_count_and_display "pages/" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
 grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
 
