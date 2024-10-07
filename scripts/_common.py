@@ -276,4 +276,4 @@ def generate_github_new_link(page):
     filename = urllib.parse.quote(Path(page).name)
 
     page = replace_characters_for_link(page)
-
+   return f"[{page}](https://github.com/tldr-pages/tldr/new/main/{directory}?filename={filename})"
