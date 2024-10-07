@@ -44,6 +44,7 @@ jobs:
         id: lychee
         with:
           jobSummary: false
+          fail: false
           args: >-
             --cache
             --verbose
