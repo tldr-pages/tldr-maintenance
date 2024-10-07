@@ -9,9 +9,10 @@ from enum import Enum
 from pathlib import Path
 from datetime import datetime, timezone
 import os
+import re
 import json
 import subprocess
-import re
+import urllib.parse
 
 
 class Colors(str, Enum):
@@ -234,3 +235,45 @@ def strip_dynamic_content(markdown):
         r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE
     )
     return re.sub(regex, "", markdown)
+
+
+def replace_characters_for_link(page):
+    return str(
+        page.replace("[", "\\[")
+        .replace("]", "\\]")
+        .replace(")", "\\)")
+        .replace("(", "\\(")
+    )
+
+
+def generate_github_link(item):
+    def replace_reference(match):
+        page = match.group(0)
+
+        directory = Path(page).parent
+        filename = urllib.parse.quote(Path(page).name)
+
+        page = replace_characters_for_link(page)
+
+        return f"[{page}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename})"
+
+    return re.sub(r"pages\..*\.md", replace_reference, item)
+
+
+def generate_github_edit_link(page):
+    directory = Path(page).parent
+    filename = urllib.parse.quote(Path(page).name)
+
+    page = replace_characters_for_link(page)
+
+    return (
+        f"[{page}](https://github.com/tldr-pages/tldr/edit/main/{directory}/{filename})"
+    )
+
+
+def generate_github_new_link(page):
+    directory = Path(page).parent
+    filename = urllib.parse.quote(Path(page).name)
+
+    page = replace_characters_for_link(page)
+

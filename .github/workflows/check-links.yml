@@ -43,6 +43,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1
         id: lychee
         with:
+          jobSummary: false
           args: >-
             --cache
             --verbose
@@ -56,6 +57,9 @@ jobs:
 
       - name: Sort failed URLs alphabetically
         run: python3 scripts/sort-lychee-output.py
+
+      - name: Upload Lychee output as GitHub Job Summary
+        run: cat ${{ env.LYCHEE_OUTPUT_FILE }} > $GITHUB_STEP_SUMMARY
 
       - name: Find the last report issue open
         if: github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main'
