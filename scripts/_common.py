@@ -8,8 +8,10 @@ A Python file that makes some commonly used functions available for other script
 from enum import Enum
 from pathlib import Path
 import os
+import re
 import json
 import subprocess
+import urllib.parse
 
 
 class Colors(str, Enum):
@@ -202,3 +204,46 @@ def update_github_issue(issue_number, title, body):
         )
 
     return result
+
+
+def replace_characters_for_link(page):
+    return str(
+        page.replace("[", "\\[")
+        .replace("]", "\\]")
+        .replace(")", "\\)")
+        .replace("(", "\\(")
+    )
+
+
+def generate_github_link(item):
+    def replace_reference(match):
+        page = match.group(0)
+
+        directory = Path(page).parent
+        filename = urllib.parse.quote(Path(page).name)
+
+        page = replace_characters_for_link(page)
+
+        return f"[{page}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename})"
+
+    return re.sub(r"pages\..*\.md", replace_reference, item)
+
+
+def generate_github_edit_link(page):
+    directory = Path(page).parent
+    filename = urllib.parse.quote(Path(page).name)
+
+    page = replace_characters_for_link(page)
+
+    return (
+        f"[{page}](https://github.com/tldr-pages/tldr/edit/main/{directory}/{filename})"
+    )
+
+
+def generate_github_new_link(page):
+    directory = Path(page).parent
+    filename = urllib.parse.quote(Path(page).name)
+
+    page = replace_characters_for_link(page)
+
+    return f"[{page}](https://github.com/tldr-pages/tldr/new/main/{directory}?filename={filename})"

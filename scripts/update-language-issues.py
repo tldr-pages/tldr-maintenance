@@ -2,9 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import os
-import re
 import sys
-import urllib.parse
 
 from pathlib import Path
 from enum import Enum
@@ -15,6 +13,9 @@ from _common import (
     create_github_issue,
     get_github_issue,
     update_github_issue,
+    generate_github_link,
+    generate_github_edit_link,
+    generate_github_new_link,
 )
 
 
@@ -22,7 +23,7 @@ class Topics(str, Enum):
     def __str__(self):
         return str(
             self.value
-        )  # make str(Colors.COLOR) return the ANSI code instead of an Enum object
+        )  # make str(Topics.TOPIC) return the Topic instead of an Enum object
 
     INCONSISTENT = "inconsistent filename(s)"
     MALFORMED_OR_OUTDATED_MORE_INFO_LINK = (
@@ -37,58 +38,6 @@ class Topics(str, Enum):
     MISSING_ENGLISH = "missing English page(s)"
     MISSING_TRANSLATED = "missing translated page(s)"
     LINT_ERRORS = "linter error(s)"
-
-
-def generate_github_link(item):
-    def replace_reference(match):
-        page = match.group(0)
-
-        directory = Path(page).parent
-        filename = Path(page).name
-
-        filename = urllib.parse.quote(filename)
-        page = str(
-            page.replace("[", "\\[")
-            .replace("]", "\\]")
-            .replace(")", "\\)")
-            .replace("(", "\\(")
-        )
-
-        return f"[{page}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename})"
-
-    return re.sub(r"pages\..*\.md", replace_reference, item)
-
-
-def generate_github_edit_link(page):
-    directory = Path(page).parent
-    filename = Path(page).name
-
-    filename = urllib.parse.quote(filename)
-    page = str(
-        page.replace("[", "\\[")
-        .replace("]", "\\]")
-        .replace(")", "\\)")
-        .replace("(", "\\(")
-    )
-
-    return (
-        f"[{page}](https://github.com/tldr-pages/tldr/edit/main/{directory}/{filename})"
-    )
-
-
-def generate_github_new_link(page):
-    directory = Path(page).parent
-    filename = Path(page).name
-
-    filename = urllib.parse.quote(filename)
-    page = str(
-        page.replace("[", "\\[")
-        .replace("]", "\\]")
-        .replace(")", "\\)")
-        .replace("(", "\\(")
-    )
-
-    return f"[{page}](https://github.com/tldr-pages/tldr/new/main/{directory}?filename={filename})"
 
 
 def parse_file(filepath):
