@@ -170,7 +170,7 @@ def add_metric_details(lines, data, topic_name, topic, file_name):
 def generate_dashboard(data):
     DETAILS_OPENING = "<details>\n"
     DETAILS_CLOSING = "\n</details>\n"
-    
+
     markdown = "# Translation Dashboard Status\n\n"
     markdown += "<!-- __NOUPDATE__ -->\n"
     markdown += f"**Last updated:** {get_datetime_pretty()}\n"
