@@ -10,7 +10,6 @@ from enum import Enum
 from _common import (
     get_datetime_pretty,
     strip_dynamic_content,
-    create_github_issue,
     get_github_issue,
     update_github_issue,
     generate_github_link,
