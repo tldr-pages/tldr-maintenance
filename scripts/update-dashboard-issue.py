@@ -8,6 +8,8 @@ import sys
 from pathlib import Path
 from enum import Enum
 from _common import (
+    get_datetime_pretty,
+    strip_dynamic_content,
     get_github_issue,
     update_github_issue,
     generate_github_link,
@@ -168,7 +170,12 @@ def add_metric_details(lines, data, topic_name, topic, file_name):
 def generate_dashboard(data):
     DETAILS_OPENING = "<details>\n"
     DETAILS_CLOSING = "\n</details>\n"
-    markdown = "# Translation Dashboard Status\n\n## Overview\n\n"
+
+    markdown = "# Translation Dashboard Status\n\n"
+    markdown += "<!-- __NOUPDATE__ -->\n"
+    markdown += f"**Last updated:** {get_datetime_pretty()}\n"
+    markdown += "<!-- __END_NOUPDATE__ -->\n"
+    markdown += "## Overview\n"
     markdown += "| Metric | Value |\n"
     markdown += "|--------|-------|\n"
 
@@ -235,6 +242,14 @@ def main():
         parsed_data = parse_seperate_text_files(parsed_data)
 
         markdown_content = generate_dashboard(parsed_data)
+
+        if strip_dynamic_content(markdown_content) == strip_dynamic_content(
+            issue_data["body"]
+        ):
+            print(
+                "new issue body (sans dynamic content) identical to existing issue body, not updating"
+            )
+            sys.exit(0)
 
         result = update_github_issue(
             issue_data["number"], issue_title, markdown_content

@@ -7,6 +7,7 @@ A Python file that makes some commonly used functions available for other script
 
 from enum import Enum
 from pathlib import Path
+from datetime import datetime, timezone
 import os
 import re
 import json
@@ -149,7 +150,12 @@ def get_github_issue(title: str = None) -> list[dict]:
     data = json.loads(result.stdout)
 
     simplified_data = [
-        {"number": issue["number"], "title": issue["title"], "url": issue["html_url"]}
+        {
+            "number": issue["number"],
+            "title": issue["title"],
+            "body": issue["body"],
+            "url": issue["html_url"],
+        }
         for issue in data
     ]
 
@@ -159,6 +165,7 @@ def get_github_issue(title: str = None) -> list[dict]:
                 {
                     "number": issue["number"],
                     "title": issue["title"],
+                    "body": issue["body"],
                     "url": issue["html_url"],
                 }
                 for issue in data
@@ -204,6 +211,30 @@ def update_github_issue(issue_number, title, body):
         )
 
     return result
+
+
+def get_datetime_pretty():
+    # Guarantee UTC to be fair to everyone, since we can't make this dynamic based on the browser's timezone
+    date = datetime.now(timezone.utc)
+    return date.strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
+def strip_dynamic_content(markdown):
+    """
+    Removes any dynamic content enclosed within `<!-- __NOUPDATE__ -->` and `<!-- __END_NOUPDATE__ -->` tags from the provided Markdown string.
+
+    This function is used to remove any dynamic content (e.g. the last updated time) from the given string before updating a GitHub issue, ensuring that the issue content remains static if not *actual* content has changed
+
+    Args:
+            markdown (str): The Markdown content to be processed.
+
+    Returns:
+            str: The Markdown content with the dynamic content removed.
+    """
+    regex = re.compile(
+        r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE
+    )
+    return re.sub(regex, "", markdown)
 
 
 def replace_characters_for_link(page):
