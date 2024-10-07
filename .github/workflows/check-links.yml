@@ -42,9 +42,9 @@ jobs:
       - name: Lychee URL checker
         uses: lycheeverse/lychee-action@master
         id: lychee
+        continue-on-error: true
         with:
           jobSummary: false
-          fail: false
           args: >-
             --cache
             --verbose
