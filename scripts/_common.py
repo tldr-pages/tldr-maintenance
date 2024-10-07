@@ -215,14 +215,7 @@ def update_github_issue(issue_number, title, body):
 def get_datetime_pretty():
     # Guarantee UTC to be fair to everyone, since we can't make this dynamic based on the browser's timezone
     date = datetime.now(timezone.utc)
-    date = date.isoformat()  # Start with a date string in a standard format
-    date = date.replace("T", " ")  # Insert space in between date and time
-    # Make timezone easier to read & explicit
-    date = date.replace("+00:00", " UTC")
-    # Remove microseconds for easier groking
-    date = re.sub(r"\.[0-9]+", "", date)
-
-    return date
+    return date.strftime("%Y-%m-%d %H:%M:%S UTC")
 
 
 def strip_dynamic_content(markdown):
