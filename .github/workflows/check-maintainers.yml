@@ -9,6 +9,15 @@ on:
         - .github/workflows/check-maintainers.yml
         - scripts/check-maintainers.py
 
+permissions:
+  contents: read
+  issues: write
+  discussions: write
+  pull-requests: write
+  repository-projects: write
+  deployments: write
+  statuses: write
+
 jobs:
   check-maintainers:
     runs-on: ubuntu-latest
