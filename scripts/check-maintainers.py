@@ -22,6 +22,8 @@ def get_repo_collaborators():
     command = [
         "gh",
         "api",
+        "-H",
+        "X-GitHub-Api-Version: 2022-11-28",
         f"/repos/{ORG_NAME}/{REPO_NAME}/collaborators",
         "--paginate",
         "--slurp",
@@ -35,7 +37,15 @@ def get_repo_collaborators():
 
 
 def get_org_members():
-    command = ["gh", "api", f"/orgs/{ORG_NAME}/members", "--paginate", "--slurp"]
+    command = [
+        "gh",
+        "api",
+        "-H",
+        "X-GitHub-Api-Version: 2022-11-28",
+        f"/orgs/{ORG_NAME}/members",
+        "--paginate",
+        "--slurp",
+    ]
     output = run_gh_command(command)
     if output:
         org_members = json.loads(output)[0]
@@ -44,7 +54,13 @@ def get_org_members():
 
 
 def is_member_admin(username):
-    command = ["gh", "api", f"/orgs/{ORG_NAME}/memberships/{username}"]
+    command = [
+        "gh",
+        "api",
+        "-H",
+        "X-GitHub-Api-Version: 2022-11-28",
+        f"/orgs/{ORG_NAME}/memberships/{username}",
+    ]
     output = run_gh_command(command)
 
     if output:
