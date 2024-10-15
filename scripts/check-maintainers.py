@@ -43,8 +43,6 @@ def get_org_members():
         "-H",
         "X-GitHub-Api-Version: 2022-11-28",
         f"/orgs/{ORG_NAME}/members",
-        "--paginate",
-        "--slurp",
     ]
     output = run_gh_command(command)
     if output:
