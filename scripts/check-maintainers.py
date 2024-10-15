@@ -46,7 +46,7 @@ def get_org_members():
     ]
     output = run_gh_command(command)
     if output:
-        org_members = json.loads(output)[0]
+        org_members = json.loads(output)
         return sorted(set(org_member["login"] for org_member in org_members))
     return []
 
