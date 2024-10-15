@@ -1,0 +1,70 @@
+name: Check maintainers
+
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: "0 0 1 * *"
+  push:
+    paths:
+        - .github/workflows/check-maintainers.yml
+        - scripts/check-maintainers.py
+
+jobs:
+  check-maintainers:
+    runs-on: ubuntu-latest
+    env:
+      LYCHEE_OUTPUT_FILE: "lychee/out.md"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+
+      - uses: actions/setup-python@v5
+        if: github.ref == 'refs/heads/main'
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install pip dependencies
+        if: github.ref == 'refs/heads/main'
+        run: pip install -r requirements.txt
+
+      - name: Run the script and generate artifacts
+        id: check-maintainers
+        run: |
+          ./scripts/check-maintainers.py 2>&1 | tee check-maintainers.txt
+          cat check-maintainers.txt >> $GITHUB_STEP_SUMMARY
+          if [[ ! -s check-maintainers.txt ]]; then
+            echo "empty=true" >> $GITHUB_OUTPUT
+          else
+            echo "empty=false" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: check-maintainers
+          path: check-maintainers.txt
+
+      - name: Find the last report issue open
+        if: github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main'
+        uses: micalevisk/last-issue-action@v2
+        id: last-issue
+        with:
+          state: open
+          labels: check maintainers
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update last report open issue created
+        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' }}
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: MAINTAINERS checker report
+          content-filepath: check-maintainers.txt
+          issue-number: ${{ steps.last-issue.outputs.issue-number }}
+          labels: check links
+
+      - name: Close last report open issue
+        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.check-maintainers.outputs.is_empty == 'true' && steps.last-issue.outputs.has-found == 'true' }}
+        run: gh issue close ${{ steps.last-issue.outputs.issue-number }}
