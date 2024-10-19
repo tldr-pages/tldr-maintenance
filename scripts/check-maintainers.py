@@ -6,6 +6,8 @@ import re
 import json
 import subprocess
 
+from _common import Colors, create_colored_line
+
 ORG_NAME = "tldr-pages"
 REPO_NAME = "tldr"
 
@@ -13,9 +15,16 @@ REPO_NAME = "tldr"
 def run_gh_command(command):
     result = subprocess.run(command, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"Error running command: {command}\n{result.stderr}")
+        print(
+            create_colored_line(
+                Colors.RED, f"Error running command: {command}\n{result.stderr}"
+            )
+        )
         return None
     return result.stdout
+
+
+API_VERSION = "X-GitHub-Api-Version: 2022-11-28"
 
 
 def get_repo_collaborators():
@@ -23,7 +32,7 @@ def get_repo_collaborators():
         "gh",
         "api",
         "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
+        API_VERSION,
         f"/repos/{ORG_NAME}/{REPO_NAME}/collaborators",
         "--paginate",
         "--slurp",
@@ -41,7 +50,7 @@ def get_org_members():
         "gh",
         "api",
         "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
+        API_VERSION,
         f"/orgs/{ORG_NAME}/members",
     ]
     output = run_gh_command(command)
@@ -56,7 +65,7 @@ def is_member_admin(username):
         "gh",
         "api",
         "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
+        API_VERSION,
         f"/orgs/{ORG_NAME}/memberships/{username}",
     ]
     output = run_gh_command(command)
@@ -84,25 +93,41 @@ def verify_user_role(users, role, collaborators, org_members):
     elif role == "organization owners":
         verify_owner(users)
     else:
-        print(f"Unknown role {role} for {users}.")
+        print(create_colored_line(Colors.RED, f"Unknown role {role} for {users}."))
 
 
 def verify_collaborator(users, collaborators):
     for user in users:
         if user not in collaborators:
-            print(f"{user} is not a collaborator.")
+            print(create_colored_line(Colors.RED, f"{user} is not a collaborator."))
+        else:
+            print(create_colored_line(Colors.GREEN, f"{user} is a collaborator."))
 
 
 def verify_member(users, org_members):
     for user in users:
         if user not in org_members:
-            print(f"{user} is not an organization member.")
+            print(
+                create_colored_line(
+                    Colors.RED, f"{user} is not an organization member."
+                )
+            )
+        else:
+            print(
+                create_colored_line(Colors.GREEN, f"{user} is an organization member.")
+            )
 
 
 def verify_owner(users):
     for user in users:
         if not is_member_admin(user):
-            print(f"{user} is not an organization owner.")
+            print(
+                create_colored_line(Colors.RED, f"{user} is not an organization owner.")
+            )
+        else:
+            print(
+                create_colored_line(Colors.GREEN, f"{user} is an organization owner.")
+            )
 
 
 def parse_maintainers_file(file_path):
