@@ -119,7 +119,7 @@ def add_language_details(line, patterns, current_language, data):
 
 def parse_seperate_text_files(data):
     for file in [
-        Path("inconsistent_filenames"),
+        Path("inconsistent-filenames.txt"),
         Path("malformed-or-outdated-more-info-link-pages.txt"),
         Path("missing-alias-pages.txt"),
         Path("mismatched-page-titles.txt"),
