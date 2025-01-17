@@ -18,20 +18,26 @@ EXIT_CODE=0
 run_python_script() {
   local script_name="$1"
   local remove_text="$2"
+  local flags="$3"
+  local script_path="./tldr/scripts/${script_name}.py"
 
-  ./tldr/scripts/"${script_name}".py -Sn > "$script_name".txt
-  sed 's/\x1b\[[0-9;]*m//g' "$script_name".txt | sed "$remove_text" > "$script_name".txt.tmp
-  mv "$script_name".txt.tmp "$script_name".txt
-  sort -o "$script_name".txt "$script_name".txt
+  local output
+  if [ -z "$flags" ]; then
+      output=$("$script_path")
+  else
+      output=$("$script_path" "${flags}")
+  fi
+
+  echo "$output" | \
+      sed 's/\x1b\[[0-9;]*m//g' | \
+      sed "$remove_text" | \
+      sort > "$script_name".txt
 }
 
-run_python_script "set-more-info-link" 's/ link would be.*$//'
-run_python_script "set-alias-page" 's/ page would be.*$//'
-run_python_script "set-page-title" 's/ title would be.*$//'
-
-if [[ "$OSTYPE" != "darwin"* ]]; then
-  (cd tldr && ./scripts/wrong-filename.sh && mv ./inconsistent-filenames.txt ../inconsistent-filenames.txt)
-fi
+run_python_script "set-more-info-link" 's/ link would be.*$//' "-Sn"
+run_python_script "set-alias-page" 's/ page would be.*$//' "-Sn"
+run_python_script "set-page-title" 's/ title would be.*$//' "-Sn"
+run_python_script "check-page-title" '' ""
 
 ./scripts/check-pages.sh -v
 
@@ -64,8 +70,8 @@ grep_count_and_display() {
 
 printf "# Metrics for tldr\n\n"
 
-grep_count_and_display "pages/" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
 grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
+grep_count_and_display "pages.en/" "./check-page-title.txt" "./check-pages/malformed-or-outdated-page-titles.txt" "malformed page title(s)"
 
 count_and_display "./check-pages/missing-tldr-pages.txt" "missing TLDR page(s)"
 count_and_display "./check-pages/misplaced-pages.txt" "misplaced page(s)"
@@ -83,6 +89,7 @@ for folder in $folders; do
   grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-or-outdated-more-info-link-$folder_suffix-pages.txt" "malformed or outdated more info link page(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-alias-page.txt" "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-page-title.txt" "./check-pages.$folder_suffix/mismatched-$folder_suffix-page-titles.txt" "mismatched page title(s)"
+  grep_count_and_display "pages.$folder_suffix/" "./check-page-title.txt" "./check-pages.$folder_suffix/malformed-or-outdated-$folder_suffix-page-titles.txt" "malformed or outdated page title(s)"
 
   count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt" "missing TLDR page(s)"
   count_and_display "./check-pages.$folder_suffix/misplaced-$folder_suffix-pages.txt" "misplaced page(s)"
@@ -95,7 +102,7 @@ for folder in $folders; do
   printf -- '_%.0s' {1..100}; echo
 done
 
-rm -f "./set-alias-page.txt" "./set-more-info-link.txt" "./set-page-title.txt"
+rm -f "./set-alias-page.txt" "./set-more-info-link.txt" "./set-page-title.txt" "./check-page-title.txt"
 
 merge_files_and_calculate_total() {
   local files_pattern="$1"
@@ -140,10 +147,10 @@ calculate_and_display() {
   fi
 }
 
-calculate_and_display '*/check-pages*/inconsistent*filenames.txt' "./inconsistent-filenames.txt" "$total_pages" "inconsistent filename(s)"
 calculate_and_display '*/check-pages*/malformed*more-info-link*pages.txt' "./malformed-or-outdated-more-info-link-pages.txt" "$total_pages" "malformed or outdated more info link page(s)"
 calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
 calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles.txt" "$total_unique_non_english_pages" "mismatched page title(s)"
+calculate_and_display '*/check-pages*/malformed-or-outdated*page-titles.txt' "./malformed-or-outdated-page-titles.txt" "$total_pages" "malformed or outdated page title(s)"
 calculate_and_display '*/check-pages*/missing-tldr*pages.txt' "./missing-tldr-pages.txt" "$total_tldr_pages" "missing TLDR page(s)"
 calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-count.txt' "./outdated-pages-based-on-command-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
