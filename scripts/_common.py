@@ -193,6 +193,13 @@ def update_github_issue(issue_number, title, body):
         "-f",
         f"body={body}",
     ]
+    
+    print(
+        create_colored_line(
+            Colors.CYAN,
+            f"Updating {title} (#{issue_number}): {len(body)} - {body}"
+        )
+    )
 
     result = subprocess.run(command, capture_output=True, text=True)
 
@@ -200,7 +207,7 @@ def update_github_issue(issue_number, title, body):
         print(
             create_colored_line(
                 Colors.RED,
-                f"Updating {title} (#{issue_number}) failed: {result.stderr}",
+                f"Updating {title} (#{issue_number}) failed: {result.stderr}"
             )
         )
     else:
