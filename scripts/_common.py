@@ -178,6 +178,11 @@ def get_github_issue(title: str = None) -> list[dict]:
 
 
 def update_github_issue(issue_number, title, body):
+    payload = {
+        "title": title,
+        "body": body,
+    }
+    
     command = [
         "gh",
         "api",
@@ -188,20 +193,11 @@ def update_github_issue(issue_number, title, body):
         "-H",
         "X-GitHub-Api-Version: 2022-11-28",
         f"/repos/tldr-pages/tldr-maintenance/issues/{issue_number}",
-        "-f",
-        f"title={title}",
-        "-f",
-        f"body={body}",
+        "--input",
+        "-"
     ]
-    
-    print(
-        create_colored_line(
-            Colors.CYAN,
-            f"Updating {title} (#{issue_number}): {len(body)} - {body}"
-        )
-    )
 
-    result = subprocess.run(command, capture_output=True, text=True)
+    result = subprocess.run(command, input=json.dumps(payload), capture_output=True, text=True)
 
     if result.returncode != 0:
         print(
