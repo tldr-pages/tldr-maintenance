@@ -182,7 +182,7 @@ def update_github_issue(issue_number, title, body):
         "title": title,
         "body": body,
     }
-    
+
     command = [
         "gh",
         "api",
@@ -194,16 +194,18 @@ def update_github_issue(issue_number, title, body):
         "X-GitHub-Api-Version: 2022-11-28",
         f"/repos/tldr-pages/tldr-maintenance/issues/{issue_number}",
         "--input",
-        "-"
+        "-",
     ]
 
-    result = subprocess.run(command, input=json.dumps(payload), capture_output=True, text=True)
+    result = subprocess.run(
+        command, input=json.dumps(payload), capture_output=True, text=True
+    )
 
     if result.returncode != 0:
         print(
             create_colored_line(
                 Colors.RED,
-                f"Updating {title} (#{issue_number}) failed: {result.stderr}"
+                f"Updating {title} (#{issue_number}) failed: {result.stderr}",
             )
         )
     else:
