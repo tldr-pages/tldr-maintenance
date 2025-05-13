@@ -1,0 +1,5 @@
+/.github/workflows/* @sbrl @kbdharun @sebastiaanspeck
+/scripts/* @sebastiaanspeck @kbdharun
+/package.json @kbdharun @sebastiaanspeck
+/package-lock.json @kbdharun @sebastiaanspeck
+/requirements.txt @kbdharun @sebastiaanspeck
