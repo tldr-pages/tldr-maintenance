@@ -59,6 +59,19 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: zip -r metrics.zip metrics-log.md *.txt check-pages*/
 
+      - name: Delete artifacts from GitHub Release
+        if: github.ref == 'refs/heads/main'
+        uses: mknejp/delete-release-assets@03294a667e97911b5883d3028f277a0b4441edfb # v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: latest
+          fail-if-no-assets: false
+          fail-if-no-release: false
+          assets: |
+            metrics-log.md
+            *.txt
+            metrics.zip
+
       - name: Upload artifacts to GitHub Release
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # v2.2.2
