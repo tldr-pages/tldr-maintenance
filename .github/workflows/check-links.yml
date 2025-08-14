@@ -56,8 +56,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: cat pre-sort
+        run: cat ${{ env.LYCHEE_OUTPUT_FILE }}
+
       - name: Sort failed URLs alphabetically
         run: python3 scripts/sort-lychee-output.py
+
+      - name: cat post-sort
+        run: cat ${{ env.LYCHEE_OUTPUT_FILE }}
 
       - name: Upload Lychee output as GitHub Job Summary
         run: cat ${{ env.LYCHEE_OUTPUT_FILE }} > $GITHUB_STEP_SUMMARY
