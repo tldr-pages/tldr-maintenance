@@ -56,14 +56,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: cat pre-sort
-        run: cat ${{ env.LYCHEE_OUTPUT_FILE }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: output
+          path: ${{ env.LYCHEE_OUTPUT_FILE }}
 
       - name: Sort failed URLs alphabetically
         run: python3 scripts/sort-lychee-output.py
-
-      - name: cat post-sort
-        run: cat ${{ env.LYCHEE_OUTPUT_FILE }}
 
       - name: Upload Lychee output as GitHub Job Summary
         run: cat ${{ env.LYCHEE_OUTPUT_FILE }} > $GITHUB_STEP_SUMMARY
@@ -97,8 +96,3 @@ jobs:
         with:
           path: .lycheecache
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
-
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: output
-          path: ${{ env.LYCHEE_OUTPUT_FILE }}
