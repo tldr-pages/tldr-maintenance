@@ -56,11 +56,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: output
-          path: ${{ env.LYCHEE_OUTPUT_FILE }}
-
       - name: Sort failed URLs alphabetically
         run: python3 scripts/sort-lychee-output.py
 
