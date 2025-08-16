@@ -40,7 +40,7 @@ jobs:
           path: ${{ env.LYCHEE_INPUT_FILE }}
 
       - name: Lychee URL checker
-        uses: lycheeverse/lychee-action@82202e5e9c2f4ef1a55a3d02563e1cb6041e5332 # v2.4.1
+        uses: lycheeverse/lychee-action@5c4ee84814c983aa7164eaee476f014e53ff3963 # v2.5.0
         id: lychee
         continue-on-error: true
         with:
@@ -91,8 +91,3 @@ jobs:
         with:
           path: .lycheecache
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
-
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: output
-          path: ${{ env.LYCHEE_OUTPUT_FILE }}

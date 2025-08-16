@@ -6,9 +6,7 @@ from pathlib import Path
 
 
 def extract_failures(markdown_text):
-    failure_pattern = re.compile(
-        r"^\* \[(\w+)\] \[([^\]]+)\]\([^\)]+\) \| .*$", re.MULTILINE
-    )
+    failure_pattern = re.compile(r"^\* \[([^\]]+)\] <([^>]+)> \| .*$", re.MULTILINE)
     return failure_pattern.findall(markdown_text)
 
 
