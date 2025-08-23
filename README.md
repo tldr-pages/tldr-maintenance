@@ -1,5 +1,8 @@
 # tldr-maintenance
 
+[![Calculate Metrics](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/calculate-metrics.yml/badge.svg)](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/calculate-metrics.yml)
+[![Check links with Lychee](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/check-links.yml/badge.svg)](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/check-links.yml)
+
 This repo runs a Bash script that calculates metrics about the current state of the [tldr-repo](https://github.com/tldr-pages/tldr).  
 These [metrics](https://github.com/tldr-pages/tldr-maintenance/issues/25) will help contributors to quickly spot whether there is still work to do to maintain and improve the quality. It also helps to detect any issues in the [tldr-repo](https://github.com/tldr-pages/tldr).
 
