@@ -122,7 +122,7 @@ strip_commands() {
   
   mapfile -t stripped_commands < <(
     grep "$COMMAND_REGEX" "$file" | 
-    sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' | 
+    sed -E 's/\{\{([^{}]|(\{[^}]*\}))*\}\}/{{}}/g' | 
     sed 's/<[^>]*>//g' | 
     sed 's/([^)]*)//g' | 
     sed 's/"[^"]*"/""/g' | 
