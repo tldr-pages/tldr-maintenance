@@ -29,7 +29,7 @@ run_python_script "set-more-info-link" 's/ link would be.*$//'
 run_python_script "set-alias-page" 's/ page would be.*$//'
 run_python_script "set-page-title" 's/ title would be.*$//'
 
-./tldr/scripts/wrong-filename.py && mv ./tldr/inconsistent-filenames.txt ./inconsistent-filenames.txt
+./tldr/scripts/wrong-filename.py
 
 ./scripts/check-pages.sh -v
 
