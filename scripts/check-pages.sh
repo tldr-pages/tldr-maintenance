@@ -20,7 +20,7 @@
 #   - Adding -v enables verbose logging.
 
 ROOT_DIR="${TLDR_ROOT:-./tldr}"
-PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows" "cisco-ios")
+PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows" "cisco-ios" "dos")
 
 # shellcheck disable=SC2016
 COMMAND_REGEX='^`[^`]\+`$'
