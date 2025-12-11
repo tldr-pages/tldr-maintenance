@@ -164,6 +164,30 @@ check_missing_tldr_page() {
   done
 }
 
+check_missing_see_also_page() {
+  local file="$1"
+  read -r line
+
+  for command in $(echo ${line} | grep -Po '`[^`]*`' | sed 's/`//g' | sed 's/ /-/g'); do
+      local missing=true
+      local filename="${command,,}"
+      for platform in "${PLATFORMS[@]}"; do
+        if [ -f "$folder_path/$platform/$filename.md" ]; then
+          missing=false
+          break
+        fi
+      done
+
+        if [ "$missing" = true ]; then
+        local filepath
+        filepath=$(get_filepath_without_tldr "$file")
+        echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_TLDR_OUTPUT_FILE"
+        fi
+  done
+
+
+}
+
 check_misplaced_page() {
   local file="$1"
   local platform
@@ -268,7 +292,10 @@ for file in "${files[@]}"; do
     case "$check_name" in
         "missing_tldr_page")
             # shellcheck disable=SC2016
-            grep -o '`tldr \(.*\)`$' "$file" | check_missing_tldr_page "$file"
+            grep -o '`tldr .*`$' "$file" | check_missing_tldr_page "$file"
+            ;;
+        "missing_see_also_page")
+            grep -o '^> See also: .*' "$file" | check_missing_see_also_page "$file"
             ;;
         "misplaced_page")
             check_misplaced_page "$file"
