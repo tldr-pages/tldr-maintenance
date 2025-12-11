@@ -24,7 +24,7 @@ PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos"
 
 # shellcheck disable=SC2016
 COMMAND_REGEX='^`[^`]\+`$'
-CHECK_NAMES="missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
+CHECK_NAMES="missing_tldr_page,missing_see_also_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
 VERBOSE=false
 
 while getopts ":l:c:v" opt; do
