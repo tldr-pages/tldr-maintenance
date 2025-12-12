@@ -167,8 +167,7 @@ check_missing_tldr_page() {
 check_missing_see_also_page() {
   local file="$1"
   read -r line
-
-  for command in "$(echo ${line}" | grep -Po '`[^`]*`' | sed 's/`//g' | sed 's/ /-/g'); do
+  for command in "$(echo '${line}' | grep -Po '`[^`]*`' | sed 's/`//g' | sed 's/ /-/g')"; do
       local missing=true
       local filename="${command,,}"
       for platform in "${PLATFORMS[@]}"; do
