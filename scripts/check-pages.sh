@@ -3,10 +3,10 @@
 
 # This script can be executed to check several things for the translated pages. This could also be run on the English folder, be aware that some checks are not applicable.
 # - Check if a page references missing TLDR pages.
-#   A command is marked as missing when it is mentioned in a page (`tldr {{command}}`) but the referenced command doesn't have a (translated) page.     
-# - Check if a page is misplaced. 
+#   A command is marked as missing when it is mentioned in a page (`tldr {{command}}`) but the referenced command doesn't have a (translated) page.
+# - Check if a page is misplaced.
 #   A page is marked as misplaced when the page isn’t inside a folder in the list of supported platforms.
-# - Check if a page is outdated. 
+# - Check if a page is outdated.
 #   A page is marked as outdated when the number of commands differ from the number of commands in the English page or the contents of the commands differ from the English page.
 # - Check if a page is missing as English page (n/a for English).
 #   A page is marked as missing when the filename can't be found as English page.
@@ -24,7 +24,7 @@ PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos"
 
 # shellcheck disable=SC2016
 COMMAND_REGEX='^`[^`]\+`$'
-CHECK_NAMES="missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
+CHECK_NAMES="missing_tldr_page,missing_see_also_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
 VERBOSE=false
 
 while getopts ":l:c:v" opt; do
@@ -119,14 +119,14 @@ strip_commands() {
   local file="$1"
 
   local stripped_commands=()
-  
+
   mapfile -t stripped_commands < <(
-    grep "$COMMAND_REGEX" "$file" | 
-    sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' | 
-    sed 's/<[^>]*>//g' | 
-    sed 's/([^)]*)//g' | 
-    sed 's/"[^"]*"/""/g' | 
-    sed "s/'[^']*'//g" | 
+    grep "$COMMAND_REGEX" "$file" |
+    sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' |
+    sed 's/<[^>]*>//g' |
+    sed 's/([^)]*)//g' |
+    sed 's/"[^"]*"/""/g' |
+    sed "s/'[^']*'//g" |
     sed 's/`//g'
   )
 
@@ -135,7 +135,7 @@ strip_commands() {
 
 check_missing_tldr_page() {
   local file="$1"
-  
+
   while IFS= read -r line; do
     line="${line#\`tldr }" # Remove "`tldr " prefix
     line="${line%\`}"    # Remove the last backtick
@@ -164,6 +164,29 @@ check_missing_tldr_page() {
   done
 }
 
+check_missing_see_also_page() {
+  local file="$1"
+  read -r line
+  for command in "$(echo '${line}' | grep -Po '`[^`]*`' | sed 's/`//g' | sed 's/ /-/g')"; do
+      local missing=true
+      local filename="${command,,}"
+      for platform in "${PLATFORMS[@]}"; do
+        if [ -f "$folder_path/$platform/$filename.md" ]; then
+          missing=false
+          break
+        fi
+      done
+
+        if [ "$missing" = true ]; then
+        local filepath
+        filepath=$(get_filepath_without_tldr "$file")
+        echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_TLDR_OUTPUT_FILE"
+        fi
+  done
+
+
+}
+
 check_misplaced_page() {
   local file="$1"
   local platform
@@ -189,7 +212,7 @@ check_outdated_page() {
   local commands
   english_commands=$(count_commands "$english_file")
   commands=$(count_commands "$file")
-  
+
   english_commands_as_string=$(strip_commands "$english_file")
   commands_as_string=$(strip_commands "$file")
 
@@ -268,7 +291,10 @@ for file in "${files[@]}"; do
     case "$check_name" in
         "missing_tldr_page")
             # shellcheck disable=SC2016
-            grep -o '`tldr \(.*\)`$' "$file" | check_missing_tldr_page "$file"
+            grep -o '`tldr .*`$' "$file" | check_missing_tldr_page "$file"
+            ;;
+        "missing_see_also_page")
+            grep -o '^> See also: .*' "$file" | check_missing_see_also_page "$file"
             ;;
         "misplaced_page")
             check_misplaced_page "$file"
