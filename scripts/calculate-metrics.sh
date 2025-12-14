@@ -20,7 +20,7 @@ run_python_script() {
   local remove_text="$2"
   local additional_options="$3"
 
-  ./tldr/scripts/"${script_name}".py -Sn $additional_options > "$script_name".txt
+  ./tldr/scripts/"${script_name}".py -Sn "$additional_options" > "$script_name".txt
   sed 's/\x1b\[[0-9;]*m//g' "$script_name".txt | sed "$remove_text" > "$script_name".txt.tmp
   mv "$script_name".txt.tmp "$script_name".txt
   sort -o "$script_name".txt "$script_name".txt
