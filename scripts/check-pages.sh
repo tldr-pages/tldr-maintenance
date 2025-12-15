@@ -3,10 +3,10 @@
 
 # This script can be executed to check several things for the translated pages. This could also be run on the English folder, be aware that some checks are not applicable.
 # - Check if a page references missing TLDR pages.
-#   A command is marked as missing when it is mentioned in a page (`tldr {{command}}`) but the referenced command doesn't have a (translated) page.     
-# - Check if a page is misplaced. 
+#   A command is marked as missing when it is mentioned in a page (`tldr {{command}}`) but the referenced command doesn't have a (translated) page.
+# - Check if a page is misplaced.
 #   A page is marked as misplaced when the page isn’t inside a folder in the list of supported platforms.
-# - Check if a page is outdated. 
+# - Check if a page is outdated.
 #   A page is marked as outdated when the number of commands differ from the number of commands in the English page or the contents of the commands differ from the English page.
 # - Check if a page is missing as English page (n/a for English).
 #   A page is marked as missing when the filename can't be found as English page.
@@ -119,14 +119,14 @@ strip_commands() {
   local file="$1"
 
   local stripped_commands=()
-  
+
   mapfile -t stripped_commands < <(
-    grep "$COMMAND_REGEX" "$file" | 
-    sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' | 
-    sed 's/<[^>]*>//g' | 
-    sed 's/([^)]*)//g' | 
-    sed 's/"[^"]*"/""/g' | 
-    sed "s/'[^']*'//g" | 
+    grep "$COMMAND_REGEX" "$file" |
+    sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' |
+    sed 's/<[^>]*>//g' |
+    sed 's/([^)]*)//g' |
+    sed 's/"[^"]*"/""/g' |
+    sed "s/'[^']*'//g" |
     sed 's/`//g'
   )
 
@@ -135,7 +135,7 @@ strip_commands() {
 
 check_missing_tldr_page() {
   local file="$1"
-  
+
   while IFS= read -r line; do
     line="${line#\`tldr }" # Remove "`tldr " prefix
     line="${line%\`}"    # Remove the last backtick
@@ -189,7 +189,7 @@ check_outdated_page() {
   local commands
   english_commands=$(count_commands "$english_file")
   commands=$(count_commands "$file")
-  
+
   english_commands_as_string=$(strip_commands "$english_file")
   commands_as_string=$(strip_commands "$file")
 
