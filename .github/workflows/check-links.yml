@@ -84,7 +84,7 @@ jobs:
       - name: Close last report open issue
         if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.lychee.outputs.exit_code == 0 && steps.last-issue.outputs.has-found == 'true' }}
         run: gh issue close ${{ steps.last-issue.outputs.issue-number }}
-  
+
       - name: Save lychee cache
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         if: always()
