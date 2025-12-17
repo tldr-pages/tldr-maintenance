@@ -5,7 +5,7 @@
 # - Check if a page references missing TLDR pages.
 #   A command is marked as missing when it is mentioned in a page (`tldr {{command}}`) but the referenced command doesn't have a (translated) page.
 # - Check if a page is misplaced.
-#   A page is marked as misplaced when the page isn’t inside a folder in the list of supported platforms.
+#   A page is marked as misplaced when the page isn't inside a folder in the list of supported platforms.
 # - Check if a page is outdated.
 #   A page is marked as outdated when the number of commands differ from the number of commands in the English page or the contents of the commands differ from the English page.
 # - Check if a page is missing as English page (n/a for English).
@@ -24,7 +24,7 @@ PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos"
 
 # shellcheck disable=SC2016
 COMMAND_REGEX='^`[^`]\+`$'
-CHECK_NAMES="missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
+CHECK_NAMES="missing_tldr_page,missing_see_also_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
 VERBOSE=false
 
 while getopts ":l:c:v" opt; do
@@ -164,6 +164,34 @@ check_missing_tldr_page() {
   done
 }
 
+check_missing_see_also_page() {
+  local file="$1"
+  read -r line
+  if [ "$line" = "" ]
+  then
+    return
+  fi
+
+  # shellcheck disable=SC2016
+  for command in $(echo "${line}" | grep -o '`[^`]*`' | sed 's/`//g' | sed 's/ /-/g'); do
+      local missing=true
+      local filename="${command,,}"
+      for platform in "${PLATFORMS[@]}"; do
+        if [ -f "$folder_path/$platform/$filename.md" ]; then
+          missing=false
+          break
+        fi
+      done
+
+        if [ "$missing" = true ]; then
+          local filepath
+          filepath=$(get_filepath_without_tldr "$file")
+
+          echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_TLDR_OUTPUT_FILE"
+        fi
+  done
+}
+
 check_misplaced_page() {
   local file="$1"
   local platform
@@ -259,6 +287,29 @@ if [[ " ${CHECK_NAMES[*]} " =~ " lint " ]]; then
   lint "$folder_path"
 fi
 
+declare -A section
+state=1
+while IFS= read -r line; do
+  case $state in
+  1)
+    locale=$(echo "$line" | grep "###" | cut -d " " -f 2)
+    if [ -n "$locale" ] ; then
+      state=2
+    fi
+  ;;
+  2)
+    content=$(echo "$line" | grep ">" | cut -d '`' -f 1)
+    if [ -n "$content" ]; then
+      section[$locale]=$content
+      state=1
+    fi
+    if [ "$line" == "---" ]; then
+      state=1
+    fi
+  ;;
+  esac
+done < ./tldr/contributing-guides/translation-templates/see-also-mentions.md
+
 for file in "${files[@]}"; do
   if [ -n "$LANGUAGE_ID" ]; then
     english_file=$(get_english_file "$file")
@@ -268,7 +319,10 @@ for file in "${files[@]}"; do
     case "$check_name" in
         "missing_tldr_page")
             # shellcheck disable=SC2016
-            grep -o '`tldr \(.*\)`$' "$file" | check_missing_tldr_page "$file"
+            grep -o '`tldr .*`$' "$file" | check_missing_tldr_page "$file"
+            ;;
+        "missing_see_also_page")
+            grep -o "^${section[${LANGUAGE_ID:-en}]}.*" "$file" | check_missing_see_also_page "$file"
             ;;
         "misplaced_page")
             check_misplaced_page "$file"
