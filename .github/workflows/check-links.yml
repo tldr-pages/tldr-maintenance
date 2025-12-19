@@ -17,14 +17,6 @@ jobs:
       LYCHEE_INPUT_FILE: "links.txt"
       LYCHEE_OUTPUT_FILE: "lychee/out.md"
     steps:
-      - name: Restore lychee cache
-        id: restore-cache
-        uses: actions/cache/restore@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
-        with:
-          path: .lycheecache
-          key: cache-lychee-${{ github.sha }}
-          restore-keys: cache-lychee-
-
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -82,10 +74,3 @@ jobs:
       - name: Close last report open issue
         if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.lychee.outputs.exit_code == 0 && steps.last-issue.outputs.has-found == 'true' }}
         run: gh issue close ${{ steps.last-issue.outputs.issue-number }}
-
-      - name: Save lychee cache
-        uses: actions/cache/save@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
-        if: always()
-        with:
-          path: .lycheecache
-          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
