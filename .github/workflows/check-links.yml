@@ -39,7 +39,7 @@ jobs:
           jobSummary: false
           args: >-
             --no-progress
-            --accept 100..=103,200..=299,429
+            --accept 100..=103,200..=302,429
             --max-concurrency 25
             --exclude-all-private
             ${{ env.LYCHEE_INPUT_FILE }}
