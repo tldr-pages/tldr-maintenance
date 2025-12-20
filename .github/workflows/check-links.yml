@@ -17,6 +17,14 @@ jobs:
       LYCHEE_INPUT_FILE: "links.txt"
       LYCHEE_OUTPUT_FILE: "lychee/out.md"
     steps:
+      - name: Restore lychee cache
+        id: restore-cache
+        uses: actions/cache/restore@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -33,18 +41,19 @@ jobs:
         with:
           jobSummary: false
           args: >-
+            --cache
             --no-progress
-            --accept 100..=103,200..=399,429
+            --accept 100..=103,200..=299,429
             --max-concurrency 25
             --exclude-all-private
             ${{ env.LYCHEE_INPUT_FILE }}
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Upload Lychee input and output as artifact
+      - name: Upload Lychee input and output
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          name: lychee-files
+          name: links-and-output
           path: |
             ${{ env.LYCHEE_INPUT_FILE }}
             ${{ env.LYCHEE_OUTPUT_FILE }}
@@ -77,3 +86,10 @@ jobs:
       - name: Close last report open issue
         if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.lychee.outputs.exit_code == 0 && steps.last-issue.outputs.has-found == 'true' }}
         run: gh issue close ${{ steps.last-issue.outputs.issue-number }}
+
+      - name: Save lychee cache
+        uses: actions/cache/save@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        if: always()
+        with:
+          path: .lycheecache
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
