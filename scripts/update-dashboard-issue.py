@@ -32,9 +32,7 @@ class Topics(str, Enum):
     MISMATCHED_PAGE_TITLES = "mismatched page title(s)"
     MISSING_TLDR_PAGES = "missing TLDR page(s)"
     MISPLACED_PAGES = "misplaced page(s)"
-    OUTDATED_PAGES_BASED_ON_HEADER = (
-        "outdated page(s) based on header line count"
-    )
+    OUTDATED_PAGES_BASED_ON_HEADER = "outdated page(s) based on header line count"
     OUTDATED_PAGES_BASED_ON_COMMAND_COUNT = (
         "outdated page(s) based on number of commands"
     )
