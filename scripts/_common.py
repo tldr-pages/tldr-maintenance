@@ -129,7 +129,7 @@ def create_github_issue(title: str) -> list[dict]:
     result = subprocess.run(command, capture_output=True, text=True)
     data = json.loads(result.stdout)
 
-    return [{"number": data["number"], "title": data["title"], "url": data["html_url"]}]
+    return [{"number": data["number"], "title": data["title"], "body": data["body"], "url": data["html_url"]}]
 
 
 def get_github_issue(title: str = None) -> list[dict]:
