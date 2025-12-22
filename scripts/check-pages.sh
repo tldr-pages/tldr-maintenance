@@ -23,6 +23,7 @@ ROOT_DIR="${TLDR_ROOT:-./tldr}"
 PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows" "cisco-ios" "dos")
 
 # shellcheck disable=SC2016
+HEADER_REGEX='^>.*\.$'
 COMMAND_REGEX='^`[^`]\+`$'
 CHECK_NAMES="missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
 VERBOSE=false
@@ -65,6 +66,7 @@ MISSING_TLDR_OUTPUT_FILE="$OUTPUT_DIR/missing-tldr${LANGUAGE_ID:+-$LANGUAGE_ID}-
 MISPLACED_OUTPUT_FILE="$OUTPUT_DIR/misplaced${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages-based-on-command-contents.txt"
 OUTDATED_BASED_ON_COMMAND_COUNT_FILE="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages-based-on-command-count.txt"
+OUTDATED_BASED_ON_HEADER="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages-based-on-header.txt"
 MISSING_ENGLISH_OUTPUT_FILE="$OUTPUT_DIR/missing-english${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 MISSING_TRANSLATED_OUTPUT_FILE="$OUTPUT_DIR/missing-translated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 LINT_FILE="$OUTPUT_DIR/lint-errors${LANGUAGE_ID:+-$LANGUAGE_ID}.txt"
@@ -113,6 +115,12 @@ count_commands() {
   local file="$1"
 
   grep -c "$COMMAND_REGEX" "$file"
+}
+
+count_header() {
+  local file="$1"
+
+  grep -c "$HEADER_REGEX" "$file"
 }
 
 strip_commands() {
@@ -202,6 +210,12 @@ check_outdated_page() {
     echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE"
   elif [ "$english_commands_as_string" != "$commands_as_string" ]; then
     echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE"
+  fi
+
+  english_header_lines=$(count_header "$english_file")
+  header_lines=$(count_header "$file")
+  if [ "$english_header_lines" != "$header_lines" ]; then
+    echo "$filepath" >> "$OUTDATED_BASED_ON_HEADER"
   fi
 }
 
