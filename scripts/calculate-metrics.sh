@@ -85,6 +85,7 @@ for folder in $folders; do
 
   count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt" "missing TLDR page(s)"
   count_and_display "./check-pages.$folder_suffix/misplaced-$folder_suffix-pages.txt" "misplaced page(s)"
+  count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-header.txt" "outdated page(s) based on header line count"
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-count.txt" "outdated page(s) based on number of commands"
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-contents.txt" "outdated page(s) based on the commands itself"
   count_and_display "./check-pages.$folder_suffix/missing-english-$folder_suffix-pages.txt" "missing English page(s)"
@@ -145,6 +146,7 @@ calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-
 calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles.txt" "$total_unique_non_english_pages" "mismatched page title(s)"
 calculate_and_display '*/check-pages*/missing-tldr*pages.txt' "./missing-tldr-pages.txt" "$total_tldr_pages" "missing TLDR page(s)"
 calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
+calculate_and_display '*/check-pages*/outdated*pages-based-on-header.txt' "./outdated-pages-based-on-header.txt" "$total_non_english_pages" "outdated page(s) based on header line count"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-count.txt' "./outdated-pages-based-on-command-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-contents.txt' "./outdated-pages-based-on-command-contents.txt" "$total_non_english_pages" "outdated page(s) based on the commands itself"
 calculate_and_display '*/check-pages*/missing-english*pages.txt' "./missing-english-pages.txt" "$total_unique_non_english_pages" "missing English page(s)"
