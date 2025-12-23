@@ -38,7 +38,9 @@ class Topics(str, Enum):
     OUTDATED_PAGES_BASED_ON_COMMAND_CONTENTS = (
         "outdated page(s) based on the commands itself"
     )
-    OUTDATED_PAGES_BASED_ON_HEADER_LINE_COUNT = "outdated page(s) based on number of header lines"
+    OUTDATED_PAGES_BASED_ON_HEADER_LINE_COUNT = (
+        "outdated page(s) based on number of header lines"
+    )
     MISSING_ENGLISH_PAGES = "missing English page(s)"
     MISSING_TRANSLATED_PAGES = "missing translated page(s)"
     LINT_ERRORS = "linter error(s)"
