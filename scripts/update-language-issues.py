@@ -35,9 +35,9 @@ class Topics(str, Enum):
     PAGE_TITLES = "mismatched page title(s)"
     MISSING_TLDR = "missing TLDR page(s)"
     MISPLACED = "misplaced page(s)"
-    BASED_ON_HEADER = "outdated page(s) based on header line count"
     BASED_ON_COMMAND_COUNT = "outdated page(s) based on number of commands"
     BASED_ON_COMMAND_CONTENTS = "outdated page(s) based on the commands itself"
+    BASED_ON_HEADER_LINE_COUNT = "outdated page(s) based on number of header lines"
     MISSING_ENGLISH = "missing English page(s)"
     MISSING_TRANSLATED = "missing translated page(s)"
     LINT_ERRORS = "linter error(s)"
@@ -58,6 +58,7 @@ def parse_language_directory(directory):
         "misplaced",
         "based-on-command-count",
         "based-on-command-contents",
+        "based-on-header-line-count",
         "missing-english",
         "missing-translated",
         "lint-errors",

@@ -32,12 +32,14 @@ class Topics(str, Enum):
     MISMATCHED_PAGE_TITLES = "mismatched page title(s)"
     MISSING_TLDR_PAGES = "missing TLDR page(s)"
     MISPLACED_PAGES = "misplaced page(s)"
-    OUTDATED_PAGES_BASED_ON_HEADER = "outdated page(s) based on header line count"
     OUTDATED_PAGES_BASED_ON_COMMAND_COUNT = (
         "outdated page(s) based on number of commands"
     )
     OUTDATED_PAGES_BASED_ON_COMMAND_CONTENTS = (
         "outdated page(s) based on the commands itself"
+    )
+    OUTDATED_PAGES_BASED_ON_HEADER_LINE_COUNT = (
+        "outdated page(s) based on number of header lines"
     )
     MISSING_ENGLISH_PAGES = "missing English page(s)"
     MISSING_TRANSLATED_PAGES = "missing translated page(s)"
@@ -55,6 +57,7 @@ def parse_log_file(path: Path) -> dict:
         "Total misplaced pages": r"Total misplaced page\(s\): (.+)",
         "Total outdated pages (based on number of commands)": r"Total outdated page\(s\) based on number of commands: (.+)",
         "Total outdated pages (based on the commands itself)": r"Total outdated page\(s\) based on the commands itself: (.+)",
+        "Total outdated pages (based on number of header lines)": r"Total outdated page\(s\) based on number of header lines: (.+)",
         "Total missing English pages": r"Total missing English page\(s\): (.+)",
         "Total missing translated pages": r"Total missing translated page\(s\): (.+)",
         "Total linter errors": r"Total lint error\(s\): (.+)",
@@ -69,6 +72,7 @@ def parse_log_file(path: Path) -> dict:
         "misplaced page(s)": r"(\d+) misplaced page",
         "outdated pages (based on number of commands)": r"(\d+) outdated page\(s\) based on number of commands",
         "outdated pages (based on the commands itself)": r"(\d+) outdated page\(s\) based on the commands itself",
+        "outdated pages (based on the number of header lines)": r"(\d+) outdated page\(s\) based on number of header lines",
         "missing English page(s)": r"(\d+) missing English",
         "missing translated page(s)": r"(\d+) missing translated",
         "linter error(s)": r"(\d+) linter error",
@@ -128,6 +132,7 @@ def parse_seperate_text_files(data):
         Path("misplaced-pages.txt"),
         Path("outdated-pages-based-on-command-count.txt"),
         Path("outdated-pages-based-on-command-contents.txt"),
+        Path("outdated-pages-based-on-header-line-count.txt"),
         Path("missing-english-pages.txt"),
         Path("missing-translated-pages.txt"),
         Path("lint-errors.txt"),
