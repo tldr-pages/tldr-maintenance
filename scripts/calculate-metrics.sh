@@ -27,7 +27,7 @@ run_python_script() {
 }
 
 run_python_script "set-more-info-link" 's/ link would be.*$//'
-run_python_script "set-alias-page" 's/ page would be.*$//' '-i'
+run_python_script "set-alias-page" 's/ page would be.*$//'
 run_python_script "set-page-title" 's/ title would be.*$//'
 
 ./tldr/scripts/wrong-filename.py
