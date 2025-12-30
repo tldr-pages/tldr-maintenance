@@ -20,14 +20,20 @@ run_python_script() {
   local remove_text="$2"
   local additional_options="$3"
 
-  ./tldr/scripts/"${script_name}".py -Sn "$additional_options" > "$script_name".txt
-  sed 's/\x1b\[[0-9;]*m//g' "$script_name".txt | sed "$remove_text" > "$script_name".txt.tmp
+  if [[ -n "$additional_options" ]]; then
+    ./tldr/scripts/"${script_name}.py" -Sn "$additional_options" >> "$script_name".txt
+  else
+    ./tldr/scripts/"${script_name}.py" -Sn >> "$script_name".txt
+  fi
+
+  sed 's/\x1b\[[0-9;]*m//g' "$script_name".txt | sed "$remove_text" >> "$script_name".txt.tmp
   mv "$script_name".txt.tmp "$script_name".txt
-  sort -o "$script_name".txt "$script_name".txt
+  sort -u "$script_name".txt -o "$script_name".txt
 }
 
 run_python_script "set-more-info-link" 's/ link would be.*$//'
 run_python_script "set-alias-page" 's/ page would be.*$//'
+run_python_script "set-alias-page" 's/ page would be.*$//' '-i'
 run_python_script "set-page-title" 's/ title would be.*$//'
 
 ./tldr/scripts/wrong-filename.py
