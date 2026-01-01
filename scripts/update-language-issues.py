@@ -31,10 +31,10 @@ class Topics(str, Enum):
     MALFORMED_OR_OUTDATED_MORE_INFO_LINK = (
         "malformed or outdated more info link page(s)"
     )
-    ALIAS_PAGES = "missing alias page(s)"
     MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
         "malformed or outdated see also mention(s)"
     )
+    ALIAS_PAGES = "missing alias page(s)"
     PAGE_TITLES = "mismatched page title(s)"
     MISSING_TLDR = "missing TLDR page(s)"
     MISPLACED = "misplaced page(s)"
