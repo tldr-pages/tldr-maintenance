@@ -28,6 +28,9 @@ class Topics(str, Enum):
     MALFORMED_OR_OUTDATED_MORE_INFO_LINK_PAGES = (
         "malformed or outdated more info link page(s)"
     )
+    MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
+        "malformed or outdated see also mention(s)"
+    )
     MISSING_ALIAS_PAGES = "missing alias page(s)"
     MISMATCHED_PAGE_TITLES = "mismatched page title(s)"
     MISSING_TLDR_PAGES = "missing TLDR page(s)"
@@ -51,6 +54,7 @@ def parse_log_file(path: Path) -> dict:
     overview_patterns = {
         "Total inconsistent filenames": r"Total inconsistent filename\(s\): (.+)",
         "Total malformed or outdated more info link pages": r"Total malformed or outdated more info link page\(s\): (.+)",
+        "Total malformed or outdated see also's": r"Total malformed or outdated see also mention\(s\): (.+)",
         "Total missing alias pages": r"Total missing alias page\(s\): (.+)",
         "Total mismatched page titles": r"Total mismatched page title\(s\): (.+)",
         "Total missing TLDR pages": r"Total missing TLDR page\(s\): (.+)",
@@ -66,6 +70,7 @@ def parse_log_file(path: Path) -> dict:
     detail_patterns = {
         "inconsistent filename(s)": r"(\d+) inconsistent filename",
         "malformed or outdated more info link page(s)": r"(\d+) malformed or outdated",
+        "malformed or outdated see also mention(s)": r"(\d+) malformed or outdated see also",
         "missing alias page(s)": r"(\d+) missing alias",
         "mismatched page title(s)": r"(\d+) mismatched page title",
         "missing TLDR page(s)": r"(\d+) missing TLDR",
@@ -126,6 +131,7 @@ def parse_seperate_text_files(data):
     for file in [
         Path("inconsistent-filenames.txt"),
         Path("malformed-or-outdated-more-info-link-pages.txt"),
+        Path("malformed-or-outdated-see-also-mentions.txt"),
         Path("missing-alias-pages.txt"),
         Path("mismatched-page-titles.txt"),
         Path("missing-tldr-pages.txt"),
