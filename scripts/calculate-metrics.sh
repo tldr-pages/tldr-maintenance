@@ -89,7 +89,7 @@ for folder in $folders; do
 
   grep_count_and_display "pages.$folder_suffix/" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-or-outdated-more-info-link-$folder_suffix-pages.txt" "malformed or outdated more info link page(s)"
-  grep_count_and_display "pages.$folder_suffix/" "./set-see-also.txt" "./check-pages.$folder_suffix/malformed-or-outdated-$folder_suffix-see-also-mentions.txt" "malformed or outdated see also mention(s)"
+  grep_count_and_display "pages.$folder_suffix/" "./set-see-also.txt" "./check-pages.$folder_suffix/malformed-or-outdated-see-also-mentions-$folder_suffix-pages.txt" "malformed or outdated see also mention(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-alias-page.txt" "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-page-title.txt" "./check-pages.$folder_suffix/mismatched-$folder_suffix-page-titles.txt" "mismatched page title(s)"
 
@@ -152,7 +152,7 @@ calculate_and_display() {
 
 calculate_and_display '*/check-pages*/inconsistent*filenames.txt' "./inconsistent-filenames.txt" "$total_pages" "inconsistent filename(s)"
 calculate_and_display '*/check-pages*/malformed-or-outdated-more-info-link*pages.txt' "./malformed-or-outdated-more-info-link-pages.txt" "$total_pages" "malformed or outdated more info link page(s)"
-calculate_and_display '*/check-pages*/malformed-or-outdated*see-also-mentions.txt' "./malformed-or-outdated-see-also-mentions.txt" "$total_pages_need_see_also_mention" "malformed or outdated see also mention(s)"
+calculate_and_display '*/check-pages*/malformed-or-outdated-see-also-mentions*pages.txt' "./malformed-or-outdated-see-also-mentions.txt" "$total_pages_need_see_also_mention" "malformed or outdated see also mention(s)"
 calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
 calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles.txt" "$total_unique_non_english_pages" "mismatched page title(s)"
 calculate_and_display '*/check-pages*/missing-tldr*pages.txt' "./missing-tldr-pages.txt" "$total_tldr_pages" "missing TLDR page(s)"
