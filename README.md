@@ -15,7 +15,7 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 ### English
 
 - **Malformed more-info link page(s)**
-  A page is malformed when the `> More information: <link>.` does not match the format in the Python script.
+  A page is malformed when the `> More information: <link>.` does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/more-info-link.md).
 - **Missing TLDR page(s)**
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
@@ -28,7 +28,7 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 ### Other languages
 
 - **Malformed or outdated more-info link page(s)**
-  A page is malformed when the `> More information: <link>.` does not match the format in the Python script.
+  A page is malformed when the `> More information: <link>.` does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/more-info-link.md).
    A page is outdated when the `> More information: <link>.` does not match the link in the English page.
 - **Missing TLDR page(s)**
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
