@@ -13,6 +13,9 @@ on:
 jobs:
   check-links:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     env:
       LYCHEE_INPUT_FILE: "links.txt"
       LYCHEE_OUTPUT_FILE: "lychee/out.md"
