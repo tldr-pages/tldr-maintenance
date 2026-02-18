@@ -14,6 +14,9 @@ on:
 jobs:
   calculate-metrics:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
 
     name: Calculate Metrics
 
