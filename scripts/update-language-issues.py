@@ -127,7 +127,7 @@ def main():
 
         for lang_dir in check_pages_dir:
             locale = get_locale(lang_dir)
-            print(f"Updating {locale}") 
+            print(f"Updating {locale}")
 
             title = f"Translation Dashboard Status for {locale}"
 
