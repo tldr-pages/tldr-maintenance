@@ -48,7 +48,8 @@ class Topics(str, Enum):
 
 def parse_file(filepath):
     with filepath.open(encoding="utf-8") as file:
-        return file.read().strip().split("\n")
+        content = file.read().strip()
+        return content.split("\n") if content else []
 
 
 def parse_language_directory(directory):
