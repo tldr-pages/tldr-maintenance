@@ -111,7 +111,7 @@ def create_colored_line(start_color: str, text: str) -> str:
     return f"{start_color}{text}{Colors.RESET}"
 
 
-def create_github_issue(title: str) -> list[dict]:
+def create_github_issue(title: str) -> dict:
     command = [
         "gh",
         "api",
@@ -129,7 +129,12 @@ def create_github_issue(title: str) -> list[dict]:
     result = subprocess.run(command, capture_output=True, text=True)
     data = json.loads(result.stdout)
 
-    return [{"number": data["number"], "title": data["title"], "url": data["html_url"]}]
+    return {
+        "number": data["number"],
+        "title": data["title"],
+        "body": data.get("body") or "",
+        "url": data["html_url"],
+    }
 
 
 def get_github_issue(title: str = None) -> list[dict]:
@@ -233,6 +238,8 @@ def strip_dynamic_content(markdown):
     Returns:
             str: The Markdown content with the dynamic content removed.
     """
+    if not markdown:
+        return ""
     regex = re.compile(
         r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE
     )
