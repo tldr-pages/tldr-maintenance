@@ -40,8 +40,12 @@ def get_repo_collaborators():
     output = run_gh_command(command)
 
     if output:
-        collaborators = json.loads(output)[0]
-        return sorted(set(collaborator["login"] for collaborator in collaborators))
+        pages = json.loads(output)
+        return sorted(
+            set(
+                collaborator["login"].lower() for page in pages for collaborator in page
+            )
+        )
     return []
 
 
@@ -52,11 +56,15 @@ def get_org_members():
         "-H",
         API_VERSION,
         f"/orgs/{ORG_NAME}/members",
+        "--paginate",
+        "--slurp",
     ]
     output = run_gh_command(command)
     if output:
-        org_members = json.loads(output)
-        return sorted(set(org_member["login"] for org_member in org_members))
+        pages = json.loads(output)
+        return sorted(
+            set(org_member["login"].lower() for page in pages for org_member in page)
+        )
     return []
 
 
@@ -162,7 +170,7 @@ def parse_maintainers_file(file_path):
             name_info = parts[0].strip().lstrip("- ").strip()
             name_match = re.search(r"\*\*.*\(\[\@(.*)\].*", name_info)
             if name_match and current_role:
-                maintainers[current_role].append(name_match.group(1))
+                maintainers[current_role].append(name_match.group(1).lower())
 
     return maintainers
 
