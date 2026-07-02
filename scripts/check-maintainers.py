@@ -43,9 +43,7 @@ def get_repo_collaborators():
         pages = json.loads(output)
         return sorted(
             set(
-                collaborator["login"].lower()
-                for page in pages
-                for collaborator in page
+                collaborator["login"].lower() for page in pages for collaborator in page
             )
         )
     return []
@@ -65,11 +63,7 @@ def get_org_members():
     if output:
         pages = json.loads(output)
         return sorted(
-            set(
-                org_member["login"].lower()
-                for page in pages
-                for org_member in page
-            )
+            set(org_member["login"].lower() for page in pages for org_member in page)
         )
     return []
 
