@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def extract_failures(markdown_text):
-    failure_pattern = re.compile(r"^\* \[([^\]]+)\] <([^>]+)> \| .*$", re.MULTILINE)
+    failure_pattern = re.compile(r"^\* \[([^\]]+)\] <([^>]+)>.* \| .*$", re.MULTILINE)
     failures = failure_pattern.findall(markdown_text)
 
     # Drop redirects (200)
