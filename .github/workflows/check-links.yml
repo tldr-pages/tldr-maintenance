@@ -7,8 +7,10 @@ on:
   push:
     paths:
         - .lycheeignore
+        - .lycheeexpected
         - .github/workflows/check-links.yml
         - scripts/sort-lychee-output.py
+        - scripts/filter-expected-failures.py
 
 jobs:
   check-links:
@@ -53,6 +55,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Filter known/expected failures
+        id: filter
+        run: python3 scripts/filter-expected-failures.py
+
       - name: Upload Lychee input and output
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
@@ -78,7 +84,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update last report open issue created
-        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.lychee.outputs.exit_code != 0 }}
+        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.filter.outputs.count != '0' }}
         uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6.0.0
         with:
           title: Link checker report
@@ -87,7 +93,7 @@ jobs:
           labels: check links
 
       - name: Close last report open issue
-        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.lychee.outputs.exit_code == 0 && steps.last-issue.outputs.has-found == 'true' }}
+        if: ${{ github.repository == 'tldr-pages/tldr-maintenance' && github.ref == 'refs/heads/main' && steps.filter.outputs.count == '0' && steps.last-issue.outputs.has-found == 'true' }}
         run: gh issue close ${{ steps.last-issue.outputs.issue-number }}
 
       - name: Save lychee cache

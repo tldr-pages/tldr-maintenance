@@ -1,0 +1,47 @@
+# Domains that are confirmed live for real users but block automated
+# link checkers (bot/WAF protection) or are otherwise consistently
+# flaky in a specific, known way. Unlike .lycheeignore, these domains
+# are still actually requested every run - a failure here is only
+# dropped from the report if its status TAG matches what's listed
+# below. Any other status (a real 404, a dead connection, a changed
+# error code, ...) still gets reported normally, so we keep real
+# regression detection instead of losing the domain entirely.
+#
+# Format: <substring-of-the-URL><TAB><lychee status tag>
+# One line per known (domain, expected-status) pair. See
+# scripts/filter-expected-failures.py.
+acme.com	ERROR
+barotraumagame.com	403
+blockout.net	ERROR
+cisco.com	403
+code2prompt.dev	404
+developer.salesforce.com	403
+docs.open-mpi.org	404
+docs.pagure.org	404
+docs.redhat.com	403
+doomwiki.org	403
+en.opensuse.org	403
+exercism.org	403
+flox.dev	404
+gitlab.torproject.org	403
+gnupg.org	404
+inkscape.org	403
+man.openbsd.org	TIMEOUT
+mathworks.com	403
+naturalselection.fandom.com	403
+nixos.wiki	403
+npmjs.com	403
+phpbu.de	ERROR
+secure.phabricator.com	503
+software.jaos.org	502
+support.brave.app	403
+theiphonewiki.com	502
+trunkrs.dev	403
+uvicorn.org	ERROR
+wiki.alpinelinux.org	403
+wiki.manjaro.org	404
+wiki.st.com	ERROR
+wordnet.princeton.edu	403
+www.ibm.com/docs/spectrum-lsf	403
+xpdfreader.com	ERROR
+zint.org.uk	500
