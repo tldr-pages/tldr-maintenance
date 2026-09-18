@@ -26,7 +26,7 @@ en.opensuse.org	403
 exercism.org	403
 flox.dev	404
 gitlab.torproject.org	403
-gnu.org	404
+gnu.org	TIMEOUT
 gnupg.org	404
 inkscape.org	403
 man.openbsd.org	TIMEOUT
@@ -38,15 +38,18 @@ phpbu.de	ERROR
 raspberrypi.com	403
 secure.phabricator.com	503
 software.jaos.org	502
+software.jaos.org	TIMEOUT
 support.brave.app	403
 techdocs.akamai.com	404
 theiphonewiki.com	502
 trunkrs.dev	403
 uvicorn.org	ERROR
+uvicorn.org	TIMEOUT
 wiki.alpinelinux.org	403
 wiki.manjaro.org	404
 wiki.st.com	ERROR
 wordnet.princeton.edu	403
 www.ibm.com/docs/spectrum-lsf	403
+www.nongnu.org	TIMEOUT
 xpdfreader.com	ERROR
 zint.org.uk	500
