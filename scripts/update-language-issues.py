@@ -18,6 +18,7 @@ from _common import (
     generate_github_link,
     generate_github_edit_link,
     generate_github_new_link,
+    generate_github_lint_link,
 )
 
 
@@ -107,6 +108,8 @@ def generate_markdown_for_language(language, data):
                         markdown += f"- {generate_github_new_link(item)}\n"
                     case "missing-tldr":
                         markdown += f"- {generate_github_link(item)}\n"
+                    case "lint-errors":
+                        markdown += f"- {generate_github_lint_link(item)}\n"
                     case _:
                         markdown += f"- {generate_github_edit_link(item)}\n"
             markdown += "</details>\n"
