@@ -289,24 +289,25 @@ def generate_github_new_link(page):
     return f"[{page}](https://github.com/tldr-pages/tldr/new/main/{directory}?filename={filename})"
 
 
+
 def generate_github_lint_link(line):
     """
-    Generate a Markdown link for a linter error line (from markdownlint or tldr-lint).
+    Generate a Markdown edit link for a linter error line (from markdownlint or tldr-lint).
 
-    The page path and line number are extracted from the error line, e.g.
-    "tldr/pages.fr/common/tar.md:12: TLDR112 ..." links to line 12 of pages.fr/common/tar.md.
+    Only the page path is used for the link, e.g. "tldr/pages.fr/common/tar.md:12: TLDR112 ..."
+    links to the edit page of pages.fr/common/tar.md, while the full error is kept as the link text.
     Lines that don't reference a page are returned escaped, without a link.
     """
 
-    match = re.match(r"^(?:\./)?(?:tldr/)?(pages[^:]*\.md):(\d+)(.*)$", line)
+    match = re.match(r"^(?:\./)?(?:tldr/)?(pages[^:]*\.md)(.*)$", line)
     if not match:
         return replace_characters_for_link(line)
 
-    page, line_number, message = match.groups()
+    page, message = match.groups()
 
     directory = Path(page).parent
     filename = urllib.parse.quote(Path(page).name)
 
-    text = replace_characters_for_link(f"{page}:{line_number}{message}")
+    text = replace_characters_for_link(f"{page}{message}")
 
-    return f"[{text}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename}?plain=1#L{line_number})"
+    return f"[{text}](https://github.com/tldr-pages/tldr/edit/main/{directory}/{filename})"
