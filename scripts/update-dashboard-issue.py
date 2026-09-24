@@ -15,6 +15,7 @@ from _common import (
     generate_github_link,
     generate_github_edit_link,
     generate_github_new_link,
+    generate_github_lint_link,
 )
 
 
@@ -172,6 +173,10 @@ def add_metric_details(lines, data, topic_name, topic, file_name):
             case "missing_tldr_pages":
                 data["metrics"][topic]["files"] = [
                     f"{generate_github_link(line.strip())}" for line in lines
+                ]
+            case "lint_errors":
+                data["metrics"][topic]["files"] = [
+                    f"{generate_github_lint_link(line.strip())}" for line in lines
                 ]
             case _:
                 data["metrics"][topic]["files"] = [
