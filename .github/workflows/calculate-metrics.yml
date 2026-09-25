@@ -38,7 +38,7 @@ jobs:
           cache: 'npm'
 
       - name: Install npm dependencies
-        run: npm install -g markdownlint-cli tldr-lint
+        run: npm ci
 
       - name: Install pip dependencies
         if: github.ref == 'refs/heads/main'
@@ -46,7 +46,7 @@ jobs:
 
       - name: Run the script and generate artifacts
         run: |
-          ./scripts/calculate-metrics.sh 2>&1 | tee metrics-log.md
+          npm run --silent calculate-metrics 2>&1 | tee metrics-log.md
           cat metrics-log.md >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Calculate Metrics artifact

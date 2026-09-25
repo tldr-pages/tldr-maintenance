@@ -12,6 +12,7 @@
     "husky": "^9.1.7"
   },
   "scripts": {
+    "calculate-metrics": "bash scripts/calculate-metrics.sh",
     "lint-markdown": "markdownlint *.md",
     "lint-python": "black scripts --check && flake8 scripts",
     "lint-bash": "shellcheck scripts/*.sh",
