@@ -14,7 +14,7 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 
 The metrics are defined in [`metrics.tsv`](scripts/metrics.tsv), which is used by all scripts.
 Every metric is calculated per language, the results are written to `check-pages/<metric>.txt` (English) and `check-pages.<language>/<metric>.txt`.
-Some metrics don't apply to English, since they compare a translated page with the English page.
+Empty results are removed. Some metrics don't apply to English, since they compare a translated page with the English page.
 
 - **Inconsistent filename(s)** (`inconsistent-filenames`)
   A filename is inconsistent when it doesn't match the title (`# ...`) of the page, checked by [`wrong-filename.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.py).
@@ -46,7 +46,7 @@ Some metrics don't apply to English, since they compare a translated page with t
   A page is outdated when the number of commands differ from the number of commands in the English page.
   Can also be seen at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
 - **Outdated page(s) based on the commands itself** (`outdated-pages-based-on-command-contents`, not for English)
-  A page is outdated when the commands itself (every line that starts with \`, but removing everything between `{{...}}`, `"..."` and `'...'`) differs from the English commands itself.
+  A page is outdated when the commands itself (every line that starts with \`, but removing everything between `{{...}}`, `<...>`, `(...)`, `"..."` and `'...'`) differs from the English commands itself.
 - **Outdated page(s) based on number of header lines** (`outdated-pages-based-on-header-line-count`, not for English)
   A page is outdated when the number of header lines (every line that starts with `>`) differs from the number of header lines in the English page.
 - **Missing English page(s)** (`missing-english-pages`, not for English)
@@ -61,7 +61,8 @@ Some metrics don't apply to English, since they compare a translated page with t
 ## Summary
 
 At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/metrics-log.md) a summary is written, with the total of every metric (the results of all languages, written to `<metric>.txt`).
-This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation. Most totals include a percentage (rounded down to one decimal), calculated based on:
+This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation.
+Most totals include a percentage (rounded down to one decimal), calculated based on the sum of a total that is counted per language (`check-pages[.<language>]/totals.tsv`) over the languages the metric applies to:
 
 - **Total pages**: inconsistent filenames and misplaced pages.
 - **Total non-English pages**: malformed or outdated more info links, mismatched page titles, outdated pages and missing English pages.
@@ -78,7 +79,7 @@ A summary can also be downloaded at the [latest GitHub Release](https://github.c
 
 ## Running locally
 
-The scripts require Bash and the GNU versions of the command-line tools (as on Linux), Python 3 and Node.js:
+The scripts require Bash 4.3 or later and the GNU versions of the command-line tools (as on Linux), Python 3 and Node.js:
 
 ```sh
 git submodule update --init
@@ -88,7 +89,7 @@ PATH="$PWD/node_modules/.bin:$PATH" npm run --silent calculate-metrics > metrics
 
 The tldr repository is expected in `./tldr`, set `TLDR_ROOT` to use another clone.
 The script exits with 1 when one of the checks failed to run, the found issues don't change the exit code.
-To check a single language, run `scripts/check-pages.sh -l <language>` (see the script for its options).
+To check a single language, run `scripts/check-pages.sh -l <language>`, optionally with `-c <metric>,<metric>` to only check some metrics (see the script for its options).
 
 ## Maintainer scripts
 

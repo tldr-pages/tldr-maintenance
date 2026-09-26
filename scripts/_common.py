@@ -71,7 +71,7 @@ class Metric:
             case "lint":
                 return generate_github_lint_link(result)
             case _:
-                return replace_characters_for_link(result)
+                raise ValueError(f"Unknown link type {self.link} of metric {self.id}")
 
 
 def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
@@ -84,23 +84,25 @@ def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
 
     metrics = []
     with path.open(encoding="utf-8") as file:
-        for line in file:
-            line = line.rstrip("\n")
+        for number, line in enumerate(file, start=1):
+            line = line.rstrip("\r\n")
             if not line or line.startswith("#") or line.startswith("id\t"):
                 continue
-            metrics.append(Metric(*line.split("\t")))
+            columns = line.split("\t")
+            if len(columns) != 6 or not all(columns):
+                raise SystemExit(
+                    f"{path}:{number}: expected 6 non-empty columns separated by a tab"
+                )
+            metric = Metric(*columns)
+            if metric.languages not in ("all", "translations") or metric.link not in (
+                "reference",
+                "edit",
+                "new",
+                "lint",
+            ):
+                raise SystemExit(f"{path}:{number}: invalid languages or link")
+            metrics.append(metric)
     return metrics
-
-
-def test_get_metrics():
-    metrics = get_metrics()
-    ids = [metric.id for metric in metrics]
-    assert len(ids) == len(set(ids))
-    assert all(metric.languages in ("all", "translations") for metric in metrics)
-    assert all(
-        metric.link in ("reference", "edit", "new", "lint", "none")
-        for metric in metrics
-    )
 
 
 API_VERSION = "2022-11-28"
@@ -125,9 +127,17 @@ def get_token() -> str:
 _token = None
 
 
-def github_request(path: str, params: dict = None) -> tuple[int, object]:
+def github_request(
+    path: str, params: dict = None, method: str = "GET", payload: dict = None
+) -> tuple[int, object]:
     """
-    Perform a GET request against the GitHub REST API, waiting when rate limited.
+    Perform a request against the GitHub REST API, waiting when rate limited.
+
+    Parameters:
+    path (str): the path of the endpoint, e.g. "/repos/tldr-pages/tldr".
+    params (dict): the query parameters.
+    method (str): the HTTP method.
+    payload (dict): the JSON body to send.
 
     Returns:
     tuple: the HTTP status code and the decoded JSON body (None when there is no body).
@@ -142,9 +152,12 @@ def github_request(path: str, params: dict = None) -> tuple[int, object]:
         url += "?" + urllib.parse.urlencode(params)
     request = urllib.request.Request(
         url,
+        method=method,
+        data=json.dumps(payload).encode() if payload is not None else None,
         headers={
             "Accept": "application/vnd.github+json",
             "Authorization": f"Bearer {_token}",
+            "Content-Type": "application/json",
             "X-GitHub-Api-Version": API_VERSION,
         },
     )
@@ -193,51 +206,20 @@ def github_paginate(path: str, params: dict = None) -> list | None:
         page += 1
 
 
-def get_tldr_root(lookup_path: Path = None) -> Path:
-    """
-    Get the path of the local tldr-maintenance repository, looking for it in each part of the given path. If it is not found, the path in the environment variable TLDR_ROOT is returned.
-
-    Parameters:
-    lookup_path (Path): the path to search for the tldr root. By default, the path of the script.
-
-    Returns:
-    Path: the local tldr-maintenance repository.
-    """
-
-    if lookup_path is None:
-        absolute_lookup_path = Path(__file__).resolve()
-    else:
-        absolute_lookup_path = Path(lookup_path).resolve()
-    if (
-        tldr_root := next(
-            (
-                path
-                for path in absolute_lookup_path.parents
-                if path.name == "tldr-maintenance"
-            ),
-            None,
-        )
-    ) is not None:
-        return tldr_root
-    elif "TLDR_ROOT" in os.environ:
-        return Path(os.environ["TLDR_ROOT"])
-    raise SystemExit(
-        f"{Colors.RED}Please set the environment variable TLDR_ROOT to the location of a clone of https://github.com/tldr-pages/tldr-maintenance{Colors.RESET}"
-    )
-
-
 def get_check_pages_dir(root: Path) -> list[Path]:
     """
-    Get all check-pages directories.
+    Get all directories with the results of check-pages.sh.
 
     Parameters:
-    root (Path): the path to search for the pages directories.
+    root (Path): the directory calculate-metrics.sh ran in.
 
     Returns:
-    list (list of Path's): Path's of page entry and platform, e.g. "page.fr/common".
+    list (list of Path's): the result directories, e.g. "check-pages" (English) and "check-pages.fr".
     """
 
-    return sorted([d for d in root.iterdir() if d.name.startswith("check-pages")])
+    return sorted(
+        [d for d in root.iterdir() if d.is_dir() and d.name.startswith("check-pages")]
+    )
 
 
 def get_locale(path: Path) -> str:
@@ -276,113 +258,112 @@ def create_colored_line(start_color: str, text: str) -> str:
     return f"{start_color}{text}{Colors.RESET}"
 
 
-def create_github_issue(title: str) -> dict:
-    command = [
-        "gh",
-        "api",
-        "--method",
-        "POST",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        "/repos/tldr-pages/tldr-maintenance/issues",
-        "-f",
-        f"title={title}",
-    ]
+ISSUES_PATH = "/repos/tldr-pages/tldr-maintenance/issues"
+RELEASE_URL = "https://github.com/tldr-pages/tldr-maintenance/releases/download/latest"
+# GitHub rejects issue bodies with more characters.
+MAX_ISSUE_BODY_LENGTH = 65536
 
-    result = subprocess.run(command, capture_output=True, text=True)
-    data = json.loads(result.stdout)
+
+def simplify_issue(issue: dict) -> dict:
+    return {
+        "number": issue["number"],
+        "title": issue["title"],
+        "body": issue.get("body") or "",
+        "url": issue["html_url"],
+    }
+
+
+def get_github_issues() -> dict[str, dict]:
+    """
+    Get all open issues (without pull requests) of tldr-maintenance.
+
+    Returns:
+    dict: the issues by title.
+    """
+
+    issues = github_paginate(ISSUES_PATH, {"state": "open"})
+    if issues is None:
+        raise SystemExit("Getting the issues of tldr-maintenance failed.")
 
     return {
-        "number": data["number"],
-        "title": data["title"],
-        "body": data.get("body") or "",
-        "url": data["html_url"],
+        issue["title"]: simplify_issue(issue)
+        for issue in issues
+        if "pull_request" not in issue
     }
 
 
-def get_github_issue(title: str = None) -> list[dict]:
-    command = [
-        "gh",
-        "api",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        "/repos/tldr-pages/tldr-maintenance/issues?per_page=100",
-    ]
+def create_github_issue(title: str) -> dict:
+    status, data = github_request(ISSUES_PATH, method="POST", payload={"title": title})
+    if status != 201:
+        raise SystemExit(f"Creating the issue {title} failed: {data}")
 
-    result = subprocess.run(command, capture_output=True, text=True)
-    data = json.loads(result.stdout)
-
-    simplified_data = [
-        {
-            "number": issue["number"],
-            "title": issue["title"],
-            "body": issue["body"],
-            "url": issue["html_url"],
-        }
-        for issue in data
-    ]
-
-    if title:
-        return next(
-            (
-                {
-                    "number": issue["number"],
-                    "title": issue["title"],
-                    "body": issue["body"],
-                    "url": issue["html_url"],
-                }
-                for issue in data
-                if issue["title"] == title
-            ),
-            None,
-        )
-    else:
-        return simplified_data
+    return simplify_issue(data)
 
 
-def update_github_issue(issue_number, title, body):
-    payload = {
-        "title": title,
-        "body": body,
-    }
+def update_github_issue(issue_number: int, title: str, body: str) -> bool:
+    """
+    Update the title and body of an issue.
 
-    command = [
-        "gh",
-        "api",
-        "--method",
-        "PATCH",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        f"/repos/tldr-pages/tldr-maintenance/issues/{issue_number}",
-        "--input",
-        "-",
-    ]
+    Returns:
+    bool: whether the update succeeded.
+    """
 
-    result = subprocess.run(
-        command, input=json.dumps(payload), capture_output=True, text=True
+    status, data = github_request(
+        f"{ISSUES_PATH}/{issue_number}",
+        method="PATCH",
+        payload={"title": title, "body": body},
     )
 
-    if result.returncode != 0:
+    if status != 200:
         print(
             create_colored_line(
-                Colors.RED,
-                f"Updating {title} (#{issue_number}) failed: {result.stderr}",
-            )
+                Colors.RED, f"Updating {title} (#{issue_number}) failed: {data}"
+            ),
+            file=sys.stderr,
         )
-    else:
-        print(
-            create_colored_line(
-                Colors.GREEN, f"Updating {title} (#{issue_number}) succeeded"
-            )
+        return False
+
+    print(
+        create_colored_line(
+            Colors.GREEN, f"Updating {title} (#{issue_number}) succeeded"
+        )
+    )
+    return True
+
+
+@dataclass
+class IssueSection:
+    """A section of an issue body, with a shorter version for when the body is too long."""
+
+    full: str
+    short: str
+
+
+def build_issue_body(
+    header: str, sections: list[IssueSection], max_length: int = MAX_ISSUE_BODY_LENGTH
+) -> str:
+    """
+    Join the sections of an issue body. When it's too long, the sections that save the most are shortened first.
+    """
+
+    use_full = [True] * len(sections)
+
+    def render() -> str:
+        return header + "".join(
+            section.full if full else section.short
+            for section, full in zip(sections, use_full)
         )
 
-    return result
+    body = render()
+    while len(body) > max_length and any(use_full):
+        longest = max(
+            (i for i, full in enumerate(use_full) if full),
+            key=lambda i: len(sections[i].full) - len(sections[i].short),
+        )
+        use_full[longest] = False
+        body = render()
+
+    return body
 
 
 def get_datetime_pretty():
@@ -431,7 +412,7 @@ def generate_github_link(item):
 
         return f"[{page}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename})"
 
-    return re.sub(r"pages(?:\.[^/\s]+)?/[^:]*\.md(?=:|$)", replace_reference, item)
+    return re.sub(r"pages(?:\.[^/\s]+)?/[^:]*?\.md(?=[:\s]|$)", replace_reference, item)
 
 
 def generate_github_edit_link(page):

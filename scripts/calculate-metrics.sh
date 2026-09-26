@@ -11,7 +11,13 @@ SCRIPTS_DIR="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck source=scripts/_common.sh
 source "$SCRIPTS_DIR/_common.sh"
 
-mapfile -t METRICS < <(grep -v -e '^#' -e '^id	' -e '^$' "$SCRIPTS_DIR/metrics.tsv")
+if [ ! -d "$TLDR_ROOT_DIR/pages" ]; then
+  echo "The tldr repository isn't found in $TLDR_ROOT_DIR, run \`git submodule update --init\` or set TLDR_ROOT." >&2
+  exit 1
+fi
+
+metrics_output=$(list_metrics) || exit 1
+mapfile -t METRICS <<< "$metrics_output"
 LANGUAGE_IDS=()
 for folder in "$TLDR_ROOT_DIR"/pages.*; do
   # pages.en is a symlink to the English pages.
@@ -30,7 +36,8 @@ JOB_FAILED=false
 # Remove the results of a previous run.
 rm -rf ./check-pages ./check-pages.*
 for metric in "${METRICS[@]}"; do
-  rm -f "./${metric%%	*}.txt"
+  IFS=$'\t' read -r id _ <<< "$metric"
+  rm -f "./$id.txt"
 done
 
 # Run a command as a named background job, with at most MAX_JOBS jobs at the same time.
@@ -110,48 +117,10 @@ run_tldr_scripts() {
 }
 
 start_job "tldr-scripts" run_tldr_scripts
-start_job "en" "$SCRIPTS_DIR/check-pages.sh" -v
+start_job "en" "$SCRIPTS_DIR/check-pages.sh"
 for language_id in "${LANGUAGE_IDS[@]}"; do
-  start_job "$language_id" "$SCRIPTS_DIR/check-pages.sh" -l "$language_id" -v
+  start_job "$language_id" "$SCRIPTS_DIR/check-pages.sh" -l "$language_id"
 done
-
-# Calculate the denominators of metrics.tsv while the jobs are running.
-total_pages=0
-total_non_english_pages=0
-total_pages_need_translation=0
-total_pages_need_see_also_mention=0
-total_tldr_references=0
-total_see_also_references=0
-
-mapfile -t english_pages < <(list_pages "$TLDR_ROOT_DIR/pages")
-# Only translated pages whose English page has a "See also" mention need a (translated) "See also" mention.
-mapfile -t english_pages_with_see_also_mention < <(list_pages_with_see_also_mention "${english_pages[@]}")
-
-for language_id in "" "${LANGUAGE_IDS[@]}"; do
-  folder="$TLDR_ROOT_DIR/pages${language_id:+.$language_id}"
-  see_also_prefix=$(get_see_also_prefix "${language_id:-en}")
-  mapfile -t pages < <(list_pages "$folder")
-
-  total_pages=$((total_pages + ${#pages[@]}))
-  # Every reference is counted once per page, like the results.
-  total_tldr_references=$((total_tldr_references + $(list_tldr_references "${pages[@]}" | sort -u | wc -l)))
-  total_see_also_references=$((total_see_also_references + $(list_see_also_references "$see_also_prefix" "${pages[@]}" | sort -u | wc -l)))
-
-  if [ -n "$language_id" ]; then
-    total_non_english_pages=$((total_non_english_pages + ${#pages[@]}))
-    total_pages_need_translation=$((total_pages_need_translation + ${#english_pages[@]}))
-
-    # set-see-also.py only checks languages with a translation template.
-    if [ -n "$see_also_prefix" ]; then
-      for page in "${english_pages_with_see_also_mention[@]}"; do
-        if [ -f "$folder${page#"$TLDR_ROOT_DIR/pages"}" ]; then
-          total_pages_need_see_also_mention=$((total_pages_need_see_also_mention + 1))
-        fi
-      done
-    fi
-  fi
-done
-
 wait
 
 # Display the number of results of every metric that applies to the language.
@@ -198,21 +167,54 @@ calculate_percentage() {
   fi
 }
 
+# Print the result directories of the languages a metric applies to ("all" or "translations").
+list_result_dirs() {
+  local languages="$1"
+
+  if [ "$languages" = "all" ]; then
+    echo "./check-pages"
+  fi
+  printf './check-pages.%s\n' "${LANGUAGE_IDS[@]}"
+}
+
+# Print the sum of a total of check-pages[.<language>]/totals.tsv over the languages a metric applies to.
+sum_totals() {
+  local total_name="$1"
+  local languages="$2"
+  local sum=0 value dir
+
+  while IFS= read -r dir; do
+    value=$(awk -F '\t' -v name="$total_name" '$1 == name { print $2; found = 1 } END { exit !found }' "$dir/totals.tsv") || return 1
+    sum=$((sum + value))
+  done < <(list_result_dirs "$languages")
+
+  echo "$sum"
+}
+
 # Merge the results of all languages and display the total.
 display_total() {
   local id="$1"
-  local denominator="$2"
-  local label="$3"
-  local results total
+  local languages="$2"
+  local denominator="$3"
+  local label="$4"
+  local results=() total dir denominator_total
 
-  mapfile -t results < <(find ./check-pages ./check-pages.* -maxdepth 1 -type f -name "$id.txt" 2>/dev/null | sort)
+  while IFS= read -r dir; do
+    if [ -f "$dir/$id.txt" ]; then
+      results+=("$dir/$id.txt")
+    fi
+  done < <(list_result_dirs "$languages")
   cat /dev/null "${results[@]}" | sort -u > "./$id.txt"
   total=$(wc -l < "./$id.txt")
 
   if [ "$denominator" = "-" ]; then
     echo "Total $label: $total"
+  elif denominator_total=$(sum_totals "$denominator" "$languages"); then
+    echo "Total $label: $total/$denominator_total - $(calculate_percentage "$total" "$denominator_total")%"
   else
-    echo "Total $label: $total/${!denominator} - $(calculate_percentage "$total" "${!denominator}")%"
+    echo "Total $label: $total"
+    echo "Error: the total $denominator is missing in check-pages*/totals.tsv." >&2
+    JOB_FAILED=true
   fi
 }
 
@@ -226,13 +228,14 @@ for language_id in "${LANGUAGE_IDS[@]}"; do
 done
 
 for metric in "${METRICS[@]}"; do
-  IFS=$'\t' read -r id _ _ denominator _ label <<< "$metric"
-  display_total "$id" "$denominator" "$label"
+  IFS=$'\t' read -r id languages _ denominator _ label <<< "$metric"
+  display_total "$id" "$languages" "$denominator" "$label"
 done
 
 # Remove empty results.
 for metric in "${METRICS[@]}"; do
-  find . ./check-pages ./check-pages.* -maxdepth 1 -type f -name "${metric%%	*}.txt" -size 0 -delete 2>/dev/null
+  IFS=$'\t' read -r id _ <<< "$metric"
+  find . ./check-pages ./check-pages.* -maxdepth 1 -type f -name "$id.txt" -size 0 -delete 2>/dev/null
 done
 
 if [ "$JOB_FAILED" = true ]; then

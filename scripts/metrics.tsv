@@ -1,27 +1,35 @@
 # The metrics calculated by calculate-metrics.sh, in the order they are displayed.
-# This file is read by calculate-metrics.sh, update-dashboard-issue.py and update-language-issues.py.
+# This file is read by calculate-metrics.sh, check-pages.sh, update-dashboard-issue.py and update-language-issues.py.
 #
-# Columns (separated by a tab):
+# Columns (separated by a tab, none of them may be empty):
 # - id: the name of the result files: check-pages[.<language>]/<id>.txt per language and <id>.txt for the total.
 # - languages: "all" or "translations" (the metric doesn't apply to English).
-# - source: "check-pages" (written by check-pages.sh) or the name of a result of a tldr script, filtered per language.
-# - denominator: the variable in calculate-metrics.sh with the total the percentage is calculated on, or "-".
+# - source: "check-pages" (the check in check-pages.sh with the same id) or the name of a result of the tldr scripts
+#   in calculate-metrics.sh, which is filtered per language.
+# - denominator: the total the percentage is calculated on, or "-" for no percentage.
+#   It is the sum of a total that check-pages.sh counts per language (check-pages[.<language>]/totals.tsv)
+#   over the languages the metric applies to:
+#   - pages: the pages.
+#   - english-pages: the English pages (the pages every language should have).
+#   - pages-need-see-also-mention: the pages whose English page has a "See also" mention recognized by set-see-also.py.
+#   - tldr-references: the pages referenced with `tldr <command>`, counted once per page.
+#   - see-also-references: the pages mentioned in the first "See also" line, counted once per page.
 # - link: how a result is linked in the dashboards: "reference" (link the page mentioned in the result),
-#   "edit" (edit the page), "new" (create the page), "lint" (link the line of the page) or "none".
+#   "edit" (edit the page), "new" (create the page) or "lint" (link the line of the page).
 # - label: the description of the metric, used in the output and dashboards.
 id	languages	source	denominator	link	label
-inconsistent-filenames	all	wrong-filename	total_pages	reference	inconsistent filename(s)
-malformed-or-outdated-more-info-links	translations	set-more-info-link	total_non_english_pages	edit	malformed or outdated more info link page(s)
-malformed-or-outdated-see-also-mentions	translations	set-see-also-updated	total_pages_need_see_also_mention	edit	malformed or outdated see also mention(s)
-missing-see-also-mentions	translations	set-see-also-added	total_pages_need_see_also_mention	edit	missing see also mention(s)
+inconsistent-filenames	all	wrong-filename	pages	reference	inconsistent filename(s)
+malformed-or-outdated-more-info-links	translations	set-more-info-link	pages	edit	malformed or outdated more info link page(s)
+malformed-or-outdated-see-also-mentions	translations	set-see-also-updated	pages-need-see-also-mention	edit	malformed or outdated see also mention(s)
+missing-see-also-mentions	translations	set-see-also-added	pages-need-see-also-mention	edit	missing see also mention(s)
 missing-alias-pages	translations	set-alias-page	-	new	missing alias page(s)
-mismatched-page-titles	translations	set-page-title	total_non_english_pages	edit	mismatched page title(s)
-missing-tldr-pages	all	check-pages	total_tldr_references	reference	missing TLDR page(s)
-missing-see-also-pages	all	check-pages	total_see_also_references	reference	missing see also page(s)
-misplaced-pages	all	check-pages	total_pages	edit	misplaced page(s)
-outdated-pages-based-on-command-count	translations	check-pages	total_non_english_pages	edit	outdated page(s) based on number of commands
-outdated-pages-based-on-command-contents	translations	check-pages	total_non_english_pages	edit	outdated page(s) based on the commands itself
-outdated-pages-based-on-header-line-count	translations	check-pages	total_non_english_pages	edit	outdated page(s) based on number of header lines
-missing-english-pages	translations	check-pages	total_non_english_pages	edit	missing English page(s)
-missing-translated-pages	translations	check-pages	total_pages_need_translation	new	missing translated page(s)
+mismatched-page-titles	translations	set-page-title	pages	edit	mismatched page title(s)
+missing-tldr-pages	all	check-pages	tldr-references	reference	missing TLDR page(s)
+missing-see-also-pages	all	check-pages	see-also-references	reference	missing see also page(s)
+misplaced-pages	all	check-pages	pages	edit	misplaced page(s)
+outdated-pages-based-on-command-count	translations	check-pages	pages	edit	outdated page(s) based on number of commands
+outdated-pages-based-on-command-contents	translations	check-pages	pages	edit	outdated page(s) based on the commands itself
+outdated-pages-based-on-header-line-count	translations	check-pages	pages	edit	outdated page(s) based on number of header lines
+missing-english-pages	translations	check-pages	pages	edit	missing English page(s)
+missing-translated-pages	translations	check-pages	english-pages	new	missing translated page(s)
 lint-errors	all	check-pages	-	lint	linter error(s)

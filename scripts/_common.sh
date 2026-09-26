@@ -9,10 +9,24 @@ TLDR_ROOT_DIR="${TLDR_ROOT:-./tldr}"
 TLDR_ROOT_DIR="${TLDR_ROOT_DIR%/}"
 
 SEE_ALSO_TEMPLATE="$TLDR_ROOT_DIR/contributing-guides/translation-templates/see-also-mentions.md"
+METRICS_FILE="$(dirname "${BASH_SOURCE[0]}")/metrics.tsv"
 
-# Print the path of a page relative to the tldr repository (e.g. "pages.fr/common/tar.md").
-relative_page_path() {
-  echo "${1#"$TLDR_ROOT_DIR"/}"
+# Print the metrics of metrics.tsv (one line per metric, with the columns separated by a tab), in their order.
+# Fails when a line doesn't have 6 non-empty columns, since `read` can't split empty columns.
+# Usage: IFS=$'\t' read -r id languages source denominator link label <<< "$metric"
+list_metrics() {
+  awk -F '\t' '
+    { sub(/\r$/, "") }
+    /^#/ || /^$/ || $1 == "id" { next }
+    {
+      for (i = 1; i <= 6; i++) if ($i == "") empty = 1
+      if (NF != 6 || empty) {
+        print FILENAME ":" FNR ": expected 6 non-empty columns separated by a tab" > "/dev/stderr"
+        exit 1
+      }
+      print
+    }
+  ' "$METRICS_FILE"
 }
 
 # Print the pages (Markdown files) in a folder, sorted.
