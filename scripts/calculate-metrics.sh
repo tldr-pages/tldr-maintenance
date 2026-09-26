@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
-# shellcheck disable=SC2329 # The jobs are invoked through start_job.
+# shellcheck disable=SC2317,SC2329 # The jobs are invoked through start_job (SC2317 for ShellCheck < 0.11).
 
 # Calculate the metrics described in metrics.tsv for English and every language, used by the GitHub Action `calculate-metrics`.
 # The results are written to check-pages[.<language>]/<metric>.txt and the totals to <metric>.txt (when not empty).
@@ -21,7 +21,8 @@ declare -A TLDR_SCRIPT_JOB_OF=(
   [set-more-info-link]=run_set_more_info_link
   [set-see-also-added]=run_set_see_also
   [set-see-also-updated]=run_set_see_also
-  [set-alias-page]=run_set_alias_page
+  [set-alias-page-added]=run_set_alias_page
+  [set-alias-page-updated]=run_set_alias_page
   [set-page-title]=run_set_page_title
   [wrong-filename]=run_wrong_filename
 )
@@ -62,24 +63,28 @@ done
 MAX_JOBS=$(nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)
 JOBS_DIR=$(mktemp -d) || exit 1
 trap 'rm -rf "$JOBS_DIR"' EXIT
-# Stop a process and all its descendants.
-kill_tree() {
+# Print a process and all its descendants.
+list_process_tree() {
   local child
 
+  echo "$1"
   for child in $(pgrep -P "$1"); do
-    kill_tree "$child"
+    list_process_tree "$child"
   done
-  kill -TERM "$1" 2>/dev/null
 }
 
 # Stop the background jobs (with their checks and linters) when the script is interrupted.
 stop_jobs() {
-  local pid
+  local pids=() pid
 
   trap '' INT TERM
   for pid in $(jobs -p); do
-    kill_tree "$pid"
+    mapfile -t -O "${#pids[@]}" pids < <(list_process_tree "$pid")
   done
+  if [ "${#pids[@]}" -gt 0 ]; then
+    kill -TERM "${pids[@]}" 2>/dev/null
+  fi
+  wait
   exit "$1"
 }
 trap 'stop_jobs 130' INT
@@ -148,18 +153,27 @@ run_set_more_info_link() {
 run_set_see_also() {
   # A missing "See also" mention would be "added", a malformed or outdated one would be "updated".
   run_tldr_sync_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/' > "$JOBS_DIR/set-see-also" || return 1
-  sed -n 's/ added$//p' "$JOBS_DIR/set-see-also" > "$JOBS_DIR/set-see-also-added" &&
-    sed '/ added$/d; s/ updated$//' "$JOBS_DIR/set-see-also" > "$JOBS_DIR/set-see-also-updated" &&
-    publish_result set-see-also-added &&
-    publish_result set-see-also-updated
+  split_added_and_updated set-see-also
 }
 
 run_set_alias_page() {
+  # A missing alias page would be "added", an outdated one would be "updated".
+  # With -i, also alias pages whose description differs a bit from the template are checked.
   {
-    run_tldr_sync_script "set-alias-page" 's/ page would be.*$//' &&
-      run_tldr_sync_script "set-alias-page" 's/ page would be.*$//' -i
-  } > "$JOBS_DIR/set-alias-page" &&
-    publish_result set-alias-page
+    run_tldr_sync_script "set-alias-page" 's/ page would be \(added\|updated\).*$/ \1/' &&
+      run_tldr_sync_script "set-alias-page" 's/ page would be \(added\|updated\).*$/ \1/' -i
+  } > "$JOBS_DIR/set-alias-page" || return 1
+  split_added_and_updated set-alias-page
+}
+
+# Split the results of a tldr script (lines ending with " added" or " updated") into <name>-added and <name>-updated.
+split_added_and_updated() {
+  local name="$1"
+
+  sed -n 's/ added$//p' "$JOBS_DIR/$name" > "$JOBS_DIR/$name-added" &&
+    sed -n 's/ updated$//p' "$JOBS_DIR/$name" > "$JOBS_DIR/$name-updated" &&
+    publish_result "$name-added" &&
+    publish_result "$name-updated"
 }
 
 run_set_page_title() {

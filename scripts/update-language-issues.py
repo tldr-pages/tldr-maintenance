@@ -18,7 +18,8 @@ from _dashboard import (
     build_issue_body,
     get_language_issue_title,
     get_metrics,
-    get_check_pages_dir,
+    get_check_pages_dirs,
+    read_results,
     get_locale,
     get_datetime_pretty,
     strip_dynamic_content,
@@ -26,12 +27,6 @@ from _dashboard import (
     get_github_issues,
     update_github_issue,
 )
-
-
-def parse_file(filepath: Path) -> list[str]:
-    with filepath.open(encoding="utf-8") as file:
-        content = file.read().strip()
-        return content.split("\n") if content else []
 
 
 def parse_language_directory(
@@ -45,8 +40,7 @@ def parse_language_directory(
     for metric in metrics:
         if not metric.applies_to(locale):
             continue
-        filepath = Path(directory) / metric.file_name
-        lang_data[metric] = parse_file(filepath) if filepath.is_file() else []
+        lang_data[metric] = read_results(Path(directory) / metric.file_name)
 
     return lang_data
 
@@ -95,7 +89,7 @@ def main():
     issues = get_github_issues()
     failed = False
 
-    for lang_dir in get_check_pages_dir(Path.cwd()):
+    for lang_dir in get_check_pages_dirs(Path.cwd()):
         locale = get_locale(lang_dir)
         print(f"Updating {locale}")
 

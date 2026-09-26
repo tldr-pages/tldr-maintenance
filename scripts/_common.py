@@ -77,7 +77,8 @@ def decode_json(body: bytes) -> object:
         return None
     try:
         return json.loads(body)
-    except json.JSONDecodeError:
+    except ValueError:
+        # Not JSON or not UTF-8.
         return body.decode(errors="replace")
 
 
@@ -133,7 +134,8 @@ def github_request(
                 retry_after = error.headers.get("Retry-After") or ""
                 wait = int(retry_after) if retry_after.isdigit() else 0
                 if not wait:
-                    reset = int(error.headers.get("X-RateLimit-Reset", time.time()))
+                    reset = error.headers.get("X-RateLimit-Reset") or ""
+                    reset = int(reset) if reset.isdigit() else int(time.time())
                     wait = max(reset - int(time.time()), 0) + 1
                 print(f"Rate limited, waiting {wait}s...", file=sys.stderr)
                 time.sleep(wait)

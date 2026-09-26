@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
-# shellcheck disable=SC2329 # The checks are invoked through CHECK_OF.
+# shellcheck disable=SC2317,SC2329 # The checks are invoked through CHECK_OF (SC2317 for ShellCheck < 0.11).
 
 # Check the pages of one language for the metrics in metrics.tsv with "check-pages" as source (see the README for
 # a description of every metric). The results are written to check-pages[.<language>]/<metric>.txt and the totals
@@ -102,7 +102,7 @@ done
 if [ -n "$SELECTED_METRICS" ]; then
   IFS=',' read -ra selected_metrics <<< "$SELECTED_METRICS"
   for id in "${selected_metrics[@]}"; do
-    if [ -z "${metric_sources[$id]}" ]; then
+    if [ -z "$id" ] || [ -z "${metric_sources[$id]}" ]; then
       echo "Unknown metric: $id" >&2
       usage
     elif [ -z "${metric_languages[$id]}" ]; then
@@ -126,12 +126,15 @@ if [ $VERBOSE = true ]; then
   set -x
 fi
 
-# The results file of every metric that is checked, and the functions to run (in the order of the checks).
+# The results of every metric that is checked are collected in WORK_DIR and only written to OUTPUT_DIR when its
+# check succeeded, so the results of a failed (or interrupted) check are missing instead of incomplete.
 declare -A OUTPUT_FILE
 checks=()
+rm -f "$OUTPUT_DIR/totals.tsv"
 for id in "${selected_metrics[@]}"; do
   if [ "${metric_languages[$id]}" = "all" ] || [ -n "$LANGUAGE_ID" ]; then
-    OUTPUT_FILE[$id]="$OUTPUT_DIR/$id.txt"
+    rm -f "$OUTPUT_DIR/$id.txt"
+    OUTPUT_FILE[$id]="$WORK_DIR/results-$id"
     : > "${OUTPUT_FILE[$id]}" || exit 1
     if [[ " ${checks[*]} " != *" ${CHECK_OF[$id]} "* ]]; then
       checks+=("${CHECK_OF[$id]}")
@@ -456,7 +459,8 @@ write_totals() {
       return 1
     fi
     printf '%s\t%s\n' "$name" "${totals[$name]}"
-  done > "$OUTPUT_DIR/totals.tsv"
+  done > "$WORK_DIR/totals.tsv" &&
+    mv "$WORK_DIR/totals.tsv" "$OUTPUT_DIR/totals.tsv"
 }
 
 status=0
@@ -464,18 +468,14 @@ for check in "${checks[@]}" write_totals; do
   if ! "$check"; then
     echo "$check failed for $FOLDER_PATH." >&2
     status=1
-    # Remove the (partial) results of the metrics of the check, so they aren't mistaken for complete results.
-    for id in "${!OUTPUT_FILE[@]}"; do
-      if [ "${CHECK_OF[$id]}" = "$check" ]; then
-        rm -f "${OUTPUT_FILE[$id]}"
-        unset "OUTPUT_FILE[$id]"
-      fi
-    done
+    continue
   fi
-done
 
-for output_file in "${OUTPUT_FILE[@]}"; do
-  sort -u -o "$output_file" "$output_file" || status=1
+  for id in "${!OUTPUT_FILE[@]}"; do
+    if [ "${CHECK_OF[$id]}" = "$check" ]; then
+      sort -u "${OUTPUT_FILE[$id]}" > "$OUTPUT_DIR/$id.txt" || status=1
+    fi
+  done
 done
 
 exit "$status"

@@ -16,6 +16,7 @@ from _dashboard import (
     MAX_LISTED_RESULTS,
     RELEASE_URL,
     IssueSection,
+    read_results,
     Metric,
     build_issue_body,
     get_language_issue_title,
@@ -45,9 +46,7 @@ def parse_summary(path: Path, metrics: list[Metric]) -> dict:
             if row["metric"] != metric.id or row["language"] != "total":
                 continue
             value = row["results"]
-            if value == "-":
-                value = "not calculated"
-            elif row["total"] != "-":
+            if row["total"] != "-":
                 value += f"/{row['total']} - {row['percentage']}%"
             data["overview"][f"Total {metric.label}"] = value
 
@@ -70,8 +69,7 @@ def parse_result_files(data: dict, metrics: list[Metric]) -> dict:
         if not file.is_file():
             continue
 
-        with file.open(encoding="utf-8") as f:
-            lines = f.read().splitlines()
+        lines = read_results(file)
 
         data["metrics"][metric.label] = {
             "count": len(lines),

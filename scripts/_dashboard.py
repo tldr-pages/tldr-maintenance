@@ -60,20 +60,10 @@ class Metric:
                 raise ValueError(f"Unknown link type {self.link} of metric {self.id}")
 
 
-# The totals check-pages.sh counts per language, used as denominator (keep in sync with TOTAL_NAMES in _common.sh).
-TOTAL_NAMES = (
-    "pages",
-    "english-pages",
-    "pages-need-see-also-mention",
-    "tldr-references",
-    "see-also-references",
-)
-
-
 def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
     """
     Get the metrics described in metrics.tsv, in the order they are displayed.
-    Raises a ValueError when metrics.tsv is invalid, with the same rules as list_metrics in _common.sh.
+    Raises a ValueError when a column used here is invalid (calculate-metrics.sh validates all columns).
 
     Returns:
     list (list of Metric's): the metrics.
@@ -98,10 +88,6 @@ def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
                 raise ValueError(f"{location}: duplicate label {metric.label}")
             if metric.languages not in ("all", "translations"):
                 raise ValueError(f"{location}: invalid languages {metric.languages}")
-            if metric.denominator not in (*TOTAL_NAMES, "-"):
-                raise ValueError(
-                    f"{location}: invalid denominator {metric.denominator}"
-                )
             if metric.link not in ("reference", "edit", "new", "lint"):
                 raise ValueError(f"{location}: invalid link {metric.link}")
             metrics.append(metric)
@@ -111,7 +97,14 @@ def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
     return metrics
 
 
-def get_check_pages_dir(root: Path) -> list[Path]:
+def read_results(path: Path) -> list[str]:
+    """Read the results of a metric (one per line) from a result file of calculate-metrics.sh."""
+
+    with path.open(encoding="utf-8") as file:
+        return file.read().splitlines()
+
+
+def get_check_pages_dirs(root: Path) -> list[Path]:
     """
     Get all directories with the results of check-pages.sh.
 
@@ -151,7 +144,7 @@ ISSUES_PATH = f"/repos/{MAINTENANCE_REPO}/issues"
 RELEASE_URL = f"https://github.com/{MAINTENANCE_REPO}/releases/download/latest"
 # GitHub rejects issue bodies with more characters.
 MAX_ISSUE_BODY_LENGTH = 65536
-# The results of a metric are only listed in an issue when there aren't more.
+# The results of a metric are only listed in an issue when there are fewer than this.
 MAX_LISTED_RESULTS = 1000
 DASHBOARD_ISSUE_TITLE = "Translation Dashboard Status"
 

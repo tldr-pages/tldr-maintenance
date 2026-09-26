@@ -32,6 +32,10 @@ Some metrics don't apply to English, since they compare a translated page with t
 - **Missing alias page(s)** (`missing-alias-pages`, not for English)
   A translated alias page is missing when the English page is an alias page, but the translated page doesn't exist.
   This metric generates false-positives, so the results need to be checked by hand.
+- **Outdated alias page(s)** (`outdated-alias-pages`, not for English)
+  A translated alias page is outdated when the English page is an alias page, but the translated alias page doesn't match the
+  [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/alias-pages.md) or refers to another command.
+  This metric generates false-positives, so the results need to be checked by hand.
 - **Mismatched page title(s)** (`mismatched-page-titles`, not for English)
   A page title is mismatched when the title (`# ...`) doesn't match the title of the English page.
 - **Missing TLDR page(s)** (`missing-tldr-pages`)
