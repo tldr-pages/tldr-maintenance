@@ -10,11 +10,13 @@ import os
 import sys
 
 from pathlib import Path
-from _common import (
+from _dashboard import (
+    MAX_LISTED_RESULTS,
     RELEASE_URL,
     IssueSection,
     Metric,
     build_issue_body,
+    get_language_issue_title,
     get_metrics,
     get_check_pages_dir,
     get_locale,
@@ -24,9 +26,6 @@ from _common import (
     get_github_issues,
     update_github_issue,
 )
-
-# Only list the results of a metric when there aren't too many.
-MAX_LISTED_RESULTS = 1000
 
 
 def parse_file(filepath: Path) -> list[str]:
@@ -52,14 +51,10 @@ def parse_language_directory(
     return lang_data
 
 
-def get_issue_title(language: str) -> str:
-    return f"Translation Dashboard Status for {language}"
-
-
 def generate_markdown_for_language(
     language: str, directory_name: str, data: dict[Metric, list[str]]
 ) -> str:
-    title = f"# {get_issue_title(language)}\n\n"
+    title = f"# {get_language_issue_title(language)}\n\n"
     header = title + f"## {language} language Issues\n"
     header += "<!-- __NOUPDATE__ -->\n"
     header += f"**Last updated:** {get_datetime_pretty()}\n"
@@ -104,8 +99,11 @@ def main():
         locale = get_locale(lang_dir)
         print(f"Updating {locale}")
 
-        title = get_issue_title(locale)
+        title = get_language_issue_title(locale)
         issue_data = issues.get(title) or create_github_issue(title)
+        if not issue_data:
+            failed = True
+            continue
 
         lang_data = parse_language_directory(lang_dir, locale, metrics)
         markdown_content = generate_markdown_for_language(

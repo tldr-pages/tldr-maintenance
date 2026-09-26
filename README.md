@@ -14,7 +14,7 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 
 The metrics are defined in [`metrics.tsv`](scripts/metrics.tsv), which is used by all scripts.
 Every metric is calculated per language, the results are written to `check-pages/<metric>.txt` (English) and `check-pages.<language>/<metric>.txt`.
-Empty results are removed. Some metrics don't apply to English, since they compare a translated page with the English page.
+Some metrics don't apply to English, since they compare a translated page with the English page.
 
 - **Inconsistent filename(s)** (`inconsistent-filenames`)
   A filename is inconsistent when it doesn't match the title (`# ...`) of the page, checked by [`wrong-filename.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.py).
@@ -60,7 +60,9 @@ Empty results are removed. Some metrics don't apply to English, since they compa
 
 ## Summary
 
-At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/metrics-log.md) a summary is written, with the total of every metric (the results of all languages, written to `<metric>.txt`).
+At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/metrics-log.md) a summary is written, with the total of every metric
+(the results of all languages, written to `<metric>.txt` when there are results).
+The summary is also written to `summary.tsv`, with the number of results per language and the totals.
 This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation.
 Most totals include a percentage (rounded down to one decimal), calculated based on the sum of a total that is counted per language (`check-pages[.<language>]/totals.tsv`) over the languages the metric applies to:
 
@@ -79,17 +81,18 @@ A summary can also be downloaded at the [latest GitHub Release](https://github.c
 
 ## Running locally
 
-The scripts require Bash 4.3 or later and the GNU versions of the command-line tools (as on Linux), Python 3 and Node.js:
+The scripts require Bash 4.3 or later and the GNU versions of the command-line tools (as on Linux), Python 3.10 or later and Node.js:
 
 ```sh
 git submodule update --init
 npm ci
-PATH="$PWD/node_modules/.bin:$PATH" npm run --silent calculate-metrics > metrics-log.md
+npm run --silent calculate-metrics > metrics-log.md
 ```
 
 The tldr repository is expected in `./tldr`, set `TLDR_ROOT` to use another clone.
 The script exits with 1 when one of the checks failed to run, the found issues don't change the exit code.
 To check a single language, run `scripts/check-pages.sh -l <language>`, optionally with `-c <metric>,<metric>` to only check some metrics (see the script for its options).
+It needs the linters on the `PATH`: `PATH="$PWD/node_modules/.bin:$PATH" scripts/check-pages.sh -l fr`.
 
 ## Maintainer scripts
 

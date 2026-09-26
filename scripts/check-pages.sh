@@ -65,22 +65,23 @@ if [ "$LANGUAGE_ID" = "en" ]; then
   LANGUAGE_ID=""
 fi
 
-folder_path="$TLDR_ROOT_DIR/pages${LANGUAGE_ID:+.$LANGUAGE_ID}"
-if [ ! -d "$folder_path" ]; then
-  echo "The specified path does not exist: $folder_path" >&2
+FOLDER_PATH="$TLDR_ROOT_DIR/pages${LANGUAGE_ID:+.$LANGUAGE_ID}"
+if [ ! -d "$FOLDER_PATH" ]; then
+  echo "The specified path does not exist: $FOLDER_PATH" >&2
   exit 1
 fi
 
 # Read the metrics of this script from metrics.tsv.
 metrics_output=$(list_metrics) || exit 1
 mapfile -t metrics <<< "$metrics_output"
-declare -A metric_languages
+declare -A metric_languages metric_sources
 check_metrics=()
 for metric in "${metrics[@]}"; do
   IFS=$'\t' read -r id languages source _ <<< "$metric"
+  metric_sources[$id]="$source"
   if [ "$source" = "check-pages" ]; then
     if [ -z "${CHECK_OF[$id]}" ]; then
-      echo "There is no check for the metric $id in metrics.tsv." >&2
+      echo "There is no check for the metric $id of metrics.tsv." >&2
       exit 1
     fi
     metric_languages[$id]="$languages"
@@ -97,8 +98,11 @@ done
 if [ -n "$SELECTED_METRICS" ]; then
   IFS=',' read -ra selected_metrics <<< "$SELECTED_METRICS"
   for id in "${selected_metrics[@]}"; do
-    if [ -z "${metric_languages[$id]}" ]; then
+    if [ -z "${metric_sources[$id]}" ]; then
       echo "Unknown metric: $id" >&2
+      usage
+    elif [ -z "${metric_languages[$id]}" ]; then
+      echo "The metric $id isn't checked by this script, but by ${metric_sources[$id]} (see calculate-metrics.sh)." >&2
       usage
     fi
   done
@@ -107,9 +111,9 @@ else
 fi
 
 OUTPUT_DIR="check-pages${LANGUAGE_ID:+.$LANGUAGE_ID}"
-mkdir -p "$OUTPUT_DIR"
+mkdir -p "$OUTPUT_DIR" || exit 1
 
-WORK_DIR=$(mktemp -d)
+WORK_DIR=$(mktemp -d) || exit 1
 trap 'rm -rf "$WORK_DIR"' EXIT
 
 if [ $VERBOSE = true ]; then
@@ -124,16 +128,25 @@ checks=()
 for id in "${selected_metrics[@]}"; do
   if [ "${metric_languages[$id]}" = "all" ] || [ -n "$LANGUAGE_ID" ]; then
     OUTPUT_FILE[$id]="$OUTPUT_DIR/$id.txt"
-    : > "${OUTPUT_FILE[$id]}"
+    : > "${OUTPUT_FILE[$id]}" || exit 1
     if [[ " ${checks[*]} " != *" ${CHECK_OF[$id]} "* ]]; then
       checks+=("${CHECK_OF[$id]}")
     fi
   fi
 done
 
-mapfile -t files < <(list_pages "$folder_path")
-mapfile -t english_files < <(list_pages "$TLDR_ROOT_DIR/pages")
-see_also_prefix=$(get_see_also_prefix "${LANGUAGE_ID:-en}")
+# The pages of the language and the English pages, as array and as file (one page per line) for the helpers of
+# _common.sh, which read the pages from stdin and refer to a page by its line number.
+PAGES_FILE="$WORK_DIR/pages"
+ENGLISH_PAGES_FILE="$WORK_DIR/english-pages"
+list_pages "$FOLDER_PATH" > "$PAGES_FILE" || exit 1
+list_pages "$TLDR_ROOT_DIR/pages" > "$ENGLISH_PAGES_FILE" || exit 1
+mapfile -t files < "$PAGES_FILE"
+mapfile -t english_files < "$ENGLISH_PAGES_FILE"
+SEE_ALSO_PREFIX=$(get_see_also_prefix "${LANGUAGE_ID:-en}")
+
+# Node.js warnings (e.g. deprecations) would end up between the lint errors.
+export NODE_NO_WARNINGS=1
 
 # The checks below avoid starting processes per page, since a folder can contain thousands of pages.
 # Instead, external tools (awk, sed) process all pages at once and Bash only loops over their output,
@@ -152,9 +165,10 @@ add_result() {
 
 page_exists() {
   local command="$1"
+  local platform
 
   for platform in "${PLATFORMS[@]}"; do
-    if [ -f "$folder_path/$platform/$command.md" ]; then
+    if [ -f "$FOLDER_PATH/$platform/$command.md" ]; then
       return 0
     fi
   done
@@ -178,7 +192,7 @@ add_missing_references() {
 # Write the references with `tldr <command>` to $WORK_DIR/tldr-references (once).
 list_tldr_references_once() {
   if [ ! -f "$WORK_DIR/tldr-references" ]; then
-    list_tldr_references "${files[@]}" > "$WORK_DIR/tldr-references.tmp" || return 1
+    list_tldr_references < "$PAGES_FILE" > "$WORK_DIR/tldr-references.tmp" || return 1
     mv "$WORK_DIR/tldr-references.tmp" "$WORK_DIR/tldr-references"
   fi
 }
@@ -186,7 +200,7 @@ list_tldr_references_once() {
 # Write the references of the "See also" mentions to $WORK_DIR/see-also-references (once).
 list_see_also_references_once() {
   if [ ! -f "$WORK_DIR/see-also-references" ]; then
-    list_see_also_references "$see_also_prefix" "${files[@]}" > "$WORK_DIR/see-also-references.tmp" || return 1
+    list_see_also_references "$SEE_ALSO_PREFIX" < "$PAGES_FILE" > "$WORK_DIR/see-also-references.tmp" || return 1
     mv "$WORK_DIR/see-also-references.tmp" "$WORK_DIR/see-also-references"
   fi
 }
@@ -214,20 +228,22 @@ check_misplaced_pages() {
   done
 }
 
-# For every given page, print a line with \001 followed by the index of the page (starting at 1),
-# a line with \002 for every header line and every command, stripped from placeholders, strings, etc.
-strip_commands() {
-  if [ "$#" -eq 0 ]; then
-    return 0
-  fi
-
+# For every given page (read from stdin), print a line with its index, number of commands, number of header lines
+# and its commands (stripped from placeholders, strings, etc.) joined by a space, separated by \037.
+summarize_commands() {
   # shellcheck disable=SC2016
   awk '
-    BEGIN { for (i = 1; i < ARGC; i++) index_of[ARGV[i]] = i }
-    FNR == 1 { print "\001" index_of[FILENAME] }
-    /^>/ { print "\002" }
-    /^`[^`]+`$/ { print }
-  ' "$@" |
+    {
+      page = $0
+      print "\001" NR
+      while ((status = (getline line < page)) > 0) {
+        if (line ~ /^>/) print "\002"
+        else if (line ~ /^`[^`]+`$/) print line
+      }
+      if (status < 0) { print "Cannot read " page > "/dev/stderr"; exit 1 }
+      close(page)
+    }
+  ' |
     sed 's/{{\[\([^|]*|[^]]*\)\]}}/___\1___/g' |
     sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' |
     sed -e 's/<[^>]*>//g' \
@@ -235,76 +251,55 @@ strip_commands() {
       -e 's/"[^"]*"/""/g' \
       -e "s/'[^']*'//g" \
       -e 's/`//g' \
-      -e 's/___\(.*\)___/{{\[\1\]}}/g'
-}
-
-# Fill command_counts, header_counts and commands_as_string for all given pages.
-declare -A command_counts header_counts commands_as_string
-load_commands() {
-  local pages=("$@")
-  local line page="" commands=0 headers=0 as_string=""
-
-  store_commands() {
-    if [ -n "$page" ]; then
-      command_counts["$page"]=$commands
-      header_counts["$page"]=$headers
-      commands_as_string["$page"]=$as_string
-    fi
-  }
-
-  strip_commands "${pages[@]}" > "$WORK_DIR/commands" || return 1
-
-  while IFS= read -r line; do
-    case "$line" in
-      $'\001'*)
-        store_commands
-        page="${pages[${line#?} - 1]}"
-        commands=0
-        headers=0
-        as_string=""
-        ;;
-      $'\002')
-        headers=$((headers + 1))
-        ;;
-      *)
-        if [ "$commands" -eq 0 ]; then
-          as_string="$line"
-        else
-          as_string+=" $line"
-        fi
-        commands=$((commands + 1))
-        ;;
-    esac
-  done < "$WORK_DIR/commands"
-  store_commands
+      -e 's/___\(.*\)___/{{\[\1\]}}/g' |
+    awk '
+      function print_page() {
+        if (index_of_page != "") print index_of_page "\037" commands "\037" headers "\037" joined
+      }
+      /^\001/ { print_page(); index_of_page = substr($0, 2); commands = 0; headers = 0; joined = ""; next }
+      $0 == "\002" { headers++; next }
+      { joined = commands == 0 ? $0 : joined " " $0; commands++ }
+      END { print_page() }
+    '
 }
 
 # Checks the outdated-pages-based-on-command-count, -command-contents and -header-line-count metrics.
 check_outdated_pages() {
-  local file english_file filepath
-  local pages=()
+  local file english_file filepath i index commands headers joined
+  local pairs=()
+  local -A command_counts header_counts commands_as_string
 
+  # The translated pages with an English page, followed by that English page.
   for file in "${files[@]}"; do
-    english_file="$TLDR_ROOT_DIR/pages${file#"$folder_path"}"
+    english_file="$TLDR_ROOT_DIR/pages${file#"$FOLDER_PATH"}"
     if [ -f "$english_file" ]; then
-      pages+=("$file" "$english_file")
+      pairs+=("$file" "$english_file")
     fi
   done
 
-  load_commands "${pages[@]}" || return 1
+  if [ "${#pairs[@]}" -eq 0 ]; then
+    return 0
+  fi
 
-  for ((i = 0; i < ${#pages[@]}; i += 2)); do
-    file="${pages[i]}"
-    english_file="${pages[i + 1]}"
-    filepath="${file#"$TLDR_ROOT_DIR"/}"
+  printf '%s\n' "${pairs[@]}" | summarize_commands > "$WORK_DIR/commands" || return 1
 
-    if [ "${command_counts[$english_file]:-0}" != "${command_counts[$file]:-0}" ]; then
+  while IFS=$'\037' read -r index commands headers joined; do
+    command_counts[$index]="$commands"
+    header_counts[$index]="$headers"
+    commands_as_string[$index]="$joined"
+  done < "$WORK_DIR/commands"
+
+  # The pairs are at index i and i + 1, their lines in the input of summarize_commands at i + 1 and i + 2.
+  for ((i = 0; i < ${#pairs[@]}; i += 2)); do
+    filepath="${pairs[i]#"$TLDR_ROOT_DIR"/}"
+
+    if [ "${command_counts[$((i + 2))]}" != "${command_counts[$((i + 1))]}" ]; then
       add_result outdated-pages-based-on-command-count "$filepath"
-    elif [ "${commands_as_string[$english_file]}" != "${commands_as_string[$file]}" ]; then
+    elif [ "${commands_as_string[$((i + 2))]}" != "${commands_as_string[$((i + 1))]}" ]; then
       add_result outdated-pages-based-on-command-contents "$filepath"
     fi
 
-    if [ "${header_counts[$english_file]:-0}" != "${header_counts[$file]:-0}" ]; then
+    if [ "${header_counts[$((i + 2))]}" != "${header_counts[$((i + 1))]}" ]; then
       add_result outdated-pages-based-on-header-line-count "$filepath"
     fi
   done
@@ -314,7 +309,7 @@ check_missing_english_pages() {
   local file
 
   for file in "${files[@]}"; do
-    if [ ! -f "$TLDR_ROOT_DIR/pages${file#"$folder_path"}" ]; then
+    if [ ! -f "$TLDR_ROOT_DIR/pages${file#"$FOLDER_PATH"}" ]; then
       add_result missing-english-pages "${file#"$TLDR_ROOT_DIR"/}"
     fi
   done
@@ -324,18 +319,49 @@ check_missing_translated_pages() {
   local english_file translated_file
 
   for english_file in "${english_files[@]}"; do
-    translated_file="$folder_path${english_file#"$TLDR_ROOT_DIR/pages"}"
+    translated_file="$FOLDER_PATH${english_file#"$TLDR_ROOT_DIR/pages"}"
     if [ ! -f "$translated_file" ]; then
       add_result missing-translated-pages "${translated_file#"$TLDR_ROOT_DIR"/}"
     fi
   done
 }
 
+# Add the output of a linter to the lint errors, one line per error, and fail when it has other output.
+# Both linters print a line per lint error, starting with the path of the page and the line number.
+# tldr-lint prints the path followed by the parse error on the next lines for a page it can't parse,
+# which is joined to one line.
+add_lint_errors() {
+  local linter="$1"
+  local output_file="$2"
+
+  # shellcheck disable=SC2016
+  awk '
+    function add_parse_error() {
+      if (file != "") print file ":" line ": Parse error: " message
+      file = ""
+    }
+    # Node.js warnings, e.g. "(node:123) [DEP0040] DeprecationWarning: ...".
+    /^\(node:[0-9]+\) / || /^\(Use `node --trace-/ { next }
+    /^[^ ].*\.md:[0-9]+[: ]/ { add_parse_error(); print; next }
+    /^[^ ].*\.md:$/ { add_parse_error(); file = substr($0, 1, length($0) - 1); line = 1; message = ""; next }
+    file != "" {
+      if (match($0, /on line [0-9]+/)) line = substr($0, RSTART + 8, RLENGTH - 8)
+      message = $0
+      next
+    }
+    { print > "/dev/stderr"; unexpected = 1 }
+    END { add_parse_error(); exit unexpected }
+  ' "$output_file" >> "${OUTPUT_FILE[lint-errors]}" || {
+    echo "$linter failed." >&2
+    return 1
+  }
+}
+
 lint() {
-  local folder="${folder_path##*/}"
+  local folder="${FOLDER_PATH##*/}"
   local ignore_checks=()
   local tldr_lint_options=()
-  local status
+  local linter status
 
   if [ "${#files[@]}" -eq 0 ]; then
     return 0
@@ -367,43 +393,24 @@ lint() {
   done
 
   # The linters run inside the tldr repository, so the results contain the path relative to it.
-  (cd "$TLDR_ROOT_DIR" && markdownlint "$folder" -c .markdownlint.json) >> "${OUTPUT_FILE[lint-errors]}" 2>&1
+  (cd "$TLDR_ROOT_DIR" && markdownlint "$folder" -c .markdownlint.json) > "$WORK_DIR/markdownlint" 2>&1
   status=$?
   # markdownlint exits with 1 when it finds lint errors and with a higher code when it failed to run.
   if [ "$status" -gt 1 ]; then
+    cat "$WORK_DIR/markdownlint" >&2
     echo "markdownlint failed with exit code $status." >&2
     return 1
   fi
+  add_lint_errors markdownlint "$WORK_DIR/markdownlint" || return 1
 
+  # tldr-lint also exits with 1 when it failed to run, so only its output shows whether it did.
   (cd "$TLDR_ROOT_DIR" && tldr-lint "${tldr_lint_options[@]}" "$folder") > "$WORK_DIR/tldr-lint" 2>&1
-  # tldr-lint also exits with 1 when it failed to run, so its output is checked instead. It prints a line per lint error,
-  # or, for a page it can't parse, the path followed by the parse error on the next lines, which is joined to one line.
-  # Any other output (e.g. an error before the first page) means it failed to run.
-  # shellcheck disable=SC2016
-  awk '
-    function add_parse_error() {
-      if (file != "") print file ":" line ": Parse error: " message
-      file = ""
-    }
-    /^[^ ].*\.md:[0-9]+: / { add_parse_error(); print; next }
-    /^[^ ].*\.md:$/ { add_parse_error(); file = substr($0, 1, length($0) - 1); line = 1; message = ""; next }
-    file != "" {
-      if (match($0, /on line [0-9]+/)) line = substr($0, RSTART + 8, RLENGTH - 8)
-      message = $0
-      next
-    }
-    { print > "/dev/stderr"; unexpected = 1 }
-    END { add_parse_error(); exit unexpected }
-  ' "$WORK_DIR/tldr-lint" >> "${OUTPUT_FILE[lint-errors]}" || {
-    echo "tldr-lint failed." >&2
-    return 1
-  }
+  add_lint_errors tldr-lint "$WORK_DIR/tldr-lint"
 }
 
-# Write the totals the percentages are calculated on (see the denominator column of metrics.tsv).
+# Write the totals the percentages are calculated on (see TOTAL_NAMES in _common.sh and metrics.tsv).
 write_totals() {
-  local file english_file
-  local tldr_references see_also_references
+  local file english_file tldr_references see_also_references
   local english_pages_of_files=()
   local pages_need_see_also_mention=0
 
@@ -413,34 +420,45 @@ write_totals() {
   see_also_references=$(sort -u "$WORK_DIR/see-also-references" | wc -l) || return 1
 
   # set-see-also.py only checks languages with a translation template.
-  if [ -n "$see_also_prefix" ]; then
+  if [ -n "$SEE_ALSO_PREFIX" ]; then
     for file in "${files[@]}"; do
-      english_file="$TLDR_ROOT_DIR/pages${file#"$folder_path"}"
+      english_file="$TLDR_ROOT_DIR/pages${file#"$FOLDER_PATH"}"
       if [ -f "$english_file" ]; then
         english_pages_of_files+=("$english_file")
       fi
     done
-    pages_need_see_also_mention=$(list_pages_with_see_also_mention "${english_pages_of_files[@]}" | wc -l) || return 1
+    if [ "${#english_pages_of_files[@]}" -gt 0 ]; then
+      pages_need_see_also_mention=$(printf '%s\n' "${english_pages_of_files[@]}" | list_pages_with_see_also_mention | wc -l) || return 1
+    fi
   fi
 
-  printf '%s\t%s\n' \
-    pages "${#files[@]}" \
-    english-pages "${#english_files[@]}" \
-    pages-need-see-also-mention "$pages_need_see_also_mention" \
-    tldr-references "$tldr_references" \
-    see-also-references "$see_also_references" > "$OUTPUT_DIR/totals.tsv"
+  local -A totals=(
+    [pages]="${#files[@]}"
+    [english-pages]="${#english_files[@]}"
+    [pages-need-see-also-mention]="$pages_need_see_also_mention"
+    [tldr-references]="$tldr_references"
+    [see-also-references]="$see_also_references"
+  )
+  local name
+  for name in "${TOTAL_NAMES[@]}"; do
+    if [ -z "${totals[$name]}" ]; then
+      echo "The total $name isn't counted." >&2
+      return 1
+    fi
+    printf '%s\t%s\n' "$name" "${totals[$name]}"
+  done > "$OUTPUT_DIR/totals.tsv"
 }
 
 status=0
 for check in "${checks[@]}" write_totals; do
   if ! "$check"; then
-    echo "$check failed for $folder_path." >&2
+    echo "$check failed for $FOLDER_PATH." >&2
     status=1
   fi
 done
 
 for output_file in "${OUTPUT_FILE[@]}"; do
-  sort -o "$output_file" "$output_file" || status=1
+  sort -u -o "$output_file" "$output_file" || status=1
 done
 
 exit "$status"

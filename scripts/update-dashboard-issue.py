@@ -2,20 +2,23 @@
 # SPDX-License-Identifier: MIT
 
 """
-Update the "Translation Dashboard Status" issue with the output of calculate-metrics.sh
-(metrics-log.md and the <metric>.txt files in the current directory).
+Update the "Translation Dashboard Status" issue with the results of calculate-metrics.sh
+(summary.tsv and the <metric>.txt files in the current directory).
 """
 
+import csv
 import os
-import re
 import sys
 
 from pathlib import Path
-from _common import (
+from _dashboard import (
+    DASHBOARD_ISSUE_TITLE,
+    MAX_LISTED_RESULTS,
     RELEASE_URL,
     IssueSection,
     Metric,
     build_issue_body,
+    get_language_issue_title,
     get_metrics,
     get_datetime_pretty,
     strip_dynamic_content,
@@ -23,37 +26,33 @@ from _common import (
     update_github_issue,
 )
 
-ISSUE_TITLE = "Translation Dashboard Status"
-# Only list the results of a metric when there aren't too many.
-MAX_LISTED_RESULTS = 100
+SUMMARY_FILE = Path("summary.tsv")
 
 
-def parse_log_file(path: Path, metrics: list[Metric]) -> dict:
+def parse_summary(path: Path, metrics: list[Metric]) -> dict:
     """
-    Parse the totals and the number of results per language from the output of calculate-metrics.sh.
+    Parse the totals and the number of results per language from summary.tsv, written by calculate-metrics.sh.
     """
 
     data = {"overview": {}, "metrics": {}, "details": {}}
+    label_of = {metric.id: metric.label for metric in metrics}
 
-    with path.open(encoding="utf-8") as f:
-        lines = f.read().splitlines()
+    with path.open(encoding="utf-8", newline="") as f:
+        rows = list(csv.DictReader(f, delimiter="\t"))
 
-    patterns = [
-        (
-            metric,
-            re.compile(rf"^Total {re.escape(metric.label)}: (.+)$"),
-            re.compile(rf"^(\d+) {re.escape(metric.label)} in check-pages\.(\w+)/"),
-        )
-        for metric in metrics
-    ]
+    for metric in metrics:
+        for row in rows:
+            if row["metric"] != metric.id or row["language"] != "total":
+                continue
+            value = row["results"]
+            if row["total"] != "-":
+                value += f"/{row['total']} - {row['percentage']}%"
+            data["overview"][f"Total {metric.label}"] = value
 
-    for line in lines:
-        for metric, total_pattern, detail_pattern in patterns:
-            if match := total_pattern.match(line):
-                data["overview"][f"Total {metric.label}"] = match.group(1).strip()
-            elif (match := detail_pattern.match(line)) and int(match.group(1)) > 0:
-                count, language = match.groups()
-                data["details"].setdefault(language, {})[metric.label] = int(count)
+    for row in rows:
+        if row["language"] != "total" and int(row["results"]) > 0:
+            label = label_of[row["metric"]]
+            data["details"].setdefault(row["language"], {})[label] = int(row["results"])
 
     return data
 
@@ -75,7 +74,7 @@ def parse_result_files(data: dict, metrics: list[Metric]) -> dict:
             "count": len(lines),
             "results": (
                 [metric.format_result(line) for line in lines]
-                if len(lines) <= MAX_LISTED_RESULTS
+                if len(lines) < MAX_LISTED_RESULTS
                 else []
             ),
             "url": f"{RELEASE_URL}/{metric.file_name}",
@@ -88,7 +87,7 @@ def generate_dashboard(data: dict, issues: dict[str, dict]) -> str:
     DETAILS_OPENING = "<details>\n"
     DETAILS_CLOSING = "\n</details>\n"
 
-    header = f"# {ISSUE_TITLE}\n\n"
+    header = f"# {DASHBOARD_ISSUE_TITLE}\n\n"
     header += "<!-- __NOUPDATE__ -->\n"
     header += f"**Last updated:** {get_datetime_pretty()}\n"
     header += "<!-- __END_NOUPDATE__ -->\n"
@@ -121,7 +120,7 @@ def generate_dashboard(data: dict, issues: dict[str, dict]) -> str:
     breakdown_by_language = "\n## Detailed Breakdown by Language\n\n"
     for lang, details in data["details"].items():
         breakdown_by_language += DETAILS_OPENING
-        language_issue = issues.get(f"{ISSUE_TITLE} for {lang}")
+        language_issue = issues.get(get_language_issue_title(lang))
         if language_issue:
             breakdown_by_language += (
                 f'\n<summary><a href="{language_issue["url"]}">{lang}</a></summary>\n\n'
@@ -148,17 +147,16 @@ def main():
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
 
-    log_file_path = Path("metrics-log.md")
-    if not log_file_path.exists():
-        sys.exit("metrics-log.md not found.")
+    if not SUMMARY_FILE.exists():
+        sys.exit(f"{SUMMARY_FILE} not found.")
 
     issues = get_github_issues()
-    issue_data = issues.get(ISSUE_TITLE)
+    issue_data = issues.get(DASHBOARD_ISSUE_TITLE)
     if not issue_data:
-        sys.exit(f"The {ISSUE_TITLE} issue is not found.")
+        sys.exit(f"The {DASHBOARD_ISSUE_TITLE} issue is not found.")
 
     metrics = get_metrics()
-    parsed_data = parse_log_file(log_file_path, metrics)
+    parsed_data = parse_summary(SUMMARY_FILE, metrics)
     parsed_data = parse_result_files(parsed_data, metrics)
 
     markdown_content = generate_dashboard(parsed_data, issues)
@@ -171,7 +169,9 @@ def main():
         )
         sys.exit(0)
 
-    if not update_github_issue(issue_data["number"], ISSUE_TITLE, markdown_content):
+    if not update_github_issue(
+        issue_data["number"], DASHBOARD_ISSUE_TITLE, markdown_content
+    ):
         sys.exit(1)
 
 

@@ -61,12 +61,13 @@ jobs:
           name: metrics
           path: |
             metrics-log.md
+            summary.tsv
             *.txt
             check-pages*/
 
       - name: Create metrics.zip
         if: github.ref == 'refs/heads/main'
-        run: zip -r metrics.zip metrics-log.md *.txt check-pages*/
+        run: zip -r metrics.zip metrics-log.md summary.tsv *.txt check-pages*/
 
       - name: Delete artifacts from GitHub Release
         if: github.ref == 'refs/heads/main'
@@ -78,6 +79,7 @@ jobs:
           fail-if-no-release: false
           assets: |
             metrics-log.md
+            summary.tsv
             *.txt
             metrics.zip
 
@@ -88,6 +90,7 @@ jobs:
           tag_name: latest
           files: |
             metrics-log.md
+            summary.tsv
             *.txt
             metrics.zip
 
