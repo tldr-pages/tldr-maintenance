@@ -45,12 +45,15 @@ def parse_summary(path: Path, metrics: list[Metric]) -> dict:
             if row["metric"] != metric.id or row["language"] != "total":
                 continue
             value = row["results"]
-            if row["total"] != "-":
+            if value == "-":
+                value = "not calculated"
+            elif row["total"] != "-":
                 value += f"/{row['total']} - {row['percentage']}%"
             data["overview"][f"Total {metric.label}"] = value
 
+    # The breakdown by language is about the translations.
     for row in rows:
-        if row["language"] != "total" and int(row["results"]) > 0:
+        if row["language"] not in ("total", "en") and int(row["results"]) > 0:
             label = label_of[row["metric"]]
             data["details"].setdefault(row["language"], {})[label] = int(row["results"])
 

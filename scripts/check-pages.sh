@@ -403,8 +403,14 @@ lint() {
   fi
   add_lint_errors markdownlint "$WORK_DIR/markdownlint" || return 1
 
-  # tldr-lint also exits with 1 when it failed to run, so only its output shows whether it did.
   (cd "$TLDR_ROOT_DIR" && tldr-lint "${tldr_lint_options[@]}" "$folder") > "$WORK_DIR/tldr-lint" 2>&1
+  status=$?
+  # tldr-lint exits with 1 when it finds lint errors, but also when it failed to run (then its output shows why).
+  if [ "$status" -gt 1 ]; then
+    cat "$WORK_DIR/tldr-lint" >&2
+    echo "tldr-lint failed with exit code $status." >&2
+    return 1
+  fi
   add_lint_errors tldr-lint "$WORK_DIR/tldr-lint"
 }
 

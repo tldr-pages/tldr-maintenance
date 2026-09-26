@@ -11,6 +11,7 @@ import sys
 import json
 import time
 import subprocess
+import http.client
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -35,6 +36,16 @@ REPO = f"{ORG_NAME}/{REPO_NAME}"
 MAINTENANCE_REPO = f"{ORG_NAME}/tldr-maintenance"
 API_URL = "https://api.github.com"
 API_VERSION = "2022-11-28"
+# Seconds to wait for a response of the GitHub API.
+TIMEOUT = 60
+MAX_ATTEMPTS = 5
+
+
+class GitHubError(SystemExit):
+    """
+    A request to the GitHub API failed. It exits the script with the message when it isn't caught,
+    but scripts can catch it to continue with other work.
+    """
 
 
 def get_token() -> str:
@@ -46,11 +57,14 @@ def get_token() -> str:
     if token:
         return token
     try:
-        return subprocess.run(
+        token = subprocess.run(
             ["gh", "auth", "token"], capture_output=True, text=True, check=True
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
-        sys.exit("Please set GITHUB_TOKEN or log in with `gh auth login`.")
+        token = ""
+    if not token:
+        raise GitHubError("Please set GITHUB_TOKEN or log in with `gh auth login`.")
+    return token
 
 
 _token = None
@@ -104,15 +118,18 @@ def github_request(
         data = json.dumps(payload).encode()
     request = urllib.request.Request(url, data=data, headers=headers, method=method)
 
-    for attempt in range(1, 6):
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        last_attempt = attempt == MAX_ATTEMPTS
         try:
-            with urllib.request.urlopen(request) as response:
+            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
                 return response.status, decode_json(response.read())
         except urllib.error.HTTPError as error:
             if error.code in (403, 429) and (
                 error.headers.get("Retry-After")
                 or error.headers.get("X-RateLimit-Remaining") == "0"
             ):
+                if last_attempt:
+                    break
                 wait = int(error.headers.get("Retry-After") or 0)
                 if not wait:
                     reset = int(error.headers.get("X-RateLimit-Reset", time.time()))
@@ -121,7 +138,7 @@ def github_request(
                 time.sleep(wait)
                 continue
             # Creating something (POST) isn't retried, since it might have been created.
-            if error.code >= 500 and method != "POST" and attempt < 5:
+            if error.code >= 500 and method != "POST" and not last_attempt:
                 print(
                     f"{method} {url} failed ({error.code}), retrying...",
                     file=sys.stderr,
@@ -129,19 +146,23 @@ def github_request(
                 time.sleep(2**attempt)
                 continue
             return error.code, decode_json(error.read())
-        except urllib.error.URLError as error:
-            if method == "POST" or attempt == 5:
-                raise SystemExit(f"{method} {url} failed: {error.reason}")
-            print(
-                f"{method} {url} failed ({error.reason}), retrying...", file=sys.stderr
-            )
+        except (OSError, http.client.HTTPException) as error:
+            # Network errors (urllib.error.URLError is an OSError), timeouts and broken responses.
+            if method == "POST" or last_attempt:
+                raise GitHubError(f"{method} {url} failed: {error}") from error
+            print(f"{method} {url} failed ({error}), retrying...", file=sys.stderr)
             time.sleep(2**attempt)
-    raise SystemExit(f"Giving up on {url} after repeated rate limiting.")
+    raise GitHubError(f"Giving up on {method} {url} after repeated rate limiting.")
 
 
-def github_paginate(path: str, params: dict | None = None) -> list | None:
+def github_paginate(
+    path: str, params: dict | None = None, required: bool = False
+) -> list | None:
     """
     Get all pages of a GitHub REST API list endpoint.
+
+    Parameters:
+    required (bool): raise a GitHubError instead of returning None when a request fails.
 
     Returns:
     list: all items, or None when the request isn't allowed (e.g. the token lacks access).
@@ -154,6 +175,8 @@ def github_paginate(path: str, params: dict | None = None) -> list | None:
             path, {**(params or {}), "per_page": 100, "page": page}
         )
         if status != 200:
+            if required:
+                raise GitHubError(f"GET {path} failed with {status}: {data}")
             return None
         items += data
         if len(data) < 100:

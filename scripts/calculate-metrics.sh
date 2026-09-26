@@ -62,6 +62,8 @@ done
 MAX_JOBS=$(nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)
 JOBS_DIR=$(mktemp -d) || exit 1
 trap 'rm -rf "$JOBS_DIR"' EXIT
+# Stop the background jobs when the script is interrupted.
+trap 'kill $(jobs -p) 2>/dev/null; exit 130' INT TERM
 RESULTS_DIR="$JOBS_DIR/results"
 mkdir -p "$RESULTS_DIR" || exit 1
 JOB_FAILED=false
@@ -113,26 +115,36 @@ run_tldr_sync_script() {
   "$TLDR_ROOT_DIR/scripts/$script_name.py" -Sn "$@" | sed -e 's/\x1b\[[0-9;]*m//g' -e "$remove_text"
 }
 
+# Make a result of the tldr scripts available, after it has been written to JOBS_DIR completely.
+publish_result() {
+  mv "$JOBS_DIR/$1" "$RESULTS_DIR/$1"
+}
+
 run_set_more_info_link() {
-  run_tldr_sync_script "set-more-info-link" 's/ link would be.*$//' > "$RESULTS_DIR/set-more-info-link"
+  run_tldr_sync_script "set-more-info-link" 's/ link would be.*$//' > "$JOBS_DIR/set-more-info-link" &&
+    publish_result set-more-info-link
 }
 
 run_set_see_also() {
   # A missing "See also" mention would be "added", a malformed or outdated one would be "updated".
   run_tldr_sync_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/' > "$JOBS_DIR/set-see-also" || return 1
-  sed -n 's/ added$//p' "$JOBS_DIR/set-see-also" > "$RESULTS_DIR/set-see-also-added" &&
-    sed '/ added$/d; s/ updated$//' "$JOBS_DIR/set-see-also" > "$RESULTS_DIR/set-see-also-updated"
+  sed -n 's/ added$//p' "$JOBS_DIR/set-see-also" > "$JOBS_DIR/set-see-also-added" &&
+    sed '/ added$/d; s/ updated$//' "$JOBS_DIR/set-see-also" > "$JOBS_DIR/set-see-also-updated" &&
+    publish_result set-see-also-added &&
+    publish_result set-see-also-updated
 }
 
 run_set_alias_page() {
   {
     run_tldr_sync_script "set-alias-page" 's/ page would be.*$//' &&
       run_tldr_sync_script "set-alias-page" 's/ page would be.*$//' -i
-  } > "$RESULTS_DIR/set-alias-page"
+  } > "$JOBS_DIR/set-alias-page" &&
+    publish_result set-alias-page
 }
 
 run_set_page_title() {
-  run_tldr_sync_script "set-page-title" 's/ title would be.*$//' > "$RESULTS_DIR/set-page-title"
+  run_tldr_sync_script "set-page-title" 's/ title would be.*$//' > "$JOBS_DIR/set-page-title" &&
+    publish_result set-page-title
 }
 
 run_wrong_filename() {
@@ -148,17 +160,23 @@ run_wrong_filename() {
   done
   script="$(realpath "$TLDR_ROOT_DIR/scripts/wrong-filename.py")"
   (cd "$pages_dirs" && "$script") || return 1
-  mv "$pages_dirs/inconsistent-filenames.txt" "$RESULTS_DIR/wrong-filename"
+  mv "$pages_dirs/inconsistent-filenames.txt" "$JOBS_DIR/wrong-filename" &&
+    publish_result wrong-filename
 }
 
-# The tldr scripts take longer than the checks of a language, so they are started first.
+# The longest jobs are started first: the tldr scripts, English and then the languages with the most pages.
 for job in "${TLDR_SCRIPT_JOBS[@]}"; do
   start_job "$job" "$job"
 done
 start_job "en" "$SCRIPTS_DIR/check-pages.sh"
 for language_id in "${LANGUAGE_IDS[@]}"; do
+  echo "$(find "$TLDR_ROOT_DIR/pages.$language_id" -type f -name "*.md" | wc -l) $language_id"
+done | sort -rn | while read -r _ language_id; do
+  echo "$language_id"
+done > "$JOBS_DIR/language-order"
+while read -r language_id; do
   start_job "$language_id" "$SCRIPTS_DIR/check-pages.sh" -l "$language_id"
-done
+done < "$JOBS_DIR/language-order"
 wait
 
 # Print the result directories of the languages a metric applies to ("all" or "translations").
@@ -174,54 +192,56 @@ list_result_dirs() {
   done
 }
 
-# Write the results of a tldr script for a language.
+# Write the results of the tldr scripts per language to check-pages[.<language>]/<metric>.txt.
 # The results contain the path of a page, e.g. "pages.fr/common/tar.md" or "Inconsistency found in file: pages/...".
 write_tldr_script_results() {
-  local source="$1"
-  local language_id="$2"
-  local output_file="$3"
-  local results_file="$RESULTS_DIR/$source"
+  local metric id languages source dir language_id
 
-  if [ ! -f "$results_file" ]; then
-    echo "Error: the results of $source are missing." >&2
-    JOB_FAILED=true
-    return
-  fi
+  for metric in "${METRICS[@]}"; do
+    IFS=$'\t' read -r id languages source _ <<< "$metric"
+    if [ "$source" = "check-pages" ] || [ ! -f "$RESULTS_DIR/$source" ]; then
+      continue
+    fi
 
-  grep -E "(^|[ :])pages${language_id:+\\.$language_id}/" "$results_file" | sort -u > "$output_file"
-  # grep exits with 1 when no line matches.
-  if [ "${PIPESTATUS[0]}" -gt 1 ]; then
-    JOB_FAILED=true
-  fi
+    while IFS= read -r dir; do
+      language_id="${dir#./check-pages}"
+      language_id="${language_id#.}"
+      mkdir -p "$dir"
+      grep -E "(^|[ :])pages${language_id:+\\.$language_id}/" "$RESULTS_DIR/$source" | sort -u > "$dir/$id.txt"
+      # grep exits with 1 when no line matches.
+      if [ "${PIPESTATUS[0]}" -gt 1 ]; then
+        JOB_FAILED=true
+      fi
+    done < <(list_result_dirs "$languages")
+  done
 }
 
 # Display the number of results of every metric that applies to the language.
 display_language() {
   local language_id="$1"
   local output_dir="./check-pages${language_id:+.$language_id}"
-  local metric id languages source label output_file count
+  local metric id languages source denominator label output_file count total
 
   display_job "${language_id:-en}"
 
   for metric in "${METRICS[@]}"; do
-    IFS=$'\t' read -r id languages source _ _ label <<< "$metric"
+    IFS=$'\t' read -r id languages source denominator _ label <<< "$metric"
     if [ "$languages" != "all" ] && [ -z "$language_id" ]; then
       continue
     fi
 
     output_file="$output_dir/$id.txt"
-    if [ "$source" != "check-pages" ]; then
-      mkdir -p "$output_dir"
-      write_tldr_script_results "$source" "$language_id" "$output_file"
-    fi
-
     if [ -f "$output_file" ]; then
       count=$(wc -l < "$output_file")
       echo "$count $label in ${output_file#./}."
-      printf '%s\t%s\t%s\t-\t-\n' "${language_id:-en}" "$id" "$count" >> ./summary.tsv
+      if [ "$denominator" != "-" ] && total=$(sum_totals "$denominator" "$output_dir"); then
+        printf '%s\t%s\t%s\t%s\t%s\n' "${language_id:-en}" "$id" "$count" "$total" "$(calculate_percentage "$count" "$total")" >> ./summary.tsv
+      else
+        printf '%s\t%s\t%s\t-\t-\n' "${language_id:-en}" "$id" "$count" >> ./summary.tsv
+      fi
     else
-      echo "Error: ${output_file#./} is missing." >&2
-      JOB_FAILED=true
+      # The job that should have written the results failed, which is already reported.
+      echo "? $label (not calculated, since $source failed)."
     fi
   done
 
@@ -240,16 +260,16 @@ calculate_percentage() {
   fi
 }
 
-# Print the sum of a total of check-pages[.<language>]/totals.tsv over the languages a metric applies to.
+# Print the sum of a total of the totals.tsv files in the given result directories.
 sum_totals() {
   local total_name="$1"
-  local languages="$2"
+  shift
   local sum=0 value dir
 
-  while IFS= read -r dir; do
+  for dir in "$@"; do
     value=$(awk -F '\t' -v name="$total_name" '$1 == name { print $2; found = 1 } END { exit !found }' "$dir/totals.tsv" 2>/dev/null) || return 1
     sum=$((sum + value))
-  done < <(list_result_dirs "$languages")
+  done
 
   echo "$sum"
 }
@@ -258,19 +278,27 @@ sum_totals() {
 display_total() {
   local id="$1"
   local languages="$2"
-  local denominator="$3"
-  local label="$4"
-  local results=() total dir denominator_total percentage
+  local source="$3"
+  local denominator="$4"
+  local label="$5"
+  local dirs results=() total dir denominator_total percentage
 
-  while IFS= read -r dir; do
+  if [ "$source" != "check-pages" ] && [ ! -f "$RESULTS_DIR/$source" ]; then
+    echo "Total $label: not calculated, since $source failed."
+    printf 'total\t%s\t-\t-\t-\n' "$id" >> ./summary.tsv
+    return
+  fi
+
+  mapfile -t dirs < <(list_result_dirs "$languages")
+  for dir in "${dirs[@]}"; do
     if [ -f "$dir/$id.txt" ]; then
       results+=("$dir/$id.txt")
     fi
-  done < <(list_result_dirs "$languages")
+  done
   cat /dev/null "${results[@]}" | sort -u > "./$id.txt"
   total=$(wc -l < "./$id.txt")
 
-  if [ "$denominator" != "-" ] && denominator_total=$(sum_totals "$denominator" "$languages"); then
+  if [ "$denominator" != "-" ] && denominator_total=$(sum_totals "$denominator" "${dirs[@]}"); then
     percentage=$(calculate_percentage "$total" "$denominator_total")
     echo "Total $label: $total/$denominator_total - $percentage%"
     printf 'total\t%s\t%s\t%s\t%s\n' "$id" "$total" "$denominator_total" "$percentage" >> ./summary.tsv
@@ -288,6 +316,7 @@ printf "# Metrics for tldr\n\n"
 for job in "${TLDR_SCRIPT_JOBS[@]}"; do
   display_job "$job"
 done
+write_tldr_script_results
 
 display_language ""
 for language_id in "${LANGUAGE_IDS[@]}"; do
@@ -302,8 +331,8 @@ while IFS= read -r dir; do
 done < <(list_result_dirs all)
 
 for metric in "${METRICS[@]}"; do
-  IFS=$'\t' read -r id languages _ denominator _ label <<< "$metric"
-  display_total "$id" "$languages" "$denominator" "$label"
+  IFS=$'\t' read -r id languages source denominator _ label <<< "$metric"
+  display_total "$id" "$languages" "$source" "$denominator" "$label"
 done
 
 # Remove the empty totals, so only totals with results are uploaded as release assets.

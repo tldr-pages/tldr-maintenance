@@ -48,9 +48,16 @@ list_metrics() {
       if (!($4 in valid_denominator)) fail("invalid denominator " $4)
       if (!($5 in valid_link)) fail("invalid link " $5)
       ids[$1]
+      count++
       print
     }
-    END { exit failed }
+    END {
+      if (!failed && count == 0) {
+        print FILENAME ": no metrics" > "/dev/stderr"
+        exit 1
+      }
+      exit failed
+    }
   ' "$METRICS_FILE"
 }
 

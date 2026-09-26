@@ -17,6 +17,7 @@ from _common import (
     MAINTENANCE_REPO,
     REPO,
     Colors,
+    GitHubError,
     create_colored_line,
     github_paginate,
     github_request,
@@ -59,9 +60,20 @@ class Metric:
                 raise ValueError(f"Unknown link type {self.link} of metric {self.id}")
 
 
+# The totals check-pages.sh counts per language, used as denominator (keep in sync with TOTAL_NAMES in _common.sh).
+TOTAL_NAMES = (
+    "pages",
+    "english-pages",
+    "pages-need-see-also-mention",
+    "tldr-references",
+    "see-also-references",
+)
+
+
 def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
     """
     Get the metrics described in metrics.tsv, in the order they are displayed.
+    Raises a ValueError when metrics.tsv is invalid, with the same rules as list_metrics in _common.sh.
 
     Returns:
     list (list of Metric's): the metrics.
@@ -73,20 +85,27 @@ def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
             line = line.rstrip("\r\n")
             if not line or line.startswith("#") or line.startswith("id\t"):
                 continue
+            location = f"{path}:{number}"
             columns = line.split("\t")
             if len(columns) != 6 or not all(columns):
-                raise SystemExit(
-                    f"{path}:{number}: expected 6 non-empty columns separated by a tab"
+                raise ValueError(
+                    f"{location}: expected 6 non-empty columns separated by a tab"
                 )
             metric = Metric(*columns)
-            if metric.languages not in ("all", "translations") or metric.link not in (
-                "reference",
-                "edit",
-                "new",
-                "lint",
-            ):
-                raise SystemExit(f"{path}:{number}: invalid languages or link")
+            if any(metric.id == other.id for other in metrics):
+                raise ValueError(f"{location}: duplicate id {metric.id}")
+            if metric.languages not in ("all", "translations"):
+                raise ValueError(f"{location}: invalid languages {metric.languages}")
+            if metric.denominator not in (*TOTAL_NAMES, "-"):
+                raise ValueError(
+                    f"{location}: invalid denominator {metric.denominator}"
+                )
+            if metric.link not in ("reference", "edit", "new", "lint"):
+                raise ValueError(f"{location}: invalid link {metric.link}")
             metrics.append(metric)
+
+    if not metrics:
+        raise ValueError(f"{path}: no metrics")
     return metrics
 
 
@@ -102,7 +121,12 @@ def get_check_pages_dir(root: Path) -> list[Path]:
     """
 
     return sorted(
-        [d for d in root.iterdir() if d.is_dir() and d.name.startswith("check-pages")]
+        [
+            d
+            for d in root.iterdir()
+            if d.is_dir()
+            and (d.name == "check-pages" or d.name.startswith("check-pages."))
+        ]
     )
 
 
@@ -117,14 +141,8 @@ def get_locale(path: Path) -> str:
     str: a POSIX Locale Name in the form of "ll" or "ll_CC" (e.g. "fr" or "pt_BR").
     """
 
-    # compute locale
-    check_pages_dirname = path.name
-    if "." in check_pages_dirname:
-        _, locale = check_pages_dirname.split(".")
-    else:
-        locale = "en"
-
-    return locale
+    _, _, locale = path.name.partition(".")
+    return locale or "en"
 
 
 ISSUES_PATH = f"/repos/{MAINTENANCE_REPO}/issues"
@@ -157,9 +175,7 @@ def get_github_issues() -> dict[str, dict]:
     dict: the issues by title.
     """
 
-    issues = github_paginate(ISSUES_PATH, {"state": "open"})
-    if issues is None:
-        raise SystemExit("Getting the issues of tldr-maintenance failed.")
+    issues = github_paginate(ISSUES_PATH, {"state": "open"}, required=True)
 
     return {
         issue["title"]: simplify_issue(issue)
@@ -176,7 +192,12 @@ def create_github_issue(title: str) -> dict | None:
     dict: the issue, or None when creating it failed.
     """
 
-    status, data = github_request(ISSUES_PATH, method="POST", payload={"title": title})
+    try:
+        status, data = github_request(
+            ISSUES_PATH, method="POST", payload={"title": title}
+        )
+    except GitHubError as error:
+        status, data = None, error
     if status != 201:
         print(
             create_colored_line(Colors.RED, f"Creating {title} failed: {data}"),
@@ -195,11 +216,14 @@ def update_github_issue(issue_number: int, title: str, body: str) -> bool:
     bool: whether the update succeeded.
     """
 
-    status, data = github_request(
-        f"{ISSUES_PATH}/{issue_number}",
-        method="PATCH",
-        payload={"title": title, "body": body},
-    )
+    try:
+        status, data = github_request(
+            f"{ISSUES_PATH}/{issue_number}",
+            method="PATCH",
+            payload={"title": title, "body": body},
+        )
+    except GitHubError as error:
+        status, data = None, error
 
     if status != 200:
         print(
@@ -231,7 +255,7 @@ def build_issue_body(
 ) -> str:
     """
     Join the sections of an issue body. When it's too long, the sections that save the most are shortened first.
-    When it's still too long, the end is cut off.
+    When it's still too long, the last sections are left out.
     """
 
     use_full = [True] * len(sections)
@@ -251,13 +275,13 @@ def build_issue_body(
         use_full[longest] = False
         body = render()
 
-    if len(body) > max_length:
-        truncated = (
-            "\n\n(The rest is cut off, since GitHub doesn't allow longer issues.)\n"
-        )
-        body = body[: max_length - len(truncated)] + truncated
+    left_out = "\n\n(The other sections are left out, since GitHub doesn't allow longer issues.)\n"
+    while len(body) > max_length and sections:
+        sections = sections[:-1]
+        use_full = use_full[:-1]
+        body = render() + left_out
 
-    return body
+    return body[:max_length]
 
 
 def get_datetime_pretty():
@@ -280,10 +304,9 @@ def strip_dynamic_content(markdown):
     """
     if not markdown:
         return ""
-    regex = re.compile(
-        r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE
+    return re.sub(
+        r"<!--\s*__NOUPDATE__.*?__END_NOUPDATE__\s*-->", "", markdown, flags=re.DOTALL
     )
-    return re.sub(regex, "", markdown)
 
 
 def replace_characters_for_link(page):

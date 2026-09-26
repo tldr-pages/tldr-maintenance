@@ -17,6 +17,7 @@ check-pages*/
 # calculate-metrics.sh generates these files.
 /*.txt
 /*.md
+/summary.tsv
 metrics.zip
 !requirements.txt
 

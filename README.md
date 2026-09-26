@@ -62,7 +62,7 @@ Some metrics don't apply to English, since they compare a translated page with t
 
 At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/metrics-log.md) a summary is written, with the total of every metric
 (the results of all languages, written to `<metric>.txt` when there are results).
-The summary is also written to `summary.tsv`, with the number of results per language and the totals.
+The summary is also written to `summary.tsv`, with the number of results, the total and the percentage per language and for all languages (`total`).
 This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation.
 Most totals include a percentage (rounded down to one decimal), calculated based on the sum of a total that is counted per language (`check-pages[.<language>]/totals.tsv`) over the languages the metric applies to:
 
