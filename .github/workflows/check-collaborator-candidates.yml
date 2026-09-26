@@ -1,0 +1,49 @@
+name: Check collaborator candidates
+
+on:
+  workflow_dispatch:
+    inputs:
+      since-days:
+        description: 'Only consider contributors with a PR merged in this many days'
+        default: '90'
+      threshold:
+        description: 'Merged PRs needed to become a collaborator'
+        default: '5'
+  schedule:
+    - cron: '0 6 1 * *' # once a month
+
+permissions:
+  contents: read
+
+jobs:
+  check-collaborator-candidates:
+    runs-on: ubuntu-latest
+
+    name: Check collaborator candidates
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Generate the report
+        run: |
+          npm run --silent check-collaborator-candidates -- \
+            --since-days "$SINCE_DAYS" \
+            --threshold "$THRESHOLD" \
+            > collaborator-candidates.md
+          cat collaborator-candidates.md >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SINCE_DAYS: ${{ inputs.since-days || '90' }}
+          THRESHOLD: ${{ inputs.threshold || '5' }}
+
+      - name: Upload the report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: collaborator-candidates
+          path: collaborator-candidates.md

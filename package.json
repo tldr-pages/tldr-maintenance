@@ -14,6 +14,7 @@
   "scripts": {
     "calculate-metrics": "bash scripts/calculate-metrics.sh",
     "check-codeowners": "python3 scripts/check-codeowners.py",
+    "check-collaborator-candidates": "python3 scripts/check-collaborator-candidates.py",
     "lint-markdown": "markdownlint *.md",
     "lint-python": "black scripts --check && flake8 scripts",
     "lint-bash": "shellcheck scripts/*.sh",

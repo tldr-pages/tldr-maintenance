@@ -92,3 +92,20 @@ For every owner it looks up the last review, the last authored PR, the last comm
 
 The report also lists the paths that would be left without any active owner. The periods can be changed with `--inactive-days`, `--stale-days` and `--stale-threshold`, and `--only-flagged` hides the owners without findings.
 The write access check needs a token with push access to tldr-pages/tldr, otherwise it shows `unknown`.
+
+### Collaborator candidates
+
+[`check-collaborator-candidates.py`](scripts/check-collaborator-candidates.py) reports contributors who qualify to become a collaborator,
+i.e. who have had at least 5 PRs merged in a repository of the organization (see [COMMUNITY-ROLES.md](https://github.com/tldr-pages/tldr/blob/main/COMMUNITY-ROLES.md#when-to-change-roles)).
+It runs once a month (see the [workflow](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/check-collaborator-candidates.yml) summary) or locally:
+
+```sh
+GITHUB_TOKEN=... npm run --silent check-collaborator-candidates > collaborator-candidates.md
+```
+
+It only looks at contributors with a PR merged in the last 90 days (`--since-days`), and the threshold can be changed with `--threshold`. It skips bots and authors that GitHub reports as a collaborator, member or owner of the repository.
+For tldr-pages/tldr it also skips everyone listed in [MAINTAINERS.md](https://github.com/tldr-pages/tldr/blob/main/MAINTAINERS.md) or mentioned in an issue or PR with the `community` label,
+so contributors who were already invited (or declined) don't show up again. A candidate keeps showing up every month until such an issue exists.
+
+Whether the PRs are non-trivial still has to be checked by hand, so the report links the latest PRs and includes a pre-filled nomination issue for every candidate.
+The write access check needs a token with push access to the repository, otherwise it shows `unknown`.
