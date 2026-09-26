@@ -37,7 +37,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from _common import github_request
+from _github import github_request
 
 ORG_NAME = "tldr-pages"
 COMMUNITY_REPO = f"{ORG_NAME}/tldr"

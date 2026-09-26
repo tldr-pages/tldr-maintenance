@@ -7,10 +7,10 @@ on:
     paths:
       - tldr/
       - .github/workflows/calculate-metrics.yml
-      - scripts/*.sh
-      - scripts/*.py
-      - '!scripts/sort-lychee-output.py'
-      - '!scripts/check-*.py'
+      - scripts/_common.py
+      - scripts/calculate-metrics.sh
+      - scripts/check-pages.sh
+      - scripts/update-*.py
 
 jobs:
   calculate-metrics:
