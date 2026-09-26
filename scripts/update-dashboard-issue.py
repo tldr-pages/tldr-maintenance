@@ -32,9 +32,11 @@ class Topics(str, Enum):
     MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
         "malformed or outdated see also mention(s)"
     )
+    MISSING_SEE_ALSO_MENTIONS = "missing see also mention(s)"
     MISSING_ALIAS_PAGES = "missing alias page(s)"
     MISMATCHED_PAGE_TITLES = "mismatched page title(s)"
     MISSING_TLDR_PAGES = "missing TLDR page(s)"
+    MISSING_SEE_ALSO_REFERENCED_PAGES = "missing see also page(s)"
     MISPLACED_PAGES = "misplaced page(s)"
     OUTDATED_PAGES_BASED_ON_COMMAND_COUNT = (
         "outdated page(s) based on number of commands"
@@ -56,9 +58,11 @@ def parse_log_file(path: Path) -> dict:
         "Total inconsistent filenames": r"Total inconsistent filename\(s\): (.+)",
         "Total malformed or outdated more info link pages": r"Total malformed or outdated more info link page\(s\): (.+)",
         "Total malformed or outdated see also's": r"Total malformed or outdated see also mention\(s\): (.+)",
+        "Total missing see also's": r"Total missing see also mention\(s\): (.+)",
         "Total missing alias pages": r"Total missing alias page\(s\): (.+)",
         "Total mismatched page titles": r"Total mismatched page title\(s\): (.+)",
         "Total missing TLDR pages": r"Total missing TLDR page\(s\): (.+)",
+        "Total missing see also pages": r"Total missing see also page\(s\): (.+)",
         "Total misplaced pages": r"Total misplaced page\(s\): (.+)",
         "Total outdated pages (based on number of commands)": r"Total outdated page\(s\) based on number of commands: (.+)",
         "Total outdated pages (based on the commands itself)": r"Total outdated page\(s\) based on the commands itself: (.+)",
@@ -70,11 +74,13 @@ def parse_log_file(path: Path) -> dict:
 
     detail_patterns = {
         "inconsistent filename(s)": r"(\d+) inconsistent filename",
-        "malformed or outdated more info link page(s)": r"(\d+) malformed or outdated",
+        "malformed or outdated more info link page(s)": r"(\d+) malformed or outdated more info link",
         "malformed or outdated see also mention(s)": r"(\d+) malformed or outdated see also",
+        "missing see also mention(s)": r"(\d+) missing see also mention",
         "missing alias page(s)": r"(\d+) missing alias",
         "mismatched page title(s)": r"(\d+) mismatched page title",
         "missing TLDR page(s)": r"(\d+) missing TLDR",
+        "missing see also page(s)": r"(\d+) missing see also page",
         "misplaced page(s)": r"(\d+) misplaced page",
         "outdated pages (based on number of commands)": r"(\d+) outdated page\(s\) based on number of commands",
         "outdated pages (based on the commands itself)": r"(\d+) outdated page\(s\) based on the commands itself",
@@ -133,9 +139,11 @@ def parse_seperate_text_files(data):
         Path("inconsistent-filenames.txt"),
         Path("malformed-or-outdated-more-info-link-pages.txt"),
         Path("malformed-or-outdated-see-also-mentions.txt"),
+        Path("missing-see-also-mentions.txt"),
         Path("missing-alias-pages.txt"),
         Path("mismatched-page-titles.txt"),
         Path("missing-tldr-pages.txt"),
+        Path("missing-see-also-referenced-pages.txt"),
         Path("misplaced-pages.txt"),
         Path("outdated-pages-based-on-command-count.txt"),
         Path("outdated-pages-based-on-command-contents.txt"),
@@ -170,7 +178,7 @@ def add_metric_details(lines, data, topic_name, topic, file_name):
                 data["metrics"][topic]["files"] = [
                     f"{generate_github_new_link(line.strip())}" for line in lines
                 ]
-            case "missing_tldr_pages":
+            case "missing_tldr_pages" | "missing_see_also_referenced_pages":
                 data["metrics"][topic]["files"] = [
                     f"{generate_github_link(line.strip())}" for line in lines
                 ]

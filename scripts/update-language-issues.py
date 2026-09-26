@@ -35,9 +35,11 @@ class Topics(str, Enum):
     MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
         "malformed or outdated see also mention(s)"
     )
+    MISSING_SEE_ALSO_MENTIONS = "missing see also mention(s)"
     ALIAS_PAGES = "missing alias page(s)"
     PAGE_TITLES = "mismatched page title(s)"
     MISSING_TLDR = "missing TLDR page(s)"
+    MISSING_SEE_ALSO_REFERENCED = "missing see also page(s)"
     MISPLACED = "misplaced page(s)"
     BASED_ON_COMMAND_COUNT = "outdated page(s) based on number of commands"
     BASED_ON_COMMAND_CONTENTS = "outdated page(s) based on the commands itself"
@@ -58,9 +60,11 @@ def parse_language_directory(directory):
         "inconsistent",
         "malformed-or-outdated-more-info-link",
         "malformed-or-outdated-see-also-mentions",
+        "missing-see-also-mentions",
         "alias-pages",
         "page-titles",
         "missing-tldr",
+        "missing-see-also-referenced",
         "misplaced",
         "based-on-command-count",
         "based-on-command-contents",
@@ -106,7 +110,7 @@ def generate_markdown_for_language(language, data):
                         markdown += f"- {item}\n"
                     case "alias-pages":
                         markdown += f"- {generate_github_new_link(item)}\n"
-                    case "missing-tldr":
+                    case "missing-tldr" | "missing-see-also-referenced":
                         markdown += f"- {generate_github_link(item)}\n"
                     case "lint-errors":
                         markdown += f"- {generate_github_lint_link(item)}\n"

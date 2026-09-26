@@ -10,10 +10,42 @@ total_english_pages=$(find ./tldr/pages -type f | wc -l)
 total_translation_folders=$(find ./tldr -maxdepth 1 -type d -name "pages.*" | wc -l)
 total_pages_need_translation=$((total_english_pages * total_translation_folders))
 # shellcheck disable=SC2016
-total_tldr_pages=$(find ./tldr/pages* -type f -exec grep -o '`tldr [^`]*' {} + | awk -F':' '{print $2}' | wc -l)
-total_english_pages_with_see_also_mention=$(find ./tldr/pages* -type f -exec grep -o '> See also:' {} + | awk -F':' '{print $2}' | wc -l)
-total_pages_need_see_also_mention=$((total_english_pages_with_see_also_mention * total_translation_folders))
+total_tldr_pages=$(find ./tldr/pages* -type f -exec grep -o '`tldr [^`]*' {} + | wc -l)
 total_unique_non_english_pages=$(find ./tldr/pages.* -type f | awk -F/ '{print $NF}' | sort -u | wc -l)
+
+SEE_ALSO_TEMPLATE="./tldr/contributing-guides/translation-templates/see-also-mentions.md"
+
+# Print the "See also" prefix (e.g. "> Voir aussi : ") of a language from the translation template.
+get_see_also_prefix() {
+  local language_id="$1"
+
+  awk -v heading="### $language_id" '$0 == heading { found = 1; next } found && /^>/ { sub(/`.*/, ""); print; exit }' "$SEE_ALSO_TEMPLATE"
+}
+
+# Only translated pages whose English page has a "See also" mention need a (translated) "See also" mention.
+mapfile -t english_pages_with_see_also_mention < <(grep -rl --include='*.md' '^> See also:' ./tldr/pages | sed 's|^\./tldr/pages/||')
+total_pages_need_see_also_mention=0
+# Every "See also" mention references one or more pages, count all references in all languages.
+total_see_also_references=0
+for folder in $(find ./tldr -maxdepth 1 -type d -name "pages*" | sort); do
+  folder_suffix="${folder##*/pages}"
+  folder_suffix="${folder_suffix#.}"
+
+  if [ -n "$folder_suffix" ]; then
+    for page in "${english_pages_with_see_also_mention[@]}"; do
+      if [ -f "$folder/$page" ]; then
+        total_pages_need_see_also_mention=$((total_pages_need_see_also_mention + 1))
+      fi
+    done
+  fi
+
+  see_also_prefix=$(get_see_also_prefix "${folder_suffix:-en}")
+  if [ -n "$see_also_prefix" ]; then
+    # shellcheck disable=SC2016
+    references=$(find "$folder" -type f -name "*.md" -exec awk -v prefix="$see_also_prefix" 'index($0, prefix) == 1' {} + | grep -o '`[^`]*`' | wc -l)
+    total_see_also_references=$((total_see_also_references + references))
+  fi
+done
 
 EXIT_CODE=0
 
@@ -34,7 +66,9 @@ run_python_script() {
 }
 
 run_python_script "set-more-info-link" 's/ link would be.*$//'
-run_python_script "set-see-also" 's/ see also would be.*$//'
+run_python_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/'
+sed -n 's/ added$//p' "set-see-also.txt" > "set-see-also-added.txt"
+sed -n 's/ updated$//p' "set-see-also.txt" > "set-see-also-updated.txt"
 run_python_script "set-alias-page" 's/ page would be.*$//'
 run_python_script "set-alias-page" 's/ page would be.*$//' '-i'
 run_python_script "set-page-title" 's/ title would be.*$//'
@@ -66,7 +100,7 @@ grep_count_and_display() {
     return
   fi
 
-  grep "$grep_string" "$input_file" > "$output_file"
+  grep -F "$grep_string" "$input_file" > "$output_file"
   count_and_display "$output_file" "$message"
 }
 
@@ -76,6 +110,7 @@ grep_count_and_display "pages/" "./inconsistent-filenames.txt" "./check-pages/in
 grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
 
 count_and_display "./check-pages/missing-tldr-pages.txt" "missing TLDR page(s)"
+count_and_display "./check-pages/missing-see-also-referenced-pages.txt" "missing see also page(s)"
 count_and_display "./check-pages/misplaced-pages.txt" "misplaced page(s)"
 count_and_display "./check-pages/lint-errors.txt" "linter error(s)"
 
@@ -89,11 +124,13 @@ for folder in $folders; do
 
   grep_count_and_display "pages.$folder_suffix/" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-or-outdated-more-info-link-$folder_suffix-pages.txt" "malformed or outdated more info link page(s)"
-  grep_count_and_display "pages.$folder_suffix/" "./set-see-also.txt" "./check-pages.$folder_suffix/malformed-or-outdated-see-also-mentions-$folder_suffix-pages.txt" "malformed or outdated see also mention(s)"
+  grep_count_and_display "pages.$folder_suffix/" "./set-see-also-updated.txt" "./check-pages.$folder_suffix/malformed-or-outdated-see-also-mentions-$folder_suffix-pages.txt" "malformed or outdated see also mention(s)"
+  grep_count_and_display "pages.$folder_suffix/" "./set-see-also-added.txt" "./check-pages.$folder_suffix/missing-see-also-mentions-$folder_suffix-pages.txt" "missing see also mention(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-alias-page.txt" "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-page-title.txt" "./check-pages.$folder_suffix/mismatched-$folder_suffix-page-titles.txt" "mismatched page title(s)"
 
   count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt" "missing TLDR page(s)"
+  count_and_display "./check-pages.$folder_suffix/missing-see-also-referenced-$folder_suffix-pages.txt" "missing see also page(s)"
   count_and_display "./check-pages.$folder_suffix/misplaced-$folder_suffix-pages.txt" "misplaced page(s)"
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-count.txt" "outdated page(s) based on number of commands"
   count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-contents.txt" "outdated page(s) based on the commands itself"
@@ -105,7 +142,7 @@ for folder in $folders; do
   printf -- '_%.0s' {1..100}; echo
 done
 
-rm -f "./set-more-info-link.txt" "./set-see-also.txt" "./set-alias-page.txt" "./set-page-title.txt"
+rm -f "./set-more-info-link.txt" "./set-see-also.txt" "./set-see-also-added.txt" "./set-see-also-updated.txt" "./set-alias-page.txt" "./set-page-title.txt"
 
 merge_files_and_calculate_total() {
   local files_pattern="$1"
@@ -124,7 +161,7 @@ calculate_percentage() {
   local total="$2"
 
   if [ "$part_of_total" -gt 0 ] && [ "$total" -gt 0 ]; then
-    echo $((part_of_total * 100 / total))
+    awk -v part="$part_of_total" -v total="$total" 'BEGIN { printf "%.1f\n", part * 100 / total }'
   else
     echo 0
   fi
@@ -153,9 +190,11 @@ calculate_and_display() {
 calculate_and_display '*/check-pages*/inconsistent*filenames.txt' "./inconsistent-filenames.txt" "$total_pages" "inconsistent filename(s)"
 calculate_and_display '*/check-pages*/malformed-or-outdated-more-info-link*pages.txt' "./malformed-or-outdated-more-info-link-pages.txt" "$total_pages" "malformed or outdated more info link page(s)"
 calculate_and_display '*/check-pages*/malformed-or-outdated-see-also-mentions*pages.txt' "./malformed-or-outdated-see-also-mentions.txt" "$total_pages_need_see_also_mention" "malformed or outdated see also mention(s)"
+calculate_and_display '*/check-pages*/missing-see-also-mentions*pages.txt' "./missing-see-also-mentions.txt" "$total_pages_need_see_also_mention" "missing see also mention(s)"
 calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
 calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles.txt" "$total_unique_non_english_pages" "mismatched page title(s)"
 calculate_and_display '*/check-pages*/missing-tldr*pages.txt' "./missing-tldr-pages.txt" "$total_tldr_pages" "missing TLDR page(s)"
+calculate_and_display '*/check-pages*/missing-see-also-referenced*pages.txt' "./missing-see-also-referenced-pages.txt" "$total_see_also_references" "missing see also page(s)"
 calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-count.txt' "./outdated-pages-based-on-command-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
 calculate_and_display '*/check-pages*/outdated*pages-based-on-command-contents.txt' "./outdated-pages-based-on-command-contents.txt" "$total_non_english_pages" "outdated page(s) based on the commands itself"

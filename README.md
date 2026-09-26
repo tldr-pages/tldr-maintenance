@@ -19,6 +19,8 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 - **Missing TLDR page(s)**
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
+- **Missing see also page(s)**
+  A page is missing when there is a page that mentions another page in its `> See also: ...` line, but the other page doesn't exist.
 - **Misplaced page(s)**
   A page is misplaced when the page isn’t inside a folder in the list of supported platforms.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
@@ -30,8 +32,15 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 - **Malformed or outdated more-info link page(s)**
   A page is malformed when the `> More information: <link>.` does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/more-info-link.md).
    A page is outdated when the `> More information: <link>.` does not match the link in the English page.
+- **Malformed or outdated see also mention(s)**
+  A mention is malformed when the `> See also: ...` line does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/see-also-mentions.md).
+  A mention is outdated when the mentioned pages do not match the pages mentioned in the English page.
+- **Missing see also mention(s)**
+  A mention is missing when the English page has a `> See also: ...` line, but the translated page doesn't.
 - **Missing TLDR page(s)**
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
+- **Missing see also page(s)**
+  A page is missing when there is a page that mentions another page in its translated `> See also: ...` line, but the other page doesn't exist (yet) in that language.
 - **Misplaced page(s)**
   A page is misplaced when the page isn’t inside a folder in the list of supported platforms.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
@@ -55,8 +64,11 @@ At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintena
 This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation. Some numbers include a percentage:
 
 - Total malformed or outdated more info link page(s) [with percentage, calculated based on total pages]
+- Total malformed or outdated see also mention(s) [with percentage, calculated based on total translated pages whose English page has a see also mention]
+- Total missing see also mention(s) [with percentage, calculated based on total translated pages whose English page has a see also mention]
 - Total missing alias page(s)
 - Total missing TLDR commands [with percentage, calculated based on total of TLDR commands]
+- Total missing see also page(s) [with percentage, calculated based on total of pages mentioned in see also mentions]
 - Total misplaced page(s) [with percentage, calculated based on total pages]
 - Total outdated page(s) based on number of commands [with percentage, calculated based on total non-English pages]
 - Total outdated page(s) based on the commands itself [with percentage, calculated based on total non-English pages]

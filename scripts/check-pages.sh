@@ -4,6 +4,8 @@
 # This script can be executed to check several things for the translated pages. This could also be run on the English folder, be aware that some checks are not applicable.
 # - Check if a page references missing TLDR pages.
 #   A command is marked as missing when it is mentioned in a page (`tldr {{command}}`) but the referenced command doesn't have a (translated) page.
+# - Check if a page references missing see also pages.
+#   A command is marked as missing when it is mentioned in the "See also" line of a page but the referenced command doesn't have a (translated) page.
 # - Check if a page is misplaced.
 #   A page is marked as misplaced when the page isn't inside a folder in the list of supported platforms.
 # - Check if a page is outdated.
@@ -16,7 +18,7 @@
 
 # Usage: ./check-pages.sh [-l language_id] [-c check_names] [-v]
 #   - language_id (optional): Specify a language identifier (e.g., 'id', 'fr') to filter results for a specific language.
-#   - check_names (optional): Provide an array splitted by "," to only run specific checks [missing_tldr_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint]
+#   - check_names (optional): Provide an array splitted by "," to only run specific checks [missing_tldr_page,missing_see_also_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint]
 #   - Adding -v enables verbose logging.
 
 ROOT_DIR="${TLDR_ROOT:-./tldr}"
@@ -64,6 +66,7 @@ if [ $VERBOSE = true ]; then
 fi
 
 MISSING_TLDR_OUTPUT_FILE="$OUTPUT_DIR/missing-tldr${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
+MISSING_SEE_ALSO_OUTPUT_FILE="$OUTPUT_DIR/missing-see-also-referenced${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 MISPLACED_OUTPUT_FILE="$OUTPUT_DIR/misplaced${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages-based-on-command-contents.txt"
 OUTDATED_BASED_ON_COMMAND_COUNT_FILE="$OUTPUT_DIR/outdated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages-based-on-command-count.txt"
@@ -72,7 +75,7 @@ MISSING_ENGLISH_OUTPUT_FILE="$OUTPUT_DIR/missing-english${LANGUAGE_ID:+-$LANGUAG
 MISSING_TRANSLATED_OUTPUT_FILE="$OUTPUT_DIR/missing-translated${LANGUAGE_ID:+-$LANGUAGE_ID}-pages.txt"
 LINT_FILE="$OUTPUT_DIR/lint-errors${LANGUAGE_ID:+-$LANGUAGE_ID}.txt"
 
-OUTPUT_FILES=( "$MISSING_TLDR_OUTPUT_FILE" "$MISPLACED_OUTPUT_FILE" "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE" "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE" "$OUTDATED_BASED_ON_HEADER_FILE" "$MISSING_ENGLISH_OUTPUT_FILE" "$MISSING_TRANSLATED_OUTPUT_FILE" "$LINT_FILE" )
+OUTPUT_FILES=( "$MISSING_TLDR_OUTPUT_FILE" "$MISSING_SEE_ALSO_OUTPUT_FILE" "$MISPLACED_OUTPUT_FILE" "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE" "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE" "$OUTDATED_BASED_ON_HEADER_FILE" "$MISSING_ENGLISH_OUTPUT_FILE" "$MISSING_TRANSLATED_OUTPUT_FILE" "$LINT_FILE" )
 
 for OUTPUT_FILE in  "${OUTPUT_FILES[@]}"; do
   rm -rf "$OUTPUT_FILE"
@@ -177,29 +180,29 @@ check_missing_tldr_page() {
 
 check_missing_see_also_page() {
   local file="$1"
+  local line
   read -r line
-  if [ "$line" = "" ]
-  then
+  if [ "$line" = "" ]; then
     return
   fi
 
   # shellcheck disable=SC2016
   for command in $(echo "${line}" | grep -o '`[^`]*`' | sed 's/`//g' | sed 's/ /-/g'); do
-      local missing=true
-      local filename="${command,,}"
-      for platform in "${PLATFORMS[@]}"; do
-        if [ -f "$folder_path/$platform/$filename.md" ]; then
-          missing=false
-          break
-        fi
-      done
+    local missing=true
+    local filename="${command,,}"
+    for platform in "${PLATFORMS[@]}"; do
+      if [ -f "$folder_path/$platform/$filename.md" ]; then
+        missing=false
+        break
+      fi
+    done
 
-        if [ "$missing" = true ]; then
-          local filepath
-          filepath=$(get_filepath_without_tldr "$file")
+    if [ "$missing" = true ]; then
+      local filepath
+      filepath=$(get_filepath_without_tldr "$file")
 
-          echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_TLDR_OUTPUT_FILE"
-        fi
+      echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_SEE_ALSO_OUTPUT_FILE"
+    fi
   done
 }
 
@@ -327,6 +330,8 @@ while IFS= read -r line; do
   esac
 done < ./tldr/contributing-guides/translation-templates/see-also-mentions.md
 
+see_also_prefix="${section[${LANGUAGE_ID:-en}]}"
+
 for file in "${files[@]}"; do
   if [ -n "$LANGUAGE_ID" ]; then
     english_file=$(get_english_file "$file")
@@ -339,7 +344,9 @@ for file in "${files[@]}"; do
             grep -o '`tldr .*`$' "$file" | check_missing_tldr_page "$file"
             ;;
         "missing_see_also_page")
-            grep -o "^${section[${LANGUAGE_ID:-en}]}.*" "$file" | check_missing_see_also_page "$file"
+            if [ -n "$see_also_prefix" ]; then
+              awk -v prefix="$see_also_prefix" 'index($0, prefix) == 1' "$file" | check_missing_see_also_page "$file"
+            fi
             ;;
         "misplaced_page")
             check_misplaced_page "$file"
