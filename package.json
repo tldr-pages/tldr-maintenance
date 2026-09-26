@@ -13,6 +13,7 @@
   },
   "scripts": {
     "calculate-metrics": "bash scripts/calculate-metrics.sh",
+    "check-codeowners": "python3 scripts/check-codeowners.py",
     "lint-markdown": "markdownlint *.md",
     "lint-python": "black scripts --check && flake8 scripts",
     "lint-bash": "shellcheck scripts/*.sh",
