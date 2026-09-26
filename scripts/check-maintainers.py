@@ -20,7 +20,9 @@ Criteria (see COMMUNITY-ROLES.md):
 
 Private organization members, outside collaborators and the two-factor authentication
 status are only visible to organization owners. With another token, the roles that can't
-be seen are reported as unknown.
+be seen are reported as unknown. Without access to the organization, GitHub ignores the
+role filter and lists all public members as both members and owners; then public members
+are only known to be in the organization.
 
 The result is a Markdown report on stdout, suitable for $GITHUB_STEP_SUMMARY.
 
@@ -39,6 +41,8 @@ from _common import ORG_NAME, REPO, github_paginate
 COLLABORATOR = "repository collaborator"
 MEMBER = "organization member"
 OWNER = "organization owner"
+# In the organization, but the token can't tell whether as a member or as an owner.
+MEMBER_OR_OWNER = "organization member or owner"
 NONE = "none"
 UNKNOWN = "unknown"
 
@@ -95,23 +99,32 @@ def with_article(role: str) -> str:
     return ("an " if role[0] in "aeiou" else "a ") + role
 
 
-def get_actual_role(login: str, owners, members, collaborators, complete) -> str:
+def get_actual_role(
+    login: str, owners, members, collaborators, public_members, complete
+) -> str:
     """
     Get the role of the user on GitHub. When the token can't see all roles (complete is
-    False), not finding the user doesn't mean they have no role.
+    False), not finding the user doesn't mean they have no role. When the token can't
+    see the organization roles (owners and members are None), public members are only
+    known to be in the organization.
     """
 
     if owners is not None and login in owners:
         return OWNER
     if members is not None and login in members:
         return MEMBER
+    if owners is None and login in public_members:
+        return MEMBER_OR_OWNER
     if collaborators is not None and login in collaborators:
         return COLLABORATOR
     return NONE if complete else UNKNOWN
 
 
 def assess(maintainer: Maintainer):
-    if maintainer.actual_role == UNKNOWN:
+    if maintainer.actual_role == UNKNOWN or (
+        maintainer.actual_role == MEMBER_OR_OWNER
+        and maintainer.listed_role in (MEMBER, OWNER)
+    ):
         maintainer.verdict = "unknown"
         return
     if maintainer.listed_role == NONE:
@@ -120,6 +133,7 @@ def assess(maintainer: Maintainer):
             f"is {with_article(maintainer.actual_role)} but not listed as current"
         )
     elif maintainer.listed_role != maintainer.actual_role:
+        # MEMBER_OR_OWNER only gets here when listed as a collaborator or not at all.
         maintainer.verdict = "fix"
         maintainer.reasons.append(
             f"listed as {maintainer.listed_role}, but is "
@@ -134,7 +148,10 @@ def assess(maintainer: Maintainer):
         maintainer.verdict = "fix"
         maintainer.reasons.append("two-factor authentication is disabled")
 
-    if maintainer.actual_role in (MEMBER, OWNER) and not maintainer.public_member:
+    if (
+        maintainer.actual_role in (MEMBER, OWNER, MEMBER_OR_OWNER)
+        and not maintainer.public_member
+    ):
         maintainer.verdict = "check" if maintainer.verdict == "ok" else "fix"
         maintainer.reasons.append("organization membership isn't public")
 
@@ -178,7 +195,7 @@ def render_report(maintainers: list[Maintainer], args, now: datetime) -> str:
     ]
     for maintainer in shown:
         public = {True: "yes", False: "**no**", None: "-"}[maintainer.public_member]
-        if maintainer.actual_role not in (MEMBER, OWNER):
+        if maintainer.actual_role not in (MEMBER, OWNER, MEMBER_OR_OWNER):
             public = "-"
         lines.append(
             "| "
@@ -221,6 +238,12 @@ def main():
     )
     public_members = get_logins(f"/orgs/{ORG_NAME}/public_members") or {}
 
+    # Nobody can be both a member and an owner. Without access to the organization,
+    # GitHub ignores the role filter and returns all public members for both, so the
+    # roles can't be told apart.
+    if owners is not None and members is not None and owners.keys() & members.keys():
+        owners = members = None
+
     # Only organization owners can filter on two-factor authentication. This also tells
     # whether the token can see private members and outside collaborators.
     members_without_2fa = get_logins(
@@ -238,7 +261,12 @@ def main():
     )
 
     listed = parse_maintainers(args.maintainers)
-    names = {**(collaborators or {}), **(members or {}), **(owners or {})}
+    names = {
+        **public_members,
+        **(collaborators or {}),
+        **(members or {}),
+        **(owners or {}),
+    }
     names.update({login: name for login, (name, _) in listed.items()})
 
     maintainers = []
@@ -247,7 +275,7 @@ def main():
         if login in listed:
             maintainer.listed_role = listed[login][1]
         maintainer.actual_role = get_actual_role(
-            login, owners, members, collaborators, complete
+            login, owners, members, collaborators, public_members, complete
         )
         maintainer.public_member = login in public_members
         if complete:
