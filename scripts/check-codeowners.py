@@ -34,11 +34,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from _github import github_request
-
-ORG_NAME = "tldr-pages"
-REPO_NAME = "tldr"
-REPO = f"{ORG_NAME}/{REPO_NAME}"
+from _common import REPO, github_request
 
 
 def search_issues(query: str, sort: str, per_page: int = 1) -> dict:
@@ -60,9 +56,10 @@ def parse_datetime(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
-def parse_codeowners(path: Path) -> dict[str, list[str]]:
+def parse_codeowners(path: Path) -> dict[str, tuple[str, list[str]]]:
     """
-    Map each CODEOWNER (lowercase login, teams are skipped) to the patterns they own.
+    Map each CODEOWNER (lowercase login, teams are skipped) to their name as written in
+    the file and the patterns they own. GitHub logins are case-insensitive.
     """
 
     owners = {}
@@ -74,7 +71,7 @@ def parse_codeowners(path: Path) -> dict[str, list[str]]:
         for name in names:
             if not name.startswith("@") or "/" in name:
                 continue
-            owners.setdefault(name[1:].lower(), []).append(pattern)
+            owners.setdefault(name[1:].lower(), (name[1:], []))[1].append(pattern)
     return owners
 
 
@@ -82,6 +79,7 @@ def parse_codeowners(path: Path) -> dict[str, list[str]]:
 class OwnerActivity:
     login: str
     patterns: list[str]
+    name: str = ""
     exists: bool = True
     has_write_access: bool | None = None
     last_review: datetime | None = None
@@ -132,10 +130,49 @@ def get_last_review(login: str) -> datetime | None:
     return latest
 
 
+def get_last_comment(login: str, since: datetime) -> datetime | None:
+    """
+    Get the exact date of the latest comment on an issue or PR by the user since the given date.
+
+    The search only tells when a thread was last updated, which can be long after the
+    user's comment, so the comments of the most recently updated threads are inspected.
+    """
+
+    since_param = since.strftime("%Y-%m-%dT%H:%M:%SZ")
+    threads = search_issues(
+        f"commenter:{login} updated:>={since.strftime('%Y-%m-%d')}", "updated", 20
+    )["items"]
+    latest = None
+    for thread in threads:
+        if latest and parse_datetime(thread["updated_at"]) < latest:
+            break
+        page = 1
+        while True:
+            status, comments = github_request(
+                f"/repos/{REPO}/issues/{thread['number']}/comments",
+                {"since": since_param, "per_page": 100, "page": page},
+            )
+            if status != 200 or not comments:
+                break
+            for comment in comments:
+                user = comment.get("user") or {}
+                created = parse_datetime(comment["created_at"])
+                if user.get("login", "").lower() == login and created >= since:
+                    latest = max(latest, created) if latest else created
+            if len(comments) < 100:
+                break
+            page += 1
+    return latest
+
+
 def collect_activity(
-    login: str, patterns: list[str], stale_before: datetime
+    login: str,
+    name: str,
+    patterns: list[str],
+    stale_before: datetime,
+    inactive_before: datetime,
 ) -> OwnerActivity:
-    owner = OwnerActivity(login, patterns)
+    owner = OwnerActivity(login, patterns, name)
 
     status, _ = github_request(f"/users/{login}")
     if status == 404:
@@ -155,11 +192,7 @@ def collect_activity(
     if prs:
         owner.last_pr = parse_datetime(prs[0]["created_at"])
 
-    # The search can only tell when the issue/PR was last updated, so this is an upper
-    # bound of the actual comment date. It's only used to tell someone is still around.
-    comments = search_issues(f"commenter:{login}", "updated")["items"]
-    if comments:
-        owner.last_comment = parse_datetime(comments[0]["updated_at"])
+    owner.last_comment = get_last_comment(login, inactive_before)
 
     requests = search_issues(
         f"is:pr is:open draft:false review-requested:{login}", "created", 100
@@ -196,10 +229,8 @@ def assess(owner: OwnerActivity, inactive_before: datetime, stale_threshold: int
         )
 
 
-def format_date(value: datetime | None, approximate: bool = False) -> str:
-    if not value:
-        return "never"
-    return ("≤ " if approximate else "") + value.strftime("%Y-%m-%d")
+def format_date(value: datetime | None, missing: str = "never") -> str:
+    return value.strftime("%Y-%m-%d") if value else missing
 
 
 def format_write_access(value: bool | None) -> str:
@@ -212,6 +243,7 @@ def format_patterns(patterns: list[str], limit: int = 3) -> str:
 
 
 def render_report(owners: list[OwnerActivity], args, now: datetime) -> str:
+    inactive_before = now - timedelta(days=args.inactive_days)
     icons = {"remove": "🔴", "check": "🟡", "ok": "🟢"}
     order = {"remove": 0, "check": 1, "ok": 2}
     shown = sorted(
@@ -224,7 +256,7 @@ def render_report(owners: list[OwnerActivity], args, now: datetime) -> str:
         "",
         f"Generated on {now.strftime('%Y-%m-%d %H:%M UTC')} for `{REPO}`. "
         f"Inactivity period: {args.inactive_days} days "
-        f"(since {(now - timedelta(days=args.inactive_days)).strftime('%Y-%m-%d')}). "
+        f"(since {inactive_before.strftime('%Y-%m-%d')}). "
         f"Review requests count as stale after {args.stale_days} days.",
         "",
         "- 🔴 **remove**: account gone, no write access, or no activity at all in the period.",
@@ -245,11 +277,14 @@ def render_report(owners: list[OwnerActivity], args, now: datetime) -> str:
             + " | ".join(
                 [
                     icons[owner.verdict],
-                    f"[@{owner.login}](https://github.com/{REPO}/pulls?"
+                    f"[@{owner.name}](https://github.com/{REPO}/pulls?"
                     f"q=is%3Apr+reviewed-by%3A{owner.login})",
                     format_date(owner.last_review),
                     format_date(owner.last_pr),
-                    format_date(owner.last_comment, approximate=True),
+                    format_date(
+                        owner.last_comment,
+                        f"before {inactive_before.strftime('%Y-%m-%d')}",
+                    ),
                     f"{len(owner.open_requests)} / {len(owner.stale_requests)}"
                     + (f" {stale_links}" if stale_links else ""),
                     format_write_access(owner.has_write_access),
@@ -285,7 +320,7 @@ def render_report(owners: list[OwnerActivity], args, now: datetime) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[1])
+    parser = argparse.ArgumentParser(description=__doc__.strip().split("\n\n")[0])
     parser.add_argument(
         "--codeowners",
         type=Path,
@@ -305,9 +340,9 @@ def main():
     stale_before = now - timedelta(days=args.stale_days)
 
     owners = []
-    for login, patterns in parse_codeowners(args.codeowners).items():
-        print(f"Checking @{login}...", file=sys.stderr)
-        owner = collect_activity(login, patterns, stale_before)
+    for login, (name, patterns) in parse_codeowners(args.codeowners).items():
+        print(f"Checking @{name}...", file=sys.stderr)
+        owner = collect_activity(login, name, patterns, stale_before, inactive_before)
         assess(owner, inactive_before, args.stale_threshold)
         owners.append(owner)
 

@@ -37,10 +37,9 @@ from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from _github import github_request
+from _common import ORG_NAME, REPO, github_paginate, github_request
 
-ORG_NAME = "tldr-pages"
-COMMUNITY_REPO = f"{ORG_NAME}/tldr"
+COMMUNITY_REPO = REPO
 COMMUNITY_LABEL = "community"
 HAS_WRITE_ACCESS = {"COLLABORATOR", "MEMBER", "OWNER"}
 # The Search API returns at most 1000 results for a query.
@@ -157,28 +156,17 @@ def get_community_mentions() -> set[str]:
     Collect everyone mentioned in an issue or PR labeled `community`, open or closed.
     """
 
+    issues = github_paginate(
+        f"/repos/{COMMUNITY_REPO}/issues",
+        {"labels": COMMUNITY_LABEL, "state": "all"},
+    )
+    if issues is None:
+        raise SystemExit(f"Listing `{COMMUNITY_LABEL}` issues failed.")
     mentions = set()
-    page = 1
-    while True:
-        status, issues = github_request(
-            f"/repos/{COMMUNITY_REPO}/issues",
-            {
-                "labels": COMMUNITY_LABEL,
-                "state": "all",
-                "per_page": 100,
-                "page": page,
-            },
-        )
-        if status != 200:
-            raise SystemExit(
-                f"Listing `{COMMUNITY_LABEL}` issues failed with {status}: {issues}"
-            )
-        for issue in issues:
-            text = f"{issue['title']}\n{issue.get('body') or ''}"
-            mentions.update(login.lower() for login in MENTION_REGEX.findall(text))
-        if len(issues) < 100:
-            return mentions
-        page += 1
+    for issue in issues:
+        text = f"{issue['title']}\n{issue.get('body') or ''}"
+        mentions.update(login.lower() for login in MENTION_REGEX.findall(text))
+    return mentions
 
 
 def check_write_access(candidate: Candidate):

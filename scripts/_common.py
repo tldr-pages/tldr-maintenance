@@ -10,9 +10,13 @@ from pathlib import Path
 from datetime import datetime, timezone
 import os
 import re
+import sys
 import json
+import time
 import subprocess
+import urllib.error
 import urllib.parse
+import urllib.request
 
 
 class Colors(str, Enum):
@@ -26,6 +30,100 @@ class Colors(str, Enum):
     BLUE = "\x1b[34m"
     CYAN = "\x1b[36m"
     RESET = "\x1b[0m"
+
+
+ORG_NAME = "tldr-pages"
+REPO_NAME = "tldr"
+REPO = f"{ORG_NAME}/{REPO_NAME}"
+API_URL = "https://api.github.com"
+API_VERSION = "2022-11-28"
+
+
+def get_token() -> str:
+    """
+    Get a GitHub token from GITHUB_TOKEN, GH_TOKEN or the GitHub CLI.
+    """
+
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if token:
+        return token
+    try:
+        return subprocess.run(
+            ["gh", "auth", "token"], capture_output=True, text=True, check=True
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        sys.exit("Please set GITHUB_TOKEN or log in with `gh auth login`.")
+
+
+_token = None
+
+
+def github_request(path: str, params: dict = None) -> tuple[int, object]:
+    """
+    Perform a GET request against the GitHub REST API, waiting when rate limited.
+
+    Returns:
+    tuple: the HTTP status code and the decoded JSON body (None when there is no body).
+    """
+
+    global _token
+    if _token is None:
+        _token = get_token()
+
+    url = f"{API_URL}{path}"
+    if params:
+        url += "?" + urllib.parse.urlencode(params)
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/vnd.github+json",
+            "Authorization": f"Bearer {_token}",
+            "X-GitHub-Api-Version": API_VERSION,
+        },
+    )
+
+    for _ in range(5):
+        try:
+            with urllib.request.urlopen(request) as response:
+                body = response.read()
+                return response.status, json.loads(body) if body else None
+        except urllib.error.HTTPError as error:
+            if error.code in (403, 429) and (
+                error.headers.get("Retry-After")
+                or error.headers.get("X-RateLimit-Remaining") == "0"
+            ):
+                wait = int(error.headers.get("Retry-After") or 0)
+                if not wait:
+                    reset = int(error.headers.get("X-RateLimit-Reset", time.time()))
+                    wait = max(reset - int(time.time()), 0) + 1
+                print(f"Rate limited, waiting {wait}s...", file=sys.stderr)
+                time.sleep(wait)
+                continue
+            body = error.read()
+            return error.code, json.loads(body) if body else None
+    raise SystemExit(f"Giving up on {url} after repeated rate limiting.")
+
+
+def github_paginate(path: str, params: dict = None) -> list | None:
+    """
+    Get all pages of a GitHub REST API list endpoint.
+
+    Returns:
+    list: all items, or None when the request isn't allowed (e.g. the token lacks access).
+    """
+
+    items = []
+    page = 1
+    while True:
+        status, data = github_request(
+            path, {**(params or {}), "per_page": 100, "page": page}
+        )
+        if status != 200:
+            return None
+        items += data
+        if len(data) < 100:
+            return items
+        page += 1
 
 
 def get_tldr_root(lookup_path: Path = None) -> Path:
