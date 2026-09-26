@@ -16,14 +16,14 @@ from _dashboard import (
     MAX_LISTED_RESULTS,
     RELEASE_URL,
     IssueSection,
-    read_results,
     Metric,
     build_issue_body,
-    get_language_issue_title,
-    get_metrics,
-    get_datetime_pretty,
-    strip_dynamic_content,
     get_github_issues,
+    get_language_issue_title,
+    get_last_updated,
+    get_metrics,
+    read_results,
+    strip_dynamic_content,
     update_github_issue,
 )
 
@@ -52,7 +52,9 @@ def parse_summary(path: Path, metrics: list[Metric]) -> dict:
 
     # The breakdown by language is about the translations.
     for row in rows:
-        if row["language"] not in ("total", "en") and int(row["results"]) > 0:
+        if row["language"] in ("total", "en") or not row["results"].isdigit():
+            continue
+        if int(row["results"]) > 0:
             label = label_of[row["metric"]]
             data["details"].setdefault(row["language"], {})[label] = int(row["results"])
 
@@ -89,9 +91,7 @@ def generate_dashboard(data: dict, issues: dict[str, dict]) -> str:
     DETAILS_CLOSING = "\n</details>\n"
 
     header = f"# {DASHBOARD_ISSUE_TITLE}\n\n"
-    header += "<!-- __NOUPDATE__ -->\n"
-    header += f"**Last updated:** {get_datetime_pretty()}\n"
-    header += "<!-- __END_NOUPDATE__ -->\n"
+    header += get_last_updated()
     header += "## Overview\n"
     header += "| Metric | Value |\n"
     header += "|--------|-------|\n"

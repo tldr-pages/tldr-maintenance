@@ -41,6 +41,7 @@ usage() {
 
 LANGUAGE_ID=""
 SELECTED_METRICS=""
+SELECT_METRICS=false
 VERBOSE=false
 
 while getopts ":l:c:v" opt; do
@@ -50,6 +51,7 @@ while getopts ":l:c:v" opt; do
     ;;
   c)
     SELECTED_METRICS="$OPTARG"
+    SELECT_METRICS=true
     ;;
   v)
     VERBOSE=true
@@ -99,7 +101,11 @@ for id in "${!CHECK_OF[@]}"; do
   fi
 done
 
-if [ -n "$SELECTED_METRICS" ]; then
+if [ "$SELECT_METRICS" = true ]; then
+  # An empty list or an empty id (e.g. a trailing comma) is rejected.
+  if [[ -z "$SELECTED_METRICS" || "$SELECTED_METRICS" == *, ]]; then
+    usage
+  fi
   IFS=',' read -ra selected_metrics <<< "$SELECTED_METRICS"
   for id in "${selected_metrics[@]}"; do
     if [ -z "$id" ] || [ -z "${metric_sources[$id]}" ]; then
@@ -473,7 +479,8 @@ for check in "${checks[@]}" write_totals; do
 
   for id in "${!OUTPUT_FILE[@]}"; do
     if [ "${CHECK_OF[$id]}" = "$check" ]; then
-      sort -u "${OUTPUT_FILE[$id]}" > "$OUTPUT_DIR/$id.txt" || status=1
+      sort -u "${OUTPUT_FILE[$id]}" > "$WORK_DIR/sorted" &&
+        mv "$WORK_DIR/sorted" "$OUTPUT_DIR/$id.txt" || status=1
     fi
   done
 done

@@ -16,15 +16,15 @@ from _dashboard import (
     IssueSection,
     Metric,
     build_issue_body,
-    get_language_issue_title,
-    get_metrics,
-    get_check_pages_dirs,
-    read_results,
-    get_locale,
-    get_datetime_pretty,
-    strip_dynamic_content,
     create_github_issue,
+    get_check_pages_dirs,
     get_github_issues,
+    get_language_issue_title,
+    get_last_updated,
+    get_locale,
+    get_metrics,
+    read_results,
+    strip_dynamic_content,
     update_github_issue,
 )
 
@@ -40,7 +40,7 @@ def parse_language_directory(
     for metric in metrics:
         if not metric.applies_to(locale):
             continue
-        lang_data[metric] = read_results(Path(directory) / metric.file_name)
+        lang_data[metric] = read_results(directory / metric.file_name)
 
     return lang_data
 
@@ -50,9 +50,7 @@ def generate_markdown_for_language(
 ) -> str:
     title = f"# {get_language_issue_title(language)}\n\n"
     header = title + f"## {language} language Issues\n"
-    header += "<!-- __NOUPDATE__ -->\n"
-    header += f"**Last updated:** {get_datetime_pretty()}\n"
-    header += "<!-- __END_NOUPDATE__ -->\n"
+    header += get_last_updated()
 
     sections = []
     for metric, items in data.items():

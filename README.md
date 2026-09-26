@@ -60,7 +60,8 @@ Some metrics don't apply to English, since they compare a translated page with t
   A page is missing when the English page can't be found as translated page.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
 - **Linter error(s)** (`lint-errors`)
-  Run the `markdownlint` and `tldr-lint` with specific checks enabled for the specific language (only applies to the `tldr-lint`).
+  The errors of `markdownlint` and `tldr-lint`. For translations, some checks of `tldr-lint` are ignored
+  (`TLDR104` about the English tense, and capital letters and punctuation for some languages), see `lint` in [`check-pages.sh`](scripts/check-pages.sh).
 
 ## Summary
 

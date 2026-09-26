@@ -279,6 +279,16 @@ def build_issue_body(
     return body[:max_length]
 
 
+def get_last_updated() -> str:
+    """The "Last updated" line of an issue, which is ignored when comparing issue bodies (see strip_dynamic_content)."""
+
+    return (
+        "<!-- __NOUPDATE__ -->\n"
+        f"**Last updated:** {get_datetime_pretty()}\n"
+        "<!-- __END_NOUPDATE__ -->\n"
+    )
+
+
 def get_datetime_pretty():
     # Guarantee UTC to be fair to everyone, since we can't make this dynamic based on the browser's timezone
     date = datetime.now(timezone.utc)

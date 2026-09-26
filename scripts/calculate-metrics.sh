@@ -27,78 +27,9 @@ declare -A TLDR_SCRIPT_JOB_OF=(
   [wrong-filename]=run_wrong_filename
 )
 
-if [ ! -d "$TLDR_ROOT_DIR/pages" ]; then
-  echo "The tldr repository isn't found in $TLDR_ROOT_DIR, run \`git submodule update --init\` or set TLDR_ROOT." >&2
-  exit 1
-fi
-
-metrics_output=$(list_metrics) || exit 1
-mapfile -t METRICS <<< "$metrics_output"
-
-# The tldr script jobs to run.
-TLDR_SCRIPT_JOBS=()
-for metric in "${METRICS[@]}"; do
-  IFS=$'\t' read -r id _ source _ <<< "$metric"
-  if [ "$source" = "check-pages" ]; then
-    continue
-  fi
-  job="${TLDR_SCRIPT_JOB_OF[$source]}"
-  if [ -z "$job" ]; then
-    echo "The source $source of the metric $id in metrics.tsv isn't known, see TLDR_SCRIPT_JOB_OF." >&2
-    exit 1
-  fi
-  if [[ " ${TLDR_SCRIPT_JOBS[*]} " != *" $job "* ]]; then
-    TLDR_SCRIPT_JOBS+=("$job")
-  fi
-done
-
-LANGUAGE_IDS=()
-for folder in "$TLDR_ROOT_DIR"/pages.*; do
-  # pages.en is a symlink to the English pages.
-  if [ -d "$folder" ] && [ ! -L "$folder" ]; then
-    LANGUAGE_IDS+=("${folder##*/pages.}")
-  fi
-done
-
-MAX_JOBS=$(nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)
-JOBS_DIR=$(mktemp -d) || exit 1
-trap 'rm -rf "$JOBS_DIR"' EXIT
-# Print a process and all its descendants.
-list_process_tree() {
-  local child
-
-  echo "$1"
-  for child in $(pgrep -P "$1"); do
-    list_process_tree "$child"
-  done
-}
-
-# Stop the background jobs (with their checks and linters) when the script is interrupted.
-stop_jobs() {
-  local pids=() pid
-
-  trap '' INT TERM
-  for pid in $(jobs -p); do
-    mapfile -t -O "${#pids[@]}" pids < <(list_process_tree "$pid")
-  done
-  if [ "${#pids[@]}" -gt 0 ]; then
-    kill -TERM "${pids[@]}" 2>/dev/null
-  fi
-  wait
-  exit "$1"
-}
-trap 'stop_jobs 130' INT
-trap 'stop_jobs 143' TERM
-RESULTS_DIR="$JOBS_DIR/results"
-mkdir -p "$RESULTS_DIR" || exit 1
 JOB_FAILED=false
 
-# Remove the results of a previous run.
-rm -rf ./check-pages ./check-pages.* ./summary.tsv
-for metric in "${METRICS[@]}"; do
-  IFS=$'\t' read -r id _ <<< "$metric"
-  rm -f "./$id.txt"
-done
+# Jobs
 
 # Run a command as a named background job, with at most MAX_JOBS jobs at the same time.
 # Its output and exit code are stored, so they can be displayed together with the results.
@@ -130,6 +61,33 @@ display_job() {
   fi
 }
 
+# Print a process and all its descendants.
+list_process_tree() {
+  local child
+
+  echo "$1"
+  for child in $(pgrep -P "$1"); do
+    list_process_tree "$child"
+  done
+}
+
+# Stop the background jobs (with their checks and linters) when the script is interrupted.
+stop_jobs() {
+  local pids=() pid
+
+  trap '' INT TERM
+  for pid in $(jobs -p); do
+    mapfile -t -O "${#pids[@]}" pids < <(list_process_tree "$pid")
+  done
+  if [ "${#pids[@]}" -gt 0 ]; then
+    kill -TERM "${pids[@]}" 2>/dev/null
+  fi
+  wait
+  exit "$1"
+}
+
+# Jobs that run the scripts of the tldr repository
+
 # Run a script of the tldr repository in dry-run synchronization mode.
 # The colors and the given text (with sed) are removed from its output.
 run_tldr_sync_script() {
@@ -143,6 +101,16 @@ run_tldr_sync_script() {
 # Make a result of the tldr scripts available, after it has been written to JOBS_DIR completely.
 publish_result() {
   mv "$JOBS_DIR/$1" "$RESULTS_DIR/$1"
+}
+
+# Split the results of a tldr script (lines ending with " added" or " updated") into <name>-added and <name>-updated.
+split_added_and_updated() {
+  local name="$1"
+
+  sed -n 's/ added$//p' "$JOBS_DIR/$name" > "$JOBS_DIR/$name-added" &&
+    sed -n 's/ updated$//p' "$JOBS_DIR/$name" > "$JOBS_DIR/$name-updated" &&
+    publish_result "$name-added" &&
+    publish_result "$name-updated"
 }
 
 run_set_more_info_link() {
@@ -164,16 +132,6 @@ run_set_alias_page() {
       run_tldr_sync_script "set-alias-page" 's/ page would be \(added\|updated\).*$/ \1/' -i
   } > "$JOBS_DIR/set-alias-page" || return 1
   split_added_and_updated set-alias-page
-}
-
-# Split the results of a tldr script (lines ending with " added" or " updated") into <name>-added and <name>-updated.
-split_added_and_updated() {
-  local name="$1"
-
-  sed -n 's/ added$//p' "$JOBS_DIR/$name" > "$JOBS_DIR/$name-added" &&
-    sed -n 's/ updated$//p' "$JOBS_DIR/$name" > "$JOBS_DIR/$name-updated" &&
-    publish_result "$name-added" &&
-    publish_result "$name-updated"
 }
 
 run_set_page_title() {
@@ -198,18 +156,7 @@ run_wrong_filename() {
     publish_result wrong-filename
 }
 
-# The longest jobs are started first: the tldr scripts, English and then the languages with the most pages.
-for job in "${TLDR_SCRIPT_JOBS[@]}"; do
-  start_job "$job" "$job"
-done
-start_job "en" "$SCRIPTS_DIR/check-pages.sh"
-for language_id in "${LANGUAGE_IDS[@]}"; do
-  echo "$(find "$TLDR_ROOT_DIR/pages.$language_id" -type f -name "*.md" | wc -l) $language_id"
-done | sort -rn | cut -d " " -f 2 > "$JOBS_DIR/language-order"
-while read -r language_id; do
-  start_job "$language_id" "$SCRIPTS_DIR/check-pages.sh" -l "$language_id"
-done < "$JOBS_DIR/language-order"
-wait
+# Results
 
 # Print the result directories of the languages a metric applies to ("all" or "translations").
 list_result_dirs() {
@@ -248,38 +195,6 @@ write_tldr_script_results() {
   done
 }
 
-# Display the number of results of every metric that applies to the language.
-display_language() {
-  local language_id="$1"
-  local output_dir="./check-pages${language_id:+.$language_id}"
-  local metric id languages source denominator label output_file count total
-
-  display_job "${language_id:-en}"
-
-  for metric in "${METRICS[@]}"; do
-    IFS=$'\t' read -r id languages source denominator _ label <<< "$metric"
-    if [ "$languages" != "all" ] && [ -z "$language_id" ]; then
-      continue
-    fi
-
-    output_file="$output_dir/$id.txt"
-    if [ -f "$output_file" ]; then
-      count=$(wc -l < "$output_file")
-      echo "$count $label in ${output_file#./}."
-      if [ "$denominator" != "-" ] && total=$(sum_totals "$denominator" "$output_dir"); then
-        printf '%s\t%s\t%s\t%s\t%s\n' "${language_id:-en}" "$id" "$count" "$total" "$(calculate_percentage "$count" "$total")" >> ./summary.tsv
-      else
-        printf '%s\t%s\t%s\t-\t-\n' "${language_id:-en}" "$id" "$count" >> ./summary.tsv
-      fi
-    else
-      # The job that should have written the results failed, which is already reported.
-      echo "? $label (not calculated, since $source failed)."
-    fi
-  done
-
-  printf -- '_%.0s' {1..100}; echo
-}
-
 # Print the percentage with one decimal, rounded down so it only shows 100.0 when everything is affected.
 calculate_percentage() {
   local part_of_total="$1"
@@ -304,6 +219,40 @@ sum_totals() {
   done
 
   echo "$sum"
+}
+
+# Display the number of results of every metric that applies to the language.
+display_language() {
+  local language_id="$1"
+  local output_dir="./check-pages${language_id:+.$language_id}"
+  local metric id languages source denominator label output_file count total
+
+  display_job "${language_id:-en}"
+
+  for metric in "${METRICS[@]}"; do
+    IFS=$'\t' read -r id languages source denominator _ label <<< "$metric"
+    if [ "$languages" != "all" ] && [ -z "$language_id" ]; then
+      continue
+    fi
+
+    output_file="$output_dir/$id.txt"
+    if [ ! -f "$output_file" ]; then
+      # The job that should have written the results failed, which is already reported.
+      echo "? $label (not calculated, since $source failed)."
+      printf '%s\t%s\t-\t-\t-\n' "${language_id:-en}" "$id" >> ./summary.tsv
+      continue
+    fi
+
+    count=$(wc -l < "$output_file")
+    echo "$count $label in ${output_file#./}."
+    if [ "$denominator" != "-" ] && total=$(sum_totals "$denominator" "$output_dir"); then
+      printf '%s\t%s\t%s\t%s\t%s\n' "${language_id:-en}" "$id" "$count" "$total" "$(calculate_percentage "$count" "$total")" >> ./summary.tsv
+    else
+      printf '%s\t%s\t%s\t-\t-\n' "${language_id:-en}" "$id" "$count" >> ./summary.tsv
+    fi
+  done
+
+  printf -- '_%.0s' {1..100}; echo
 }
 
 # Merge the results of all languages and display the total.
@@ -338,6 +287,69 @@ display_total() {
     printf 'total\t%s\t%s\t-\t-\n' "$id" "$total" >> ./summary.tsv
   fi
 }
+
+# Main
+
+if [ ! -d "$TLDR_ROOT_DIR/pages" ]; then
+  echo "The tldr repository isn't found in $TLDR_ROOT_DIR, run \`git submodule update --init\` or set TLDR_ROOT." >&2
+  exit 1
+fi
+
+metrics_output=$(list_metrics) || exit 1
+mapfile -t METRICS <<< "$metrics_output"
+
+# The jobs of the tldr scripts to run.
+TLDR_SCRIPT_JOBS=()
+for metric in "${METRICS[@]}"; do
+  IFS=$'\t' read -r id _ source _ <<< "$metric"
+  if [ "$source" = "check-pages" ]; then
+    continue
+  fi
+  job="${TLDR_SCRIPT_JOB_OF[$source]}"
+  if [ -z "$job" ]; then
+    echo "The source $source of the metric $id in metrics.tsv isn't known, see TLDR_SCRIPT_JOB_OF." >&2
+    exit 1
+  fi
+  if [[ " ${TLDR_SCRIPT_JOBS[*]} " != *" $job "* ]]; then
+    TLDR_SCRIPT_JOBS+=("$job")
+  fi
+done
+
+LANGUAGE_IDS=()
+for folder in "$TLDR_ROOT_DIR"/pages.*; do
+  # pages.en is a symlink to the English pages.
+  if [ -d "$folder" ] && [ ! -L "$folder" ]; then
+    LANGUAGE_IDS+=("${folder##*/pages.}")
+  fi
+done
+
+MAX_JOBS=$(nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)
+JOBS_DIR=$(mktemp -d) || exit 1
+RESULTS_DIR="$JOBS_DIR/results"
+mkdir -p "$RESULTS_DIR" || exit 1
+trap 'rm -rf "$JOBS_DIR"' EXIT
+trap 'stop_jobs 130' INT
+trap 'stop_jobs 143' TERM
+
+# Remove the results of a previous run.
+rm -rf ./check-pages ./check-pages.* ./summary.tsv
+for metric in "${METRICS[@]}"; do
+  IFS=$'\t' read -r id _ <<< "$metric"
+  rm -f "./$id.txt"
+done
+
+# The longest jobs are started first: the tldr scripts, English and then the languages with the most pages.
+for job in "${TLDR_SCRIPT_JOBS[@]}"; do
+  start_job "$job" "$job"
+done
+start_job "en" "$SCRIPTS_DIR/check-pages.sh"
+for language_id in "${LANGUAGE_IDS[@]}"; do
+  echo "$(find "$TLDR_ROOT_DIR/pages.$language_id" -type f -name "*.md" | wc -l) $language_id"
+done | sort -rn | cut -d " " -f 2 > "$JOBS_DIR/language-order"
+while read -r language_id; do
+  start_job "$language_id" "$SCRIPTS_DIR/check-pages.sh" -l "$language_id"
+done < "$JOBS_DIR/language-order"
+wait
 
 printf 'language\tmetric\tresults\ttotal\tpercentage\n' > ./summary.tsv
 
