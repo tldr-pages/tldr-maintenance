@@ -124,9 +124,10 @@ def parse_datetime(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
-def parse_codeowners(path: Path) -> dict[str, list[str]]:
+def parse_codeowners(path: Path) -> dict[str, tuple[str, list[str]]]:
     """
-    Map each CODEOWNER (lowercase login, teams are skipped) to the patterns they own.
+    Map each CODEOWNER (lowercase login, teams are skipped) to their name as written in
+    the file and the patterns they own. GitHub logins are case-insensitive.
     """
 
     owners = {}
@@ -138,7 +139,7 @@ def parse_codeowners(path: Path) -> dict[str, list[str]]:
         for name in names:
             if not name.startswith("@") or "/" in name:
                 continue
-            owners.setdefault(name[1:].lower(), []).append(pattern)
+            owners.setdefault(name[1:].lower(), (name[1:], []))[1].append(pattern)
     return owners
 
 
@@ -146,6 +147,7 @@ def parse_codeowners(path: Path) -> dict[str, list[str]]:
 class OwnerActivity:
     login: str
     patterns: list[str]
+    name: str = ""
     exists: bool = True
     has_write_access: bool | None = None
     last_review: datetime | None = None
@@ -232,9 +234,13 @@ def get_last_comment(login: str, since: datetime) -> datetime | None:
 
 
 def collect_activity(
-    login: str, patterns: list[str], stale_before: datetime, inactive_before: datetime
+    login: str,
+    name: str,
+    patterns: list[str],
+    stale_before: datetime,
+    inactive_before: datetime,
 ) -> OwnerActivity:
-    owner = OwnerActivity(login, patterns)
+    owner = OwnerActivity(login, patterns, name)
 
     status, _ = github_request(f"/users/{login}")
     if status == 404:
@@ -339,7 +345,7 @@ def render_report(owners: list[OwnerActivity], args, now: datetime) -> str:
             + " | ".join(
                 [
                     icons[owner.verdict],
-                    f"[@{owner.login}](https://github.com/{REPO}/pulls?"
+                    f"[@{owner.name}](https://github.com/{REPO}/pulls?"
                     f"q=is%3Apr+reviewed-by%3A{owner.login})",
                     format_date(owner.last_review),
                     format_date(owner.last_pr),
@@ -405,9 +411,9 @@ def main():
     stale_before = now - timedelta(days=args.stale_days)
 
     owners = []
-    for login, patterns in parse_codeowners(args.codeowners).items():
-        print(f"Checking @{login}...", file=sys.stderr)
-        owner = collect_activity(login, patterns, stale_before, inactive_before)
+    for login, (name, patterns) in parse_codeowners(args.codeowners).items():
+        print(f"Checking @{name}...", file=sys.stderr)
+        owner = collect_activity(login, name, patterns, stale_before, inactive_before)
         assess(owner, inactive_before, args.stale_threshold)
         owners.append(owner)
 
