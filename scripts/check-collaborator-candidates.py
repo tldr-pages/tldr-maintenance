@@ -12,7 +12,7 @@ the authors who reached the threshold and are not a collaborator yet.
 
 An author is skipped when:
 
-- they are a bot,
+- they are a bot or a deleted account (@ghost),
 - GitHub reports them as a collaborator, member or owner of the repository,
 - for tldr-pages/tldr only: they are listed in tldr/MAINTAINERS.md (current and past
   maintainers alike), or mentioned in an issue or PR with the `community` label, which
@@ -34,7 +34,7 @@ import re
 import sys
 import urllib.parse
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from _github import github_request
@@ -87,20 +87,35 @@ def is_bot(user: dict) -> bool:
     return user.get("type") == "Bot" or user["login"].lower().endswith("[bot]")
 
 
-def get_recently_merged(since: datetime) -> list[dict]:
-    query = f"org:{ORG_NAME} is:pr is:merged merged:>={since.strftime('%Y-%m-%d')}"
-    items = []
+def is_deleted(user: dict) -> bool:
+    # PRs of deleted accounts are attributed to the @ghost placeholder user.
+    return user["login"].lower() == "ghost"
+
+
+def get_merged(start: date, end: date) -> list[dict]:
+    """
+    Get the PRs merged in the organization from start up to and including end,
+    splitting the period when it has more results than a single search returns.
+    """
+
+    query = f"org:{ORG_NAME} is:pr is:merged merged:{start}..{end}"
+    data = search_issues(query)
+    if data["total_count"] > SEARCH_LIMIT and start < end:
+        middle = start + (end - start) // 2
+        return get_merged(start, middle) + get_merged(middle + timedelta(days=1), end)
+
+    items = data["items"]
     page = 1
-    while len(items) < SEARCH_LIMIT:
-        data = search_issues(query, page=page)
-        items += data["items"]
-        if len(data["items"]) < 100 or len(items) >= data["total_count"]:
-            break
+    while len(items) < min(data["total_count"], SEARCH_LIMIT):
         page += 1
-    if len(items) >= SEARCH_LIMIT:
+        page_items = search_issues(query, page=page)["items"]
+        if not page_items:
+            break
+        items += page_items
+    if data["total_count"] > SEARCH_LIMIT:
         print(
-            f"Warning: more than {SEARCH_LIMIT} merged PRs since {since:%Y-%m-%d}, "
-            "use a shorter --since-days to see all of them.",
+            f"Warning: more than {SEARCH_LIMIT} PRs merged on {start}, "
+            "only the first ones are checked.",
             file=sys.stderr,
         )
     return items
@@ -108,14 +123,18 @@ def get_recently_merged(since: datetime) -> list[dict]:
 
 def group_by_author(items: list[dict]) -> dict[tuple[str, str], Candidate]:
     """
-    Group merged PRs per (repository, author), leaving out bots and authors who
-    already have write access to that repository.
+    Group merged PRs per (repository, author), leaving out bots, deleted accounts and
+    authors who already have write access to that repository.
     """
 
     candidates = {}
     for item in items:
         user = item["user"]
-        if is_bot(user) or item.get("author_association") in HAS_WRITE_ACCESS:
+        if (
+            is_bot(user)
+            or is_deleted(user)
+            or item.get("author_association") in HAS_WRITE_ACCESS
+        ):
             continue
         key = (repo_of(item), user["login"].lower())
         candidate = candidates.setdefault(key, Candidate(user["login"], key[0]))
@@ -274,7 +293,7 @@ def render_report(candidates: list[Candidate], args, now: datetime) -> str:
 def find_candidates(args, now: datetime) -> list[Candidate]:
     since = now - timedelta(days=args.since_days)
     print(f"Searching PRs merged since {since:%Y-%m-%d}...", file=sys.stderr)
-    grouped = group_by_author(get_recently_merged(since))
+    grouped = group_by_author(get_merged(since.date(), now.date()))
 
     # Both only tell about tldr-pages/tldr, so they don't hide progress in other repos.
     skip = get_maintainers(args.maintainers) | get_community_mentions()
