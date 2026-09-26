@@ -9,6 +9,7 @@ on:
       - .github/workflows/calculate-metrics.yml
       - scripts/*.sh
       - scripts/*.py
+      - scripts/metrics.tsv
       - '!scripts/sort-lychee-output.py'
 
 jobs:
@@ -45,11 +46,16 @@ jobs:
         run: pip install -r requirements.txt && rm -f requirements.txt
 
       - name: Run the script and generate artifacts
+        # The bash shell uses pipefail, so the step fails when one of the checks failed to run.
+        shell: bash
         run: |
-          npm run --silent calculate-metrics 2>&1 | tee metrics-log.md
-          cat metrics-log.md >> $GITHUB_STEP_SUMMARY
+          status=0
+          npm run --silent calculate-metrics 2>&1 | tee metrics-log.md || status=$?
+          cat metrics-log.md >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
 
       - name: Upload Calculate Metrics artifact
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: metrics

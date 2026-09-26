@@ -6,6 +6,7 @@ A Python file that makes some commonly used functions available for other script
 """
 
 from enum import Enum
+from dataclasses import dataclass
 from pathlib import Path
 from datetime import datetime, timezone
 import os
@@ -36,6 +37,72 @@ ORG_NAME = "tldr-pages"
 REPO_NAME = "tldr"
 REPO = f"{ORG_NAME}/{REPO_NAME}"
 API_URL = "https://api.github.com"
+METRICS_FILE = Path(__file__).parent / "metrics.tsv"
+
+
+@dataclass(frozen=True)
+class Metric:
+    """A metric as described in metrics.tsv."""
+
+    id: str
+    languages: str
+    source: str
+    denominator: str
+    link: str
+    label: str
+
+    @property
+    def file_name(self) -> str:
+        return f"{self.id}.txt"
+
+    def applies_to(self, locale: str) -> bool:
+        return self.languages == "all" or locale != "en"
+
+    def format_result(self, result: str) -> str:
+        """Format a line of a result file as Markdown, with a link to the page."""
+
+        match self.link:
+            case "reference":
+                return generate_github_link(result)
+            case "edit":
+                return generate_github_edit_link(result)
+            case "new":
+                return generate_github_new_link(result)
+            case "lint":
+                return generate_github_lint_link(result)
+            case _:
+                return replace_characters_for_link(result)
+
+
+def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
+    """
+    Get the metrics described in metrics.tsv, in the order they are displayed.
+
+    Returns:
+    list (list of Metric's): the metrics.
+    """
+
+    metrics = []
+    with path.open(encoding="utf-8") as file:
+        for line in file:
+            line = line.rstrip("\n")
+            if not line or line.startswith("#") or line.startswith("id\t"):
+                continue
+            metrics.append(Metric(*line.split("\t")))
+    return metrics
+
+
+def test_get_metrics():
+    metrics = get_metrics()
+    ids = [metric.id for metric in metrics]
+    assert len(ids) == len(set(ids))
+    assert all(metric.languages in ("all", "translations") for metric in metrics)
+    assert all(
+        metric.link in ("reference", "edit", "new", "lint", "none")
+        for metric in metrics
+    )
+
+
 API_VERSION = "2022-11-28"
 
 
@@ -364,7 +431,7 @@ def generate_github_link(item):
 
         return f"[{page}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename})"
 
-    return re.sub(r"pages\..*\.md", replace_reference, item)
+    return re.sub(r"pages(?:\.[^/\s]+)?/[^:]*\.md(?=:|$)", replace_reference, item)
 
 
 def generate_github_edit_link(page):

@@ -1,57 +1,37 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
 
-# This script is used by the GitHub Action `calculate-metrics`.
-# Exit codes: 0 when no issues are found, 1 when issues are found and 2 when one of the checks failed to run.
+# Calculate the metrics described in metrics.tsv for English and every language, used by the GitHub Action `calculate-metrics`.
+# The results are written to check-pages[.<language>]/<metric>.txt, the totals to <metric>.txt and a summary to stdout.
+# Exits with 1 when one of the checks failed to run.
 
+set -o pipefail
+
+SCRIPTS_DIR="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck source=scripts/_common.sh
-source "$(dirname "${BASH_SOURCE[0]}")/_common.sh"
+source "$SCRIPTS_DIR/_common.sh"
 
-total_pages=$(find ./tldr/pages* -type f | wc -l)
-total_non_english_pages=$(find ./tldr/pages.* -type f | wc -l)
-total_english_pages=$(find ./tldr/pages -type f | wc -l)
-
-total_translation_folders=$(find ./tldr -maxdepth 1 -type d -name "pages.*" | wc -l)
-total_pages_need_translation=$((total_english_pages * total_translation_folders))
-# shellcheck disable=SC2016
-total_tldr_pages=$(find ./tldr/pages* -type f -exec grep -o '`tldr [^`]*' {} + | wc -l)
-total_unique_non_english_pages=$(find ./tldr/pages.* -type f | awk -F/ '{print $NF}' | sort -u | wc -l)
-
-# Only translated pages whose English page has a "See also" mention need a (translated) "See also" mention.
-mapfile -t english_pages < <(find ./tldr/pages -type f -name "*.md" -readable | sort -u)
-mapfile -t english_pages_with_see_also_mention < <(list_pages_with_see_also_mention "${english_pages[@]}" | sed 's|^\./tldr/pages/||')
-total_pages_need_see_also_mention=0
-# Every "See also" mention references one or more pages, count the references of all languages.
-total_see_also_references=0
-for folder in $(find ./tldr -maxdepth 1 -type d -name "pages*" | sort); do
-  language_id="${folder##*/pages}"
-  language_id="${language_id#.}"
-
-  see_also_prefix=$(get_see_also_prefix "${language_id:-en}")
-  if [ -z "$see_also_prefix" ]; then
-    continue
-  fi
-
-  if [ -n "$language_id" ]; then
-    for page in "${english_pages_with_see_also_mention[@]}"; do
-      if [ -f "$folder/$page" ]; then
-        total_pages_need_see_also_mention=$((total_pages_need_see_also_mention + 1))
-      fi
-    done
-  fi
-
-  mapfile -t pages < <(find "$folder" -type f -name "*.md" -readable | sort -u)
-  if [ "${#pages[@]}" -gt 0 ]; then
-    references=$(list_see_also_references "$see_also_prefix" "${pages[@]}" | wc -l)
-    total_see_also_references=$((total_see_also_references + references))
+mapfile -t METRICS < <(grep -v -e '^#' -e '^id	' -e '^$' "$SCRIPTS_DIR/metrics.tsv")
+LANGUAGE_IDS=()
+for folder in "$TLDR_ROOT_DIR"/pages.*; do
+  # pages.en is a symlink to the English pages.
+  if [ -d "$folder" ] && [ ! -L "$folder" ]; then
+    LANGUAGE_IDS+=("${folder##*/pages.}")
   fi
 done
 
-EXIT_CODE=0
-JOB_FAILED=false
-MAX_JOBS=$(nproc)
+MAX_JOBS=$(nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)
 JOBS_DIR=$(mktemp -d)
+RESULTS_DIR="$JOBS_DIR/results"
+mkdir -p "$RESULTS_DIR"
 trap 'rm -rf "$JOBS_DIR"' EXIT
+JOB_FAILED=false
+
+# Remove the results of a previous run.
+rm -rf ./check-pages ./check-pages.*
+for metric in "${METRICS[@]}"; do
+  rm -f "./${metric%%	*}.txt"
+done
 
 # Run a command as a named background job, with at most MAX_JOBS jobs at the same time.
 # Its output and exit code are stored, so they can be displayed together with the results.
@@ -83,133 +63,127 @@ display_job() {
   fi
 }
 
-# Run a Python script of the tldr repository in dry-run synchronization mode.
+# Run a script of the tldr repository in dry-run synchronization mode and write its output to a result.
 # The colors and the given text (with sed) are removed from its output.
-# shellcheck disable=SC2329 # Invoked by run_python_scripts.
-run_python_script() {
+# shellcheck disable=SC2329 # Invoked by run_tldr_scripts.
+run_tldr_sync_script() {
   local script_name="$1"
   local remove_text="$2"
   shift 2
 
-  ./tldr/scripts/"$script_name.py" -Sn "$@" | sed -e 's/\x1b\[[0-9;]*m//g' -e "$remove_text"
+  "$TLDR_ROOT_DIR/scripts/$script_name.py" -Sn "$@" | sed -e 's/\x1b\[[0-9;]*m//g' -e "$remove_text"
 }
 
+# Run the scripts of the tldr repository and write their results (used as source in metrics.tsv) to RESULTS_DIR.
 # shellcheck disable=SC2329 # Invoked with start_job.
-run_python_scripts() (
-  set -o pipefail
-  status=0
+run_tldr_scripts() {
+  local status=0
+  local pages_dirs wrong_filename_script
 
-  run_python_script "set-more-info-link" 's/ link would be.*$//' > "set-more-info-link.txt" || status=1
-  sort -u "set-more-info-link.txt" -o "set-more-info-link.txt"
+  run_tldr_sync_script "set-more-info-link" 's/ link would be.*$//' > "$RESULTS_DIR/set-more-info-link" || status=1
 
   # A missing "See also" mention would be "added", a malformed or outdated one would be "updated".
-  run_python_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/' > "set-see-also.txt" || status=1
-  sed -n 's/ added$//p' "set-see-also.txt" | sort -u > "set-see-also-added.txt"
-  sed '/ added$/d; s/ updated$//' "set-see-also.txt" | sort -u > "set-see-also-updated.txt"
+  run_tldr_sync_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/' > "$RESULTS_DIR/set-see-also" || status=1
+  sed -n 's/ added$//p' "$RESULTS_DIR/set-see-also" > "$RESULTS_DIR/set-see-also-added"
+  sed '/ added$/d; s/ updated$//' "$RESULTS_DIR/set-see-also" > "$RESULTS_DIR/set-see-also-updated"
 
-  run_python_script "set-alias-page" 's/ page would be.*$//' > "set-alias-page.txt" || status=1
-  run_python_script "set-alias-page" 's/ page would be.*$//' -i >> "set-alias-page.txt" || status=1
-  sort -u "set-alias-page.txt" -o "set-alias-page.txt"
+  {
+    run_tldr_sync_script "set-alias-page" 's/ page would be.*$//' &&
+      run_tldr_sync_script "set-alias-page" 's/ page would be.*$//' -i
+  } > "$RESULTS_DIR/set-alias-page" || status=1
 
-  run_python_script "set-page-title" 's/ title would be.*$//' > "set-page-title.txt" || status=1
-  sort -u "set-page-title.txt" -o "set-page-title.txt"
+  run_tldr_sync_script "set-page-title" 's/ title would be.*$//' > "$RESULTS_DIR/set-page-title" || status=1
 
-  # wrong-filename.py checks the pages in the current directory and writes its results to that directory.
-  # It also finds the English pages through the `pages.en` symlink, these duplicates are skipped.
-  rm -f "./tldr/inconsistent-filenames.txt"
-  if (cd ./tldr && ./scripts/wrong-filename.py); then
-    sed '/file: pages\.en\//d' "./tldr/inconsistent-filenames.txt" | sort -u > "inconsistent-filenames.txt"
-  else
-    status=1
-  fi
-  rm -f "./tldr/inconsistent-filenames.txt"
+  # wrong-filename.py checks the pages* folders in the current directory and writes its results there.
+  # Run it in a separate directory with links to the pages folders, so nothing is written to the tldr repository.
+  # The pages.en symlink is skipped, since it would check the English pages twice.
+  pages_dirs="$JOBS_DIR/pages-dirs"
+  mkdir -p "$pages_dirs"
+  for folder in "$TLDR_ROOT_DIR"/pages "${LANGUAGE_IDS[@]/#/$TLDR_ROOT_DIR/pages.}"; do
+    ln -s "$(realpath "$folder")" "$pages_dirs/${folder##*/}"
+  done
+  wrong_filename_script="$(realpath "$TLDR_ROOT_DIR/scripts/wrong-filename.py")"
+  (cd "$pages_dirs" && "$wrong_filename_script") || status=1
+  mv "$pages_dirs/inconsistent-filenames.txt" "$RESULTS_DIR/wrong-filename" || status=1
 
-  exit "$status"
-)
+  return "$status"
+}
 
-# Run the Python scripts and the checks for English and every language in parallel, the results are displayed below.
-folders=$(find ./tldr -type d -name "pages.*" | sort -u)
-start_job "python" run_python_scripts
-start_job "en" ./scripts/check-pages.sh -v
-for folder in $folders; do
-  start_job "${folder##*/pages.}" ./scripts/check-pages.sh -l "${folder##*/pages.}" -v
+start_job "tldr-scripts" run_tldr_scripts
+start_job "en" "$SCRIPTS_DIR/check-pages.sh" -v
+for language_id in "${LANGUAGE_IDS[@]}"; do
+  start_job "$language_id" "$SCRIPTS_DIR/check-pages.sh" -l "$language_id" -v
 done
+
+# Calculate the denominators of metrics.tsv while the jobs are running.
+total_pages=0
+total_non_english_pages=0
+total_pages_need_translation=0
+total_pages_need_see_also_mention=0
+total_tldr_references=0
+total_see_also_references=0
+
+mapfile -t english_pages < <(list_pages "$TLDR_ROOT_DIR/pages")
+# Only translated pages whose English page has a "See also" mention need a (translated) "See also" mention.
+mapfile -t english_pages_with_see_also_mention < <(list_pages_with_see_also_mention "${english_pages[@]}")
+
+for language_id in "" "${LANGUAGE_IDS[@]}"; do
+  folder="$TLDR_ROOT_DIR/pages${language_id:+.$language_id}"
+  see_also_prefix=$(get_see_also_prefix "${language_id:-en}")
+  mapfile -t pages < <(list_pages "$folder")
+
+  total_pages=$((total_pages + ${#pages[@]}))
+  # Every reference is counted once per page, like the results.
+  total_tldr_references=$((total_tldr_references + $(list_tldr_references "${pages[@]}" | sort -u | wc -l)))
+  total_see_also_references=$((total_see_also_references + $(list_see_also_references "$see_also_prefix" "${pages[@]}" | sort -u | wc -l)))
+
+  if [ -n "$language_id" ]; then
+    total_non_english_pages=$((total_non_english_pages + ${#pages[@]}))
+    total_pages_need_translation=$((total_pages_need_translation + ${#english_pages[@]}))
+
+    # set-see-also.py only checks languages with a translation template.
+    if [ -n "$see_also_prefix" ]; then
+      for page in "${english_pages_with_see_also_mention[@]}"; do
+        if [ -f "$folder${page#"$TLDR_ROOT_DIR/pages"}" ]; then
+          total_pages_need_see_also_mention=$((total_pages_need_see_also_mention + 1))
+        fi
+      done
+    fi
+  fi
+done
+
 wait
 
-count_and_display() {
-  local file="$1"
-  local message="$2"
-  local count
-  count=$(wc -l < "$file")
+# Display the number of results of every metric that applies to the language.
+display_language() {
+  local language_id="$1"
+  local output_dir="./check-pages${language_id:+.$language_id}"
+  local id languages source label
+  local output_file
 
-  echo "$count $message in ${file#./}."
-}
+  display_job "${language_id:-en}"
 
-grep_count_and_display() {
-  local grep_string="$1"
-  local input_file="$2"
-  local output_file="$3"
-  local message="$4"
+  for metric in "${METRICS[@]}"; do
+    IFS=$'\t' read -r id languages source _ _ label <<< "$metric"
+    if [ "$languages" != "all" ] && [ -z "$language_id" ]; then
+      continue
+    fi
 
-  if [ ! -e "$input_file" ]; then
-    return
-  fi
+    output_file="$output_dir/$id.txt"
+    if [ "$source" != "check-pages" ]; then
+      mkdir -p "$output_dir"
+      grep -F "pages${language_id:+.$language_id}/" "$RESULTS_DIR/$source" 2>/dev/null | sort -u > "$output_file"
+    fi
 
-  grep -F "$grep_string" "$input_file" > "$output_file"
-  count_and_display "$output_file" "$message"
-}
-
-printf "# Metrics for tldr\n\n"
-
-display_job "python"
-display_job "en"
-
-grep_count_and_display "pages/" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
-grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
-
-count_and_display "./check-pages/missing-tldr-pages.txt" "missing TLDR page(s)"
-count_and_display "./check-pages/missing-see-also-referenced-pages.txt" "missing see also page(s)"
-count_and_display "./check-pages/misplaced-pages.txt" "misplaced page(s)"
-count_and_display "./check-pages/lint-errors.txt" "linter error(s)"
-
-printf -- '_%.0s' {1..100}; echo
-
-for folder in $folders; do
-  folder_suffix="${folder##*/pages.}"
-
-  display_job "$folder_suffix"
-
-  grep_count_and_display "pages.$folder_suffix/" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
-  grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-or-outdated-more-info-link-$folder_suffix-pages.txt" "malformed or outdated more info link page(s)"
-  grep_count_and_display "pages.$folder_suffix/" "./set-see-also-updated.txt" "./check-pages.$folder_suffix/malformed-or-outdated-see-also-mentions-$folder_suffix-pages.txt" "malformed or outdated see also mention(s)"
-  grep_count_and_display "pages.$folder_suffix/" "./set-see-also-added.txt" "./check-pages.$folder_suffix/missing-see-also-mentions-$folder_suffix-pages.txt" "missing see also mention(s)"
-  grep_count_and_display "pages.$folder_suffix/" "./set-alias-page.txt" "./check-pages.$folder_suffix/missing-$folder_suffix-alias-pages.txt" "missing alias page(s)"
-  grep_count_and_display "pages.$folder_suffix/" "./set-page-title.txt" "./check-pages.$folder_suffix/mismatched-$folder_suffix-page-titles.txt" "mismatched page title(s)"
-
-  count_and_display "./check-pages.$folder_suffix/missing-tldr-$folder_suffix-pages.txt" "missing TLDR page(s)"
-  count_and_display "./check-pages.$folder_suffix/missing-see-also-referenced-$folder_suffix-pages.txt" "missing see also page(s)"
-  count_and_display "./check-pages.$folder_suffix/misplaced-$folder_suffix-pages.txt" "misplaced page(s)"
-  count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-count.txt" "outdated page(s) based on number of commands"
-  count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-command-contents.txt" "outdated page(s) based on the commands itself"
-  count_and_display "./check-pages.$folder_suffix/outdated-$folder_suffix-pages-based-on-header-line-count.txt" "outdated page(s) based on number of header lines"
-  count_and_display "./check-pages.$folder_suffix/missing-english-$folder_suffix-pages.txt" "missing English page(s)"
-  count_and_display "./check-pages.$folder_suffix/missing-translated-$folder_suffix-pages.txt" "missing translated page(s)"
-  count_and_display "./check-pages.$folder_suffix/lint-errors-$folder_suffix.txt" "linter error(s)"
+    if [ -f "$output_file" ]; then
+      echo "$(wc -l < "$output_file") $label in ${output_file#./}."
+    else
+      echo "Error: ${output_file#./} is missing." >&2
+      JOB_FAILED=true
+    fi
+  done
 
   printf -- '_%.0s' {1..100}; echo
-done
-
-rm -f "./set-more-info-link.txt" "./set-see-also.txt" "./set-see-also-added.txt" "./set-see-also-updated.txt" "./set-alias-page.txt" "./set-page-title.txt"
-
-merge_files_and_calculate_total() {
-  local files_pattern="$1"
-  local merge_file="$2"
-  local files
-
-  mapfile -t files < <(find ./check-pages* -type f -path "$files_pattern" | sort -u)
-  cat /dev/null "${files[@]}" | sort -u > "$merge_file"
-
-  wc -l < "$merge_file"
 }
 
 # Print the percentage with one decimal, rounded down so it only shows 100.0 when everything is affected.
@@ -224,48 +198,43 @@ calculate_percentage() {
   fi
 }
 
-calculate_and_display() {
-  local files_pattern="$1"
-  local output_file="$2"
+# Merge the results of all languages and display the total.
+display_total() {
+  local id="$1"
+  local denominator="$2"
+  local label="$3"
+  local results total
 
-  local total
-  total=$(merge_files_and_calculate_total "$files_pattern" "$output_file")
+  mapfile -t results < <(find ./check-pages ./check-pages.* -maxdepth 1 -type f -name "$id.txt" 2>/dev/null | sort)
+  cat /dev/null "${results[@]}" | sort -u > "./$id.txt"
+  total=$(wc -l < "./$id.txt")
 
-  if [ "$total" -gt 0 ]; then
-    EXIT_CODE=1
-  fi
-
-  if [ -n "$3" ]; then
-    local percentage
-    percentage=$(calculate_percentage "$total" "$3")
-    echo "Total $4: $total/$3 - $percentage%"
+  if [ "$denominator" = "-" ]; then
+    echo "Total $label: $total"
   else
-    echo "Total $4: $total"
+    echo "Total $label: $total/${!denominator} - $(calculate_percentage "$total" "${!denominator}")%"
   fi
 }
 
-calculate_and_display '*/check-pages*/inconsistent*filenames.txt' "./inconsistent-filenames.txt" "$total_pages" "inconsistent filename(s)"
-calculate_and_display '*/check-pages*/malformed-or-outdated-more-info-link*pages.txt' "./malformed-or-outdated-more-info-link-pages.txt" "$total_pages" "malformed or outdated more info link page(s)"
-calculate_and_display '*/check-pages*/malformed-or-outdated-see-also-mentions*pages.txt' "./malformed-or-outdated-see-also-mentions.txt" "$total_pages_need_see_also_mention" "malformed or outdated see also mention(s)"
-calculate_and_display '*/check-pages*/missing-see-also-mentions*pages.txt' "./missing-see-also-mentions.txt" "$total_pages_need_see_also_mention" "missing see also mention(s)"
-calculate_and_display '*/check-pages*/missing*alias-pages.txt' "./missing-alias-pages.txt" "" "missing alias page(s)"
-calculate_and_display '*/check-pages*/mismatched*page-titles.txt' "./mismatched-page-titles.txt" "$total_unique_non_english_pages" "mismatched page title(s)"
-calculate_and_display '*/check-pages*/missing-tldr*pages.txt' "./missing-tldr-pages.txt" "$total_tldr_pages" "missing TLDR page(s)"
-calculate_and_display '*/check-pages*/missing-see-also-referenced*pages.txt' "./missing-see-also-referenced-pages.txt" "$total_see_also_references" "missing see also page(s)"
-calculate_and_display '*/check-pages*/misplaced*pages.txt' "./misplaced-pages.txt" "$total_pages" "misplaced page(s)"
-calculate_and_display '*/check-pages*/outdated*pages-based-on-command-count.txt' "./outdated-pages-based-on-command-count.txt" "$total_non_english_pages" "outdated page(s) based on number of commands"
-calculate_and_display '*/check-pages*/outdated*pages-based-on-command-contents.txt' "./outdated-pages-based-on-command-contents.txt" "$total_non_english_pages" "outdated page(s) based on the commands itself"
-calculate_and_display '*/check-pages*/outdated*pages-based-on-header-line-count.txt' "./outdated-pages-based-on-header-line-count.txt" "$total_non_english_pages" "outdated page(s) based on number of header lines"
-calculate_and_display '*/check-pages*/missing-english*pages.txt' "./missing-english-pages.txt" "$total_unique_non_english_pages" "missing English page(s)"
-calculate_and_display '*/check-pages*/missing-translated*pages.txt' "./missing-translated-pages.txt" "$total_pages_need_translation" "missing translated page(s)"
-calculate_and_display '*/check-pages*/lint-errors*.txt' "./lint-errors.txt" "" "lint error(s)"
+printf "# Metrics for tldr\n\n"
 
-# Remove empty results, only in the directories this script writes to.
-find . -maxdepth 1 -type f -name "*.txt" -size 0 -delete
-find ./check-pages* -type f -name "*.txt" -size 0 -delete
+display_job "tldr-scripts"
+
+display_language ""
+for language_id in "${LANGUAGE_IDS[@]}"; do
+  display_language "$language_id"
+done
+
+for metric in "${METRICS[@]}"; do
+  IFS=$'\t' read -r id _ _ denominator _ label <<< "$metric"
+  display_total "$id" "$denominator" "$label"
+done
+
+# Remove empty results.
+for metric in "${METRICS[@]}"; do
+  find . ./check-pages ./check-pages.* -maxdepth 1 -type f -name "${metric%%	*}.txt" -size 0 -delete 2>/dev/null
+done
 
 if [ "$JOB_FAILED" = true ]; then
-  exit 2
+  exit 1
 fi
-
-exit $EXIT_CODE

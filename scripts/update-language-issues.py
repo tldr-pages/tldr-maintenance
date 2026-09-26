@@ -5,8 +5,9 @@ import os
 import sys
 
 from pathlib import Path
-from enum import Enum
 from _common import (
+    Metric,
+    get_metrics,
     get_tldr_root,
     get_check_pages_dir,
     get_locale,
@@ -15,76 +16,33 @@ from _common import (
     create_github_issue,
     get_github_issue,
     update_github_issue,
-    generate_github_link,
-    generate_github_edit_link,
-    generate_github_new_link,
-    generate_github_lint_link,
 )
 
 
-class Topics(str, Enum):
-    def __str__(self):
-        return str(
-            self.value
-        )  # make str(Topics.TOPIC) return the Topic instead of an Enum object
-
-    INCONSISTENT = "inconsistent filename(s)"
-    MALFORMED_OR_OUTDATED_MORE_INFO_LINK = (
-        "malformed or outdated more info link page(s)"
-    )
-    MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
-        "malformed or outdated see also mention(s)"
-    )
-    MISSING_SEE_ALSO_MENTIONS = "missing see also mention(s)"
-    ALIAS_PAGES = "missing alias page(s)"
-    PAGE_TITLES = "mismatched page title(s)"
-    MISSING_TLDR = "missing TLDR page(s)"
-    MISSING_SEE_ALSO_REFERENCED = "missing see also page(s)"
-    MISPLACED = "misplaced page(s)"
-    BASED_ON_COMMAND_COUNT = "outdated page(s) based on number of commands"
-    BASED_ON_COMMAND_CONTENTS = "outdated page(s) based on the commands itself"
-    BASED_ON_HEADER_LINE_COUNT = "outdated page(s) based on number of header lines"
-    MISSING_ENGLISH = "missing English page(s)"
-    MISSING_TRANSLATED = "missing translated page(s)"
-    LINT_ERRORS = "linter error(s)"
-
-
-def parse_file(filepath):
+def parse_file(filepath: Path) -> list[str]:
     with filepath.open(encoding="utf-8") as file:
         content = file.read().strip()
         return content.split("\n") if content else []
 
 
-def parse_language_directory(directory):
-    topics = [
-        "inconsistent",
-        "malformed-or-outdated-more-info-link",
-        "malformed-or-outdated-see-also-mentions",
-        "missing-see-also-mentions",
-        "alias-pages",
-        "page-titles",
-        "missing-tldr",
-        "missing-see-also-referenced",
-        "misplaced",
-        "based-on-command-count",
-        "based-on-command-contents",
-        "based-on-header-line-count",
-        "missing-english",
-        "missing-translated",
-        "lint-errors",
-    ]
-    lang_data = {topic: [] for topic in topics}
+def parse_language_directory(
+    directory: Path, locale: str, metrics: list[Metric]
+) -> dict[Metric, list[str]]:
+    """
+    Get the results of every metric that applies to the language, from check-pages[.<language>]/<metric>.txt.
+    """
 
-    for topic in topics:
-        topic_files = [f for f in Path(directory).iterdir() if topic in f.name]
-        for file in topic_files:
-            filepath = Path(directory) / file
-            lang_data[topic].extend(parse_file(filepath))
+    lang_data = {}
+    for metric in metrics:
+        if not metric.applies_to(locale):
+            continue
+        filepath = Path(directory) / metric.file_name
+        lang_data[metric] = parse_file(filepath) if filepath.is_file() else []
 
     return lang_data
 
 
-def generate_markdown_for_language(language, data):
+def generate_markdown_for_language(language: str, data: dict[Metric, list[str]]) -> str:
     markdown = f"## {language} language Issues\n"
     markdown += "<!-- __NOUPDATE__ -->\n"
     markdown += f"**Last updated:** {get_datetime_pretty()}\n"
@@ -92,30 +50,16 @@ def generate_markdown_for_language(language, data):
 
     has_issues = False
 
-    for topic, items in data.items():
-        title = topic.replace("-", "_").upper()
-        topic_title = getattr(Topics, title).value
+    for metric, items in data.items():
         number_of_items = len(items)
         if number_of_items >= 1000:
             has_issues = True
-            markdown += f"\n{number_of_items} {topic_title}\n\n"
+            markdown += f"\n{number_of_items} {metric.label}\n\n"
         elif items:
             has_issues = True
-            markdown += (
-                f"\n<details>\n  <summary>{number_of_items} {topic_title}</summary>\n\n"
-            )
+            markdown += f"\n<details>\n  <summary>{number_of_items} {metric.label}</summary>\n\n"
             for item in items:
-                match topic:
-                    case "inconsistent":
-                        markdown += f"- {item}\n"
-                    case "alias-pages":
-                        markdown += f"- {generate_github_new_link(item)}\n"
-                    case "missing-tldr" | "missing-see-also-referenced":
-                        markdown += f"- {generate_github_link(item)}\n"
-                    case "lint-errors":
-                        markdown += f"- {generate_github_lint_link(item)}\n"
-                    case _:
-                        markdown += f"- {generate_github_edit_link(item)}\n"
+                markdown += f"- {metric.format_result(item)}\n"
             markdown += "</details>\n"
 
     if not has_issues:
@@ -132,6 +76,7 @@ def main():
     ):
         root = get_tldr_root()
         check_pages_dir = get_check_pages_dir(root)
+        metrics = get_metrics()
 
         for lang_dir in check_pages_dir:
             locale = get_locale(lang_dir)
@@ -146,7 +91,7 @@ def main():
 
             markdown_content = f"# {title}\n\n"
 
-            lang_data = parse_language_directory(lang_dir)
+            lang_data = parse_language_directory(lang_dir, locale, metrics)
             markdown_content += generate_markdown_for_language(locale, lang_data)
 
             if strip_dynamic_content(markdown_content) == strip_dynamic_content(

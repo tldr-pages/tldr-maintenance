@@ -6,190 +6,73 @@ import re
 import sys
 
 from pathlib import Path
-from enum import Enum
 from _common import (
+    Metric,
+    get_metrics,
     get_datetime_pretty,
     strip_dynamic_content,
     get_github_issue,
     update_github_issue,
-    generate_github_link,
-    generate_github_edit_link,
-    generate_github_new_link,
-    generate_github_lint_link,
 )
 
-
-class Topics(str, Enum):
-    def __str__(self):
-        return str(
-            self.value
-        )  # make str(Topics.TOPIC) return the Topic instead of an Enum object
-
-    INCONSISTENT_FILENAMES = "inconsistent filename(s)"
-    MALFORMED_OR_OUTDATED_MORE_INFO_LINK_PAGES = (
-        "malformed or outdated more info link page(s)"
-    )
-    MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
-        "malformed or outdated see also mention(s)"
-    )
-    MISSING_SEE_ALSO_MENTIONS = "missing see also mention(s)"
-    MISSING_ALIAS_PAGES = "missing alias page(s)"
-    MISMATCHED_PAGE_TITLES = "mismatched page title(s)"
-    MISSING_TLDR_PAGES = "missing TLDR page(s)"
-    MISSING_SEE_ALSO_REFERENCED_PAGES = "missing see also page(s)"
-    MISPLACED_PAGES = "misplaced page(s)"
-    OUTDATED_PAGES_BASED_ON_COMMAND_COUNT = (
-        "outdated page(s) based on number of commands"
-    )
-    OUTDATED_PAGES_BASED_ON_COMMAND_CONTENTS = (
-        "outdated page(s) based on the commands itself"
-    )
-    OUTDATED_PAGES_BASED_ON_HEADER_LINE_COUNT = (
-        "outdated page(s) based on number of header lines"
-    )
-    MISSING_ENGLISH_PAGES = "missing English page(s)"
-    MISSING_TRANSLATED_PAGES = "missing translated page(s)"
-    LINT_ERRORS = "linter error(s)"
+RELEASE_URL = "https://github.com/tldr-pages/tldr-maintenance/releases/download/latest"
 
 
-def parse_log_file(path: Path) -> dict:
+def parse_log_file(path: Path, metrics: list[Metric]) -> dict:
+    """
+    Parse the totals and the number of results per language from the output of calculate-metrics.sh.
+    """
+
     data = {"overview": {}, "metrics": {}, "details": {}}
-    overview_patterns = {
-        "Total inconsistent filenames": r"Total inconsistent filename\(s\): (.+)",
-        "Total malformed or outdated more info link pages": r"Total malformed or outdated more info link page\(s\): (.+)",
-        "Total malformed or outdated see also's": r"Total malformed or outdated see also mention\(s\): (.+)",
-        "Total missing see also's": r"Total missing see also mention\(s\): (.+)",
-        "Total missing alias pages": r"Total missing alias page\(s\): (.+)",
-        "Total mismatched page titles": r"Total mismatched page title\(s\): (.+)",
-        "Total missing TLDR pages": r"Total missing TLDR page\(s\): (.+)",
-        "Total missing see also pages": r"Total missing see also page\(s\): (.+)",
-        "Total misplaced pages": r"Total misplaced page\(s\): (.+)",
-        "Total outdated pages (based on number of commands)": r"Total outdated page\(s\) based on number of commands: (.+)",
-        "Total outdated pages (based on the commands itself)": r"Total outdated page\(s\) based on the commands itself: (.+)",
-        "Total outdated pages (based on number of header lines)": r"Total outdated page\(s\) based on number of header lines: (.+)",
-        "Total missing English pages": r"Total missing English page\(s\): (.+)",
-        "Total missing translated pages": r"Total missing translated page\(s\): (.+)",
-        "Total linter errors": r"Total lint error\(s\): (.+)",
-    }
-
-    detail_patterns = {
-        "inconsistent filename(s)": r"(\d+) inconsistent filename",
-        "malformed or outdated more info link page(s)": r"(\d+) malformed or outdated more info link",
-        "malformed or outdated see also mention(s)": r"(\d+) malformed or outdated see also",
-        "missing see also mention(s)": r"(\d+) missing see also mention",
-        "missing alias page(s)": r"(\d+) missing alias",
-        "mismatched page title(s)": r"(\d+) mismatched page title",
-        "missing TLDR page(s)": r"(\d+) missing TLDR",
-        "missing see also page(s)": r"(\d+) missing see also page",
-        "misplaced page(s)": r"(\d+) misplaced page",
-        "outdated pages (based on number of commands)": r"(\d+) outdated page\(s\) based on number of commands",
-        "outdated pages (based on the commands itself)": r"(\d+) outdated page\(s\) based on the commands itself",
-        "outdated pages (based on the number of header lines)": r"(\d+) outdated page\(s\) based on number of header lines",
-        "missing English page(s)": r"(\d+) missing English",
-        "missing translated page(s)": r"(\d+) missing translated",
-        "linter error(s)": r"(\d+) linter error",
-    }
 
     with path.open(encoding="utf-8") as f:
-        lines = f.readlines()
+        lines = f.read().splitlines()
 
-    process_overview(lines, overview_patterns, data)
-    process_language_details(lines, detail_patterns, data)
+    patterns = [
+        (
+            metric,
+            re.compile(rf"^Total {re.escape(metric.label)}: (.+)$"),
+            re.compile(rf"^(\d+) {re.escape(metric.label)} in check-pages\.(\w+)/"),
+        )
+        for metric in metrics
+    ]
+
+    for line in lines:
+        for metric, total_pattern, detail_pattern in patterns:
+            if match := total_pattern.match(line):
+                data["overview"][f"Total {metric.label}"] = match.group(1).strip()
+            elif (match := detail_pattern.match(line)) and int(match.group(1)) > 0:
+                count, language = match.groups()
+                data["details"].setdefault(language, {})[metric.label] = int(count)
 
     return data
 
 
-def process_overview(lines, patterns, data):
-    for line in lines:
-        for key, pattern in patterns.items():
-            match = re.search(pattern, line)
-            if match:
-                data["overview"][key] = match.group(1).strip()
+def parse_result_files(data: dict, metrics: list[Metric]) -> dict:
+    """
+    Add the total results of every metric (the <metric>.txt files written by calculate-metrics.sh).
+    """
 
-
-def process_language_details(lines, patterns, data):
-    current_language = None
-    for line in lines:
-        current_language = update_current_language(line, current_language, data)
-        if current_language:
-            add_language_details(line, patterns, current_language, data)
-
-
-def update_current_language(line, current_language, data):
-    if line.startswith("-" * 100):
-        return None
-    match = re.match(r"^\d+.+in check-pages\.(\w+)/", line)
-    if match:
-        new_language = match.group(1)
-        if new_language not in data["details"]:
-            data["details"][new_language] = {}
-        return new_language
-    return current_language
-
-
-def add_language_details(line, patterns, current_language, data):
-    for key, pattern in patterns.items():
-        match = re.search(pattern, line)
-        if match and int(match.group(1)) > 0:
-            data["details"][current_language][key] = int(match.group(1))
-
-
-def parse_seperate_text_files(data):
-    for file in [
-        Path("inconsistent-filenames.txt"),
-        Path("malformed-or-outdated-more-info-link-pages.txt"),
-        Path("malformed-or-outdated-see-also-mentions.txt"),
-        Path("missing-see-also-mentions.txt"),
-        Path("missing-alias-pages.txt"),
-        Path("mismatched-page-titles.txt"),
-        Path("missing-tldr-pages.txt"),
-        Path("missing-see-also-referenced-pages.txt"),
-        Path("misplaced-pages.txt"),
-        Path("outdated-pages-based-on-command-count.txt"),
-        Path("outdated-pages-based-on-command-contents.txt"),
-        Path("outdated-pages-based-on-header-line-count.txt"),
-        Path("missing-english-pages.txt"),
-        Path("missing-translated-pages.txt"),
-        Path("lint-errors.txt"),
-    ]:
+    for metric in metrics:
+        file = Path(metric.file_name)
         if not file.is_file():
             continue
-        topic_name = file.name.replace(".txt", "").replace("-", "_")
-        if hasattr(Topics, topic_name.upper()):
-            topic = getattr(Topics, topic_name.upper()).value
-            if topic:
-                with file.open(encoding="utf-8") as f:
-                    lines = f.readlines()
-                    add_metric_details(lines, data, topic_name, topic, file.name)
+
+        with file.open(encoding="utf-8") as f:
+            lines = f.read().splitlines()
+
+        data["metrics"][metric.label] = {
+            "count": len(lines),
+            # Only list the results when there aren't too many.
+            "files": (
+                [metric.format_result(line) for line in lines]
+                if len(lines) <= 100
+                else []
+            ),
+            "url": f"{RELEASE_URL}/{metric.file_name}",
+        }
+
     return data
-
-
-def add_metric_details(lines, data, topic_name, topic, file_name):
-    data["metrics"][topic] = {
-        "count": len(lines),
-        "files": [],
-        "url": f"https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/{file_name}",
-    }
-    if len(lines) <= 100:
-        match topic_name:
-            case "inconsistent_filenames":
-                data["metrics"][topic]["files"] = [f"{line.strip()}" for line in lines]
-            case "missing_alias_pages":
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_new_link(line.strip())}" for line in lines
-                ]
-            case "missing_tldr_pages" | "missing_see_also_referenced_pages":
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_link(line.strip())}" for line in lines
-                ]
-            case "lint_errors":
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_lint_link(line.strip())}" for line in lines
-                ]
-            case _:
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_edit_link(line.strip())}" for line in lines
-                ]
 
 
 def generate_dashboard(data):
@@ -263,8 +146,9 @@ def main():
             print(f"{issue_title}-issue not found.", file=sys.stderr)
             sys.exit(0)
 
-        parsed_data = parse_log_file(log_file_path)
-        parsed_data = parse_seperate_text_files(parsed_data)
+        metrics = get_metrics()
+        parsed_data = parse_log_file(log_file_path, metrics)
+        parsed_data = parse_result_files(parsed_data, metrics)
 
         markdown_content = generate_dashboard(parsed_data)
 
