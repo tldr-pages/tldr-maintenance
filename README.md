@@ -92,3 +92,18 @@ For every owner it looks up the last review, the last authored PR, the last comm
 
 The report also lists the paths that would be left without any active owner. The periods can be changed with `--inactive-days`, `--stale-days` and `--stale-threshold`, and `--only-flagged` hides the owners without findings.
 The write access check needs a token with push access to tldr-pages/tldr, otherwise it shows `unknown`.
+
+### Maintainers
+
+[`check-maintainers.py`](scripts/check-maintainers.py) compares the current (bold) entries in [MAINTAINERS.md](https://github.com/tldr-pages/tldr/blob/main/MAINTAINERS.md) with the actual roles on GitHub.
+It runs once a month (see the [workflow](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/check-maintainers.yml) summary) or locally:
+
+```sh
+GITHUB_TOKEN=... npm run --silent check-maintainers > maintainers-report.md
+```
+
+- 🔴 **fix**: the role on GitHub differs from MAINTAINERS.md, someone has a role without being listed, or two-factor authentication is disabled.
+- 🟡 **check**: the organization membership isn't public, which the [community roles](https://github.com/tldr-pages/tldr/blob/main/COMMUNITY-ROLES.md) require.
+
+Private members, outside collaborators and the two-factor authentication status are only visible to organization owners.
+The workflow uses the `MAINTAINERS_TOKEN` secret when it's set (a token of an organization owner), and otherwise reports those roles as unknown.
