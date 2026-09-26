@@ -10,6 +10,7 @@ on:
       - scripts/*.sh
       - scripts/*.py
       - '!scripts/sort-lychee-output.py'
+      - '!scripts/check-*.py'
 
 jobs:
   calculate-metrics:
