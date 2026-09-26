@@ -44,10 +44,12 @@ list_metrics() {
       if (NF != 6) fail("expected 6 columns separated by a tab")
       for (i = 1; i <= 6; i++) if ($i == "") fail("column " i " is empty")
       if ($1 in ids) fail("duplicate id " $1)
+      if ($6 in labels) fail("duplicate label " $6)
       if (!($2 in valid_languages)) fail("invalid languages " $2)
       if (!($4 in valid_denominator)) fail("invalid denominator " $4)
       if (!($5 in valid_link)) fail("invalid link " $5)
       ids[$1]
+      labels[$6]
       count++
       print
     }

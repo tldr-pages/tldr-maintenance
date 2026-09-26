@@ -94,6 +94,8 @@ def get_metrics(path: Path = METRICS_FILE) -> list[Metric]:
             metric = Metric(*columns)
             if any(metric.id == other.id for other in metrics):
                 raise ValueError(f"{location}: duplicate id {metric.id}")
+            if any(metric.label == other.label for other in metrics):
+                raise ValueError(f"{location}: duplicate label {metric.label}")
             if metric.languages not in ("all", "translations"):
                 raise ValueError(f"{location}: invalid languages {metric.languages}")
             if metric.denominator not in (*TOTAL_NAMES, "-"):

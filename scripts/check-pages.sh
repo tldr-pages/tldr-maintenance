@@ -59,6 +59,10 @@ while getopts ":l:c:v" opt; do
     ;;
   esac
 done
+shift $((OPTIND - 1))
+if [ "$#" -gt 0 ]; then
+  usage
+fi
 
 # pages.en is a symlink to the English pages.
 if [ "$LANGUAGE_ID" = "en" ]; then
@@ -143,7 +147,7 @@ list_pages "$FOLDER_PATH" > "$PAGES_FILE" || exit 1
 list_pages "$TLDR_ROOT_DIR/pages" > "$ENGLISH_PAGES_FILE" || exit 1
 mapfile -t files < "$PAGES_FILE"
 mapfile -t english_files < "$ENGLISH_PAGES_FILE"
-SEE_ALSO_PREFIX=$(get_see_also_prefix "${LANGUAGE_ID:-en}")
+SEE_ALSO_PREFIX=$(get_see_also_prefix "${LANGUAGE_ID:-en}") || exit 1
 
 # Node.js warnings (e.g. deprecations) would end up between the lint errors.
 export NODE_NO_WARNINGS=1
@@ -460,6 +464,13 @@ for check in "${checks[@]}" write_totals; do
   if ! "$check"; then
     echo "$check failed for $FOLDER_PATH." >&2
     status=1
+    # Remove the (partial) results of the metrics of the check, so they aren't mistaken for complete results.
+    for id in "${!OUTPUT_FILE[@]}"; do
+      if [ "${CHECK_OF[$id]}" = "$check" ]; then
+        rm -f "${OUTPUT_FILE[$id]}"
+        unset "OUTPUT_FILE[$id]"
+      fi
+    done
   fi
 done
 

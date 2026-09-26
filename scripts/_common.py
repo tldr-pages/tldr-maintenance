@@ -130,7 +130,8 @@ def github_request(
             ):
                 if last_attempt:
                     break
-                wait = int(error.headers.get("Retry-After") or 0)
+                retry_after = error.headers.get("Retry-After") or ""
+                wait = int(retry_after) if retry_after.isdigit() else 0
                 if not wait:
                     reset = int(error.headers.get("X-RateLimit-Reset", time.time()))
                     wait = max(reset - int(time.time()), 0) + 1
@@ -145,7 +146,11 @@ def github_request(
                 )
                 time.sleep(2**attempt)
                 continue
-            return error.code, decode_json(error.read())
+            try:
+                body = error.read()
+            except (OSError, http.client.HTTPException):
+                body = b""
+            return error.code, decode_json(body)
         except (OSError, http.client.HTTPException) as error:
             # Network errors (urllib.error.URLError is an OSError), timeouts and broken responses.
             if method == "POST" or last_attempt:
@@ -174,7 +179,7 @@ def github_paginate(
         status, data = github_request(
             path, {**(params or {}), "per_page": 100, "page": page}
         )
-        if status != 200:
+        if status != 200 or not isinstance(data, list):
             if required:
                 raise GitHubError(f"GET {path} failed with {status}: {data}")
             return None

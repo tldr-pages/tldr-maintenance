@@ -62,8 +62,28 @@ done
 MAX_JOBS=$(nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 2)
 JOBS_DIR=$(mktemp -d) || exit 1
 trap 'rm -rf "$JOBS_DIR"' EXIT
-# Stop the background jobs when the script is interrupted.
-trap 'kill $(jobs -p) 2>/dev/null; exit 130' INT TERM
+# Stop a process and all its descendants.
+kill_tree() {
+  local child
+
+  for child in $(pgrep -P "$1"); do
+    kill_tree "$child"
+  done
+  kill -TERM "$1" 2>/dev/null
+}
+
+# Stop the background jobs (with their checks and linters) when the script is interrupted.
+stop_jobs() {
+  local pid
+
+  trap '' INT TERM
+  for pid in $(jobs -p); do
+    kill_tree "$pid"
+  done
+  exit "$1"
+}
+trap 'stop_jobs 130' INT
+trap 'stop_jobs 143' TERM
 RESULTS_DIR="$JOBS_DIR/results"
 mkdir -p "$RESULTS_DIR" || exit 1
 JOB_FAILED=false
@@ -171,9 +191,7 @@ done
 start_job "en" "$SCRIPTS_DIR/check-pages.sh"
 for language_id in "${LANGUAGE_IDS[@]}"; do
   echo "$(find "$TLDR_ROOT_DIR/pages.$language_id" -type f -name "*.md" | wc -l) $language_id"
-done | sort -rn | while read -r _ language_id; do
-  echo "$language_id"
-done > "$JOBS_DIR/language-order"
+done | sort -rn | cut -d " " -f 2 > "$JOBS_DIR/language-order"
 while read -r language_id; do
   start_job "$language_id" "$SCRIPTS_DIR/check-pages.sh" -l "$language_id"
 done < "$JOBS_DIR/language-order"
@@ -283,17 +301,15 @@ display_total() {
   local label="$5"
   local dirs results=() total dir denominator_total percentage
 
-  if [ "$source" != "check-pages" ] && [ ! -f "$RESULTS_DIR/$source" ]; then
-    echo "Total $label: not calculated, since $source failed."
-    printf 'total\t%s\t-\t-\t-\n' "$id" >> ./summary.tsv
-    return
-  fi
-
   mapfile -t dirs < <(list_result_dirs "$languages")
   for dir in "${dirs[@]}"; do
-    if [ -f "$dir/$id.txt" ]; then
-      results+=("$dir/$id.txt")
+    if [ ! -f "$dir/$id.txt" ]; then
+      # The job that should have written the results failed, which is already reported.
+      echo "Total $label: not calculated, since $source failed."
+      printf 'total\t%s\t-\t-\t-\n' "$id" >> ./summary.tsv
+      return
     fi
+    results+=("$dir/$id.txt")
   done
   cat /dev/null "${results[@]}" | sort -u > "./$id.txt"
   total=$(wc -l < "./$id.txt")

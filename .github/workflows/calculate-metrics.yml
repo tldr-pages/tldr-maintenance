@@ -11,6 +11,9 @@ on:
       - scripts/*.sh
       - scripts/*.py
       - scripts/metrics.tsv
+      # The linters.
+      - package.json
+      - package-lock.json
       - '!scripts/sort-lychee-output.py'
 
 jobs:
