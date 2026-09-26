@@ -1,0 +1,47 @@
+name: Check CODEOWNERS activity
+
+on:
+  workflow_dispatch:
+    inputs:
+      inactive-days:
+        description: 'Days without activity before an owner is flagged'
+        default: '182'
+      stale-days:
+        description: 'Days before a pending review request counts as stale'
+        default: '10'
+  schedule:
+    - cron: '0 0 1 * *' # once a month
+
+permissions:
+  contents: read
+
+jobs:
+  check-codeowners:
+    runs-on: ubuntu-latest
+
+    name: Check CODEOWNERS activity
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Generate the report
+        run: |
+          npm run --silent check-codeowners -- \
+            --inactive-days "${{ inputs.inactive-days || '182' }}" \
+            --stale-days "${{ inputs.stale-days || '10' }}" \
+            > codeowners-report.md
+          cat codeowners-report.md >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload the report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: codeowners-report
+          path: codeowners-report.md

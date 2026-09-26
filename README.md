@@ -69,3 +69,26 @@ This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-m
 After a [workflow run](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/calculate-metrics.yml) an artifact is created.
 This artifact can be downloaded and viewed to see the exact output per language per metric to see which page needs attention.
 A summary can also be downloaded at the [latest GitHub Release](https://github.com/tldr-pages/tldr-maintenance/releases/tag/latest).
+
+## Maintainer scripts
+
+### CODEOWNERS activity
+
+[`check-codeowners.py`](scripts/check-codeowners.py) reports [CODEOWNERS](https://github.com/tldr-pages/tldr/blob/main/.github/CODEOWNERS) who may no longer be active reviewers,
+so PRs don't wait on review requests that won't be answered. It runs once a month (see the [workflow](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/check-codeowners.yml) summary) or locally:
+
+```sh
+GITHUB_TOKEN=... npm run --silent check-codeowners > codeowners-report.md
+```
+
+Without `GITHUB_TOKEN`, the token of the [GitHub CLI](https://cli.github.com/) (`gh auth login`) is used. Options are passed after `--`, e.g. `npm run check-codeowners -- --inactive-days 90`.
+
+For every owner it looks up the last review, the last authored PR, the last comment and the open review requests in the tldr repository:
+
+- 🔴 **remove**: the account no longer exists, has no write access (GitHub ignores such owners), or has had no activity for over 6 months,
+  the same period used for [relieving inactive organization members](https://github.com/tldr-pages/tldr/blob/main/COMMUNITY-ROLES.md#when-to-change-roles).
+- 🟡 **check**: no reviews for over 6 months while otherwise active, or 3 or more review requests pending for over 10 days,
+  the CODEOWNERS fallback in the [maintainer's guide](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/maintainers-guide.md#ii-handling-prs).
+
+The report also lists the paths that would be left without any active owner. The periods can be changed with `--inactive-days`, `--stale-days` and `--stale-threshold`, and `--only-flagged` hides the owners without findings.
+The write access check needs a token with push access to tldr-pages/tldr, otherwise it shows `unknown`.
