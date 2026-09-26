@@ -24,10 +24,6 @@
 ROOT_DIR="${TLDR_ROOT:-./tldr}"
 PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows" "cisco-ios" "dos")
 
-# shellcheck disable=SC2016
-HEADER_REGEX='^>.*$'
-# shellcheck disable=SC2016
-COMMAND_REGEX='^`[^`]\+`$'
 CHECK_NAMES="missing_tldr_page,missing_see_also_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint"
 VERBOSE=false
 
@@ -91,188 +87,197 @@ if [ ! -e "$folder_path" ]; then
   exit 1
 fi
 
-get_english_file() {
-  local file="$1"
+# The checks below avoid starting processes per page, since a folder can contain thousands of pages.
+# Instead, external tools (awk, sed) process all pages at once and Bash only loops over their output.
 
-  echo "./tldr/pages${file#./tldr/pages."$LANGUAGE_ID"}"
+has_check() {
+  [[ " ${CHECK_NAMES[*]} " == *" $1 "* ]]
 }
 
-get_translated_file() {
-  local file="$1"
+page_exists() {
+  local filename="$1"
 
-  echo "./tldr/pages.$LANGUAGE_ID${file#./tldr/pages}"
+  for platform in "${PLATFORMS[@]}"; do
+    if [ -f "$folder_path/$platform/$filename.md" ]; then
+      return 0
+    fi
+  done
+
+  return 1
 }
 
-get_platform() {
-  local file="$1"
+check_missing_tldr_pages() {
+  local file line command
 
-  echo "$file" | awk -F/ '{print $(NF-1)}'
-}
-
-get_filepath_without_tldr() {
-  local file="$1"
-
-  echo "${file#./tldr/}"
-}
-
-count_commands() {
-  local file="$1"
-
-  grep -c "$COMMAND_REGEX" "$file"
-}
-
-count_header() {
-  local file="$1"
-
-  grep -c "$HEADER_REGEX" "$file"
-}
-
-strip_commands() {
-  local file="$1"
-
-  local stripped_commands=()
-
-  mapfile -t stripped_commands < <(
-    grep "$COMMAND_REGEX" "$file" |
-    sed 's/{{\[\([^|]*|[^]]*\)\]}}/___\1___/g' |
-    sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' |
-    sed 's/<[^>]*>//g' |
-    sed 's/([^)]*)//g' |
-    sed 's/"[^"]*"/""/g' |
-    sed "s/'[^']*'//g" |
-    sed 's/`//g' |
-    sed 's/___\(.*\)___/{{\[\1\]}}/g'
-  )
-
-  printf "%s\n" "${stripped_commands[*]}"
-}
-
-check_missing_tldr_page() {
-  local file="$1"
-
-  while IFS= read -r line; do
+  # shellcheck disable=SC2016
+  while IFS=$'\t' read -r file line; do
     line="${line#\`tldr }" # Remove "`tldr " prefix
-    line="${line%\`}"    # Remove the last backtick
+    line="${line%\`}"      # Remove the last backtick
 
-    command=$(echo "$line" | sed -E 's/(.*) -[^ ] [^ ]+/\1/')    # Strip off "-p linux" from "wget -p common".
-    command=$(echo "$command" | sed -E 's/-[^ ] [^ ]+ (.*)/\1/') # Strip off "-p linux" from "-p linux awk".
+    command="$line"
+    # Strip off "-p linux" from "wget -p common".
+    if [[ $command =~ (.*)\ -[^\ ]\ [^\ ]+ ]]; then
+      command="${BASH_REMATCH[1]}${command:${#BASH_REMATCH[0]}}"
+    fi
+    # Strip off "-p linux" from "-p linux awk".
+    if [[ $command =~ -[^\ ]\ [^\ ]+\ (.*) ]]; then
+      command="${command:0:${#command}-${#BASH_REMATCH[0]}}${BASH_REMATCH[1]}"
+    fi
     command="${command// /-}"
 
     if ! [[ $command =~ ^-[^[:space:]] ]] && ! [[ $command =~ \{\{.*\}\} ]]; then # Exclude -p / -u / -o (tldr -u) commands and {{commands}}.
-      local missing=true
-      local filename="${command,,}"
-      for platform in "${PLATFORMS[@]}"; do
-        if [ -f "$folder_path/$platform/$filename.md" ]; then
-          missing=false
-          break
-        fi
-      done
-
-      if [ "$missing" = true ]; then
-        local filepath
-        filepath=$(get_filepath_without_tldr "$file")
-
-        echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_TLDR_OUTPUT_FILE"
+      if ! page_exists "${command,,}"; then
+        echo "$command does not exist yet! Command referenced in ${file#./tldr/}" >> "$MISSING_TLDR_OUTPUT_FILE"
       fi
+    fi
+  done < <(awk 'match($0, /`tldr .*`$/) { print FILENAME "\t" substr($0, RSTART, RLENGTH) }' "${files[@]}")
+}
+
+check_missing_see_also_pages() {
+  local file line command
+
+  # Only the first "See also" line of a page is checked.
+  # shellcheck disable=SC2016
+  while IFS=$'\t' read -r file line; do
+    while [[ $line =~ \`([^\`]*)\` ]]; do
+      line="${line#*"${BASH_REMATCH[0]}"}"
+      command="${BASH_REMATCH[1]// /-}"
+
+      if [ -n "$command" ] && ! page_exists "${command,,}"; then
+        echo "$command does not exist yet! Command referenced in ${file#./tldr/}" >> "$MISSING_SEE_ALSO_OUTPUT_FILE"
+      fi
+    done
+  done < <(awk -v prefix="$see_also_prefix" 'index($0, prefix) == 1 && !(FILENAME in seen) { seen[FILENAME]; print FILENAME "\t" $0 }' "${files[@]}")
+}
+
+check_misplaced_pages() {
+  local file platform
+
+  for file in "${files[@]}"; do
+    platform="${file%/*}"
+    platform="${platform##*/}"
+
+    if [[ ! " ${PLATFORMS[*]} " =~ $platform ]]; then
+      echo "${file#./tldr/}" >> "$MISPLACED_OUTPUT_FILE"
     fi
   done
 }
 
-check_missing_see_also_page() {
-  local file="$1"
-  local line
-  read -r line
-  if [ "$line" = "" ]; then
+# For every given page, print a line with \001 followed by the index of the page (starting at 1),
+# a line with \002 for every header line and every command, stripped from placeholders, strings, etc.
+strip_commands() {
+  # shellcheck disable=SC2016
+  awk '
+    BEGIN { for (i = 1; i < ARGC; i++) index_of[ARGV[i]] = i }
+    FNR == 1 { print "\001" index_of[FILENAME] }
+    /^>/ { print "\002" }
+    /^`[^`]+`$/ { print }
+  ' "$@" |
+    sed 's/{{\[\([^|]*|[^]]*\)\]}}/___\1___/g' |
+    sed -E 's/\{\{([^}]|(\{[^}]*\}))*\}\}/{{}}/g' |
+    sed -e 's/<[^>]*>//g' \
+      -e 's/([^)]*)//g' \
+      -e 's/"[^"]*"/""/g' \
+      -e "s/'[^']*'//g" \
+      -e 's/`//g' \
+      -e 's/___\(.*\)___/{{\[\1\]}}/g'
+}
+
+# Fill command_counts, header_counts and commands_as_string for all given pages.
+declare -A command_counts header_counts commands_as_string
+load_commands() {
+  local pages=("$@")
+  local line page="" commands=0 headers=0 as_string=""
+
+  store_commands() {
+    if [ -n "$page" ]; then
+      command_counts["$page"]=$commands
+      header_counts["$page"]=$headers
+      commands_as_string["$page"]=$as_string
+    fi
+  }
+
+  while IFS= read -r line; do
+    case "$line" in
+      $'\001'*)
+        store_commands
+        page="${pages[${line#?} - 1]}"
+        commands=0
+        headers=0
+        as_string=""
+        ;;
+      $'\002')
+        headers=$((headers + 1))
+        ;;
+      *)
+        if [ "$commands" -eq 0 ]; then
+          as_string="$line"
+        else
+          as_string+=" $line"
+        fi
+        commands=$((commands + 1))
+        ;;
+    esac
+  done < <(strip_commands "${pages[@]}")
+  store_commands
+}
+
+check_outdated_pages() {
+  local file english_file filepath
+  local pages=()
+
+  for file in "${files[@]}"; do
+    english_file="./tldr/pages${file#./tldr/pages."$LANGUAGE_ID"}"
+    if [ -f "$english_file" ]; then
+      pages+=("$file" "$english_file")
+    fi
+  done
+
+  if [ "${#pages[@]}" -eq 0 ]; then
     return
   fi
 
-  # shellcheck disable=SC2016
-  for command in $(echo "${line}" | grep -o '`[^`]*`' | sed 's/`//g' | sed 's/ /-/g'); do
-    local missing=true
-    local filename="${command,,}"
-    for platform in "${PLATFORMS[@]}"; do
-      if [ -f "$folder_path/$platform/$filename.md" ]; then
-        missing=false
-        break
-      fi
-    done
+  load_commands "${pages[@]}"
 
-    if [ "$missing" = true ]; then
-      local filepath
-      filepath=$(get_filepath_without_tldr "$file")
+  for ((i = 0; i < ${#pages[@]}; i += 2)); do
+    file="${pages[i]}"
+    english_file="${pages[i + 1]}"
+    filepath="${file#./tldr/}"
 
-      echo "$command does not exist yet! Command referenced in $filepath" >> "$MISSING_SEE_ALSO_OUTPUT_FILE"
+    if [ "${command_counts[$english_file]:-0}" != "${command_counts[$file]:-0}" ]; then
+      echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE"
+    elif [ "${commands_as_string[$english_file]}" != "${commands_as_string[$file]}" ]; then
+      echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE"
+    fi
+
+    if [ "${header_counts[$english_file]:-0}" != "${header_counts[$file]:-0}" ]; then
+      echo "$filepath" >> "$OUTDATED_BASED_ON_HEADER_FILE"
     fi
   done
 }
 
-check_misplaced_page() {
-  local file="$1"
-  local platform
-  platform=$(get_platform "$file")
+check_missing_english_pages() {
+  local file english_file
 
-  if [[ ! " ${PLATFORMS[*]} " =~ $platform ]]; then
-    local filepath
-    filepath=$(get_filepath_without_tldr "$file")
-
-    echo "$filepath" >> "$MISPLACED_OUTPUT_FILE"
-  fi
+  for file in "${files[@]}"; do
+    english_file="./tldr/pages${file#./tldr/pages."$LANGUAGE_ID"}"
+    if [ ! -f "$english_file" ]; then
+      echo "${file#./tldr/}" >> "$MISSING_ENGLISH_OUTPUT_FILE"
+    fi
+  done
 }
 
-check_outdated_page() {
-  local file="$1"
-  local english_file="$2"
+check_missing_translated_pages() {
+  local english_file translated_file
+  local english_files
 
-  if [ ! -f "$english_file" ]; then
-    return 1
-  fi
-
-  local english_commands
-  local commands
-  english_commands=$(count_commands "$english_file")
-  commands=$(count_commands "$file")
-
-  english_commands_as_string=$(strip_commands "$english_file")
-  commands_as_string=$(strip_commands "$file")
-
-  local filepath
-  filepath=$(get_filepath_without_tldr "$file")
-
-  if [ "$english_commands" != "$commands" ]; then
-    echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_COUNT_FILE"
-  elif [ "$english_commands_as_string" != "$commands_as_string" ]; then
-    echo "$filepath" >> "$OUTDATED_BASED_ON_COMMAND_CONTENTS_FILE"
-  fi
-
-  english_header_lines=$(count_header "$english_file")
-  header_lines=$(count_header "$file")
-  if [ "$english_header_lines" != "$header_lines" ]; then
-    echo "$filepath" >> "$OUTDATED_BASED_ON_HEADER_FILE"
-  fi
-}
-
-check_missing_english_page() {
-  local file="$1"
-  local english_file="$2"
-
-  if [ ! -f "$english_file" ]; then
-    local filepath
-    filepath=$(get_filepath_without_tldr "$file")
-
-    echo "$filepath" >> "$MISSING_ENGLISH_OUTPUT_FILE"
-  fi
-}
-
-check_missing_translated_page() {
-  local file="$1"
-  local translated_file="$2"
-
-  if [ ! -f "$translated_file" ]; then
-    local filepath
-    filepath=$(get_filepath_without_tldr "$translated_file")
-
-    echo "$filepath" >> "$MISSING_TRANSLATED_OUTPUT_FILE"
-  fi
+  mapfile -t english_files < <(find "$ROOT_DIR/pages" -type f -name "*.md" | sort -u)
+  for english_file in "${english_files[@]}"; do
+    translated_file="./tldr/pages.$LANGUAGE_ID${english_file#./tldr/pages}"
+    if [ ! -f "$translated_file" ]; then
+      echo "${translated_file#./tldr/}" >> "$MISSING_TRANSLATED_OUTPUT_FILE"
+    fi
+  done
 }
 
 lint() {
@@ -303,25 +308,25 @@ lint() {
   fi
 }
 
-if [[ " ${CHECK_NAMES[*]} " =~ " lint " ]]; then
-  lint "$folder_path"
-fi
-
+# Read the "See also" prefix of every language from the translation template.
 declare -A section
 state=1
 while IFS= read -r line; do
   case $state in
   1)
-    locale=$(echo "$line" | grep "###" | cut -d " " -f 2)
-    if [ -n "$locale" ] ; then
+    if [[ $line == "### "* ]]; then
+      locale="${line#\#\#\# }"
+      locale="${locale%% *}"
       state=2
     fi
   ;;
   2)
-    content=$(echo "$line" | grep ">" | cut -d '`' -f 1)
-    if [ -n "$content" ]; then
-      section[$locale]=$content
-      state=1
+    if [[ $line == *">"* ]]; then
+      content="${line%%\`*}"
+      if [ -n "$content" ]; then
+        section[$locale]=$content
+        state=1
+      fi
     fi
     if [ "$line" == "---" ]; then
       state=1
@@ -332,45 +337,32 @@ done < ./tldr/contributing-guides/translation-templates/see-also-mentions.md
 
 see_also_prefix="${section[${LANGUAGE_ID:-en}]}"
 
-for file in "${files[@]}"; do
-  if [ -n "$LANGUAGE_ID" ]; then
-    english_file=$(get_english_file "$file")
-  fi
+if has_check lint; then
+  lint "$folder_path"
+fi
 
-  for check_name in "${CHECK_NAMES[@]}"; do
-    case "$check_name" in
-        "missing_tldr_page")
-            # shellcheck disable=SC2016
-            grep -o '`tldr .*`$' "$file" | check_missing_tldr_page "$file"
-            ;;
-        "missing_see_also_page")
-            if [ -n "$see_also_prefix" ]; then
-              awk -v prefix="$see_also_prefix" 'index($0, prefix) == 1' "$file" | check_missing_see_also_page "$file"
-            fi
-            ;;
-        "misplaced_page")
-            check_misplaced_page "$file"
-            ;;
-        "outdated_page")
-            if [ -n "$english_file" ]; then
-              check_outdated_page "$file" "$english_file"
-            fi
-            ;;
-        "missing_english_page")
-            if [ -n "$english_file" ]; then
-              check_missing_english_page "$file" "$english_file"
-            fi
-            ;;
-    esac
-  done
-done
+if has_check missing_tldr_page && [ "${#files[@]}" -gt 0 ]; then
+  check_missing_tldr_pages
+fi
 
-if [ -n "$LANGUAGE_ID" ] && [[ " ${CHECK_NAMES[*]} " =~ " missing_translated_page " ]]; then
-  mapfile -t english_files < <(find "$ROOT_DIR/pages" -type f -name "*.md" | sort -u)
-  for english_file in "${english_files[@]}"; do
-    translated_file=$(get_translated_file "$english_file")
-    check_missing_translated_page "$english_file" "$translated_file"
-  done
+if has_check missing_see_also_page && [ -n "$see_also_prefix" ] && [ "${#files[@]}" -gt 0 ]; then
+  check_missing_see_also_pages
+fi
+
+if has_check misplaced_page; then
+  check_misplaced_pages
+fi
+
+if [ -n "$LANGUAGE_ID" ] && has_check outdated_page; then
+  check_outdated_pages
+fi
+
+if [ -n "$LANGUAGE_ID" ] && has_check missing_english_page; then
+  check_missing_english_pages
+fi
+
+if [ -n "$LANGUAGE_ID" ] && has_check missing_translated_page; then
+  check_missing_translated_pages
 fi
 
 for OUTPUT_FILE in  "${OUTPUT_FILES[@]}"; do

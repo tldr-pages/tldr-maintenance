@@ -65,17 +65,30 @@ run_python_script() {
   sort -u "$script_name".txt -o "$script_name".txt
 }
 
-run_python_script "set-more-info-link" 's/ link would be.*$//'
-run_python_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/'
-sed -n 's/ added$//p' "set-see-also.txt" > "set-see-also-added.txt"
-sed -n 's/ updated$//p' "set-see-also.txt" > "set-see-also-updated.txt"
-run_python_script "set-alias-page" 's/ page would be.*$//'
-run_python_script "set-alias-page" 's/ page would be.*$//' '-i'
-run_python_script "set-page-title" 's/ title would be.*$//'
+run_python_scripts() {
+  run_python_script "set-more-info-link" 's/ link would be.*$//'
+  run_python_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/'
+  sed -n 's/ added$//p' "set-see-also.txt" > "set-see-also-added.txt"
+  sed -n 's/ updated$//p' "set-see-also.txt" > "set-see-also-updated.txt"
+  run_python_script "set-alias-page" 's/ page would be.*$//'
+  run_python_script "set-alias-page" 's/ page would be.*$//' '-i'
+  run_python_script "set-page-title" 's/ title would be.*$//'
 
-./tldr/scripts/wrong-filename.py
+  ./tldr/scripts/wrong-filename.py
+}
 
-./scripts/check-pages.sh -v
+# Run the Python scripts and the checks for English and every language in parallel, the results are displayed below.
+folders=$(find ./tldr -type d -name "pages.*" | sort -u)
+max_jobs=$(nproc)
+run_python_scripts &
+./scripts/check-pages.sh -v &
+for folder in $folders; do
+  while [ "$(jobs -rp | wc -l)" -ge "$max_jobs" ]; do
+    wait -n
+  done
+  ./scripts/check-pages.sh -l "${folder##*/pages.}" -v &
+done
+wait
 
 count_and_display() {
   local file="$1"
@@ -116,11 +129,8 @@ count_and_display "./check-pages/lint-errors.txt" "linter error(s)"
 
 printf -- '_%.0s' {1..100}; echo
 
-folders=$(find ./tldr -type d -name "pages.*" | sort -u)
 for folder in $folders; do
   folder_suffix="${folder##*/pages.}"
-
-  ./scripts/check-pages.sh -l "$folder_suffix" -v
 
   grep_count_and_display "pages.$folder_suffix/" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-or-outdated-more-info-link-$folder_suffix-pages.txt" "malformed or outdated more info link page(s)"
