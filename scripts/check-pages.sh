@@ -103,7 +103,8 @@ done
 
 if [ "$SELECT_METRICS" = true ]; then
   # An empty list or an empty id (e.g. a trailing comma) is rejected.
-  if [[ -z "$SELECTED_METRICS" || "$SELECTED_METRICS" == *, ]]; then
+  if [[ -z "$SELECTED_METRICS" || "$SELECTED_METRICS" == *, || ",$SELECTED_METRICS" == *,,* ]]; then
+    echo "The metric ids can't be empty." >&2
     usage
   fi
   IFS=',' read -ra selected_metrics <<< "$SELECTED_METRICS"
@@ -465,8 +466,8 @@ write_totals() {
       return 1
     fi
     printf '%s\t%s\n' "$name" "${totals[$name]}"
-  done > "$WORK_DIR/totals.tsv" &&
-    mv "$WORK_DIR/totals.tsv" "$OUTPUT_DIR/totals.tsv"
+  done > "$OUTPUT_DIR/.totals.tsv.tmp" &&
+    mv "$OUTPUT_DIR/.totals.tsv.tmp" "$OUTPUT_DIR/totals.tsv"
 }
 
 status=0
@@ -479,8 +480,9 @@ for check in "${checks[@]}" write_totals; do
 
   for id in "${!OUTPUT_FILE[@]}"; do
     if [ "${CHECK_OF[$id]}" = "$check" ]; then
-      sort -u "${OUTPUT_FILE[$id]}" > "$WORK_DIR/sorted" &&
-        mv "$WORK_DIR/sorted" "$OUTPUT_DIR/$id.txt" || status=1
+      # The temporary file is in the same directory, so mv replaces the result at once.
+      sort -u "${OUTPUT_FILE[$id]}" > "$OUTPUT_DIR/.$id.txt.tmp" &&
+        mv "$OUTPUT_DIR/.$id.txt.tmp" "$OUTPUT_DIR/$id.txt" || status=1
     fi
   done
 done

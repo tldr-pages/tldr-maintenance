@@ -8,8 +8,8 @@ calculate-metrics.sh (the check-pages[.<language>]/<metric>.txt files in the cur
 
 import os
 import sys
-
 from pathlib import Path
+
 from _dashboard import (
     MAX_LISTED_RESULTS,
     RELEASE_URL,

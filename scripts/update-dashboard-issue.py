@@ -9,8 +9,8 @@ Update the "Translation Dashboard Status" issue with the results of calculate-me
 import csv
 import os
 import sys
-
 from pathlib import Path
+
 from _dashboard import (
     DASHBOARD_ISSUE_TITLE,
     MAX_LISTED_RESULTS,
