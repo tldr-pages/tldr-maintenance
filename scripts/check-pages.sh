@@ -21,6 +21,9 @@
 #   - check_names (optional): Provide an array splitted by "," to only run specific checks [missing_tldr_page,missing_see_also_page,misplaced_page,outdated_page,missing_english_page,missing_translated_page,lint]
 #   - Adding -v enables verbose logging.
 
+# shellcheck source=scripts/_common.sh
+source "$(dirname "${BASH_SOURCE[0]}")/_common.sh"
+
 ROOT_DIR="${TLDR_ROOT:-./tldr}"
 PLATFORMS=("android" "common" "linux" "openbsd" "freebsd" "netbsd" "osx" "sunos" "windows" "cisco-ios" "dos")
 
@@ -80,7 +83,7 @@ done
 
 # Create an array of files to loop over
 folder_path="$ROOT_DIR/pages${LANGUAGE_ID:+.$LANGUAGE_ID}"
-mapfile -t files < <(find "$folder_path" -type f -name "*.md" | sort -u)
+mapfile -t files < <(find "$folder_path" -type f -name "*.md" -readable | sort -u)
 
 if [ ! -e "$folder_path" ]; then
   echo "The specified path does not exist: $folder_path"
@@ -107,10 +110,11 @@ page_exists() {
 }
 
 check_missing_tldr_pages() {
-  local file line command
+  local index line command file
 
   # shellcheck disable=SC2016
-  while IFS=$'\t' read -r file line; do
+  while IFS=$'\t' read -r index line; do
+    file="${files[index - 1]}"
     line="${line#\`tldr }" # Remove "`tldr " prefix
     line="${line%\`}"      # Remove the last backtick
 
@@ -130,24 +134,20 @@ check_missing_tldr_pages() {
         echo "$command does not exist yet! Command referenced in ${file#./tldr/}" >> "$MISSING_TLDR_OUTPUT_FILE"
       fi
     fi
-  done < <(awk 'match($0, /`tldr .*`$/) { print FILENAME "\t" substr($0, RSTART, RLENGTH) }' "${files[@]}")
+  done < <(awk '
+    BEGIN { for (i = 1; i < ARGC; i++) index_of[ARGV[i]] = i }
+    match($0, /`tldr .*`$/) { print index_of[FILENAME] "\t" substr($0, RSTART, RLENGTH) }
+  ' "${files[@]}")
 }
 
 check_missing_see_also_pages() {
-  local file line command
+  local index command
 
-  # Only the first "See also" line of a page is checked.
-  # shellcheck disable=SC2016
-  while IFS=$'\t' read -r file line; do
-    while [[ $line =~ \`([^\`]*)\` ]]; do
-      line="${line#*"${BASH_REMATCH[0]}"}"
-      command="${BASH_REMATCH[1]// /-}"
-
-      if [ -n "$command" ] && ! page_exists "${command,,}"; then
-        echo "$command does not exist yet! Command referenced in ${file#./tldr/}" >> "$MISSING_SEE_ALSO_OUTPUT_FILE"
-      fi
-    done
-  done < <(awk -v prefix="$see_also_prefix" 'index($0, prefix) == 1 && !(FILENAME in seen) { seen[FILENAME]; print FILENAME "\t" $0 }' "${files[@]}")
+  while IFS=$'\t' read -r index command; do
+    if ! page_exists "${command,,}"; then
+      echo "$command does not exist yet! Command referenced in ${files[index - 1]#./tldr/}" >> "$MISSING_SEE_ALSO_OUTPUT_FILE"
+    fi
+  done < <(list_see_also_references "$see_also_prefix" "${files[@]}")
 }
 
 check_misplaced_pages() {
@@ -157,7 +157,7 @@ check_misplaced_pages() {
     platform="${file%/*}"
     platform="${platform##*/}"
 
-    if [[ ! " ${PLATFORMS[*]} " =~ $platform ]]; then
+    if [[ " ${PLATFORMS[*]} " != *" $platform "* ]]; then
       echo "${file#./tldr/}" >> "$MISPLACED_OUTPUT_FILE"
     fi
   done
@@ -308,34 +308,7 @@ lint() {
   fi
 }
 
-# Read the "See also" prefix of every language from the translation template.
-declare -A section
-state=1
-while IFS= read -r line; do
-  case $state in
-  1)
-    if [[ $line == "### "* ]]; then
-      locale="${line#\#\#\# }"
-      locale="${locale%% *}"
-      state=2
-    fi
-  ;;
-  2)
-    if [[ $line == *">"* ]]; then
-      content="${line%%\`*}"
-      if [ -n "$content" ]; then
-        section[$locale]=$content
-        state=1
-      fi
-    fi
-    if [ "$line" == "---" ]; then
-      state=1
-    fi
-  ;;
-  esac
-done < ./tldr/contributing-guides/translation-templates/see-also-mentions.md
-
-see_also_prefix="${section[${LANGUAGE_ID:-en}]}"
+see_also_prefix=$(get_see_also_prefix "${LANGUAGE_ID:-en}")
 
 if has_check lint; then
   lint "$folder_path"

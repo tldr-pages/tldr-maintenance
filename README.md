@@ -7,20 +7,22 @@ This repo runs a Bash script that calculates metrics about the current state of 
 These [metrics](https://github.com/tldr-pages/tldr-maintenance/issues/25) will help contributors to quickly spot whether there is still work to do to maintain and improve the quality. It also helps to detect any issues in the [tldr-repo](https://github.com/tldr-pages/tldr).
 
 > [!NOTE]
-> Running [`set-alias-page.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/set-alias-page.py) and [`wrong-filename.sh`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.sh) generates false-positives.
+> Running [`set-alias-page.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/set-alias-page.py) and [`wrong-filename.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.py) generates false-positives.
 The results need to be checked by hand. It can be used by [CODEOWNERS](https://github.com/tldr-pages/tldr/blob/main/.github/CODEOWNERS) to watch their owned language to detect if there are changes needed.
 
 ## Metrics
 
 ### English
 
+- **Inconsistent filename(s)**
+  A filename is inconsistent when it doesn't match the title (`# ...`) of the page.
 - **Malformed more-info link page(s)**
   A page is malformed when the `> More information: <link>.` does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/more-info-link.md).
 - **Missing TLDR page(s)**
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
 - **Missing see also page(s)**
-  A page is missing when there is a page that mentions another page in its `> See also: ...` line, but the other page doesn't exist.
+  A page is missing when there is a page that mentions another page in its first `> See also: ...` line, but the other page doesn't exist.
 - **Misplaced page(s)**
   A page is misplaced when the page isn’t inside a folder in the list of supported platforms.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
@@ -29,18 +31,28 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 
 ### Other languages
 
+- **Inconsistent filename(s)**
+  A filename is inconsistent when it doesn't match the title (`# ...`) of the page.
 - **Malformed or outdated more-info link page(s)**
   A page is malformed when the `> More information: <link>.` does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/more-info-link.md).
    A page is outdated when the `> More information: <link>.` does not match the link in the English page.
 - **Malformed or outdated see also mention(s)**
-  A mention is malformed when the `> See also: ...` line does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/see-also-mentions.md).
+  Only applies to pages whose English page has a `> See also: ...` mention as second to last line of the description.
+  A mention is malformed when the translated mention does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/see-also-mentions.md).
   A mention is outdated when the mentioned pages do not match the pages mentioned in the English page.
 - **Missing see also mention(s)**
-  A mention is missing when the English page has a `> See also: ...` line, but the translated page doesn't.
+  Only applies to pages whose English page has a `> See also: ...` mention as second to last line of the description.
+  A mention is missing when the second to last line of the description of the translated page isn't a mention (a line like `` > ...: `...` ``).
+  So a mention in the wrong place is reported as missing as well.
+- **Missing alias page(s)**
+  A translated alias page is missing when the English page is an alias page, but the translated page doesn't exist.
+  This metric generates false-positives, so the results need to be checked by hand.
+- **Mismatched page title(s)**
+  A page title is mismatched when the title (`# ...`) doesn't match the title of the English page.
 - **Missing TLDR page(s)**
   A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
 - **Missing see also page(s)**
-  A page is missing when there is a page that mentions another page in its translated `> See also: ...` line, but the other page doesn't exist (yet) in that language.
+  A page is missing when there is a page that mentions another page in its first translated `> See also: ...` line, but the other page doesn't exist (yet) in that language.
 - **Misplaced page(s)**
   A page is misplaced when the page isn’t inside a folder in the list of supported platforms.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
@@ -49,6 +61,8 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
   Can also be seen at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
 - **Outdated page(s) based on the commands itself**
   A page is outdated when the commands itself (every line that starts with \`, but removing everything between `{{...}}`, `"..."` and `'...'`) differs from the English commands itself.
+- **Outdated page(s) based on number of header lines**
+  A page is outdated when the number of header lines (every line that starts with `>`) differs from the number of header lines in the English page.
 - **Missing English page(s)**
   A page is missing when the filename can't be found as English page.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
@@ -61,17 +75,20 @@ The results need to be checked by hand. It can be used by [CODEOWNERS](https://g
 ## Summary
 
 At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/metrics-log.md) a summary is written.
-This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation. Some numbers include a percentage:
+This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation. Some numbers include a percentage (rounded down to one decimal):
 
+- Total inconsistent filename(s) [with percentage, calculated based on total pages]
 - Total malformed or outdated more info link page(s) [with percentage, calculated based on total pages]
 - Total malformed or outdated see also mention(s) [with percentage, calculated based on total translated pages whose English page has a see also mention]
 - Total missing see also mention(s) [with percentage, calculated based on total translated pages whose English page has a see also mention]
 - Total missing alias page(s)
+- Total mismatched page title(s) [with percentage, calculated based on total unique non-English pages]
 - Total missing TLDR commands [with percentage, calculated based on total of TLDR commands]
-- Total missing see also page(s) [with percentage, calculated based on total of pages mentioned in see also mentions]
+- Total missing see also page(s) [with percentage, calculated based on total of pages mentioned in the first see also mention of every page, including English]
 - Total misplaced page(s) [with percentage, calculated based on total pages]
 - Total outdated page(s) based on number of commands [with percentage, calculated based on total non-English pages]
 - Total outdated page(s) based on the commands itself [with percentage, calculated based on total non-English pages]
+- Total outdated page(s) based on number of header lines [with percentage, calculated based on total non-English pages]
 - Total missing English page(s) [with percentage, calculated based on total unique non-English pages]
 - Total missing translated page(s) [with percentage, calculated based on total of pages that need translation (total of English pages multiplied with number of languages)]
 - Total lint error(s)

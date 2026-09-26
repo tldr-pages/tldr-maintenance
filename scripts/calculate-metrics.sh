@@ -2,6 +2,10 @@
 # SPDX-License-Identifier: MIT
 
 # This script is used by the GitHub Action `calculate-metrics`.
+# Exit codes: 0 when no issues are found, 1 when issues are found and 2 when one of the checks failed to run.
+
+# shellcheck source=scripts/_common.sh
+source "$(dirname "${BASH_SOURCE[0]}")/_common.sh"
 
 total_pages=$(find ./tldr/pages* -type f | wc -l)
 total_non_english_pages=$(find ./tldr/pages.* -type f | wc -l)
@@ -13,25 +17,22 @@ total_pages_need_translation=$((total_english_pages * total_translation_folders)
 total_tldr_pages=$(find ./tldr/pages* -type f -exec grep -o '`tldr [^`]*' {} + | wc -l)
 total_unique_non_english_pages=$(find ./tldr/pages.* -type f | awk -F/ '{print $NF}' | sort -u | wc -l)
 
-SEE_ALSO_TEMPLATE="./tldr/contributing-guides/translation-templates/see-also-mentions.md"
-
-# Print the "See also" prefix (e.g. "> Voir aussi : ") of a language from the translation template.
-get_see_also_prefix() {
-  local language_id="$1"
-
-  awk -v heading="### $language_id" '$0 == heading { found = 1; next } found && /^>/ { sub(/`.*/, ""); print; exit }' "$SEE_ALSO_TEMPLATE"
-}
-
 # Only translated pages whose English page has a "See also" mention need a (translated) "See also" mention.
-mapfile -t english_pages_with_see_also_mention < <(grep -rl --include='*.md' '^> See also:' ./tldr/pages | sed 's|^\./tldr/pages/||')
+mapfile -t english_pages < <(find ./tldr/pages -type f -name "*.md" -readable | sort -u)
+mapfile -t english_pages_with_see_also_mention < <(list_pages_with_see_also_mention "${english_pages[@]}" | sed 's|^\./tldr/pages/||')
 total_pages_need_see_also_mention=0
-# Every "See also" mention references one or more pages, count all references in all languages.
+# Every "See also" mention references one or more pages, count the references of all languages.
 total_see_also_references=0
 for folder in $(find ./tldr -maxdepth 1 -type d -name "pages*" | sort); do
-  folder_suffix="${folder##*/pages}"
-  folder_suffix="${folder_suffix#.}"
+  language_id="${folder##*/pages}"
+  language_id="${language_id#.}"
 
-  if [ -n "$folder_suffix" ]; then
+  see_also_prefix=$(get_see_also_prefix "${language_id:-en}")
+  if [ -z "$see_also_prefix" ]; then
+    continue
+  fi
+
+  if [ -n "$language_id" ]; then
     for page in "${english_pages_with_see_also_mention[@]}"; do
       if [ -f "$folder/$page" ]; then
         total_pages_need_see_also_mention=$((total_pages_need_see_also_mention + 1))
@@ -39,54 +40,99 @@ for folder in $(find ./tldr -maxdepth 1 -type d -name "pages*" | sort); do
     done
   fi
 
-  see_also_prefix=$(get_see_also_prefix "${folder_suffix:-en}")
-  if [ -n "$see_also_prefix" ]; then
-    # shellcheck disable=SC2016
-    references=$(find "$folder" -type f -name "*.md" -exec awk -v prefix="$see_also_prefix" 'index($0, prefix) == 1' {} + | grep -o '`[^`]*`' | wc -l)
+  mapfile -t pages < <(find "$folder" -type f -name "*.md" -readable | sort -u)
+  if [ "${#pages[@]}" -gt 0 ]; then
+    references=$(list_see_also_references "$see_also_prefix" "${pages[@]}" | wc -l)
     total_see_also_references=$((total_see_also_references + references))
   fi
 done
 
 EXIT_CODE=0
+JOB_FAILED=false
+MAX_JOBS=$(nproc)
+JOBS_DIR=$(mktemp -d)
+trap 'rm -rf "$JOBS_DIR"' EXIT
 
+# Run a command as a named background job, with at most MAX_JOBS jobs at the same time.
+# Its output and exit code are stored, so they can be displayed together with the results.
+start_job() {
+  local name="$1"
+  shift
+
+  while [ "$(jobs -rp | wc -l)" -ge "$MAX_JOBS" ]; do
+    wait -n
+  done
+
+  {
+    "$@"
+    echo "$?" > "$JOBS_DIR/$name.status"
+  } > "$JOBS_DIR/$name.log" 2>&1 &
+}
+
+# Display the output of a job and report it when it failed.
+display_job() {
+  local name="$1"
+  local status
+
+  cat "$JOBS_DIR/$name.log"
+
+  status=$(cat "$JOBS_DIR/$name.status" 2>/dev/null)
+  if [ "$status" != 0 ]; then
+    echo "Error: the $name job failed with exit code ${status:-unknown}." >&2
+    JOB_FAILED=true
+  fi
+}
+
+# Run a Python script of the tldr repository in dry-run synchronization mode.
+# The colors and the given text (with sed) are removed from its output.
+# shellcheck disable=SC2329 # Invoked by run_python_scripts.
 run_python_script() {
   local script_name="$1"
   local remove_text="$2"
-  local additional_options="$3"
+  shift 2
 
-  if [[ -n "$additional_options" ]]; then
-    ./tldr/scripts/"${script_name}.py" -Sn "$additional_options" >> "$script_name".txt
+  ./tldr/scripts/"$script_name.py" -Sn "$@" | sed -e 's/\x1b\[[0-9;]*m//g' -e "$remove_text"
+}
+
+# shellcheck disable=SC2329 # Invoked with start_job.
+run_python_scripts() (
+  set -o pipefail
+  status=0
+
+  run_python_script "set-more-info-link" 's/ link would be.*$//' > "set-more-info-link.txt" || status=1
+  sort -u "set-more-info-link.txt" -o "set-more-info-link.txt"
+
+  # A missing "See also" mention would be "added", a malformed or outdated one would be "updated".
+  run_python_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/' > "set-see-also.txt" || status=1
+  sed -n 's/ added$//p' "set-see-also.txt" | sort -u > "set-see-also-added.txt"
+  sed '/ added$/d; s/ updated$//' "set-see-also.txt" | sort -u > "set-see-also-updated.txt"
+
+  run_python_script "set-alias-page" 's/ page would be.*$//' > "set-alias-page.txt" || status=1
+  run_python_script "set-alias-page" 's/ page would be.*$//' -i >> "set-alias-page.txt" || status=1
+  sort -u "set-alias-page.txt" -o "set-alias-page.txt"
+
+  run_python_script "set-page-title" 's/ title would be.*$//' > "set-page-title.txt" || status=1
+  sort -u "set-page-title.txt" -o "set-page-title.txt"
+
+  # wrong-filename.py checks the pages in the current directory and writes its results to that directory.
+  # It also finds the English pages through the `pages.en` symlink, these duplicates are skipped.
+  rm -f "./tldr/inconsistent-filenames.txt"
+  if (cd ./tldr && ./scripts/wrong-filename.py); then
+    sed '/file: pages\.en\//d' "./tldr/inconsistent-filenames.txt" | sort -u > "inconsistent-filenames.txt"
   else
-    ./tldr/scripts/"${script_name}.py" -Sn >> "$script_name".txt
+    status=1
   fi
+  rm -f "./tldr/inconsistent-filenames.txt"
 
-  sed 's/\x1b\[[0-9;]*m//g' "$script_name".txt | sed "$remove_text" >> "$script_name".txt.tmp
-  mv "$script_name".txt.tmp "$script_name".txt
-  sort -u "$script_name".txt -o "$script_name".txt
-}
-
-run_python_scripts() {
-  run_python_script "set-more-info-link" 's/ link would be.*$//'
-  run_python_script "set-see-also" 's/ see also would be \(added\|updated\).*$/ \1/'
-  sed -n 's/ added$//p' "set-see-also.txt" > "set-see-also-added.txt"
-  sed -n 's/ updated$//p' "set-see-also.txt" > "set-see-also-updated.txt"
-  run_python_script "set-alias-page" 's/ page would be.*$//'
-  run_python_script "set-alias-page" 's/ page would be.*$//' '-i'
-  run_python_script "set-page-title" 's/ title would be.*$//'
-
-  ./tldr/scripts/wrong-filename.py
-}
+  exit "$status"
+)
 
 # Run the Python scripts and the checks for English and every language in parallel, the results are displayed below.
 folders=$(find ./tldr -type d -name "pages.*" | sort -u)
-max_jobs=$(nproc)
-run_python_scripts &
-./scripts/check-pages.sh -v &
+start_job "python" run_python_scripts
+start_job "en" ./scripts/check-pages.sh -v
 for folder in $folders; do
-  while [ "$(jobs -rp | wc -l)" -ge "$max_jobs" ]; do
-    wait -n
-  done
-  ./scripts/check-pages.sh -l "${folder##*/pages.}" -v &
+  start_job "${folder##*/pages.}" ./scripts/check-pages.sh -l "${folder##*/pages.}" -v
 done
 wait
 
@@ -97,10 +143,6 @@ count_and_display() {
   count=$(wc -l < "$file")
 
   echo "$count $message in ${file#./}."
-}
-
-uniqify_file() {
-  sort -u "$1" -o "$1"
 }
 
 grep_count_and_display() {
@@ -119,6 +161,9 @@ grep_count_and_display() {
 
 printf "# Metrics for tldr\n\n"
 
+display_job "python"
+display_job "en"
+
 grep_count_and_display "pages/" "./inconsistent-filenames.txt" "./check-pages/inconsistent-filenames.txt" "inconsistent filename(s)"
 grep_count_and_display "pages.en/" "./set-more-info-link.txt" "./check-pages/malformed-more-info-link-pages.txt" "malformed more info link page(s)"
 
@@ -131,6 +176,8 @@ printf -- '_%.0s' {1..100}; echo
 
 for folder in $folders; do
   folder_suffix="${folder##*/pages.}"
+
+  display_job "$folder_suffix"
 
   grep_count_and_display "pages.$folder_suffix/" "./inconsistent-filenames.txt" "./check-pages.$folder_suffix/inconsistent-$folder_suffix-filenames.txt" "inconsistent filename(s)"
   grep_count_and_display "pages.$folder_suffix/" "./set-more-info-link.txt" "./check-pages.$folder_suffix/malformed-or-outdated-more-info-link-$folder_suffix-pages.txt" "malformed or outdated more info link page(s)"
@@ -157,23 +204,23 @@ rm -f "./set-more-info-link.txt" "./set-see-also.txt" "./set-see-also-added.txt"
 merge_files_and_calculate_total() {
   local files_pattern="$1"
   local merge_file="$2"
+  local files
 
-  for file in $(find . -type f -path "$files_pattern" | sort -u); do
-    cat "$file"
-  done > "$merge_file"
-  uniqify_file "$merge_file"
+  mapfile -t files < <(find ./check-pages* -type f -path "$files_pattern" | sort -u)
+  cat /dev/null "${files[@]}" | sort -u > "$merge_file"
 
   wc -l < "$merge_file"
 }
 
+# Print the percentage with one decimal, rounded down so it only shows 100.0 when everything is affected.
 calculate_percentage() {
   local part_of_total="$1"
   local total="$2"
 
-  if [ "$part_of_total" -gt 0 ] && [ "$total" -gt 0 ]; then
-    awk -v part="$part_of_total" -v total="$total" 'BEGIN { printf "%.1f\n", part * 100 / total }'
+  if [ "$total" -gt 0 ]; then
+    awk -v part="$part_of_total" -v total="$total" 'BEGIN { printf "%.1f\n", int(part * 1000 / total) / 10 }'
   else
-    echo 0
+    echo "0.0"
   fi
 }
 
@@ -213,6 +260,12 @@ calculate_and_display '*/check-pages*/missing-english*pages.txt' "./missing-engl
 calculate_and_display '*/check-pages*/missing-translated*pages.txt' "./missing-translated-pages.txt" "$total_pages_need_translation" "missing translated page(s)"
 calculate_and_display '*/check-pages*/lint-errors*.txt' "./lint-errors.txt" "" "lint error(s)"
 
-find . -type f \( -path '*/check-pages*/*.txt' -o -path '*.txt' \) -size 0 -exec rm -f {} \;
+# Remove empty results, only in the directories this script writes to.
+find . -maxdepth 1 -type f -name "*.txt" -size 0 -delete
+find ./check-pages* -type f -name "*.txt" -size 0 -delete
+
+if [ "$JOB_FAILED" = true ]; then
+  exit 2
+fi
 
 exit $EXIT_CODE
