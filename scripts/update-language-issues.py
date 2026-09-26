@@ -1,162 +1,120 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
 
+"""
+Update the "Translation Dashboard Status for <language>" issue of every language with the results of
+calculate-metrics.sh (the check-pages[.<language>]/<metric>.txt files in the current directory).
+"""
+
 import os
 import sys
-
 from pathlib import Path
-from enum import Enum
-from _common import (
-    get_tldr_root,
-    get_check_pages_dir,
-    get_locale,
-    get_datetime_pretty,
-    strip_dynamic_content,
+
+from _dashboard import (
+    MAX_LISTED_RESULTS,
+    RELEASE_URL,
+    IssueSection,
+    Metric,
+    build_issue_body,
     create_github_issue,
-    get_github_issue,
+    get_check_pages_dirs,
+    get_github_issues,
+    get_language_issue_title,
+    get_last_updated,
+    get_locale,
+    get_metrics,
+    read_results,
+    strip_dynamic_content,
     update_github_issue,
-    generate_github_link,
-    generate_github_edit_link,
-    generate_github_new_link,
-    generate_github_lint_link,
 )
 
 
-class Topics(str, Enum):
-    def __str__(self):
-        return str(
-            self.value
-        )  # make str(Topics.TOPIC) return the Topic instead of an Enum object
+def parse_language_directory(
+    directory: Path, locale: str, metrics: list[Metric]
+) -> dict[Metric, list[str]]:
+    """
+    Get the results of every metric that applies to the language, from check-pages[.<language>]/<metric>.txt.
+    """
 
-    INCONSISTENT = "inconsistent filename(s)"
-    MALFORMED_OR_OUTDATED_MORE_INFO_LINK = (
-        "malformed or outdated more info link page(s)"
-    )
-    MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
-        "malformed or outdated see also mention(s)"
-    )
-    ALIAS_PAGES = "missing alias page(s)"
-    PAGE_TITLES = "mismatched page title(s)"
-    MISSING_TLDR = "missing TLDR page(s)"
-    MISPLACED = "misplaced page(s)"
-    BASED_ON_COMMAND_COUNT = "outdated page(s) based on number of commands"
-    BASED_ON_COMMAND_CONTENTS = "outdated page(s) based on the commands itself"
-    BASED_ON_HEADER_LINE_COUNT = "outdated page(s) based on number of header lines"
-    MISSING_ENGLISH = "missing English page(s)"
-    MISSING_TRANSLATED = "missing translated page(s)"
-    LINT_ERRORS = "linter error(s)"
-
-
-def parse_file(filepath):
-    with filepath.open(encoding="utf-8") as file:
-        content = file.read().strip()
-        return content.split("\n") if content else []
-
-
-def parse_language_directory(directory):
-    topics = [
-        "inconsistent",
-        "malformed-or-outdated-more-info-link",
-        "malformed-or-outdated-see-also-mentions",
-        "alias-pages",
-        "page-titles",
-        "missing-tldr",
-        "misplaced",
-        "based-on-command-count",
-        "based-on-command-contents",
-        "based-on-header-line-count",
-        "missing-english",
-        "missing-translated",
-        "lint-errors",
-    ]
-    lang_data = {topic: [] for topic in topics}
-
-    for topic in topics:
-        topic_files = [f for f in Path(directory).iterdir() if topic in f.name]
-        for file in topic_files:
-            filepath = Path(directory) / file
-            lang_data[topic].extend(parse_file(filepath))
+    lang_data = {}
+    for metric in metrics:
+        if not metric.applies_to(locale):
+            continue
+        lang_data[metric] = read_results(directory / metric.file_name)
 
     return lang_data
 
 
-def generate_markdown_for_language(language, data):
-    markdown = f"## {language} language Issues\n"
-    markdown += "<!-- __NOUPDATE__ -->\n"
-    markdown += f"**Last updated:** {get_datetime_pretty()}\n"
-    markdown += "<!-- __END_NOUPDATE__ -->\n"
+def generate_markdown_for_language(
+    language: str, directory_name: str, data: dict[Metric, list[str]]
+) -> str:
+    title = f"# {get_language_issue_title(language)}\n\n"
+    header = title + f"## {language} language Issues\n"
+    header += get_last_updated()
 
-    has_issues = False
+    sections = []
+    for metric, items in data.items():
+        if not items:
+            continue
 
-    for topic, items in data.items():
-        title = topic.replace("-", "_").upper()
-        topic_title = getattr(Topics, title).value
-        number_of_items = len(items)
-        if number_of_items >= 1000:
-            has_issues = True
-            markdown += f"\n{number_of_items} {topic_title}\n\n"
-        elif items:
-            has_issues = True
-            markdown += (
-                f"\n<details>\n  <summary>{number_of_items} {topic_title}</summary>\n\n"
-            )
-            for item in items:
-                match topic:
-                    case "inconsistent":
-                        markdown += f"- {item}\n"
-                    case "alias-pages":
-                        markdown += f"- {generate_github_new_link(item)}\n"
-                    case "missing-tldr":
-                        markdown += f"- {generate_github_link(item)}\n"
-                    case "lint-errors":
-                        markdown += f"- {generate_github_lint_link(item)}\n"
-                    case _:
-                        markdown += f"- {generate_github_edit_link(item)}\n"
-            markdown += "</details>\n"
+        count = f"{len(items)} {metric.label}"
+        short = f"\n{count} (see `{directory_name}/{metric.file_name}` in [metrics.zip]({RELEASE_URL}/metrics.zip))\n\n"
+        if len(items) >= MAX_LISTED_RESULTS:
+            sections.append(IssueSection(short, short))
+            continue
 
-    if not has_issues:
-        markdown = f"No issues found for {language}.\n"
+        full = f"\n<details>\n  <summary>{count}</summary>\n\n"
+        full += "".join(f"- {metric.format_result(item)}\n" for item in items)
+        full += "</details>\n"
+        sections.append(IssueSection(full, short))
 
-    return markdown
+    if not sections:
+        return title + f"No issues found for {language}.\n"
+
+    return build_issue_body(header, sections)
 
 
 def main():
     # Check if running in CI and in the correct repository
     if (
-        os.getenv("CI") == "true"
-        and os.getenv("GITHUB_REPOSITORY") == "tldr-pages/tldr-maintenance"
+        os.getenv("CI") != "true"
+        or os.getenv("GITHUB_REPOSITORY") != "tldr-pages/tldr-maintenance"
     ):
-        root = get_tldr_root()
-        check_pages_dir = get_check_pages_dir(root)
-
-        for lang_dir in check_pages_dir:
-            locale = get_locale(lang_dir)
-            print(f"Updating {locale}")
-
-            title = f"Translation Dashboard Status for {locale}"
-
-            issue_data = get_github_issue(title)
-
-            if not issue_data:
-                issue_data = create_github_issue(title)
-
-            markdown_content = f"# {title}\n\n"
-
-            lang_data = parse_language_directory(lang_dir)
-            markdown_content += generate_markdown_for_language(locale, lang_data)
-
-            if strip_dynamic_content(markdown_content) == strip_dynamic_content(
-                issue_data["body"]
-            ):
-                print(
-                    f"new issue body (sans dynamic content) for language {locale} identical to existing issue body, not updating"
-                )
-                continue
-
-            update_github_issue(issue_data["number"], title, markdown_content)
-    else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
+
+    metrics = get_metrics()
+    issues = get_github_issues()
+    failed = False
+
+    for lang_dir in get_check_pages_dirs(Path.cwd()):
+        locale = get_locale(lang_dir)
+        print(f"Updating {locale}")
+
+        title = get_language_issue_title(locale)
+        issue_data = issues.get(title) or create_github_issue(title)
+        if not issue_data:
+            failed = True
+            continue
+
+        lang_data = parse_language_directory(lang_dir, locale, metrics)
+        markdown_content = generate_markdown_for_language(
+            locale, lang_dir.name, lang_data
+        )
+
+        if strip_dynamic_content(markdown_content) == strip_dynamic_content(
+            issue_data["body"]
+        ):
+            print(
+                f"new issue body (sans dynamic content) for language {locale} identical to existing issue body, not updating"
+            )
+            continue
+
+        if not update_github_issue(issue_data["number"], title, markdown_content):
+            failed = True
+
+    if failed:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

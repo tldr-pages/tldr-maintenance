@@ -1,281 +1,179 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
 
-import os
-import re
-import sys
+"""
+Update the "Translation Dashboard Status" issue with the results of calculate-metrics.sh
+(summary.tsv and the <metric>.txt files in the current directory).
+"""
 
+import csv
+import os
+import sys
 from pathlib import Path
-from enum import Enum
-from _common import (
-    get_datetime_pretty,
+
+from _dashboard import (
+    DASHBOARD_ISSUE_TITLE,
+    MAX_LISTED_RESULTS,
+    RELEASE_URL,
+    IssueSection,
+    Metric,
+    build_issue_body,
+    get_github_issues,
+    get_language_issue_title,
+    get_last_updated,
+    get_metrics,
+    read_results,
     strip_dynamic_content,
-    get_github_issue,
     update_github_issue,
-    generate_github_link,
-    generate_github_edit_link,
-    generate_github_new_link,
-    generate_github_lint_link,
 )
 
-
-class Topics(str, Enum):
-    def __str__(self):
-        return str(
-            self.value
-        )  # make str(Topics.TOPIC) return the Topic instead of an Enum object
-
-    INCONSISTENT_FILENAMES = "inconsistent filename(s)"
-    MALFORMED_OR_OUTDATED_MORE_INFO_LINK_PAGES = (
-        "malformed or outdated more info link page(s)"
-    )
-    MALFORMED_OR_OUTDATED_SEE_ALSO_MENTIONS = (
-        "malformed or outdated see also mention(s)"
-    )
-    MISSING_ALIAS_PAGES = "missing alias page(s)"
-    MISMATCHED_PAGE_TITLES = "mismatched page title(s)"
-    MISSING_TLDR_PAGES = "missing TLDR page(s)"
-    MISPLACED_PAGES = "misplaced page(s)"
-    OUTDATED_PAGES_BASED_ON_COMMAND_COUNT = (
-        "outdated page(s) based on number of commands"
-    )
-    OUTDATED_PAGES_BASED_ON_COMMAND_CONTENTS = (
-        "outdated page(s) based on the commands itself"
-    )
-    OUTDATED_PAGES_BASED_ON_HEADER_LINE_COUNT = (
-        "outdated page(s) based on number of header lines"
-    )
-    MISSING_ENGLISH_PAGES = "missing English page(s)"
-    MISSING_TRANSLATED_PAGES = "missing translated page(s)"
-    LINT_ERRORS = "linter error(s)"
+SUMMARY_FILE = Path("summary.tsv")
 
 
-def parse_log_file(path: Path) -> dict:
+def parse_summary(path: Path, metrics: list[Metric]) -> dict:
+    """
+    Parse the totals and the number of results per language from summary.tsv, written by calculate-metrics.sh.
+    """
+
     data = {"overview": {}, "metrics": {}, "details": {}}
-    overview_patterns = {
-        "Total inconsistent filenames": r"Total inconsistent filename\(s\): (.+)",
-        "Total malformed or outdated more info link pages": r"Total malformed or outdated more info link page\(s\): (.+)",
-        "Total malformed or outdated see also's": r"Total malformed or outdated see also mention\(s\): (.+)",
-        "Total missing alias pages": r"Total missing alias page\(s\): (.+)",
-        "Total mismatched page titles": r"Total mismatched page title\(s\): (.+)",
-        "Total missing TLDR pages": r"Total missing TLDR page\(s\): (.+)",
-        "Total misplaced pages": r"Total misplaced page\(s\): (.+)",
-        "Total outdated pages (based on number of commands)": r"Total outdated page\(s\) based on number of commands: (.+)",
-        "Total outdated pages (based on the commands itself)": r"Total outdated page\(s\) based on the commands itself: (.+)",
-        "Total outdated pages (based on number of header lines)": r"Total outdated page\(s\) based on number of header lines: (.+)",
-        "Total missing English pages": r"Total missing English page\(s\): (.+)",
-        "Total missing translated pages": r"Total missing translated page\(s\): (.+)",
-        "Total linter errors": r"Total lint error\(s\): (.+)",
-    }
+    label_of = {metric.id: metric.label for metric in metrics}
 
-    detail_patterns = {
-        "inconsistent filename(s)": r"(\d+) inconsistent filename",
-        "malformed or outdated more info link page(s)": r"(\d+) malformed or outdated",
-        "malformed or outdated see also mention(s)": r"(\d+) malformed or outdated see also",
-        "missing alias page(s)": r"(\d+) missing alias",
-        "mismatched page title(s)": r"(\d+) mismatched page title",
-        "missing TLDR page(s)": r"(\d+) missing TLDR",
-        "misplaced page(s)": r"(\d+) misplaced page",
-        "outdated pages (based on number of commands)": r"(\d+) outdated page\(s\) based on number of commands",
-        "outdated pages (based on the commands itself)": r"(\d+) outdated page\(s\) based on the commands itself",
-        "outdated pages (based on the number of header lines)": r"(\d+) outdated page\(s\) based on number of header lines",
-        "missing English page(s)": r"(\d+) missing English",
-        "missing translated page(s)": r"(\d+) missing translated",
-        "linter error(s)": r"(\d+) linter error",
-    }
+    with path.open(encoding="utf-8", newline="") as f:
+        rows = list(csv.DictReader(f, delimiter="\t"))
 
-    with path.open(encoding="utf-8") as f:
-        lines = f.readlines()
+    for metric in metrics:
+        for row in rows:
+            if row["metric"] != metric.id or row["language"] != "total":
+                continue
+            value = row["results"]
+            if row["total"] != "-":
+                value += f"/{row['total']} - {row['percentage']}%"
+            data["overview"][f"Total {metric.label}"] = value
 
-    process_overview(lines, overview_patterns, data)
-    process_language_details(lines, detail_patterns, data)
+    # The breakdown by language is about the translations.
+    for row in rows:
+        if row["language"] in ("total", "en") or not row["results"].isdigit():
+            continue
+        if int(row["results"]) > 0:
+            label = label_of[row["metric"]]
+            data["details"].setdefault(row["language"], {})[label] = int(row["results"])
 
     return data
 
 
-def process_overview(lines, patterns, data):
-    for line in lines:
-        for key, pattern in patterns.items():
-            match = re.search(pattern, line)
-            if match:
-                data["overview"][key] = match.group(1).strip()
+def parse_result_files(data: dict, metrics: list[Metric]) -> dict:
+    """
+    Add the total results of every metric (the <metric>.txt files written by calculate-metrics.sh).
+    """
 
-
-def process_language_details(lines, patterns, data):
-    current_language = None
-    for line in lines:
-        current_language = update_current_language(line, current_language, data)
-        if current_language:
-            add_language_details(line, patterns, current_language, data)
-
-
-def update_current_language(line, current_language, data):
-    if line.startswith("-" * 100):
-        return None
-    match = re.match(r"^\d+.+in check-pages\.(\w+)/", line)
-    if match:
-        new_language = match.group(1)
-        if new_language not in data["details"]:
-            data["details"][new_language] = {}
-        return new_language
-    return current_language
-
-
-def add_language_details(line, patterns, current_language, data):
-    for key, pattern in patterns.items():
-        match = re.search(pattern, line)
-        if match and int(match.group(1)) > 0:
-            data["details"][current_language][key] = int(match.group(1))
-
-
-def parse_seperate_text_files(data):
-    for file in [
-        Path("inconsistent-filenames.txt"),
-        Path("malformed-or-outdated-more-info-link-pages.txt"),
-        Path("malformed-or-outdated-see-also-mentions.txt"),
-        Path("missing-alias-pages.txt"),
-        Path("mismatched-page-titles.txt"),
-        Path("missing-tldr-pages.txt"),
-        Path("misplaced-pages.txt"),
-        Path("outdated-pages-based-on-command-count.txt"),
-        Path("outdated-pages-based-on-command-contents.txt"),
-        Path("outdated-pages-based-on-header-line-count.txt"),
-        Path("missing-english-pages.txt"),
-        Path("missing-translated-pages.txt"),
-        Path("lint-errors.txt"),
-    ]:
+    for metric in metrics:
+        file = Path(metric.file_name)
         if not file.is_file():
             continue
-        topic_name = file.name.replace(".txt", "").replace("-", "_")
-        if hasattr(Topics, topic_name.upper()):
-            topic = getattr(Topics, topic_name.upper()).value
-            if topic:
-                with file.open(encoding="utf-8") as f:
-                    lines = f.readlines()
-                    add_metric_details(lines, data, topic_name, topic, file.name)
+
+        lines = read_results(file)
+
+        data["metrics"][metric.label] = {
+            "count": len(lines),
+            "results": (
+                [metric.format_result(line) for line in lines]
+                if len(lines) < MAX_LISTED_RESULTS
+                else []
+            ),
+            "url": f"{RELEASE_URL}/{metric.file_name}",
+        }
+
     return data
 
 
-def add_metric_details(lines, data, topic_name, topic, file_name):
-    data["metrics"][topic] = {
-        "count": len(lines),
-        "files": [],
-        "url": f"https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/{file_name}",
-    }
-    if len(lines) <= 100:
-        match topic_name:
-            case "inconsistent_filenames":
-                data["metrics"][topic]["files"] = [f"{line.strip()}" for line in lines]
-            case "missing_alias_pages":
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_new_link(line.strip())}" for line in lines
-                ]
-            case "missing_tldr_pages":
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_link(line.strip())}" for line in lines
-                ]
-            case "lint_errors":
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_lint_link(line.strip())}" for line in lines
-                ]
-            case _:
-                data["metrics"][topic]["files"] = [
-                    f"{generate_github_edit_link(line.strip())}" for line in lines
-                ]
-
-
-def generate_dashboard(data):
+def generate_dashboard(data: dict, issues: dict[str, dict]) -> str:
     DETAILS_OPENING = "<details>\n"
     DETAILS_CLOSING = "\n</details>\n"
 
-    markdown = "# Translation Dashboard Status\n\n"
-    markdown += "<!-- __NOUPDATE__ -->\n"
-    markdown += f"**Last updated:** {get_datetime_pretty()}\n"
-    markdown += "<!-- __END_NOUPDATE__ -->\n"
-    markdown += "## Overview\n"
-    markdown += "| Metric | Value |\n"
-    markdown += "|--------|-------|\n"
+    header = f"# {DASHBOARD_ISSUE_TITLE}\n\n"
+    header += get_last_updated()
+    header += "## Overview\n"
+    header += "| Metric | Value |\n"
+    header += "|--------|-------|\n"
 
     for key, value in data["overview"].items():
-        markdown += f"| **{key}**  | {value} |\n"
+        header += f"| **{key}**  | {value} |\n"
 
-    markdown += "\n## Detailed Breakdown by Metric\n\n"
+    header += "\n## Detailed Breakdown by Metric\n\n"
 
-    for key, metric in data["metrics"].items():
-        markdown += DETAILS_OPENING
+    sections = []
+    for label, metric in data["metrics"].items():
+        summary = f"{DETAILS_OPENING}<summary>{metric['count']} {label}</summary>\n\n"
+        see_artifact = f"- Too many results to list here, please view the [release artifact]({metric['url']}).\n{DETAILS_CLOSING}"
 
-        markdown += f'<summary>{metric["count"]} {key}</summary>\n\n'
-
-        if not metric["files"]:
-            markdown += f"- More than 100 files, please view the [release artifact]({metric['url']}).\n"
-            markdown += DETAILS_CLOSING
-            continue
-
-        for file in metric["files"]:
-            markdown += f"- {file}\n"
-
-        markdown += DETAILS_CLOSING
-
-    markdown += "\n## Detailed Breakdown by Language\n\n"
-
-    for lang, details in data["details"].items():
-        markdown += DETAILS_OPENING
-        link_to_github_issue = get_github_issue(
-            f"Translation Dashboard Status for {lang}"
-        )
-        if link_to_github_issue:
-            markdown += f'\n<summary><a href="{link_to_github_issue["url"]}">{lang}</a></summary>\n\n'
+        if metric["results"]:
+            results = "".join(f"- {result}\n" for result in metric["results"])
+            sections.append(
+                IssueSection(
+                    summary + results + DETAILS_CLOSING, summary + see_artifact
+                )
+            )
         else:
-            markdown += f"\n<summary>{lang}</summary>\n\n"
+            sections.append(
+                IssueSection(summary + see_artifact, summary + see_artifact)
+            )
 
-        for key, value in details.items():
-            markdown += f"- {value} {key}\n"
+    breakdown_by_language = "\n## Detailed Breakdown by Language\n\n"
+    for lang, details in data["details"].items():
+        breakdown_by_language += DETAILS_OPENING
+        language_issue = issues.get(get_language_issue_title(lang))
+        if language_issue:
+            breakdown_by_language += (
+                f'\n<summary><a href="{language_issue["url"]}">{lang}</a></summary>\n\n'
+            )
+        else:
+            breakdown_by_language += f"\n<summary>{lang}</summary>\n\n"
 
-        markdown += DETAILS_CLOSING
+        for label, count in details.items():
+            breakdown_by_language += f"- {count} {label}\n"
 
-    return markdown
+        breakdown_by_language += DETAILS_CLOSING
+
+    sections.append(IssueSection(breakdown_by_language, breakdown_by_language))
+
+    return build_issue_body(header, sections)
 
 
 def main():
     # Check if running in CI and in the correct repository
     if (
-        os.getenv("CI") == "true"
-        and os.getenv("GITHUB_REPOSITORY") == "tldr-pages/tldr-maintenance"
+        os.getenv("CI") != "true"
+        or os.getenv("GITHUB_REPOSITORY") != "tldr-pages/tldr-maintenance"
     ):
-        log_file_path = Path("metrics-log.md")
-
-        if not log_file_path.exists():
-            print("metrics-log.md not found.", file=sys.stderr)
-            sys.exit(0)
-
-        issue_title = "Translation Dashboard Status"
-        issue_data = get_github_issue(issue_title)
-
-        if not issue_data:
-            print(f"{issue_title}-issue not found.", file=sys.stderr)
-            sys.exit(0)
-
-        parsed_data = parse_log_file(log_file_path)
-        parsed_data = parse_seperate_text_files(parsed_data)
-
-        markdown_content = generate_dashboard(parsed_data)
-
-        if strip_dynamic_content(markdown_content) == strip_dynamic_content(
-            issue_data["body"]
-        ):
-            print(
-                "new issue body (sans dynamic content) identical to existing issue body, not updating"
-            )
-            sys.exit(0)
-
-        result = update_github_issue(
-            issue_data["number"], issue_title, markdown_content
-        )
-
-        sys.exit(result.returncode)
-    else:
         print("Not in a CI or incorrect repository, refusing to run.", file=sys.stderr)
         sys.exit(0)
+
+    if not SUMMARY_FILE.exists():
+        sys.exit(f"{SUMMARY_FILE} not found.")
+
+    issues = get_github_issues()
+    issue_data = issues.get(DASHBOARD_ISSUE_TITLE)
+    if not issue_data:
+        sys.exit(f"The {DASHBOARD_ISSUE_TITLE} issue is not found.")
+
+    metrics = get_metrics()
+    parsed_data = parse_summary(SUMMARY_FILE, metrics)
+    parsed_data = parse_result_files(parsed_data, metrics)
+
+    markdown_content = generate_dashboard(parsed_data, issues)
+
+    if strip_dynamic_content(markdown_content) == strip_dynamic_content(
+        issue_data["body"]
+    ):
+        print(
+            "new issue body (sans dynamic content) identical to existing issue body, not updating"
+        )
+        sys.exit(0)
+
+    if not update_github_issue(
+        issue_data["number"], DASHBOARD_ISSUE_TITLE, markdown_content
+    ):
+        sys.exit(1)
 
 
 if __name__ == "__main__":

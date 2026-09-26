@@ -6,14 +6,12 @@ A Python file that makes some commonly used functions available for other script
 """
 
 from enum import Enum
-from pathlib import Path
-from datetime import datetime, timezone
 import os
-import re
 import sys
 import json
 import time
 import subprocess
+import http.client
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -35,8 +33,19 @@ class Colors(str, Enum):
 ORG_NAME = "tldr-pages"
 REPO_NAME = "tldr"
 REPO = f"{ORG_NAME}/{REPO_NAME}"
+MAINTENANCE_REPO = f"{ORG_NAME}/tldr-maintenance"
 API_URL = "https://api.github.com"
 API_VERSION = "2022-11-28"
+# Seconds to wait for a response of the GitHub API.
+TIMEOUT = 60
+MAX_ATTEMPTS = 5
+
+
+class GitHubError(SystemExit):
+    """
+    A request to the GitHub API failed. It exits the script with the message when it isn't caught,
+    but scripts can catch it to continue with other work.
+    """
 
 
 def get_token() -> str:
@@ -48,19 +57,45 @@ def get_token() -> str:
     if token:
         return token
     try:
-        return subprocess.run(
+        token = subprocess.run(
             ["gh", "auth", "token"], capture_output=True, text=True, check=True
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
-        sys.exit("Please set GITHUB_TOKEN or log in with `gh auth login`.")
+        token = ""
+    if not token:
+        raise GitHubError("Please set GITHUB_TOKEN or log in with `gh auth login`.")
+    return token
 
 
 _token = None
 
 
-def github_request(path: str, params: dict = None) -> tuple[int, object]:
+def decode_json(body: bytes) -> object:
+    """Decode a JSON response body, or return the text when it isn't JSON (e.g. an HTML error page)."""
+
+    if not body:
+        return None
+    try:
+        return json.loads(body)
+    except ValueError:
+        # Not JSON or not UTF-8.
+        return body.decode(errors="replace")
+
+
+def github_request(
+    path: str,
+    params: dict | None = None,
+    method: str = "GET",
+    payload: dict | None = None,
+) -> tuple[int, object]:
     """
-    Perform a GET request against the GitHub REST API, waiting when rate limited.
+    Perform a request against the GitHub REST API, waiting when rate limited and retrying server and network errors.
+
+    Parameters:
+    path (str): the path of the endpoint, e.g. "/repos/tldr-pages/tldr".
+    params (dict): the query parameters.
+    method (str): the HTTP method.
+    payload (dict): the JSON body to send.
 
     Returns:
     tuple: the HTTP status code and the decoded JSON body (None when there is no body).
@@ -73,40 +108,68 @@ def github_request(path: str, params: dict = None) -> tuple[int, object]:
     url = f"{API_URL}{path}"
     if params:
         url += "?" + urllib.parse.urlencode(params)
-    request = urllib.request.Request(
-        url,
-        headers={
-            "Accept": "application/vnd.github+json",
-            "Authorization": f"Bearer {_token}",
-            "X-GitHub-Api-Version": API_VERSION,
-        },
-    )
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {_token}",
+        "X-GitHub-Api-Version": API_VERSION,
+    }
+    data = None
+    if payload is not None:
+        headers["Content-Type"] = "application/json"
+        data = json.dumps(payload).encode()
+    request = urllib.request.Request(url, data=data, headers=headers, method=method)
 
-    for _ in range(5):
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        last_attempt = attempt == MAX_ATTEMPTS
         try:
-            with urllib.request.urlopen(request) as response:
-                body = response.read()
-                return response.status, json.loads(body) if body else None
+            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
+                return response.status, decode_json(response.read())
         except urllib.error.HTTPError as error:
             if error.code in (403, 429) and (
                 error.headers.get("Retry-After")
                 or error.headers.get("X-RateLimit-Remaining") == "0"
             ):
-                wait = int(error.headers.get("Retry-After") or 0)
+                if last_attempt:
+                    break
+                retry_after = error.headers.get("Retry-After") or ""
+                wait = int(retry_after) if retry_after.isdigit() else 0
                 if not wait:
-                    reset = int(error.headers.get("X-RateLimit-Reset", time.time()))
+                    reset = error.headers.get("X-RateLimit-Reset") or ""
+                    reset = int(reset) if reset.isdigit() else int(time.time())
                     wait = max(reset - int(time.time()), 0) + 1
                 print(f"Rate limited, waiting {wait}s...", file=sys.stderr)
                 time.sleep(wait)
                 continue
-            body = error.read()
-            return error.code, json.loads(body) if body else None
-    raise SystemExit(f"Giving up on {url} after repeated rate limiting.")
+            # Creating something (POST) isn't retried, since it might have been created.
+            if error.code >= 500 and method != "POST" and not last_attempt:
+                print(
+                    f"{method} {url} failed ({error.code}), retrying...",
+                    file=sys.stderr,
+                )
+                time.sleep(2**attempt)
+                continue
+            try:
+                body = error.read()
+            except (OSError, http.client.HTTPException):
+                body = b""
+            return error.code, decode_json(body)
+        except (OSError, http.client.HTTPException) as error:
+            # Network errors (urllib.error.URLError is an OSError), timeouts and broken responses.
+            if method == "POST" or last_attempt:
+                raise GitHubError(f"{method} {url} failed: {error}") from error
+            print(f"{method} {url} failed ({error}), retrying...", file=sys.stderr)
+            time.sleep(2**attempt)
+    raise GitHubError(f"Giving up on {method} {url} after repeated rate limiting.")
 
 
-def github_paginate(path: str, params: dict = None) -> list | None:
+def github_paginate(
+    path: str, params: dict | None = None, required: bool = False
+) -> list | None:
     """
     Get all pages of a GitHub REST API list endpoint.
+
+    Parameters:
+    required (bool): raise a GitHubError instead of returning None when a request fails.
 
     Returns:
     list: all items, or None when the request isn't allowed (e.g. the token lacks access).
@@ -118,80 +181,14 @@ def github_paginate(path: str, params: dict = None) -> list | None:
         status, data = github_request(
             path, {**(params or {}), "per_page": 100, "page": page}
         )
-        if status != 200:
+        if status != 200 or not isinstance(data, list):
+            if required:
+                raise GitHubError(f"GET {path} failed with {status}: {data}")
             return None
         items += data
         if len(data) < 100:
             return items
         page += 1
-
-
-def get_tldr_root(lookup_path: Path = None) -> Path:
-    """
-    Get the path of the local tldr-maintenance repository, looking for it in each part of the given path. If it is not found, the path in the environment variable TLDR_ROOT is returned.
-
-    Parameters:
-    lookup_path (Path): the path to search for the tldr root. By default, the path of the script.
-
-    Returns:
-    Path: the local tldr-maintenance repository.
-    """
-
-    if lookup_path is None:
-        absolute_lookup_path = Path(__file__).resolve()
-    else:
-        absolute_lookup_path = Path(lookup_path).resolve()
-    if (
-        tldr_root := next(
-            (
-                path
-                for path in absolute_lookup_path.parents
-                if path.name == "tldr-maintenance"
-            ),
-            None,
-        )
-    ) is not None:
-        return tldr_root
-    elif "TLDR_ROOT" in os.environ:
-        return Path(os.environ["TLDR_ROOT"])
-    raise SystemExit(
-        f"{Colors.RED}Please set the environment variable TLDR_ROOT to the location of a clone of https://github.com/tldr-pages/tldr-maintenance{Colors.RESET}"
-    )
-
-
-def get_check_pages_dir(root: Path) -> list[Path]:
-    """
-    Get all check-pages directories.
-
-    Parameters:
-    root (Path): the path to search for the pages directories.
-
-    Returns:
-    list (list of Path's): Path's of page entry and platform, e.g. "page.fr/common".
-    """
-
-    return sorted([d for d in root.iterdir() if d.name.startswith("check-pages")])
-
-
-def get_locale(path: Path) -> str:
-    """
-    Get the locale from the path.
-
-    Parameters:
-    path (Path): the path to extract the locale.
-
-    Returns:
-    str: a POSIX Locale Name in the form of "ll" or "ll_CC" (e.g. "fr" or "pt_BR").
-    """
-
-    # compute locale
-    check_pages_dirname = path.name
-    if "." in check_pages_dirname:
-        _, locale = check_pages_dirname.split(".")
-    else:
-        locale = "en"
-
-    return locale
 
 
 def create_colored_line(start_color: str, text: str) -> str:
@@ -207,204 +204,3 @@ def create_colored_line(start_color: str, text: str) -> str:
     """
 
     return f"{start_color}{text}{Colors.RESET}"
-
-
-def create_github_issue(title: str) -> dict:
-    command = [
-        "gh",
-        "api",
-        "--method",
-        "POST",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        "/repos/tldr-pages/tldr-maintenance/issues",
-        "-f",
-        f"title={title}",
-    ]
-
-    result = subprocess.run(command, capture_output=True, text=True)
-    data = json.loads(result.stdout)
-
-    return {
-        "number": data["number"],
-        "title": data["title"],
-        "body": data.get("body") or "",
-        "url": data["html_url"],
-    }
-
-
-def get_github_issue(title: str = None) -> list[dict]:
-    command = [
-        "gh",
-        "api",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        "/repos/tldr-pages/tldr-maintenance/issues?per_page=100",
-    ]
-
-    result = subprocess.run(command, capture_output=True, text=True)
-    data = json.loads(result.stdout)
-
-    simplified_data = [
-        {
-            "number": issue["number"],
-            "title": issue["title"],
-            "body": issue["body"],
-            "url": issue["html_url"],
-        }
-        for issue in data
-    ]
-
-    if title:
-        return next(
-            (
-                {
-                    "number": issue["number"],
-                    "title": issue["title"],
-                    "body": issue["body"],
-                    "url": issue["html_url"],
-                }
-                for issue in data
-                if issue["title"] == title
-            ),
-            None,
-        )
-    else:
-        return simplified_data
-
-
-def update_github_issue(issue_number, title, body):
-    payload = {
-        "title": title,
-        "body": body,
-    }
-
-    command = [
-        "gh",
-        "api",
-        "--method",
-        "PATCH",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-        f"/repos/tldr-pages/tldr-maintenance/issues/{issue_number}",
-        "--input",
-        "-",
-    ]
-
-    result = subprocess.run(
-        command, input=json.dumps(payload), capture_output=True, text=True
-    )
-
-    if result.returncode != 0:
-        print(
-            create_colored_line(
-                Colors.RED,
-                f"Updating {title} (#{issue_number}) failed: {result.stderr}",
-            )
-        )
-    else:
-        print(
-            create_colored_line(
-                Colors.GREEN, f"Updating {title} (#{issue_number}) succeeded"
-            )
-        )
-
-    return result
-
-
-def get_datetime_pretty():
-    # Guarantee UTC to be fair to everyone, since we can't make this dynamic based on the browser's timezone
-    date = datetime.now(timezone.utc)
-    return date.strftime("%Y-%m-%d %H:%M:%S UTC")
-
-
-def strip_dynamic_content(markdown):
-    """
-    Removes any dynamic content enclosed within `<!-- __NOUPDATE__ -->` and `<!-- __END_NOUPDATE__ -->` tags from the provided Markdown string.
-
-    This function is used to remove any dynamic content (e.g. the last updated time) from the given string before updating a GitHub issue, ensuring that the issue content remains static if not *actual* content has changed
-
-    Args:
-            markdown (str): The Markdown content to be processed.
-
-    Returns:
-            str: The Markdown content with the dynamic content removed.
-    """
-    if not markdown:
-        return ""
-    regex = re.compile(
-        r"<!--\s*__NOUPDATE__(.|\n)*__END_NOUPDATE__\s*-->", re.MULTILINE
-    )
-    return re.sub(regex, "", markdown)
-
-
-def replace_characters_for_link(page):
-    return str(
-        page.replace("[", "\\[")
-        .replace("]", "\\]")
-        .replace(")", "\\)")
-        .replace("(", "\\(")
-    )
-
-
-def generate_github_link(item):
-    def replace_reference(match):
-        page = match.group(0)
-
-        directory = Path(page).parent
-        filename = urllib.parse.quote(Path(page).name)
-
-        page = replace_characters_for_link(page)
-
-        return f"[{page}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename})"
-
-    return re.sub(r"pages\..*\.md", replace_reference, item)
-
-
-def generate_github_edit_link(page):
-    directory = Path(page).parent
-    filename = urllib.parse.quote(Path(page).name)
-
-    page = replace_characters_for_link(page)
-
-    return (
-        f"[{page}](https://github.com/tldr-pages/tldr/edit/main/{directory}/{filename})"
-    )
-
-
-def generate_github_new_link(page):
-    directory = Path(page).parent
-    filename = urllib.parse.quote(Path(page).name)
-
-    page = replace_characters_for_link(page)
-
-    return f"[{page}](https://github.com/tldr-pages/tldr/new/main/{directory}?filename={filename})"
-
-
-def generate_github_lint_link(line):
-    """
-    Generate a Markdown link for a linter error line (from markdownlint or tldr-lint).
-
-    The page path and line number are extracted from the error line, e.g.
-    "tldr/pages.fr/common/tar.md:12: TLDR112 ..." links to line 12 of pages.fr/common/tar.md.
-    Lines that don't reference a page are returned escaped, without a link.
-    """
-
-    match = re.match(r"^(?:\./)?(?:tldr/)?(pages[^:]*\.md):(\d+)(.*)$", line)
-    if not match:
-        return replace_characters_for_link(line)
-
-    page, line_number, message = match.groups()
-
-    directory = Path(page).parent
-    filename = urllib.parse.quote(Path(page).name)
-
-    text = replace_characters_for_link(f"{page}:{line_number}{message}")
-
-    return f"[{text}](https://github.com/tldr-pages/tldr/blob/main/{directory}/{filename}?plain=1#L{line_number})"

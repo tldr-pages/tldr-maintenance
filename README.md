@@ -7,68 +7,97 @@ This repo runs a Bash script that calculates metrics about the current state of 
 These [metrics](https://github.com/tldr-pages/tldr-maintenance/issues/25) will help contributors to quickly spot whether there is still work to do to maintain and improve the quality. It also helps to detect any issues in the [tldr-repo](https://github.com/tldr-pages/tldr).
 
 > [!NOTE]
-> Running [`set-alias-page.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/set-alias-page.py) and [`wrong-filename.sh`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.sh) generates false-positives.
+> Running [`set-alias-page.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/set-alias-page.py) and [`wrong-filename.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.py) generates false-positives.
 The results need to be checked by hand. It can be used by [CODEOWNERS](https://github.com/tldr-pages/tldr/blob/main/.github/CODEOWNERS) to watch their owned language to detect if there are changes needed.
 
 ## Metrics
 
-### English
+The metrics are defined in [`metrics.tsv`](scripts/metrics.tsv), which is used by all scripts.
+Every metric is calculated per language, the results are written to `check-pages/<metric>.txt` (English) and `check-pages.<language>/<metric>.txt`.
+Some metrics don't apply to English, since they compare a translated page with the English page.
 
-- **Malformed more-info link page(s)**
+- **Inconsistent filename(s)** (`inconsistent-filenames`)
+  A filename is inconsistent when it doesn't match the title (`# ...`) of the page, checked by [`wrong-filename.py`](https://github.com/tldr-pages/tldr/blob/main/scripts/wrong-filename.py).
+- **Malformed or outdated more info link page(s)** (`malformed-or-outdated-more-info-links`, not for English)
   A page is malformed when the `> More information: <link>.` does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/more-info-link.md).
-- **Missing TLDR page(s)**
-  A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
+  A page is outdated when the `> More information: <link>.` does not match the link in the English page.
+- **Malformed or outdated see also mention(s)** (`malformed-or-outdated-see-also-mentions`, not for English)
+  Only applies to pages whose English page has a `> See also: ...` mention as second to last line of the description.
+  A mention is malformed when the translated mention does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/see-also-mentions.md).
+  A mention is outdated when the mentioned pages do not match the pages mentioned in the English page.
+- **Missing see also mention(s)** (`missing-see-also-mentions`, not for English)
+  Only applies to pages whose English page has a `> See also: ...` mention as second to last line of the description.
+  A mention is missing when the second to last line of the description of the translated page isn't a mention (a line like `` > ...: `...` ``).
+  So a mention in the wrong place is reported as missing as well.
+- **Missing alias page(s)** (`missing-alias-pages`, not for English)
+  A translated alias page is missing when the English page is an alias page, but the translated page doesn't exist.
+  This metric generates false-positives, so the results need to be checked by hand.
+- **Outdated alias page(s)** (`outdated-alias-pages`, not for English)
+  A translated alias page is outdated when the English page is an alias page, but the translated alias page doesn't match the
+  [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/alias-pages.md) or refers to another command.
+  This metric generates false-positives, so the results need to be checked by hand.
+- **Mismatched page title(s)** (`mismatched-page-titles`, not for English)
+  A page title is mismatched when the title (`# ...`) doesn't match the title of the English page.
+- **Missing TLDR page(s)** (`missing-tldr-pages`)
+  A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist (yet) in that language.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
-- **Misplaced page(s)**
+- **Missing see also page(s)** (`missing-see-also-pages`)
+  A page is missing when there is a page that mentions another page in its first (translated) `> See also: ...` line, but the other page doesn't exist (yet) in that language.
+- **Misplaced page(s)** (`misplaced-pages`)
   A page is misplaced when the page isn’t inside a folder in the list of supported platforms.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
-- **Linter error(s)**
-  Run the `markdownlint` and `tldr-lint` with specific checks enabled (only applies to the `tldr-lint`).
-
-### Other languages
-
-- **Malformed or outdated more-info link page(s)**
-  A page is malformed when the `> More information: <link>.` does not match the format in the [TLDR template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/more-info-link.md).
-   A page is outdated when the `> More information: <link>.` does not match the link in the English page.
-- **Missing TLDR page(s)**
-  A page is missing when there is a page that references another page (like `tldr example`), but the other page doesn't exist.
-- **Misplaced page(s)**
-  A page is misplaced when the page isn’t inside a folder in the list of supported platforms.
-  Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
-- **Outdated page(s) based on number of commands**
+- **Outdated page(s) based on number of commands** (`outdated-pages-based-on-command-count`, not for English)
   A page is outdated when the number of commands differ from the number of commands in the English page.
   Can also be seen at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
-- **Outdated page(s) based on the commands itself**
-  A page is outdated when the commands itself (every line that starts with \`, but removing everything between `{{...}}`, `"..."` and `'...'`) differs from the English commands itself.
-- **Missing English page(s)**
+- **Outdated page(s) based on the commands itself** (`outdated-pages-based-on-command-contents`, not for English)
+  A page is outdated when the commands itself (every line that starts with \`, but removing everything between `{{...}}`, `<...>`, `(...)`, `"..."` and `'...'`) differs from the English commands itself.
+- **Outdated page(s) based on number of header lines** (`outdated-pages-based-on-header-line-count`, not for English)
+  A page is outdated when the number of header lines (every line that starts with `>`) differs from the number of header lines in the English page.
+- **Missing English page(s)** (`missing-english-pages`, not for English)
   A page is missing when the filename can't be found as English page.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
-- **Missing translated page(s)**
+- **Missing translated page(s)** (`missing-translated-pages`, not for English)
   A page is missing when the English page can't be found as translated page.
   Can also be seen implicit at [tldr translation](https://lukwebsforge.github.io/tldri18n/).
-- **Linter error(s)**
-  Run the `markdownlint` and `tldr-lint` with specific checks enabled for the specific language (only applies to the `tldr-lint`).
+- **Linter error(s)** (`lint-errors`)
+  The errors of `markdownlint` and `tldr-lint`. For translations, some checks of `tldr-lint` are ignored
+  (`TLDR104` about the English tense, and capital letters and punctuation for some languages), see `lint` in [`check-pages.sh`](scripts/check-pages.sh).
 
 ## Summary
 
-At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/metrics-log.md) a summary is written.
-This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation. Some numbers include a percentage:
+At the end of the [`metrics-log.md`](https://github.com/tldr-pages/tldr-maintenance/releases/download/latest/metrics-log.md) a summary is written, with the total of every metric
+(the results of all languages, written to `<metric>.txt` when there are results).
+The summary is also written to `summary.tsv`, with the number of results, the total and the percentage per language and for all languages (`total`).
+This summary is tracked in a [GitHub issue](https://github.com/tldr-pages/tldr-maintenance/issues/25), along with the metrics per translation.
+Most totals include a percentage (rounded down to one decimal), calculated based on the sum of a total that is counted per language (`check-pages[.<language>]/totals.tsv`) over the languages the metric applies to:
 
-- Total malformed or outdated more info link page(s) [with percentage, calculated based on total pages]
-- Total missing alias page(s)
-- Total missing TLDR commands [with percentage, calculated based on total of TLDR commands]
-- Total misplaced page(s) [with percentage, calculated based on total pages]
-- Total outdated page(s) based on number of commands [with percentage, calculated based on total non-English pages]
-- Total outdated page(s) based on the commands itself [with percentage, calculated based on total non-English pages]
-- Total missing English page(s) [with percentage, calculated based on total unique non-English pages]
-- Total missing translated page(s) [with percentage, calculated based on total of pages that need translation (total of English pages multiplied with number of languages)]
-- Total lint error(s)
+- **Total pages**: inconsistent filenames and misplaced pages.
+- **Total non-English pages**: malformed or outdated more info links, mismatched page titles, outdated pages and missing English pages.
+- **Total translated pages whose English page has a see also mention**: malformed or outdated see also mentions and missing see also mentions.
+  Only languages with a [translation template](https://github.com/tldr-pages/tldr/blob/main/contributing-guides/translation-templates/see-also-mentions.md) are counted.
+- **Total references** (every referenced page counted once per page): missing TLDR pages and missing see also pages.
+- **Total pages that need a translation** (the number of English pages multiplied by the number of languages): missing translated pages.
 
 ## Artifacts
 
 After a [workflow run](https://github.com/tldr-pages/tldr-maintenance/actions/workflows/calculate-metrics.yml) an artifact is created.
 This artifact can be downloaded and viewed to see the exact output per language per metric to see which page needs attention.
 A summary can also be downloaded at the [latest GitHub Release](https://github.com/tldr-pages/tldr-maintenance/releases/tag/latest).
+
+## Running locally
+
+The scripts require Bash 4.3 or later and the GNU versions of the command-line tools (as on Linux), Python 3.10 or later and Node.js:
+
+```sh
+git submodule update --init
+npm ci
+npm run --silent calculate-metrics > metrics-log.md
+```
+
+The tldr repository is expected in `./tldr`, set `TLDR_ROOT` to use another clone.
+The script exits with 1 when one of the checks failed to run, the found issues don't change the exit code.
+To check a single language, run `scripts/check-pages.sh -l <language>`, optionally with `-c <metric>,<metric>` to only check some metrics (see the script for its options).
+It needs the linters on the `PATH`: `PATH="$PWD/node_modules/.bin:$PATH" scripts/check-pages.sh -l fr`.
 
 ## Maintainer scripts
 
