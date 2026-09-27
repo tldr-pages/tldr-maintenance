@@ -74,7 +74,7 @@ jobs:
 
       - name: Delete artifacts from GitHub Release
         if: github.ref == 'refs/heads/main'
-        uses: mknejp/delete-release-assets@03294a667e97911b5883d3028f277a0b4441edfb # v1
+        uses: mknejp/delete-release-assets@a40d395589329c6e93ab51a02fc2e4c60fdfe48f # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: latest
