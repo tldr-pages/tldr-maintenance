@@ -384,7 +384,7 @@ lint() {
   case "$LANGUAGE_ID" in
     "")
       ;;
-    "ar" | "bn" | "fa" | "hi" | "ja" | "ko" | "lo" | "ml" | "ne" | "ta" | "th" | "tr")
+    "ar" | "bn" | "fa" | "he" | "hi" | "ja" | "ko" | "lo" | "ml" | "ne" | "ta" | "th" | "tr")
       ignore_checks=("TLDR104" "TLDR003" "TLDR004" "TLDR015")
       ;;
     "zh_TW" | "zh")
